@@ -40,8 +40,8 @@ LINKS = (
 
 # Social widgets
 SOCIAL = (
-    ('github', 'https://github.com/aleylara/Papyrus'),
-    ('twitter', 'https://twitter.com/'),
+    ('github', 'https://github.com/netzro'),
+    ('twitter', 'https://twitter.com/gifted_99'),
 )
 
 
