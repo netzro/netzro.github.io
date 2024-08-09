@@ -30,3 +30,7 @@ ghp-import output -b gh-pages
 
 # Push the gh-pages branch to the remote repository
 git push origin gh-pages
+
+echo "*x15"
+echo "Site deployed"
+echo "*x15"

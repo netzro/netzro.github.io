@@ -1,7 +1,7 @@
 ---
 title: Building My Site/Blog
 date: 2024-08-09 12:15am
-tag: pelican
+tags: pelican
 category: python
 ---
 
