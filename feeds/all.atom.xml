@@ -32,7 +32,7 @@ losing things money can't buy.&lt;/p&gt;
 &lt;p&gt;This statement is a reminder of the transformative potential that lies within focused thought. When we channel our mental energy toward a singular purpose or principle, we ignite a creative force that not only shapes our thoughts but also manifests in the world around us.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Concentration&lt;/strong&gt; is more than just a practice; it is a path to &lt;strong&gt;constructive and efficient thinking&lt;/strong&gt;. It teaches us to direct our mental faculties with intention, avoiding the scattered nature of an unfocused mind. By honing in on what truly matters, we unlock the power to create, to demonstrate, and to bring our desires to fruition.&lt;/p&gt;
 &lt;p&gt;As we reflect on these words, let us consider how we can apply this wisdom in our daily lives. What is the one point, the one principle, or the one desire that you need to focus on? By aligning your thoughts and energy towards it, you may discover a new level of efficiency and creativity that drives you closer to your goals.&lt;/p&gt;
-&lt;p&gt;Take a moment today to meditate on this insight and see where the power of focus can lead you.&lt;/p&gt;</content><category term="Philosophy"></category><category term="concentration"></category><category term="focus"></category><category term="creativity"></category><category term="wisdom"></category></entry><entry><title>Building My Site/Blog</title><link href="/posts/2024/Aug/09/building-my-siteblog/" rel="alternate"></link><published>2024-08-09T00:15:00+01:00</published><updated>2024-08-09T00:15:00+01:00</updated><author><name>Gifted</name></author><id>tag:None,2024-08-09:/posts/2024/Aug/09/building-my-siteblog/</id><summary type="html">&lt;p&gt;Today, I successfully set up this site/blog.&lt;/p&gt;
+&lt;p&gt;Take a moment today to meditate on this insight and see where the power of focus can lead you.&lt;/p&gt;</content><category term="Philosophy"></category><category term="concentration"></category><category term="focus"></category><category term="creativity"></category><category term="wisdom"></category></entry><entry><title>Building My Site/Blog (Parr 1)</title><link href="/posts/2024/Aug/09/building-my-siteblog-parr-1/" rel="alternate"></link><published>2024-08-09T00:15:00+01:00</published><updated>2024-08-09T00:15:00+01:00</updated><author><name>Gifted</name></author><id>tag:None,2024-08-09:/posts/2024/Aug/09/building-my-siteblog-parr-1/</id><summary type="html">&lt;p&gt;Today, I successfully set up this site/blog.&lt;/p&gt;
 &lt;p&gt;As a Python enthusiast, I used Pelican, a static site generator, to create and …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Today, I successfully set up this site/blog.&lt;/p&gt;
 &lt;p&gt;As a Python enthusiast, I used Pelican, a static site generator, to create and deploy this site/blog to GitHub Pages.&lt;/p&gt;
 &lt;p&gt;The process was both fun and informative, and I'll be documenting it here.&lt;/p&gt;
@@ -51,13 +51,7 @@ losing things money can't buy.&lt;/p&gt;
 output/
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;p&gt;Next, create two branches:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;master
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;gh-pages
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
+&lt;p&gt;Next, create two branches: 'master amd gh-pages'&lt;/p&gt;
 &lt;p&gt;In the repository settings, go to Pages and set &lt;code&gt;gh-pages&lt;/code&gt; as the branch to serve your static files.&lt;/p&gt;
 &lt;p&gt;In your Linux environment, clone the repository you just created:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;git clone &amp;lt;URL&amp;gt;
