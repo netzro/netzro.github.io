@@ -12,9 +12,6 @@
     <link rel="stylesheet" href="/theme/css/stork.css">
     <link rel="stylesheet" media="screen and (prefers-color-scheme: dark)"
         href="/theme/css/stork-dark.css">
-    <link
-        href="/feeds/all.atom.xml"
-        type="application/atom+xml" rel="alternate" title="Gifted Space Atom Feed" />
 <meta name="description" content="The ancient Greek philosopher Aristotle is one of history's most influential thinkers. Born in 384 BCE, he …" />
     <script>
         if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia(
@@ -131,6 +128,12 @@ For example, the right amount of food for an athlete in training would be differ
   </div>
   <footer class="flex flex-col mt-10 ">
     <ul class="flex flex-wrap">
+      <a href="/tag/misc.html">
+        <li
+          class="bg-zinc-200 hover:bg-zinc-300 dark:hover:bg-zinc-800 dark:bg-zinc-700 text-zinc-500 dark:text-neutral-400 mb-2 mr-2 px-3 py-1.5 rounded-md transition ease-in active:-translate-y-1 active:scale-110 duration-75">
+          misc
+        </li>
+      </a>
     </ul>
     <div class="flex w-full my-2 bg-zinc-200 dark:bg-zinc-700 rounded-lg">
       <div class="w-1/2 rounded-l-lg"></div>
@@ -143,13 +146,21 @@ For example, the right amount of food for an athlete in training would be differ
 </main>
 
     </div>
+    
     <footer class="flex w-full text-xs justify-center mt-10 mb-6 text-zinc-500 dark:text-zinc-400">
-        <div class="px-4">
-            <span>©2024 - Gifted&nbsp;&#8226;&nbsp;</span>Powered by
-            <a class="underline" href="https://getpelican.com/">Pelican</a>&nbsp;&
-            <a class="underline" href="https://github.com/aleylara/Papyrus">&nbsp;Papyrus</a>
-        </div>
-    </footer>
+    <div class="px-4">
+        <span>©2024 - Gifted&nbsp;&#8226;&nbsp;</span>
+        Powered by
+        <a class="underline" href="https://getpelican.com/">Pelican</a>&nbsp;and&nbsp;
+        <a class="underline" href="https://github.com/aleylara/Papyrus">Papyrus</a>
+        
+        <span> I've completed <strong>5</strong> out of 100 posts for #100DaysToOffload!, <strong>100</strong> days left to finish the challenge.</span>
+    
+    </div>
+</footer>
+
+
+
 
 
     <script>
@@ -188,6 +199,8 @@ For example, the right amount of food for an athlete in training would be differ
     <script>
         stork.register("sitesearch", "/search-index.st")
     </script>
+
 </body>
+
 
 </html>
