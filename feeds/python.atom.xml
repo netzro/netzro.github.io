@@ -14,11 +14,9 @@
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;Initialize it with a &lt;code&gt;.gitignore&lt;/code&gt; file that includes the following entries:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;venv/
-output/
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;Next, create two branches: 'master amd gh-pages'&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;venv/&lt;/code&gt; and &lt;code&gt;output/&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Next, create two branches: &lt;/p&gt;
+&lt;p&gt;&lt;code&gt;master&lt;/code&gt; amd &lt;code&gt;gh-pages&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;In the repository settings, go to Pages and set &lt;code&gt;gh-pages&lt;/code&gt; as the branch to serve your static files.&lt;/p&gt;
 &lt;p&gt;In your Linux environment, clone the repository you just created:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;git clone &amp;lt;URL&amp;gt;
