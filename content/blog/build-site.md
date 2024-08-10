@@ -1,8 +1,7 @@
----
 title: Building My Site/Blog (Parr 1)
 date: 2024-08-09 12:15am
 tags: pelican, python
----
+
 
 Today, I successfully set up this site/blog.
 

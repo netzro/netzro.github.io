@@ -1,11 +1,9 @@
----
 title:Note To Self - 002
 date: 2024-08-10 7:50am
 tags: note-to-self
 category: spirituality
----
 
-![detach]({static}/images/detachment.jpg){width="250">}
+
 
 Detachment is the ability to
 maintain emotional and 
@@ -18,3 +16,5 @@ indifference or lack of empathy…
 it’s about not being overly 
 influenced by others emotions 
 or expectations. 🙏🤍
+
+![detach]({static}/images/detachment.jpg){width="250">}

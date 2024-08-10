@@ -1,6 +1,6 @@
 AUTHOR = 'Gifted'
 SITENAME = 'Gifted Space'
-SITEURL = "http://127.0.0.1:8000"
+#SITEURL = "http://127.0.0.1:8000"
 PATH = "content"
 TIMEZONE = 'Africa/Lagos'
 DEFAULT_LANG = 'en'
