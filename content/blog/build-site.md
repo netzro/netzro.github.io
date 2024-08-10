@@ -1,5 +1,5 @@
 ---
-title: Building My Site/Blog
+title: Building My Site/Blog (Parr 1)
 date: 2024-08-09 12:15am
 tags: pelican
 category: python
@@ -30,15 +30,7 @@ venv/
 output/
 ```
 
-Next, create two branches:
-
-```
-master
-```
-
-```
-gh-pages
-```
+Next, create two branches: 'master amd gh-pages'
 
 In the repository settings, go to Pages and set `gh-pages` as the branch to serve your static files.
 
