@@ -1,7 +1,6 @@
 Title: The Power of Focus: A Reflection on H. Spencer Lewis's Wisdom
 Date: 2024-08-10
-Category: Philosophy
-Tags: concentration, focus, creativity, wisdom
+Tags: mysteries
 Author: Tz
 Summary: Reflecting on H. Spencer Lewis's insight into the transformative power of focused thought and its impact on creative and efficient thinking.
 

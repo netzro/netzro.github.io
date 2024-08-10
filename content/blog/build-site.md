@@ -1,8 +1,7 @@
 ---
 title: Building My Site/Blog (Parr 1)
 date: 2024-08-09 12:15am
-tags: pelican
-category: python
+tags: pelican, python
 ---
 
 Today, I successfully set up this site/blog.
@@ -25,12 +24,11 @@ Let's begin by creating a repository on GitHub named:
 
 Initialize it with a `.gitignore` file that includes the following entries:
 
-```
-venv/
-output/
-```
+`venv/` and `output/`
 
-Next, create two branches: 'master amd gh-pages'
+Next, create two branches: 
+
+`master` amd `gh-pages`
 
 In the repository settings, go to Pages and set `gh-pages` as the branch to serve your static files.
 

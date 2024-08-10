@@ -1,6 +1,6 @@
 AUTHOR = 'Gifted'
 SITENAME = 'Gifted Space'
-SITEURL = ""
+SITEURL = "http://127.0.0.1:8000"
 PATH = "content"
 TIMEZONE = 'Africa/Lagos'
 DEFAULT_LANG = 'en'
@@ -11,7 +11,8 @@ I record my Doings, Thoughts and Writing.
 '''
 USE_FOLDER_AS_CATEGORY = False
 DISPLAY_CATEGORIES_ON_MENU = False
-SUMMARY_MAX_LENGTH = 22
+SUMMARY_MAX_LENGTH = 17
+DEFAULT_PAGINATION = 8
 
 ARTICLE_PATH = ["blog"]
 PAGE_PATH = ["pages"]
@@ -38,7 +39,6 @@ SOCIAL = (
     ('twitter', 'https://twitter.com/gifted_99'),
 )
 
-DEFAULT_PAGINATION = 7
 
 # Uncomment the following line if you want document-relative URLs when developing
 # RELATIVE_URLS = True
