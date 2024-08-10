@@ -12,6 +12,9 @@
     <link rel="stylesheet" href="/theme/css/stork.css">
     <link rel="stylesheet" media="screen and (prefers-color-scheme: dark)"
         href="/theme/css/stork-dark.css">
+    <link
+        href="/feeds/all.atom.xml"
+        type="application/atom+xml" rel="alternate" title="Gifted Space Atom Feed" />
     <script>
         if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia(
                 '(prefers-color-scheme: dark)').matches)) {
@@ -42,12 +45,10 @@
             </button>
         </div>
         <ul class="flex flex-wrap lg:mr-24 md:pt-0">
-            <li class="mr-4 pt-6"><a  href="/pages/landing-page-about-hidden.html">About</a></li>
+            <li class="mr-4 pt-6"><a  href="/pages/landing-page-about-hidden/">About</a></li>
             <li class="mr-4 pt-6"><a  href="/archives.html">Archive</a></li>
-            <li class="mr-4 pt-6"><a                     href="/categories.html">Categories</a></li>
             <li class="mr-4 pt-6"><a  class="border-b-2 border-zinc-800 dark:border-zinc-300"
  href="/tags.html">Tags</a></li>
-            <li class="mr-4 pt-6"><a  href="/search.html">Search</a></li>
         </ul>
     </nav>
     <div class="flex-grow md:max-w-screen-md md:mx-auto md:w-3/4 px-4">
@@ -73,6 +74,12 @@
                 focus<sup class="p-1">1</sup>
             </li>
         </a>
+        <a href="/tag/note-to-self.html">
+            <li
+                class="bg-zinc-300 dark:bg-neutral-700 text-zinc-800 dark:text-zinc-300 hover:bg-zinc-400 dark:hover:bg-zinc-800 m-2 py-2 px-2 md:px-4 rounded-md transition ease-in active:-translate-y-1 active:scale-110 duration-75">
+                note-to-self<sup class="p-1">2</sup>
+            </li>
+        </a>
         <a href="/tag/pelican.html">
             <li
                 class="bg-zinc-300 dark:bg-neutral-700 text-zinc-800 dark:text-zinc-300 hover:bg-zinc-400 dark:hover:bg-zinc-800 m-2 py-2 px-2 md:px-4 rounded-md transition ease-in active:-translate-y-1 active:scale-110 duration-75">
@@ -91,7 +98,7 @@
     </div>
     <footer class="flex w-full text-xs justify-center mt-10 mb-6 text-zinc-500 dark:text-zinc-400">
         <div class="px-4">
-            <span>©2024&nbsp;&#8226;&nbsp;</span>Powered by
+            <span>©2024 - Gifted&nbsp;&#8226;&nbsp;</span>Powered by
             <a class="underline" href="https://getpelican.com/">Pelican</a>&nbsp;&
             <a class="underline" href="https://github.com/aleylara/Papyrus">&nbsp;Papyrus</a>
         </div>
