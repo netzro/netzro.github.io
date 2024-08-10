@@ -1,6 +1,7 @@
 --- 
 title: The Noble Knowledge of Self
 date: 2024-06-14
+tags: misc
 summary: Key to fulfillment is profound understanding of self.
 ---
 

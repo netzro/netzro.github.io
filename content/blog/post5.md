@@ -1,6 +1,7 @@
 ---
 title: The Price of Luxuries
 date: 2024-06-15
+tags: misc
 summary: Reflecting on the spiritual costs of material abundance.
 ---
 

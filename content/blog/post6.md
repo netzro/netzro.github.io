@@ -1,6 +1,7 @@
 --- 
 title: Being Generous vs Being Kind
 date: 2024-06-16
+tags: misc
 summary: The difference between being generous and being kind.
 ---
 

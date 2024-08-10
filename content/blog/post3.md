@@ -1,6 +1,7 @@
 ---
 title: "Our Forefathers Were Not Fools"
 date: 2024-06-13
+tags: misc
 summary: "Ten principles showing the practical wisdom of our ancestors."
 ---
 

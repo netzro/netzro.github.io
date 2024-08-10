@@ -1,7 +1,7 @@
 ---
 title: Dilemma after middle-age
 date: 2024-07-07
-
+tags: misc
 ---
 
 A certain person recently delivered a speech at a university alumni association on the topic of "Dilemma after middle-age". 

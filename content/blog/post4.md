@@ -1,6 +1,7 @@
 ---
 title: "Forms of Revelations"
 date: 2024-06-15
+tags: misc
 summary: Revelations depend on our consciousness and can vary greatly.
 ---
 

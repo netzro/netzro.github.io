@@ -1,6 +1,6 @@
 title: How to turn vices into virtues
 date: 2024-07-19
-
+tags: misc
 
 The ancient Greek philosopher Aristotle is one of history's most influential thinkers. Born in 384 BCE, he studied under Plato and later tutored Alexander the Great. One of his contributions to philosophy is the concept of the Golden Mean.
 The Golden Mean is the moderation of vices, making them virtues. A balance between extremes.

@@ -1,8 +1,8 @@
-Title: The Power of Focus: A Reflection on H. Spencer Lewis's Wisdom
-Date: 2024-08-10
-Tags: mysteries
-Author: Tz
-Summary: Reflecting on H. Spencer Lewis's insight into the transformative power of focused thought and its impact on creative and efficient thinking.
+title: The Power of Focus: A Reflection on H. Spencer Lewis's Wisdom
+date: 2024-08-10
+tags: mysteries
+author: Tz
+summary: Reflecting on H. Spencer Lewis's insight into the transformative power of focused thought and its impact on creative and efficient thinking.
 
 
 In a world filled with distractions, the ability to concentrate the mind on a single point is a skill of immense power. As H. Spencer Lewis wisely observed:

@@ -1,6 +1,7 @@
 ---
 title: Walking Barefoot on Dewy Grass
 date: 2024-06-20
+tags: mystries
 summary: Exploring the significance of walking barefoot on grass with dew for mystics.
 ---
 

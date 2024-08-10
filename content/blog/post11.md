@@ -1,6 +1,6 @@
 title: Master and Slave
 date: 2024-07-13
-
+tags: misc
 
 Crowley's concept of the 'Master' and the 'Slave' was appropriated from Nietzsche. Crowley thought enough of Nietzsche's philosophy to canonize him as a saint of the Gnostic Catholic Church.
 

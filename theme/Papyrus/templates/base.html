@@ -195,13 +195,21 @@
         {% endif %}
         {% block content %} {% endblock %}
     </div>
+    
     <footer class="flex w-full text-xs justify-center mt-10 mb-6 text-zinc-500 dark:text-zinc-400">
-        <div class="px-4">
-            <span>{% if COPYRIGHT %}{{ COPYRIGHT }}&nbsp;&#8226;&nbsp;{% endif %}</span>Powered by
-            <a class="underline" href="https://getpelican.com/">Pelican</a>&nbsp;&
-            <a class="underline" href="https://github.com/aleylara/Papyrus">&nbsp;Papyrus</a>
-        </div>
-    </footer>
+    <div class="px-4">
+        <span>{% if COPYRIGHT %}{{ COPYRIGHT }}&nbsp;&#8226;&nbsp;{% endif %}</span>
+        Powered by
+        <a class="underline" href="https://getpelican.com/">Pelican</a>&nbsp;and&nbsp;
+        <a class="underline" href="https://github.com/aleylara/Papyrus">Papyrus</a>
+        
+        <span>{% if OFFLOAD_COUNT %} I've completed <strong>{{ OFFLOAD_COUNT }}</strong> out of 100 posts for #100DaysToOffload!, <strong>{{ DAYS_LEFT }}</strong> days left to finish the challenge.{% endif %}</span>
+    
+    </div>
+</footer>
+
+
+
 
     {% include 'analytics.html' %}
     {% include 'disqus_script.html' %}
@@ -242,6 +250,8 @@
     <script>
         stork.register("sitesearch", "{{ SITEURL }}/search-index.st")
     </script>
+
 </body>
+
 
 </html>

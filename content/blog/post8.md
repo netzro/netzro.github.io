@@ -1,6 +1,7 @@
 ---
 title: Hetty Green: The Most Stingy Woman in History
 date: 2024-06-11
+tags: misc
 summary: Hetty Green: history's most miserly woman
 ---
 

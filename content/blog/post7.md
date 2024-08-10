@@ -1,6 +1,7 @@
 ---
 title: The Divine Duality: Understanding Good and Evil
 date: 2024-06-17
+tags: misc
 summary: An exploration of the complementary nature of good and evil, questioning the roles of divine forces and the ultimate purpose of heaven and hell.
 ---
 

@@ -1,9 +1,6 @@
 title:Note To Self - 002
 date: 2024-08-10 7:50am
-tags: note-to-self
-category: spirituality
-
-
+tags: note-to-self, #100DaysToOffload
 
 Detachment is the ability to
 maintain emotional and 
