@@ -34,7 +34,7 @@ DIRECT_TEMPLATES = (('index', 'search', 'tags', 'categories', 'archives',))
 PAGINATED_TEMPLATES = {'index': None, 'tag': None, 'category': None, 'author': None, 'archives': 24,}
 
 # Feed generation is usually not desired when developing
-FEED_ALL_ATOM = None
+FEED_ALL_ATOM = 'feeds/all.atom.xml'
 
 # Social widgets
 SOCIAL = (
