@@ -44,7 +44,7 @@ SOCIAL = (
 
 # #100DaysToOffload configuration
 OFFLOAD_START_DATE = datetime(2024, 8, 10)  # The date you started the challenge
-TOTAL_DAYS = 100  # Total days of the challenge
+TOTAL_DAYS = 365  # Total days of the challenge
 
 # Function to calculate the remaining days in the challenge
 def calculate_days_left():
