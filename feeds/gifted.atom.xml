@@ -1,5 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Gifted Space - Gifted</title><link href="/" rel="alternate"></link><link href="/feeds/gifted.atom.xml" rel="self"></link><id>/</id><updated>2024-08-11T20:31:00+01:00</updated><entry><title>Weeknote-001:24</title><link href="/posts/2024/Aug/11/weeknote-00124/" rel="alternate"></link><published>2024-08-11T20:31:00+01:00</published><updated>2024-08-11T20:31:00+01:00</updated><author><name>Gifted</name></author><id>tag:None,2024-08-11:/posts/2024/Aug/11/weeknote-00124/</id><summary type="html">&lt;p&gt;This week marks the beginning of my Weeknote series. I'm excited to share that I successfully published …&lt;/p&gt;</summary><content type="html">&lt;p&gt;This week marks the beginning of my Weeknote series. I'm excited to share that I successfully published this blog on GitHub Pages! Overall, it was a fun week. While there isn't much to say in this inaugural note, I did enjoy reading some articles and watching a few new movies.&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Gifted Space - Gifted</title><link href="/" rel="alternate"></link><link href="/feeds/gifted.atom.xml" rel="self"></link><id>/</id><updated>2024-08-15T00:00:00+01:00</updated><entry><title>Setting Up Pass as My Password Manager</title><link href="/posts/2024/Aug/15/setting-up-pass-as-my-password-manager/" rel="alternate"></link><published>2024-08-15T00:00:00+01:00</published><updated>2024-08-15T00:00:00+01:00</updated><author><name>Gifted</name></author><id>tag:None,2024-08-15:/posts/2024/Aug/15/setting-up-pass-as-my-password-manager/</id><summary type="html">&lt;p&gt;Managing passwords without a dedicated password manager can be a challenge. Having been online for decades, I've …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Managing passwords without a dedicated password manager can be a challenge. Having been online for decades, I've encountered countless sites and services requiring passwords—ranging from email services and banking sites to forums and chat platforms.&lt;/p&gt;
+&lt;p&gt;Remembering all these usernames and passwords is difficult, so I used to rely on using the same or similar passwords across different platforms—a practice I &lt;strong&gt;strongly&lt;/strong&gt; advise against. However, I often defaulted to using built-in password managers in browsers and Google services (on my Android smartphone). Typically, once I created login credentials, I would let the browser save them to its database and autofill them whenever I revisited the site, eliminating the need to remember them.&lt;/p&gt;
+&lt;p&gt;Today, I decided to explore how a password manager works. I've heard of 1Password, Bitwarden, etc., but I wanted something simple, lightweight, and minimalistic. After some research, I settled on "Pass," which is often touted as the default password manager for Unix.&lt;/p&gt;
+&lt;p&gt;In this post, I will document my workflow for setting up Pass on my Linux environment (Termux) and Android smartphone.&lt;/p&gt;
+&lt;h3&gt;Generating a GPG Key&lt;/h3&gt;
+&lt;p&gt;First, I generated a GPG key:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;pkg&lt;span class="w"&gt; &lt;/span&gt;install&lt;span class="w"&gt; &lt;/span&gt;gnupg
+gpg&lt;span class="w"&gt; &lt;/span&gt;--gen-key
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Setting Up Pass&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;pkg&lt;span class="w"&gt; &lt;/span&gt;install&lt;span class="w"&gt; &lt;/span&gt;pass
+pass&lt;span class="w"&gt; &lt;/span&gt;--version
+pass&lt;span class="w"&gt; &lt;/span&gt;init&lt;span class="w"&gt; &lt;/span&gt;&amp;lt;gpg-id&amp;gt;
+pass&lt;span class="w"&gt; &lt;/span&gt;git&lt;span class="w"&gt; &lt;/span&gt;init
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Add some passwords to Pass.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;pass&lt;span class="w"&gt; &lt;/span&gt;insert&lt;span class="w"&gt; &lt;/span&gt;&amp;lt;test.com&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Create a private repository on GitHub.&lt;/p&gt;
+&lt;p&gt;Pull and push your Pass store to GitHub:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;pass&lt;span class="w"&gt; &lt;/span&gt;git&lt;span class="w"&gt; &lt;/span&gt;pull&lt;span class="w"&gt; &lt;/span&gt;remote&lt;span class="w"&gt; &lt;/span&gt;origin&lt;span class="w"&gt; &lt;/span&gt;&amp;lt;repo-url&amp;gt;&lt;span class="w"&gt; &lt;/span&gt;&amp;lt;branch&amp;gt;
+pass&lt;span class="w"&gt; &lt;/span&gt;git&lt;span class="w"&gt; &lt;/span&gt;push&lt;span class="w"&gt; &lt;/span&gt;remote&lt;span class="w"&gt; &lt;/span&gt;origin&lt;span class="w"&gt; &lt;/span&gt;&amp;lt;repo-url&amp;gt;&lt;span class="w"&gt; &lt;/span&gt;&amp;lt;branch&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;In a future post, we’ll explore how to install Android Password Store and set it up as my primary password manager instead of relying on Google.&lt;/p&gt;</content><category term="misc"></category><category term="#100DaysToOffload"></category><category term="linux"></category></entry><entry><title>Weeknote-001:24</title><link href="/posts/2024/Aug/11/weeknote-00124/" rel="alternate"></link><published>2024-08-11T20:31:00+01:00</published><updated>2024-08-11T20:31:00+01:00</updated><author><name>Gifted</name></author><id>tag:None,2024-08-11:/posts/2024/Aug/11/weeknote-00124/</id><summary type="html">&lt;p&gt;This week marks the beginning of my Weeknote series. I'm excited to share that I successfully published …&lt;/p&gt;</summary><content type="html">&lt;p&gt;This week marks the beginning of my Weeknote series. I'm excited to share that I successfully published this blog on GitHub Pages! Overall, it was a fun week. While there isn't much to say in this inaugural note, I did enjoy reading some articles and watching a few new movies.&lt;/p&gt;
 &lt;p&gt;In addition to these activities, I also managed to do some accounting for both my personal and business finances. I plan to dive deeper into these topics in future posts.&lt;/p&gt;
 &lt;h4&gt;Articles I Read&lt;/h4&gt;
 &lt;p&gt;When I came across &lt;a href="https://kevquirk.com/"&gt;Kev Quirk's blog&lt;/a&gt; while browsing the internet, and it has become a significant source of inspiration for starting my own blog. Here are a few of his posts that resonated with me:&lt;/p&gt;
