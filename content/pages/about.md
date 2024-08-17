@@ -1,11 +1,19 @@
 ---
 title: About
-slug: landing-page-about-hidden
-status: published
 date: 2024-08-06
 ---
 
-# About  
-This blog is a place for me to test pelican
-static site generator before publishing to my main site
-at [Gifted Space.](https://netzro.github.io){target="_blank"}
+# About Me
+
+![me]({static}/images/me.JPG){style="border-radius: 50%; width: 200px; height: 200px; object-fit: cover;"}  
+
+Hi, I am Gift Owho, a self-taught hobbyist coder and web developer from Delta state in Nigeria 🇳🇬. I use the Python programming language in my daily workflow, hobbying around the great world of tech.
+
+I also have interests in spirituality. The workings of our world have always fascinated me - how nature works by keeping everything in balance.
+
+You can contact me by email  
+[owho.gift@gmail.com](mailto:owho.gift@gmail.com)  
+
+
+*Peace, Love, Balance.*  
+☮️ 💚 ☯️
