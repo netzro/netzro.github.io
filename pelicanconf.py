@@ -8,7 +8,7 @@ PATH = "content"
 TIMEZONE = 'Africa/Lagos'
 DEFAULT_LANG = 'en'
 
-SUBTITLE = 'Gifted say Welcome'
+SUBTITLE = 'Gifted say welcome'
 SUBTEXT = '''My allocated space on the internet where
 I record my Doings, Thoughts and Writing.
 '''

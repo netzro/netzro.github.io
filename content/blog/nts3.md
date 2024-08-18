@@ -1,5 +1,5 @@
 ---
-title: Note to Self - 003:24
+title: Note to Self :24-01
 date: 2024-08-11 7:23am
 tags: #100DaysToOffload, spirituality
 ---
