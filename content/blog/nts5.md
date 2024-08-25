@@ -1,7 +1,7 @@
 ---
-title: Note to Self-24-05
+title: NTS:24-05
 date: 2024-08-20
-tags: #100DaysToOffload, Spirituality
+tags: #100DaysToOffload, nts
 ---
 
 ![candles]({static}/images/candles.jpg){style="width: 200px; height: 200px;"}  

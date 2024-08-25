@@ -30,7 +30,7 @@ THEME = 'theme/Papyrus'
 THEME_STATIC_PATHS = ['static']
 
 DISPLAY_PAGES_ON_MENU = True
-DIRECT_TEMPLATES = (('index', 'search', 'tags', 'categories', 'archives',))
+DIRECT_TEMPLATES = (('index', 'tags', 'archives',))
 PAGINATED_TEMPLATES = {'index': None, 'tag': None, 'category': None, 'author': None, 'archives': 24,}
 
 # Feed generation is usually not desired when developing

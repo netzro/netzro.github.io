@@ -1,6 +1,6 @@
-title:Note To Self :24-02
+title:NTS:24-02
 date: 2024-08-10 7:50am
-tags: note-to-self, #100DaysToOffload
+tags: nts, #100DaysToOffload
 
 
 Detachment is the ability to

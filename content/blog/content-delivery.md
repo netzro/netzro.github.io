@@ -12,7 +12,7 @@ I will be posting a series titled **Weeknotes** that will cover most of the thin
 
 The naming structure will be:
 
-`Weeknote:#number:year`
+`Weeknote:#number:week:year`
 
 This naming structure may evolve if necessary, but for now, I will stick with this for simplicity.
 
@@ -20,7 +20,7 @@ Another random series titled **Note to Self (NTS)** will also feature on this bl
 
 The naming structure for this series will be:
 
-`Note to Self - #number`
+`NTS:year-#number`
 
 Other posts will definitely come in between at various times, but for now, I will focus on these.
 

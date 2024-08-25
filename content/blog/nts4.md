@@ -1,7 +1,7 @@
 ---
-title: Note to Self :24-04
+title: NTS:24-04
 date: 2024-08-18 10:12am
-tags: #100DaysToOffload, spirituality
+tags: #100DaysToOffload, nts
 ---
 
 > "Make your own Bible. Select and collect all the words and sentences that in all your readings have been to you like the blast of a trumpet." ~ Ralph Waldo Emerson
