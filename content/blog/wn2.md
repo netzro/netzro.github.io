@@ -11,8 +11,8 @@ I also discovered that this approach can be extended to configuration files—th
 This dotfiles management project is ongoing.
 
 **Articles I Read**  
-- [Old Way, New Q](https://so1o.xyz/blog/old-way?utm_source=indieblog.page&utm_medium=random&utm_campaign=indieblog.page#top) by So1o
-- [Managing Your Dotfiles](https://anishathalye.com/managing-your-dotfiles/) by Anish Athalye
+ - [Old Way, New Q](https://so1o.xyz/blog/old-way?utm_source=indieblog.page&utm_medium=random&utm_campaign=indieblog.page#top) by So1o  
+ - [Managing Your Dotfiles](https://anishathalye.com/managing-your-dotfiles/) by Anish Athalye  
 
 **CLI Tools I Discovered**  
 - **zoxide**: A smarter `cd` command

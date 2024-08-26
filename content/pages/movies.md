@@ -7,7 +7,7 @@ status: hidden
 <details markdown='1'><summary>August 2024</summary>
 
 _Title_ - **Greedy People (2024)**  
-_My rating_ - ⭐⭐⭐
+_My rating_ - ⭐⭐⭐⭐⭐
 _Watched on_ - 24th August 2024  
 
 _Title_ - **Gunner (2024)**  
