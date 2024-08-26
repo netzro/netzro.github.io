@@ -30,8 +30,8 @@ And that candle too faded away.&lt;/p&gt;
 &lt;p&gt;I also discovered that this approach can be extended to configuration files—the dotfiles for packages installed on Linux. This means that whenever I install a package, I can add its dotfile to my dotfile directory.&lt;/p&gt;
 &lt;p&gt;This dotfiles management project is ongoing.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Articles I Read&lt;/strong&gt;&lt;br&gt;
-- &lt;a href="https://so1o.xyz/blog/old-way?utm_source=indieblog.page&amp;amp;utm_medium=random&amp;amp;utm_campaign=indieblog.page#top"&gt;Old Way, New Q&lt;/a&gt; by So1o
-- &lt;a href="https://anishathalye.com/managing-your-dotfiles/"&gt;Managing Your Dotfiles&lt;/a&gt; by Anish Athalye&lt;/p&gt;
+ - &lt;a href="https://so1o.xyz/blog/old-way?utm_source=indieblog.page&amp;amp;utm_medium=random&amp;amp;utm_campaign=indieblog.page#top"&gt;Old Way, New Q&lt;/a&gt; by So1o&lt;br&gt;
+ - &lt;a href="https://anishathalye.com/managing-your-dotfiles/"&gt;Managing Your Dotfiles&lt;/a&gt; by Anish Athalye  &lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;CLI Tools I Discovered&lt;/strong&gt;&lt;br&gt;
 - &lt;strong&gt;zoxide&lt;/strong&gt;: A smarter &lt;code&gt;cd&lt;/code&gt; command&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Movies I Watched&lt;/strong&gt;  &lt;/p&gt;
