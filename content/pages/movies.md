@@ -4,10 +4,33 @@ status: hidden
 
 # My Movies List  
 
+<details markdown='1'><summary>September 2024</summary>
+_Title_ - **Tokunbo (2024)**  
+_My rating_ - ⭐⭐⭐  
+_Watched on_ - 1st September 2024  
+
+
+_Title_ - **Trap (2024)**  
+_My rating_ - ⭐⭐⭐⭐  
+_Watched on_ - 1st September 2024  
+</details>  
+
 <details markdown='1'><summary>August 2024</summary>
 
+_Title_ - **The Killer (2024)**  
+_My rating_ - ⭐⭐  
+_Watched on_ - 31st August 2024  
+
+_Title_ - **Hell Hole (2024)**  
+_My rating_ - ⭐⭐  
+_Watched on_ - 28th August 2024  
+
+_Title_ - **Longlegs (2024)**  
+_My rating_ - ⭐  
+_Watched on_ - 28th August 2024  
+
 _Title_ - **Greedy People (2024)**  
-_My rating_ - ⭐⭐⭐⭐⭐
+_My rating_ - ⭐⭐⭐⭐⭐  
 _Watched on_ - 24th August 2024  
 
 _Title_ - **Gunner (2024)**  
