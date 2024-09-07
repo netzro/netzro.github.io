@@ -5,10 +5,14 @@ status: hidden
 # My Movies List  
 
 <details markdown='1'><summary>September 2024</summary>
-_Title_ - **Tokunbo (2024)**  
+
+_Title_ - **Borderlands (2024)**  
 _My rating_ - ⭐⭐⭐  
 _Watched on_ - 1st September 2024  
 
+_Title_ - **Tokunbo (2024)**  
+_My rating_ - ⭐⭐⭐  
+_Watched on_ - 1st September 2024  
 
 _Title_ - **Trap (2024)**  
 _My rating_ - ⭐⭐⭐⭐  
@@ -82,7 +86,7 @@ _Watched on_ - 11th August 2024
 <details markdown='1'><summary>July 2024</summary>
 
 _Title_ - **Bad Boys - Ride or Die (2024)**  
-_My rating_ - ⭐⭐⭐⭐⭐
+_My rating_ - ⭐⭐⭐⭐⭐  
 _Watched on_ - 18th July 2024  
 
 _Title_  - **Soul (2020)**  
