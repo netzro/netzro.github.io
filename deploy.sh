@@ -39,6 +39,6 @@ ghp-import output -b gh-pages || handle_error "Failed to import to gh-pages bran
 git push origin gh-pages || handle_error "Failed to push gh-pages branch."
 
 # Success message
-echo "***********************"
+echo "*****************************"
 echo "Site successfully deployed!"
-echo "***********************"
+echo "*****************************"
