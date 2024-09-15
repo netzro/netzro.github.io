@@ -6,6 +6,22 @@ status: hidden
 
 <details markdown='1'><summary>September 2024</summary>
 
+_Title_ - **Thor (2011)**  
+_My rating_ - ⭐⭐⭐⭐⭐   
+_Watched on_ 🔄 - 15th September 2024  
+
+_Title_ - **Iron Man 3 (2013)**  
+_My rating_ - ⭐⭐⭐⭐⭐  
+_Watched on_ 🔄 - 15th September 2024  
+
+_Title_ - **Iron Man 2 (2010)**  
+_My rating_ - ⭐⭐⭐⭐⭐  
+_Watched on_ 🔄 - 15th September 2024  
+
+_Title_ - **Iron Man (2008)**  
+_My rating_ - ⭐⭐⭐⭐⭐  
+_Watched on_ 🔄 - 15th September 2024 
+
 _Title_ - **Borderlands (2024)**  
 _My rating_ - ⭐⭐⭐  
 _Watched on_ - 1st September 2024  
