@@ -6,20 +6,40 @@ status: hidden
 
 <details markdown='1'><summary>September 2024</summary>
 
+_Title_ - **Ant-Man (2015)**  
+_My rating_ - ⭐⭐⭐⭐ 
+_Watched on_ 🔄 - 20th September 2024  
+
+_Title_ - **Blink Twice (2024)**  
+_My rating_ - ⭐⭐⭐  
+_Watched on_ - 20th September 2024  
+
+_Title_ - **The Crow (2024)**  
+_My rating_ - ⭐⭐⭐  
+_Watched on_ - 20th September 2024  
+
+_Title_ - **1992 (2024)**  
+_My rating_ - ⭐⭐⭐
+_Watched on_ - 18th September 2024  
+
+_Title_ - **Subservience (2024)**  
+_My rating_ - ⭐⭐⭐⭐  
+_Watched on_ - 18th September 2024  
+
 _Title_ - **Thor (2011)**  
-_My rating_ - ⭐⭐⭐⭐⭐   
+_My rating_ - ⭐⭐⭐⭐  
 _Watched on_ 🔄 - 15th September 2024  
 
 _Title_ - **Iron Man 3 (2013)**  
-_My rating_ - ⭐⭐⭐⭐⭐  
+_My rating_ - ⭐⭐⭐⭐ 
 _Watched on_ 🔄 - 15th September 2024  
 
 _Title_ - **Iron Man 2 (2010)**  
-_My rating_ - ⭐⭐⭐⭐⭐  
+_My rating_ - ⭐⭐⭐⭐ 
 _Watched on_ 🔄 - 15th September 2024  
 
 _Title_ - **Iron Man (2008)**  
-_My rating_ - ⭐⭐⭐⭐⭐  
+_My rating_ - ⭐⭐⭐⭐ 
 _Watched on_ 🔄 - 15th September 2024 
 
 _Title_ - **Borderlands (2024)**  
