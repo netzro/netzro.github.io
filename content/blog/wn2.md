@@ -1,5 +1,5 @@
 ---
-title: Weeknote:24:33:02
+title: Weeknote 2024:33
 date: 2024-08-18
 tags: #100DaysToOffload, Weeknotes
 ---
