@@ -1,7 +1,7 @@
 ---
 title: Watching Marvel Movies in Order
 Date: 2024-09-19
-Tags: #100DaysToOffload
+Tags: #100DaysToOffload, movies
 ---
 
 The Marvel Cinematic Universe (MCU) encompasses both TV shows and movies. To fully immerse myself in the franchise, I've decided to watch the movies in their release order—a departure from my previous random viewing. This approach allows me to experience the films as they were initially intended.
