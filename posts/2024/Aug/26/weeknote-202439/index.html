@@ -5,7 +5,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="generator" content="Pelican" />
-    <title>Building My Site/Blog (Parr 1)</title>
+    <title>Weeknote 2024:39</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Slab|Ruda" />
     <link rel="stylesheet" type="text/css" href="/theme/css/main.css" />
@@ -16,7 +16,7 @@
     <link
         href="/feeds/all.atom.xml"
         type="application/atom+xml" rel="alternate" title="Gifted Space Atom Feed" />
-<meta name="description" content="Today, I successfully set up this site/blog. As a Python enthusiast, I used Pelican, a static …" />
+<meta name="description" content="Cli tools fzf - A command-line fuzzy finder Articles I read Laziness is the Root of All Evil …" />
     <script>
         if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia(
                 '(prefers-color-scheme: dark)').matches)) {
@@ -92,10 +92,10 @@
 
 <main>
   <header>
-    <h1 class="font-semibold text-3xl my-2">Building My Site/Blog (Parr 1)</h1>
+    <h1 class="font-semibold text-3xl my-2">Weeknote 2024:39</h1>
     <footer class="flex text-sm text-zinc-800 dark:text-zinc-400">
       <div class="flex text-xs text-zinc-800 dark:text-zinc-400">
-        <time>August 09, 2024</time>
+        <time>August 26, 2024</time>
         <div>
         </div>
         <div>
@@ -120,45 +120,14 @@
               prose-code:font-light
               prose-img:rounded-md
               ">
-    <p>Today, I successfully set up this site/blog.</p>
-<p>As a Python enthusiast, I used Pelican, a static site generator, to create and deploy this site/blog to GitHub Pages.</p>
-<p>The process was both fun and informative, and I'll be documenting it here.</p>
-<p>To get started, you'll need the following:</p>
-<ol>
-<li>A GitHub account.</li>
-<li>A Linux environment (I used Termux on my phone since I don't have a laptop).</li>
-<li>Python installed.</li>
-</ol>
-<p>Let's begin by creating a repository on GitHub named:</p>
-<div class="highlight"><pre><span></span><code>&lt;username&gt;.github.io
-</code></pre></div>
-
-<p>Initialize it with a <code>.gitignore</code> file that includes the following entries:</p>
-<p><code>venv/</code> and <code>output/</code></p>
-<p>Next, create two branches: </p>
-<p><code>master</code> amd <code>gh-pages</code></p>
-<p>In the repository settings, go to Pages and set <code>gh-pages</code> as the branch to serve your static files.</p>
-<p>In your Linux environment, clone the repository you just created:</p>
-<div class="highlight"><pre><span></span><code>git clone &lt;URL&gt;
-</code></pre></div>
-
-<p>Navigate into the newly cloned repository and create a virtual environment:</p>
-<div class="highlight"><pre><span></span><code><span class="n">python</span> <span class="o">-</span><span class="n">m</span> <span class="n">venv</span> <span class="n">venv</span>
-</code></pre></div>
-
-<p>Activate it with:</p>
-<div class="highlight"><pre><span></span><code>source venv/bin/activate
-</code></pre></div>
-
-<p>Now, it's time to install Pelican. Run the following command:</p>
-<div class="highlight"><pre><span></span><code>pip install pelican markdown tzdata ghp-import
-</code></pre></div>
-
-<p>To save your dependencies, run:</p>
-<div class="highlight"><pre><span></span><code>pip freeze &gt; requirements.txt
-</code></pre></div>
-
-<p>That's all for today. In the next post, we'll generate our site and publish it to GitHub Pages.</p>
+    <h2>Cli tools</h2>
+<p>fzf - A command-line fuzzy finder</p>
+<h2>Articles I read</h2>
+<p><a href="https://zacs.site/blog/laziness-is-the-root-of-all-evil.html">Laziness is the Root of All Evil</a> by Zac Szewczyk</p>
+<p><a href="https://nesslabs.com/apophenia">The dangers of apophenia: not everything happens for a reason</a> by Dr. Hannah Rose  </p>
+<p><a href="https://psychcentral.com/health/apophenia-overview#synchronicity">Apophenia vs. synchronicity</a> (an excerpt) by Cathy Lovering   </p>
+<p><strong>Peace, Love, Balance.</strong><br>
+☮️ 💚 ☯️</p>
     <!-- <div class="aspect-w-16 aspect-h-9 mx-auto"></div> CSS placeholder -->
   </div>
   <footer class="flex flex-col mt-10 ">
@@ -169,16 +138,10 @@
           #100DaysToOffload
         </li>
       </a>
-      <a href="/tag/pelican.html">
+      <a href="/tag/weeknotes.html">
         <li
           class="bg-zinc-200 hover:bg-zinc-300 dark:hover:bg-zinc-800 dark:bg-zinc-700 text-zinc-500 dark:text-neutral-400 mb-2 mr-2 px-3 py-1.5 rounded-md transition ease-in active:-translate-y-1 active:scale-110 duration-75">
-          pelican
-        </li>
-      </a>
-      <a href="/tag/python.html">
-        <li
-          class="bg-zinc-200 hover:bg-zinc-300 dark:hover:bg-zinc-800 dark:bg-zinc-700 text-zinc-500 dark:text-neutral-400 mb-2 mr-2 px-3 py-1.5 rounded-md transition ease-in active:-translate-y-1 active:scale-110 duration-75">
-          python
+          Weeknotes
         </li>
       </a>
     </ul>
