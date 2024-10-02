@@ -1,5 +1,5 @@
 ---
-title: NTS:24-07
+title: Note to Self 2024#07
 date: 2024-09-21
 tags: #100DaysToOffload, nts
 ---
