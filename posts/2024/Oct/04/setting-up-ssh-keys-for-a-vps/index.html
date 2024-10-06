@@ -5,7 +5,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="generator" content="Pelican" />
-    <title> pelican | Gifted Space</title>
+    <title>Setting Up SSH Keys for a VPS</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Slab|Ruda" />
     <link rel="stylesheet" type="text/css" href="/theme/css/main.css" />
@@ -16,6 +16,7 @@
     <link
         href="/feeds/all.atom.xml"
         type="application/atom+xml" rel="alternate" title="Gifted Space Atom Feed" />
+<meta name="description" content="Introduction Using SSH keys to access your Virtual Private Server (VPS) is one of the most secure …" />
     <script>
         if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia(
                 '(prefers-color-scheme: dark)').matches)) {
@@ -53,8 +54,8 @@
         </ul>
     </nav>
     <div class="flex-grow md:max-w-screen-md md:mx-auto md:w-3/4 px-4">
-        <nav class="text-zinc-800 dark:text-zinc-300 mt-12 pb-3 md:mt-16" aria-label="Breadcrumb">
-            <ul class="p-0 inline-flex">
+        <nav class="text-zinc-800 dark:text-zinc-300 mt-12 pb-2 md:mt-16" aria-label="Breadcrumb">
+            <ul class="p-0 inline-flex items-center">
                 <li class="flex items-center">
                     <a href="/" class="text-zinc-800 dark:text-zinc-300 inline-flex items-center">
                         <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20"
@@ -72,60 +73,166 @@
                     </svg>
                 </li>
                 <li class="flex items-center">
-                    <a href="/tags.html">Tags</a>
+                    <a href="/categories.html">Categories</a>
                     <svg class="fill-current w-3 h-3 mr-2 ml-1" xmlns="http://www.w3.org/2000/svg"
                         viewBox="0 0 320 512">
                         <path
                             d="M285.476 272.971L91.132 467.314c-9.373 9.373-24.569 9.373-33.941 0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941 0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z" />
                     </svg>
                 </li>
-                <li class="border-b-2 border-zinc-800 dark:border-zinc-300">
-                    pelican
+                <li class="flex items-center">
+                    <a href="/category/misc.html">misc</a>
                 </li>
+                <svg class="fill-current w-3 h-3 mr-2 ml-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+                    <path
+                        d="M285.476 272.971L91.132 467.314c-9.373 9.373-24.569 9.373-33.941 0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941 0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z" />
+                </svg>
             </ul>
         </nav>
 
-
-
-<div class="py-1">
-  <ul>
-    <a href="/posts/2024/Aug/09/building-my-siteblog-parr-1/" rel="bookmark" title="Permalink to Building My Site/Blog (Parr 1)">
-      <li class="transition ease-in active:-translate-y-1 active:scale-110 duration-75">
-        <div class="bg-white dark:bg-zinc-800 p-4 md:p-6 mb-4 rounded-lg">
-          <header class="font-semibold text-2xl mb-2">
-            <h1>Building My Site/Blog (Parr 1)</h1>
-          </header>
-          <div class="max-w-7xl container mx-auto my-4 justify-center overflow-hidden mb-2 text-sm text-zinc-800 dark:text-zinc-400
-          prose lg:max-w-none prose-headings:text-zinc-800 prose-headings:dark:text-zinc-300 
-          prose-h1:text-3xl prose-headings:font-semibold 
-          prose-pre:bg-zinc-200 prose-pre:text-zinc-800
-          dark:prose-pre:bg-zinc-800 dark:prose-pre:text-zinc-200
-          prose-blockquote:text-zinc-800
-          dark:prose-blockquote:text-zinc-200
-          prose-a:text-gray-500
-          dark:prose-a:text-gray-400
-          dark:prose-strong:text-zinc-200 
-          dark:prose-code:text-zinc-200
-          dark:prose-code:bg-zinc-800
-          prose-code:bg-zinc-200
-          prose-code:font-light
-          prose-img:rounded-md
-          ">
-            <p>Today, I successfully set up this site/blog.</p>
-<p>As a Python enthusiast, I used Pelican, a static …</p>
-          </div>
-          <div class="flex text-xs text-zinc-800 dark:text-zinc-400">
-            <time>August 09, 2024</time>
-            <div>
-            </div>
-            <div>
-                <span>&nbsp;·&nbsp;Gifted</span>
-            </div>
-          </div>
-      </li>
-    </a>
-  </ul>
-</div>
+<main>
+  <header>
+    <h1 class="font-semibold text-3xl my-2">Setting Up SSH Keys for a VPS</h1>
+    <footer class="flex text-sm text-zinc-800 dark:text-zinc-400">
+      <div class="flex text-xs text-zinc-800 dark:text-zinc-400">
+        <time>October 04, 2024</time>
+        <div>
+        </div>
+        <div>
+          <span>&nbsp;·&nbsp;Gifted</span>
+        </div>
+      </div>
+    </footer>
+  </header>
+  <div class="max-w-7xl container mx-auto my-8 text-zinc-800 dark:text-zinc-300  
+              prose lg:max-w-none prose-headings:text-zinc-800 prose-headings:dark:text-zinc-300 
+              prose-h1:text-3xl lg:prose-h1:text-3xl prose-headings:font-semibold 
+              prose-pre:bg-zinc-200 prose-pre:text-zinc-800
+              dark:prose-pre:bg-zinc-800 dark:prose-pre:text-zinc-200
+              prose-blockquote:text-zinc-800
+              dark:prose-blockquote:text-zinc-200
+              prose-a:text-gray-500
+              dark:prose-a:text-gray-400
+              dark:prose-strong:text-zinc-200 
+              dark:prose-code:text-zinc-200
+              dark:prose-code:bg-zinc-800
+              prose-code:bg-zinc-200
+              prose-code:font-light
+              prose-img:rounded-md
+              ">
+    <h2>Introduction</h2>
+<p>Using SSH keys to access your Virtual Private Server (VPS) is one of the most secure methods of authentication. SSH keys provide a stronger layer of security compared to password logins by utilizing a cryptographic key pair. This guide will walk you through generating SSH keys, copying them to your server, and disabling password logins to enhance security.</p>
+<hr>
+<h2>Step 1: Generate SSH Keys</h2>
+<p>Before you can use SSH key-based authentication, you need to generate an SSH key pair on your local machine.</p>
+<ol>
+<li>Open a terminal on your local machine.</li>
+<li>
+<p>Run the following command to generate an SSH key pair:</p>
+<p><code>bash
+ssh-keygen -t rsa -b 4096</code></p>
+<p>This will generate a 4096-bit RSA key, which is secure and recommended for most uses.</p>
+</li>
+<li>
+<p>When prompted to enter a file in which to save the key, press <code>Enter</code> to accept the default location (<code>~/.ssh/id_rsa</code>).</p>
+</li>
+<li>
+<p>You can also set a passphrase for additional security, or press <code>Enter</code> to skip this step if you don’t want a passphrase.</p>
+</li>
+</ol>
+<hr>
+<h2>Step 2: Copy the SSH Key to Your VPS</h2>
+<p>Once your key pair is generated, you need to copy the public key to your VPS so it knows to trust your key when you try to log in.</p>
+<ol>
+<li>
+<p>Use the following command to copy your public key to the VPS:</p>
+<p><code>bash
+ssh-copy-id your_user@your_vps_ip_address</code></p>
+<p>Make sure to replace <code>your_user</code> with the actual username on your VPS (if you don’t have a user yet, create one with <code>adduser</code>). Also, replace <code>your_vps_ip_address</code> with the actual IP address of your VPS.</p>
+</li>
+<li>
+<p>If <code>ssh-copy-id</code> is not available, you can manually copy the public key by doing the following:</p>
+<ul>
+<li>
+<p>Display your public key on your local machine:</p>
+<p><code>bash
+cat ~/.ssh/id_rsa.pub</code></p>
+</li>
+<li>
+<p>Log into your VPS using your password and open the authorized keys file:</p>
+<p><code>bash
+ssh your_user@your_vps_ip_address
+mkdir -p ~/.ssh
+nano ~/.ssh/authorized_keys</code></p>
+</li>
+<li>
+<p>Paste the public key into this file, save it, and exit.</p>
+</li>
+<li>
+<p>Set the correct permissions for the <code>.ssh</code> directory and the <code>authorized_keys</code> file:</p>
+<p><code>bash
+chmod 700 ~/.ssh
+chmod 600 ~/.ssh/authorized_keys</code></p>
+</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h2>Step 3: Disable Password Authentication</h2>
+<p>After ensuring that you can log in using SSH keys, it's a good security practice to disable password-based authentication.</p>
+<ol>
+<li>
+<p>Open the SSH configuration file on your VPS:</p>
+<p><code>bash
+sudo nano /etc/ssh/sshd_config</code></p>
+</li>
+<li>
+<p>Find the following directives and change them as shown:</p>
+<p><code>bash
+PasswordAuthentication no
+PermitRootLogin no</code></p>
+<p>This disables password login and root login, making your server more secure.</p>
+</li>
+<li>
+<p>Save the file and exit the editor.</p>
+</li>
+<li>
+<p>Restart the SSH service to apply the changes:</p>
+<p><code>bash
+sudo systemctl restart ssh</code></p>
+</li>
+</ol>
+<hr>
+<h2>Step 4: Test SSH Key Login</h2>
+<p>Before logging out of your current session, open a new terminal window and test the SSH key login:</p>
+<p>```bash
+ssh your_user@your_vps_ip_address</p>
+    <!-- <div class="aspect-w-16 aspect-h-9 mx-auto"></div> CSS placeholder -->
+  </div>
+  <footer class="flex flex-col mt-10 ">
+    <ul class="flex flex-wrap">
+      <a href="/tag/100daystooffload.html">
+        <li
+          class="bg-zinc-200 hover:bg-zinc-300 dark:hover:bg-zinc-800 dark:bg-zinc-700 text-zinc-500 dark:text-neutral-400 mb-2 mr-2 px-3 py-1.5 rounded-md transition ease-in active:-translate-y-1 active:scale-110 duration-75">
+          100DaysToOffload
+        </li>
+      </a>
+      <a href="/tag/linux.html">
+        <li
+          class="bg-zinc-200 hover:bg-zinc-300 dark:hover:bg-zinc-800 dark:bg-zinc-700 text-zinc-500 dark:text-neutral-400 mb-2 mr-2 px-3 py-1.5 rounded-md transition ease-in active:-translate-y-1 active:scale-110 duration-75">
+          linux
+        </li>
+      </a>
+    </ul>
+    <div class="flex w-full my-2 bg-zinc-200 dark:bg-zinc-700 rounded-lg">
+      <div class="w-1/2 rounded-l-lg"></div>
+    </div>
+    <div class="flex bg-zinc-200 dark:bg-zinc-700 py-2 rounded-lg justify-center space-x-2 text-xs">
+    </div>
+  </footer>
+  <div>
+  </div>
+</main>
 
     </div>
     

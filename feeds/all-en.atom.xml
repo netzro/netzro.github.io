@@ -1,9 +1,96 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Gifted Space</title><link href="/" rel="alternate"></link><link href="/feeds/all-en.atom.xml" rel="self"></link><id>/</id><updated>2024-10-01T00:00:00+01:00</updated><entry><title>Marvel Cinematic Universe - Phase 1</title><link href="/posts/2024/Oct/01/marvel-cinematic-universe-phase-1/" rel="alternate"></link><published>2024-10-01T00:00:00+01:00</published><updated>2024-10-01T00:00:00+01:00</updated><author><name>Gifted</name></author><id>tag:None,2024-10-01:/posts/2024/Oct/01/marvel-cinematic-universe-phase-1/</id><summary type="html">&lt;p&gt;Following my commitment to watching the Marvel Cinematic Universe (MCU) films in order of their release dates …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Following my commitment to watching the Marvel Cinematic Universe (MCU) films in order of their release dates as mentioned in my &lt;a href="{filename}/posts/2024/Sep/19/watching-marvel-movies-in-order.md"&gt;previous post&lt;/a&gt;, I have successfully completed Phase 1. This phase includes &lt;em&gt;Iron Man&lt;/em&gt; (May 2008), &lt;em&gt;The Incredible Hulk&lt;/em&gt; (June 2008), &lt;em&gt;Iron Man 2&lt;/em&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Gifted Space</title><link href="/" rel="alternate"></link><link href="/feeds/all-en.atom.xml" rel="self"></link><id>/</id><updated>2024-10-04T00:00:00+01:00</updated><entry><title>Setting Up SSH Keys for a VPS</title><link href="/posts/2024/Oct/04/setting-up-ssh-keys-for-a-vps/" rel="alternate"></link><published>2024-10-04T00:00:00+01:00</published><updated>2024-10-04T00:00:00+01:00</updated><author><name>Gifted</name></author><id>tag:None,2024-10-04:/posts/2024/Oct/04/setting-up-ssh-keys-for-a-vps/</id><summary type="html">&lt;h2&gt;Introduction&lt;/h2&gt;
+&lt;p&gt;Using SSH keys to access your Virtual Private Server (VPS) is one of the most secure …&lt;/p&gt;</summary><content type="html">&lt;h2&gt;Introduction&lt;/h2&gt;
+&lt;p&gt;Using SSH keys to access your Virtual Private Server (VPS) is one of the most secure methods of authentication. SSH keys provide a stronger layer of security compared to password logins by utilizing a cryptographic key pair. This guide will walk you through generating SSH keys, copying them to your server, and disabling password logins to enhance security.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2&gt;Step 1: Generate SSH Keys&lt;/h2&gt;
+&lt;p&gt;Before you can use SSH key-based authentication, you need to generate an SSH key pair on your local machine.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Open a terminal on your local machine.&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Run the following command to generate an SSH key pair:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;bash
+ssh-keygen -t rsa -b 4096&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;This will generate a 4096-bit RSA key, which is secure and recommended for most uses.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;When prompted to enter a file in which to save the key, press &lt;code&gt;Enter&lt;/code&gt; to accept the default location (&lt;code&gt;~/.ssh/id_rsa&lt;/code&gt;).&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;You can also set a passphrase for additional security, or press &lt;code&gt;Enter&lt;/code&gt; to skip this step if you don’t want a passphrase.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;h2&gt;Step 2: Copy the SSH Key to Your VPS&lt;/h2&gt;
+&lt;p&gt;Once your key pair is generated, you need to copy the public key to your VPS so it knows to trust your key when you try to log in.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Use the following command to copy your public key to the VPS:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;bash
+ssh-copy-id your_user@your_vps_ip_address&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Make sure to replace &lt;code&gt;your_user&lt;/code&gt; with the actual username on your VPS (if you don’t have a user yet, create one with &lt;code&gt;adduser&lt;/code&gt;). Also, replace &lt;code&gt;your_vps_ip_address&lt;/code&gt; with the actual IP address of your VPS.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;If &lt;code&gt;ssh-copy-id&lt;/code&gt; is not available, you can manually copy the public key by doing the following:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Display your public key on your local machine:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;bash
+cat ~/.ssh/id_rsa.pub&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Log into your VPS using your password and open the authorized keys file:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;bash
+ssh your_user@your_vps_ip_address
+mkdir -p ~/.ssh
+nano ~/.ssh/authorized_keys&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Paste the public key into this file, save it, and exit.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Set the correct permissions for the &lt;code&gt;.ssh&lt;/code&gt; directory and the &lt;code&gt;authorized_keys&lt;/code&gt; file:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;bash
+chmod 700 ~/.ssh
+chmod 600 ~/.ssh/authorized_keys&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;h2&gt;Step 3: Disable Password Authentication&lt;/h2&gt;
+&lt;p&gt;After ensuring that you can log in using SSH keys, it's a good security practice to disable password-based authentication.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Open the SSH configuration file on your VPS:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;bash
+sudo nano /etc/ssh/sshd_config&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Find the following directives and change them as shown:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;bash
+PasswordAuthentication no
+PermitRootLogin no&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;This disables password login and root login, making your server more secure.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Save the file and exit the editor.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Restart the SSH service to apply the changes:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;bash
+sudo systemctl restart ssh&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;h2&gt;Step 4: Test SSH Key Login&lt;/h2&gt;
+&lt;p&gt;Before logging out of your current session, open a new terminal window and test the SSH key login:&lt;/p&gt;
+&lt;p&gt;```bash
+ssh your_user@your_vps_ip_address&lt;/p&gt;</content><category term="misc"></category><category term="100DaysToOffload"></category><category term="linux"></category></entry><entry><title>Marvel Cinematic Universe - Phase 1</title><link href="/posts/2024/Oct/01/marvel-cinematic-universe-phase-1/" rel="alternate"></link><published>2024-10-01T00:00:00+01:00</published><updated>2024-10-01T00:00:00+01:00</updated><author><name>Gifted</name></author><id>tag:None,2024-10-01:/posts/2024/Oct/01/marvel-cinematic-universe-phase-1/</id><summary type="html">&lt;p&gt;Following my commitment to watching the Marvel Cinematic Universe (MCU) films in order of their release dates …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Following my commitment to watching the Marvel Cinematic Universe (MCU) films in order of their release dates as mentioned in my &lt;a href="{filename}/posts/2024/Sep/19/watching-marvel-movies-in-order.md"&gt;previous post&lt;/a&gt;, I have successfully completed Phase 1. This phase includes &lt;em&gt;Iron Man&lt;/em&gt; (May 2008), &lt;em&gt;The Incredible Hulk&lt;/em&gt; (June 2008), &lt;em&gt;Iron Man 2&lt;/em&gt;
 (April 2010), &lt;em&gt;Thor&lt;/em&gt; (April 2011), &lt;em&gt;Captain America: The First Avenger&lt;/em&gt; (July 2011), and &lt;em&gt;The Avengers&lt;/em&gt; (April 2012).&lt;/p&gt;
 &lt;p&gt;I must say that &lt;em&gt;The Avengers&lt;/em&gt; was definitely worth watching again. Viewing all these films once more has deepened my understanding of the storyline, events, and character development.&lt;/p&gt;
 &lt;p&gt;I am excited to continue and complete Phase 2 of the Marvel Cinematic Universe&lt;br&gt;
----.&lt;/p&gt;</content><category term="misc"></category><category term="#100DaysToOffload"></category><category term="mcu"></category></entry><entry><title>Note to Self 2024#08</title><link href="/posts/2024/Sep/28/note-to-self-202408/" rel="alternate"></link><published>2024-09-28T00:00:00+01:00</published><updated>2024-09-28T00:00:00+01:00</updated><author><name>Gifted</name></author><id>tag:None,2024-09-28:/posts/2024/Sep/28/note-to-self-202408/</id><summary type="html">&lt;p&gt;The stark reality of humanity is that we came here with nothing materially and we would return …&lt;/p&gt;</summary><content type="html">&lt;p&gt;The stark reality of humanity is that we came here with nothing materially and we would return materially with nothing!.
+---.&lt;/p&gt;</content><category term="misc"></category><category term="#100DaysToOffload"></category><category term="movies"></category></entry><entry><title>Note to Self 2024#08</title><link href="/posts/2024/Sep/28/note-to-self-202408/" rel="alternate"></link><published>2024-09-28T00:00:00+01:00</published><updated>2024-09-28T00:00:00+01:00</updated><author><name>Gifted</name></author><id>tag:None,2024-09-28:/posts/2024/Sep/28/note-to-self-202408/</id><summary type="html">&lt;p&gt;The stark reality of humanity is that we came here with nothing materially and we would return …&lt;/p&gt;</summary><content type="html">&lt;p&gt;The stark reality of humanity is that we came here with nothing materially and we would return materially with nothing!.
 Hence, the Vanities of our misplaced priorities like greediness, hatred, war, envy, backstabbing or backbiting, etc!.
 I believe our priorities should be humanity,beauty, creativity, unity and thus Unveiling in Us the "divinity in humanity"!.
 This would liberates us from our current vanities and establish for us a noble legacy!.
