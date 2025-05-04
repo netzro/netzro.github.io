@@ -1,6 +1,5 @@
 # Custom
 output/
-venv/.last_updated
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
