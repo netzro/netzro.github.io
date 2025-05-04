@@ -8,13 +8,21 @@ handle_error() {
 
 # Check commit message
 [ -z "$1" ] && handle_error "Usage: $0 \"Your deploy message\""
+[ ${#1} -lt 10 ] && handle_error "Commit message must be at least 10 characters long"
 
-# Activate Virtualenv (if exists)
-[ -d "venv" ] && source venv/bin/activate
+# Activate Virtualenv
+if [ -d "venv" ]; then
+  source venv/bin/activate
+else
+  read -p "No virtualenv found. Would you like to activate one? (y/n): " response
+  if [ "$response" = "y" ] || [ "$response" = "Y" ]; then
+    read -p "Enter path to virtualenv activate script (e.g., /path/to/venv/bin/activate): " venv_path
+    [ -f "$venv_path" ] && source "$venv_path" || handle_error "Invalid virtualenv path"
+  else
+    handle_error "Virtualenv required for Pelican build. Please create or activate one."
+  fi
+fi
 
-# Source Code Management
-git checkout master || handle_error "Couldn't switch to master"
-git pull origin master || handle_error "Couldn't pull latest changes"
 
 # Build Process
 pelican content -s publishconf.py || handle_error "Build failed"
@@ -25,6 +33,9 @@ if [ -n "$(git status --porcelain)" ]; then
   git commit -m "$1 [$(date +%Y-%m-%d)]" || handle_error "Commit failed"
   git push origin master || handle_error "Push to master failed"
 fi
+
+# Clean output directory
+rm -rf output/venv output/__pycache__ output/*.pyc 2>/dev/null
 
 # Deployment
 DEPLOY_HASH=$(git rev-parse --short HEAD)
