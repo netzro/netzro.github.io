@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Gifted Space</title><link href="https://netzro.github.io/" rel="alternate"></link><link href="https://netzro.github.io/feeds/all.atom.xml" rel="self"></link><id>https://netzro.github.io/</id><updated>2024-10-04T00:00:00+01:00</updated><entry><title>Setting Up SSH Keys for a VPS</title><link href="https://netzro.github.io/posts/2024/Oct/04/setting-up-ssh-keys-for-a-vps/" rel="alternate"></link><published>2024-10-04T00:00:00+01:00</published><updated>2024-10-04T00:00:00+01:00</updated><author><name>Gifted</name></author><id>tag:netzro.github.io,2024-10-04:/posts/2024/Oct/04/setting-up-ssh-keys-for-a-vps/</id><summary type="html">&lt;h2&gt;Introduction&lt;/h2&gt;
+&lt;p&gt;Using SSH keys to access your Virtual Private Server (VPS) is one of the most secure …&lt;/p&gt;</summary><content type="html">&lt;h2&gt;Introduction&lt;/h2&gt;
+&lt;p&gt;Using SSH keys to access your Virtual Private Server (VPS) is one of the most secure methods of authentication. SSH keys provide a stronger layer of security compared to password logins by utilizing a cryptographic key pair. This guide will walk you through generating SSH keys, copying them to your server, and disabling password logins to enhance security.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2&gt;Step 1: Generate SSH Keys&lt;/h2&gt;
+&lt;p&gt;Before you can use SSH key-based authentication, you need to generate an SSH key pair on your local machine.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Open a terminal on your local machine.&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Run the following command to generate an SSH key pair:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;bash
+ssh-keygen -t rsa -b 4096&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;This will generate a 4096-bit RSA key, which is secure and recommended for most uses.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;When prompted to enter a file in which to save the key, press &lt;code&gt;Enter&lt;/code&gt; to accept the default location (&lt;code&gt;~/.ssh/id_rsa&lt;/code&gt;).&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;You can also set a passphrase for additional security, or press &lt;code&gt;Enter&lt;/code&gt; to skip this step if you don’t want a passphrase.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;h2&gt;Step 2: Copy the SSH Key to Your VPS&lt;/h2&gt;
+&lt;p&gt;Once your key pair is generated, you need to copy the public key to your VPS so it knows to trust your key when you try to log in.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Use the following command to copy your public key to the VPS:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;bash
+ssh-copy-id your_user@your_vps_ip_address&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Make sure to replace &lt;code&gt;your_user&lt;/code&gt; with the actual username on your VPS (if you don’t have a user yet, create one with &lt;code&gt;adduser&lt;/code&gt;). Also, replace &lt;code&gt;your_vps_ip_address&lt;/code&gt; with the actual IP address of your VPS.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;If &lt;code&gt;ssh-copy-id&lt;/code&gt; is not available, you can manually copy the public key by doing the following:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Display your public key on your local machine:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;bash
+cat ~/.ssh/id_rsa.pub&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Log into your VPS using your password and open the authorized keys file:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;bash
+ssh your_user@your_vps_ip_address
+mkdir -p ~/.ssh
+nano ~/.ssh/authorized_keys&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Paste the public key into this file, save it, and exit.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Set the correct permissions for the &lt;code&gt;.ssh&lt;/code&gt; directory and the &lt;code&gt;authorized_keys&lt;/code&gt; file:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;bash
+chmod 700 ~/.ssh
+chmod 600 ~/.ssh/authorized_keys&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;h2&gt;Step 3: Disable Password Authentication&lt;/h2&gt;
+&lt;p&gt;After ensuring that you can log in using SSH keys, it's a good security practice to disable password-based authentication.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Open the SSH configuration file on your VPS:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;bash
+sudo nano /etc/ssh/sshd_config&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Find the following directives and change them as shown:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;bash
+PasswordAuthentication no
+PermitRootLogin no&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;This disables password login and root login, making your server more secure.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Save the file and exit the editor.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Restart the SSH service to apply the changes:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;bash
+sudo systemctl restart ssh&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;h2&gt;Step 4: Test SSH Key Login&lt;/h2&gt;
+&lt;p&gt;Before logging out of your current session, open a new terminal window and test the SSH key login:&lt;/p&gt;
+&lt;p&gt;```bash
+ssh your_user@your_vps_ip_address&lt;/p&gt;</content><category term="misc"></category><category term="100DaysToOffload"></category><category term="linux"></category></entry><entry><title>Marvel Cinematic Universe - Phase 1</title><link href="https://netzro.github.io/posts/2024/Oct/01/marvel-cinematic-universe-phase-1/" rel="alternate"></link><published>2024-10-01T00:00:00+01:00</published><updated>2024-10-01T00:00:00+01:00</updated><author><name>Gifted</name></author><id>tag:netzro.github.io,2024-10-01:/posts/2024/Oct/01/marvel-cinematic-universe-phase-1/</id><summary type="html">&lt;p&gt;Following my commitment to watching the Marvel Cinematic Universe (MCU) films in order of their release dates …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Following my commitment to watching the Marvel Cinematic Universe (MCU) films in order of their release dates as mentioned in my &lt;a href="{filename}/posts/2024/Sep/19/watching-marvel-movies-in-order.md"&gt;previous post&lt;/a&gt;, I have successfully completed Phase 1. This phase includes &lt;em&gt;Iron Man&lt;/em&gt; (May 2008), &lt;em&gt;The Incredible Hulk&lt;/em&gt; (June 2008), &lt;em&gt;Iron Man 2&lt;/em&gt;
+(April 2010), &lt;em&gt;Thor&lt;/em&gt; (April 2011), &lt;em&gt;Captain America: The First Avenger&lt;/em&gt; (July 2011), and &lt;em&gt;The Avengers&lt;/em&gt; (April 2012).&lt;/p&gt;
+&lt;p&gt;I must say that &lt;em&gt;The Avengers&lt;/em&gt; was definitely worth watching again. Viewing all these films once more has deepened my understanding of the storyline, events, and character development.&lt;/p&gt;
+&lt;p&gt;I am excited to continue and complete Phase 2 of the Marvel Cinematic Universe&lt;br&gt;
+---.&lt;/p&gt;</content><category term="misc"></category><category term="#100DaysToOffload"></category><category term="movies"></category></entry><entry><title>Note to Self 2024#08</title><link href="https://netzro.github.io/posts/2024/Sep/28/note-to-self-202408/" rel="alternate"></link><published>2024-09-28T00:00:00+01:00</published><updated>2024-09-28T00:00:00+01:00</updated><author><name>Gifted</name></author><id>tag:netzro.github.io,2024-09-28:/posts/2024/Sep/28/note-to-self-202408/</id><summary type="html">&lt;p&gt;The stark reality of humanity is that we came here with nothing materially and we would return …&lt;/p&gt;</summary><content type="html">&lt;p&gt;The stark reality of humanity is that we came here with nothing materially and we would return materially with nothing!.
+Hence, the Vanities of our misplaced priorities like greediness, hatred, war, envy, backstabbing or backbiting, etc!.
+I believe our priorities should be humanity,beauty, creativity, unity and thus Unveiling in Us the "divinity in humanity"!.
+This would liberates us from our current vanities and establish for us a noble legacy!.
+Interestingly, this is not only Possible but Achievable for "We Are The World"!.
+Best wishes for a glorious and fulfilled existence to all and peace profound to the world!.&lt;/p&gt;
+&lt;p&gt;Usu Okon&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Peace, Love, Balance.&lt;/strong&gt;&lt;br&gt;
+☮️ 💚 ☯️&lt;/p&gt;</content><category term="misc"></category><category term="#100DaysToOffload"></category><category term="nts"></category></entry><entry><title>Weeknote 2024#39</title><link href="https://netzro.github.io/posts/2024/Sep/27/weeknote-202439/" rel="alternate"></link><published>2024-09-27T00:00:00+01:00</published><updated>2024-09-27T00:00:00+01:00</updated><author><name>Gifted</name></author><id>tag:netzro.github.io,2024-09-27:/posts/2024/Sep/27/weeknote-202439/</id><summary type="html">&lt;h3&gt;Cli tools&lt;/h3&gt;
+&lt;p&gt;fzf - A command-line fuzzy finder&lt;/p&gt;
+&lt;h3&gt;Articles I read&lt;/h3&gt;
+&lt;p&gt;&lt;a href="https://zacs.site/blog/laziness-is-the-root-of-all-evil.html"&gt;Laziness is the Root of All Evil …&lt;/a&gt;&lt;/p&gt;</summary><content type="html">&lt;h3&gt;Cli tools&lt;/h3&gt;
+&lt;p&gt;fzf - A command-line fuzzy finder&lt;/p&gt;
+&lt;h3&gt;Articles I read&lt;/h3&gt;
+&lt;p&gt;&lt;a href="https://zacs.site/blog/laziness-is-the-root-of-all-evil.html"&gt;Laziness is the Root of All Evil&lt;/a&gt; by Zac Szewczyk&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://nesslabs.com/apophenia"&gt;The dangers of apophenia: not everything happens for a reason&lt;/a&gt; by Dr. Hannah Rose  &lt;/p&gt;
+&lt;p&gt;&lt;a href="https://psychcentral.com/health/apophenia-overview#synchronicity"&gt;Apophenia vs. synchronicity&lt;/a&gt; (an excerpt) by Cathy Lovering   &lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Peace, Love, Balance.&lt;/strong&gt;&lt;br&gt;
+☮️ 💚 ☯️&lt;/p&gt;</content><category term="misc"></category><category term="#100DaysToOffload"></category><category term="Weeknotes"></category></entry><entry><title>Note to Self 2024#07</title><link href="https://netzro.github.io/posts/2024/Sep/21/note-to-self-202407/" rel="alternate"></link><published>2024-09-21T00:00:00+01:00</published><updated>2024-09-21T00:00:00+01:00</updated><author><name>Gifted</name></author><id>tag:netzro.github.io,2024-09-21:/posts/2024/Sep/21/note-to-self-202407/</id><content type="html">&lt;p&gt;Seeking validation from the outside world, is the worst thing that can happen to any man.  &lt;/p&gt;</content><category term="misc"></category><category term="#100DaysToOffload"></category><category term="nts"></category></entry><entry><title>Watching Marvel Movies in Order</title><link href="https://netzro.github.io/posts/2024/Sep/19/watching-marvel-movies-in-order/" rel="alternate"></link><published>2024-09-19T00:00:00+01:00</published><updated>2024-09-19T00:00:00+01:00</updated><author><name>Gifted</name></author><id>tag:netzro.github.io,2024-09-19:/posts/2024/Sep/19/watching-marvel-movies-in-order/</id><summary type="html">&lt;p&gt;The Marvel Cinematic Universe (MCU) encompasses both TV shows and movies. To fully immerse myself in the …&lt;/p&gt;</summary><content type="html">&lt;p&gt;The Marvel Cinematic Universe (MCU) encompasses both TV shows and movies. To fully immerse myself in the franchise, I've decided to watch the movies in their release order—a departure from my previous random viewing. This approach allows me to experience the films as they were initially intended.&lt;/p&gt;
+&lt;p&gt;I'll be watching the movies in phases and posting updates upon completing each phase. Below is a comprehensive list of MCU movies.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Phase 1&lt;/em&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;em&gt;Iron Man&lt;/em&gt; (May 2008)&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;The Incredible Hulk&lt;/em&gt; (June 2008)&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;Iron Man 2&lt;/em&gt; (April 2010)&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;Thor&lt;/em&gt; (April 2011)&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;Captain America: The First Avenger&lt;/em&gt; (July 2011)&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;The Avengers&lt;/em&gt; (April 2012)&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;em&gt;Phase 2&lt;/em&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;em&gt;Iron Man 3&lt;/em&gt; (April 2013)&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;Thor: The Dark World&lt;/em&gt; (November 2013)&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;Captain America: The Winter Soldier&lt;/em&gt; (March 2014)&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;Guardians of the Galaxy&lt;/em&gt; (July 2014)&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;Avengers: Age of Ultron&lt;/em&gt; (April 2015)&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;Ant-Man&lt;/em&gt; (July 2015)&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;em&gt;Phase 3&lt;/em&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;em&gt;Captain America: Civil War&lt;/em&gt; (April 2016)&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;Doctor Strange&lt;/em&gt; (October 2016)&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;Guardians of the Galaxy Vol. 2&lt;/em&gt; (April 2017)&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;Spider-Man: Homecoming&lt;/em&gt; (July 2017)&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;Thor: Ragnarok&lt;/em&gt; (October 2017)&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;Black Panther&lt;/em&gt; (February 2018)&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;Avengers: Infinity War&lt;/em&gt; (April 2018)&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;Ant-Man and the Wasp&lt;/em&gt; (July 2018)&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;Captain Marvel&lt;/em&gt; (March 2019)&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;Avengers: Endgame&lt;/em&gt; (April 2019)&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;Spider-Man: Far From Home&lt;/em&gt; (July 2019)&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;em&gt;Phase 4&lt;/em&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;em&gt;Black Widow&lt;/em&gt; (July 2021)&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;Shang-Chi and the Legend of the Ten Rings&lt;/em&gt; (September 2021)&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;Eternals&lt;/em&gt; (November 2021)&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;Spider-Man: No Way Home&lt;/em&gt; (December 2021)&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;Doctor Strange in the Multiverse of Madness&lt;/em&gt; (May 2022)&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;Thor: Love and Thunder&lt;/em&gt; (July 2022)&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;Black Panther: Wakanda Forever&lt;/em&gt; (November 2022)&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;em&gt;Phase 5&lt;/em&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;em&gt;Ant-Man and The Wasp: Quantumania&lt;/em&gt; (February 2023)&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;Guardians of the Galaxy Vol. 3&lt;/em&gt; (May 2023)&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;The Marvels&lt;/em&gt; (November 2023)&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;Deadpool &amp;amp; Wolverine&lt;/em&gt; (July 2024)&lt;/li&gt;
+&lt;/ol&gt;</content><category term="misc"></category><category term="#100DaysToOffload"></category><category term="movies"></category></entry><entry><title>My Rubik's Cube (Part 1)</title><link href="https://netzro.github.io/posts/2024/Aug/29/my-rubiks-cube-part-1/" rel="alternate"></link><published>2024-08-29T00:00:00+01:00</published><updated>2024-08-29T00:00:00+01:00</updated><author><name>Gifted</name></author><id>tag:netzro.github.io,2024-08-29:/posts/2024/Aug/29/my-rubiks-cube-part-1/</id><summary type="html">&lt;h2&gt;The Cube&lt;/h2&gt;
+&lt;p&gt;Recently, I decided to buy myself a Rubik's Cube and see how easy or hard …&lt;/p&gt;</summary><content type="html">&lt;h2&gt;The Cube&lt;/h2&gt;
+&lt;p&gt;Recently, I decided to buy myself a Rubik's Cube and see how easy or hard solving it would be. In this series of mini-posts, I’ll share my experience and the steps I followed to solve the cube.&lt;/p&gt;
+&lt;h2&gt;The Challenge&lt;/h2&gt;
+&lt;p&gt;When I first held the cube and scrambled it, I realized that solving it was going to be more than just a quick puzzle. It requires a methodical approach and an algorithm. After some research and watching YouTube videos, I found the Beginner's Method to be the best way to start. But first, I needed to understand the notations used when solving the cube.  &lt;/p&gt;
+&lt;h2&gt;Understanding Rubik's Cube Notation&lt;/h2&gt;
+&lt;p&gt;When solving a Rubik's Cube, algorithms are often represented using a specific notation. Here’s a quick guide that helped me understand the symbols:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;U (Up):&lt;/strong&gt; Rotate the top face of the cube clockwise.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;U' (Up Prime):&lt;/strong&gt; Rotate the top face of the cube counterclockwise.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;U2 (Up Double):&lt;/strong&gt; Rotate the top face of the cube 180 degrees (two quarter turns).&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The same notation applies to other faces:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;R (Right):&lt;/strong&gt; Rotate the right face of the cube clockwise.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;R' (Right Prime):&lt;/strong&gt; Rotate the right face counterclockwise.&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;R2 (Right Double):&lt;/strong&gt; Rotate the right face 180 degrees.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;L (Left):&lt;/strong&gt; Rotate the left face of the cube clockwise.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;L' (Left Prime):&lt;/strong&gt; Rotate the left face counterclockwise.&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;L2 (Left Double):&lt;/strong&gt; Rotate the left face 180 degrees.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;F (Front):&lt;/strong&gt; Rotate the front face of the cube clockwise.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;F' (Front Prime):&lt;/strong&gt; Rotate the front face counterclockwise.&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;F2 (Front Double):&lt;/strong&gt; Rotate the front face 180 degrees.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;B (Back):&lt;/strong&gt; Rotate the back face of the cube clockwise.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;B' (Back Prime):&lt;/strong&gt; Rotate the back face counterclockwise.&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;B2 (Back Double):&lt;/strong&gt; Rotate the back face 180 degrees.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;D (Down):&lt;/strong&gt; Rotate the bottom face of the cube clockwise.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;D' (Down Prime):&lt;/strong&gt; Rotate the bottom face counterclockwise.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;D2 (Down Double):&lt;/strong&gt; Rotate the bottom face 180 degrees.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;Example Algorithm&lt;/h3&gt;
+&lt;p&gt;An example of an algorithm might look like this:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;R U R&amp;#39; U&amp;#39;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;In the next post, I will start solving the cube.&lt;/p&gt;</content><category term="misc"></category><category term="#100DaysToOffload"></category><category term="misc"></category></entry><entry><title>NTS:24-06</title><link href="https://netzro.github.io/posts/2024/Aug/22/nts24-06/" rel="alternate"></link><published>2024-08-22T00:00:00+01:00</published><updated>2024-08-22T00:00:00+01:00</updated><author><name>Gifted</name></author><id>tag:netzro.github.io,2024-08-22:/posts/2024/Aug/22/nts24-06/</id><summary type="html">&lt;blockquote&gt;
+&lt;p&gt;"To go wrong in one's own way is better than to go right in someone else's." - Fyodor …&lt;/p&gt;&lt;/blockquote&gt;</summary><content type="html">&lt;blockquote&gt;
+&lt;p&gt;"To go wrong in one's own way is better than to go right in someone else's." - Fyodor Dostoevsky &lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Every soul requires different experiences for the evolution of their consciousness. What might look like someone going down a very dark and destructive path, might just be the experience their soul needs to jolt them awake.  &lt;/p&gt;
+&lt;p&gt;No one person knows precisely what experiences another soul requires for their awakening. What is the right way for one soul, might just be the end for another.  &lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Peace, Love, Balance.&lt;/strong&gt;&lt;br&gt;
+☮️ 💚 ☯️&lt;/p&gt;</content><category term="misc"></category><category term="#100DaysToOffload"></category><category term="nts"></category></entry><entry><title>NTS:24-05</title><link href="https://netzro.github.io/posts/2024/Aug/20/nts24-05/" rel="alternate"></link><published>2024-08-20T00:00:00+01:00</published><updated>2024-08-20T00:00:00+01:00</updated><author><name>Gifted</name></author><id>tag:netzro.github.io,2024-08-20:/posts/2024/Aug/20/nts24-05/</id><summary type="html">&lt;p&gt;&lt;img alt="candles" src="https://netzro.github.io/images/candles.jpg" style="width: 200px; height: 200px;"&gt;  &lt;/p&gt;
+&lt;p&gt;Four candles were burning calmly and were melting slowly... it was so quiet that I could hear …&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;img alt="candles" src="https://netzro.github.io/images/candles.jpg" style="width: 200px; height: 200px;"&gt;  &lt;/p&gt;
+&lt;p&gt;Four candles were burning calmly and were melting slowly... it was so quiet that I could hear their talk.&lt;/p&gt;
+&lt;p&gt;"I am PEACE.," said the first one, "unfortunately people do not know how to keep me. I have nothing left to do." And the flame of this candle went out. &lt;/p&gt;
+&lt;p&gt;"I am FAITH unfortunately no one needs me," the second one said,
+"even  people don't want to hear anything about me. So it makes no sense for me to burn further." A light breeze blew and extinguished the candle. &lt;/p&gt;
+&lt;p&gt;After grieving, the third candle said: 
+I am LOVE but people neither appreciate nor understand me. I have no more energy to burn. 
+And that candle too faded away.&lt;/p&gt;
+&lt;p&gt;Suddenly, a child came into the room and, saw three extinguished candles. Scared, he shouted, "Why are you not burning? You should give light. I am afraid of the darkness." Saying all that he began to cry.&lt;/p&gt;
+&lt;p&gt;Then the fourth candle said, "Don't be afraid and don't cry. While I burn, you can always light up other three. I am HOPE."&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Peace, Love, Balance.&lt;/strong&gt;&lt;br&gt;
+☮️ 💚 ☯️&lt;/p&gt;</content><category term="misc"></category><category term="#100DaysToOffload"></category><category term="nts"></category></entry><entry><title>NTS:24-04</title><link href="https://netzro.github.io/posts/2024/Aug/18/nts24-04/" rel="alternate"></link><published>2024-08-18T10:12:00+01:00</published><updated>2024-08-18T10:12:00+01:00</updated><author><name>Gifted</name></author><id>tag:netzro.github.io,2024-08-18:/posts/2024/Aug/18/nts24-04/</id><summary type="html">&lt;blockquote&gt;
+&lt;p&gt;"Make your own Bible. Select and collect all the words and sentences that in all your readings …&lt;/p&gt;&lt;/blockquote&gt;</summary><content type="html">&lt;blockquote&gt;
+&lt;p&gt;"Make your own Bible. Select and collect all the words and sentences that in all your readings have been to you like the blast of a trumpet." ~ Ralph Waldo Emerson&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;As we dive into this wisdom, let's first consider what Emerson is suggesting. He's not advocating for creating a new holy book or replacing existing sacred texts, but rather encouraging each individual to curate their own spiritual guidebook. This "personal Bible" would be a collection of quotes, phrases, and ideas that have had a profound impact on one's life and understanding of the world.  &lt;/p&gt;
+&lt;p&gt;Emerson is proposing that we should actively seek out the words and sentences that resonate deeply with us, like the blast of a trumpet – loud, clear, and unforgettable. These passages might come from various sources: sacred texts, philosophical treatises, poetry, or even personal experiences. The key is to identify what speaks directly to our souls, what sparks our imagination, and what inspires us to be more compassionate, wise, and just.  &lt;/p&gt;
+&lt;p&gt;What are the words and phrases that have been like a blast of a trumpet in your life? Which passages or quotes have had a profound impact on your values, beliefs, or understanding of yourself and the world?  &lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Peace, Love, Balance.&lt;/strong&gt;&lt;br&gt;
+☮️ 💚 ☯️&lt;/p&gt;</content><category term="misc"></category><category term="#100DaysToOffload"></category><category term="nts"></category></entry></feed>
