@@ -6,39 +6,43 @@ handle_error() {
   exit 1
 }
 
-# Check if a commit message was provided as an argument
+# Check commit message
 if [ -z "$1" ]; then
   handle_error "No commit message provided. Usage: $0 <commit-message>"
 fi
 
-# Switch to the master branch
-git checkout master || handle_error "Failed to switch to master branch."
-
-# Generate the static site using Pelican
-pelican content || handle_error "Pelican failed to generate the site."
-
-# Check the status of the repository and include untracked files
-if [ -z "$(git status -s)" ]; then
-  echo "No changes to commit."
-  exit 0
+# Activate virtualenv
+if [ -d "venv" ]; then
+    source venv/bin/activate || handle_error "Failed to activate virtualenv"
+else
+    handle_error "Virtual environment (venv) not found"
 fi
 
-# Stage all changes, including new files
-git add -A || handle_error "Failed to stage changes."
+# Ensure dependencies
+#pip install -r requirements.txt || handle_error "Failed to install dependencies"
 
-# Commit the changes with the provided message
-git commit -m "$1" || handle_error "Failed to commit changes."
+# Switch to master
+git checkout master || handle_error "Failed to switch to master branch."
+git pull origin master || handle_error "Failed to pull latest changes"
 
-# Push the changes to the master branch on the remote repository
-git push origin master || handle_error "Failed to push changes to master."
+# Build site with production settings
+pelican content -s publishconf.py || handle_error "Pelican build failed"
 
-# Import the generated site to the gh-pages branch
-ghp-import output -b gh-pages || handle_error "Failed to import to gh-pages branch."
+# Commit source changes
+if [ -z "$(git status -s)" ]; then
+  echo "No changes to commit."
+else
+  git add -A || handle_error "Failed to stage changes."
+  git commit -m "$1 - $(date '+%Y-%m-%d %H:%M')" || handle_error "Commit failed"
+  git push origin master || handle_error "Failed to push to master"
+fi
 
-# Push the gh-pages branch to the remote repository
-git push origin gh-pages || handle_error "Failed to push gh-pages branch."
+# Deploy to GitHub Pages
+ghp-import output -b gh-pages -m "Deploy: $(date '+%Y-%m-%d %H:%M')" || handle_error "ghp-import failed"
+git push origin gh-pages || handle_error "Failed to push gh-pages"
 
 # Success message
-echo "*****************************"
-echo "Site successfully deployed!"
-echo "*****************************"
+echo "***************************************"
+echo "  Site successfully deployed!          "
+echo "  ➜ https://netzro.github.io          "
+echo "***************************************"
