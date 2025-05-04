@@ -1,48 +1,55 @@
 #!/bin/bash
 
-# Error handling function
+# Error handling
 handle_error() {
-  echo "Error: $1"
+  echo "🚨 Error: $1"
   exit 1
 }
 
 # Check commit message
 if [ -z "$1" ]; then
-  handle_error "No commit message provided. Usage: $0 <commit-message>"
+  handle_error "Usage: $0 \"Your commit message\""
 fi
 
-# Activate virtualenv
+# 1. Environment Setup ---------------------------------------------------
 if [ -d "venv" ]; then
-    source venv/bin/activate || handle_error "Failed to activate virtualenv"
+    source venv/bin/activate || handle_error "Virtualenv activation failed"
+    echo "✓ Virtualenv activated"
 else
-    handle_error "Virtual environment (venv) not found"
+    handle_error "Run 'python -m venv venv' first"
 fi
 
-# Ensure dependencies
-#pip install -r requirements.txt || handle_error "Failed to install dependencies"
+# 2. Dependency Check (Only if requirements changed) ---------------------
+# if [ requirements.txt -nt venv/.last_updated ] || [ ! -f venv/.last_updated ]; then
+#    echo "🔄 Updating dependencies..."
+#    pip install -r requirements.txt || handle_error "Dependency installation failed"
+#    touch venv/.last_updated
+#    echo "✓ Dependencies updated"
+#else
+#    echo "✓ Dependencies already current"
+#fi
 
-# Switch to master
-git checkout master || handle_error "Failed to switch to master branch."
-git pull origin master || handle_error "Failed to pull latest changes"
+# 3. Source Code Management ----------------------------------------------
+git checkout master || handle_error "Couldn't switch to master"
+git pull origin master || handle_error "Couldn't pull latest changes"
 
-# Build site with production settings
-pelican content -s publishconf.py || handle_error "Pelican build failed"
+# 4. Build Process ------------------------------------------------------
+echo "🏗️  Building site..."
+pelican content -s publishconf.py || handle_error "Build failed"
 
-# Commit source changes
-if [ -z "$(git status -s)" ]; then
-  echo "No changes to commit."
+# 5. Source Commit (Only if changes exist) -------------------------------
+if [ -n "$(git status --porcelain)" ]; then
+    git add -A
+    git commit -m "$1 [$(date +%Y-%m-%d)]" || handle_error "Commit failed"
+    git push origin master || handle_error "Push to master failed"
+    echo "✓ Source changes committed"
 else
-  git add -A || handle_error "Failed to stage changes."
-  git commit -m "$1 - $(date '+%Y-%m-%d %H:%M')" || handle_error "Commit failed"
-  git push origin master || handle_error "Failed to push to master"
+    echo "⏩ No source changes to commit"
 fi
 
-# Deploy to GitHub Pages
-ghp-import output -b gh-pages -m "Deploy: $(date '+%Y-%m-%d %H:%M')" || handle_error "ghp-import failed"
-git push origin gh-pages || handle_error "Failed to push gh-pages"
+# 6. Deployment ---------------------------------------------------------
+echo "🚀 Deploying to GitHub Pages..."
+ghp-import output -b gh-pages -m "Deploy: $(date +'%Y-%m-%d %H:%M')"
+git push origin gh-pages || handle_error "Deployment push failed"
 
-# Success message
-echo "***************************************"
-echo "  Site successfully deployed!          "
-echo "  ➜ https://netzro.github.io          "
-echo "***************************************"
+echo "✅ Success! Your site is now live at https://netzro.github.io"
