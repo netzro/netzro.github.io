@@ -5,7 +5,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="generator" content="Pelican" />
-    <title>Setting Up Pass as My Password Manager</title>
+    <title>"Setting Up Pass as My Password Manager"</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Slab|Ruda" />
     <link rel="stylesheet" type="text/css" href="https://netzro.github.io/theme/css/main.css" />
@@ -16,7 +16,7 @@
     <link
         href="https://netzro.github.io/feeds/all.atom.xml"
         type="application/atom+xml" rel="alternate" title="Gifted Space Atom Feed" />
-<meta name="description" content="Managing passwords without a dedicated password manager can be a challenge. Having been online for decades, I've …" />
+<meta name="description" content="100DaysToOffload linux draft: false description: "A guide to setting up Pass, a lightweight Unix password manager, on …" />
     <script>
         if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia(
                 '(prefers-color-scheme: dark)').matches)) {
@@ -92,7 +92,7 @@
 
 <main>
   <header>
-    <h1 class="font-semibold text-3xl my-2">Setting Up Pass as My Password Manager</h1>
+    <h1 class="font-semibold text-3xl my-2">"Setting Up Pass as My Password Manager"</h1>
     <footer class="flex text-sm text-zinc-800 dark:text-zinc-400">
       <div class="flex text-xs text-zinc-800 dark:text-zinc-400">
         <time>August 15, 2024</time>
@@ -120,13 +120,26 @@
               prose-code:font-light
               prose-img:rounded-md
               ">
-    <p>Managing passwords without a dedicated password manager can be a challenge. Having been online for decades, I've encountered countless sites and services requiring passwords—ranging from email services and banking sites to forums and chat platforms.</p>
-<p>Remembering all these usernames and passwords is difficult, so I used to rely on using the same or similar passwords across different platforms—a practice I <strong>strongly</strong> advise against. However, I often defaulted to using built-in password managers in browsers and Google services (on my Android smartphone). Typically, once I created login credentials, I would let the browser save them to its database and autofill them whenever I revisited the site, eliminating the need to remember them.</p>
-<p>Today, I decided to explore how a password manager works. I've heard of 1Password, Bitwarden, etc., but I wanted something simple, lightweight, and minimalistic. After some research, I settled on "Pass," which is often touted as the default password manager for Unix.</p>
-<p>In this post, I will document my workflow for setting up Pass on my Linux environment (Termux) and Android smartphone.</p>
-<h3>Generating a GPG Key</h3>
-<p>First, I generated a GPG key:</p>
+    <ul>
+<li>100DaysToOffload</li>
+<li>linux
+draft: false
+description: "A guide to setting up Pass, a lightweight Unix password manager, on a Linux environment (Termux) and syncing with GitHub."</li>
+</ul>
+<hr>
+<p>Managing passwords without a dedicated password manager is challenging. Having been online for decades, I’ve used countless websites and services—email, banking, forums, and chat platforms—all requiring unique credentials.</p>
+<p>Remembering usernames and passwords is tough, so I used to rely on similar passwords across platforms, a practice I <strong>strongly</strong> advise against. Previously, I depended on browser-built-in password managers and Google services (on my Android smartphone). Once I created login credentials, the browser would save them and autofill them on return visits, eliminating the need to memorize them.</p>
+<p>Today, I explored password managers and chose <strong>Pass</strong>, a simple, lightweight, and minimalistic Unix password manager. In this post, I’ll document my workflow for setting up Pass on my Linux environment (Termux) and Android smartphone.</p>
+<h2>Generating a GPG Key</h2>
+<p>First, I installed GnuPG and generated a GPG key:</p>
 <div class="highlight"><pre><span></span><code>pkg<span class="w"> </span>install<span class="w"> </span>gnupg
+gpg<span class="w"> </span>--full-generate-key
+<span class="c1">### Generating a GPG Key</span>
+
+First,<span class="w"> </span>I<span class="w"> </span>generated<span class="w"> </span>a<span class="w"> </span>GPG<span class="w"> </span>key:
+
+<span class="sb">```</span>bash
+pkg<span class="w"> </span>install<span class="w"> </span>gnupg
 gpg<span class="w"> </span>--gen-key
 </code></pre></div>
 
@@ -152,23 +165,59 @@ pass<span class="w"> </span>git<span class="w"> </span>push<span class="w"> </sp
   </div>
   <footer class="flex flex-col mt-10 ">
     <ul class="flex flex-wrap">
-      <a href="https://netzro.github.io/tag/100daystooffload.html">
-        <li
-          class="bg-zinc-200 hover:bg-zinc-300 dark:hover:bg-zinc-800 dark:bg-zinc-700 text-zinc-500 dark:text-neutral-400 mb-2 mr-2 px-3 py-1.5 rounded-md transition ease-in active:-translate-y-1 active:scale-110 duration-75">
-          #100DaysToOffload
-        </li>
-      </a>
-      <a href="https://netzro.github.io/tag/linux.html">
-        <li
-          class="bg-zinc-200 hover:bg-zinc-300 dark:hover:bg-zinc-800 dark:bg-zinc-700 text-zinc-500 dark:text-neutral-400 mb-2 mr-2 px-3 py-1.5 rounded-md transition ease-in active:-translate-y-1 active:scale-110 duration-75">
-          linux
-        </li>
-      </a>
     </ul>
     <div class="flex w-full my-2 bg-zinc-200 dark:bg-zinc-700 rounded-lg">
       <div class="w-1/2 rounded-l-lg"></div>
     </div>
     <div class="flex bg-zinc-200 dark:bg-zinc-700 py-2 rounded-lg justify-center space-x-2 text-xs">
+      <ul>
+        <a target="_blank" rel="noopener noreferrer" title="twitter" aria-label="share Features on twitter"
+          href="https://twitter.com/intent/tweet/?text=Features&amp;url=https://netzro.github.io/posts/2024/Aug/15/setting-up-pass-as-my-password-manager/">
+          <li class="bg-gray-900 p-1 text-white rounded-md">
+            <i class="fab fa-twitter fa-2x" aria-hidden="true"></i>
+          </li>
+        </a>
+      </ul>
+      <ul>
+        <a target="_blank" rel="noopener noreferrer" title="linkedin" aria-label="share Features on linkedin"
+          href="https://www.linkedin.com/sharing/share-offsite/?url=https://netzro.github.io/posts/2024/Aug/15/setting-up-pass-as-my-password-manager/">
+          <li class="bg-gray-900 p-1 text-white rounded-md">
+            <i class="fab fa-linkedin fa-2x" aria-hidden="true"></i>
+          </li>
+        </a>
+      </ul>
+      <ul>
+        <a target="_blank" rel="noopener noreferrer" title="reddit" aria-label="share Features on reddit"
+          href="https://reddit.com/submit?url=https://netzro.github.io/posts/2024/Aug/15/setting-up-pass-as-my-password-manager/">
+          <li class="bg-gray-900 p-1 text-white rounded-md">
+            <i class="fab fa-reddit fa-2x" aria-hidden="true"></i>
+          </li>
+        </a>
+      </ul>
+      <ul>
+        <a target="_blank" rel="noopener noreferrer" title="facebook" aria-label="share Features on facebook"
+          href="https://facebook.com/sharer/sharer.php?u=https://netzro.github.io/posts/2024/Aug/15/setting-up-pass-as-my-password-manager/">
+          <li class="bg-gray-900 p-1 text-white rounded-md">
+            <i class="fab fa-facebook fa-2x" aria-hidden="true"></i>
+          </li>
+        </a>
+      </ul>
+      <ul>
+        <a target="_blank" rel="noopener noreferrer" title="whatsapp" aria-label="share Features on whatsapp"
+          href="https://api.whatsapp.com/send?text=Features - https://netzro.github.io/posts/2024/Aug/15/setting-up-pass-as-my-password-manager/">
+          <li class="bg-gray-900 p-1 text-white rounded-md">
+            <i class="fab fa-whatsapp fa-2x" aria-hidden="true"></i>
+          </li>
+        </a>
+      </ul>
+      <ul>
+        <a target="_blank" rel="noopener noreferrer" title="telegram" aria-label="share Features on telegram"
+          href="https://telegram.me/share/url?text=Features&amp;url=https://netzro.github.io/posts/2024/Aug/15/setting-up-pass-as-my-password-manager/">
+          <li class="bg-gray-900 p-1 text-white rounded-md">
+            <i class="fab fa-telegram fa-2x" aria-hidden="true"></i>
+          </li>
+        </a>
+      </ul>
     </div>
   </footer>
   <div>
@@ -184,7 +233,7 @@ pass<span class="w"> </span>git<span class="w"> </span>push<span class="w"> </sp
         <a class="underline" href="https://getpelican.com/">Pelican</a>&nbsp;and&nbsp;
         <a class="underline" href="https://github.com/aleylara/Papyrus">Papyrus</a>
         
-        <span> I've completed <strong>19</strong> out of 100 posts for #100DaysToOffload!, <strong>98</strong> days left to finish the challenge.</span>
+        <span></span>
     
     </div>
 </footer>
