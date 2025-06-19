@@ -1,5 +1,5 @@
 ---
-title: "Watching Marvel Movies in Order"
+title: Watching Marvel Movies in Order
 date: 2024-09-19T00:00:00Z
 tags:
   - 100DaysToOffload

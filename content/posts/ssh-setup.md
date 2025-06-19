@@ -1,17 +1,14 @@
 ---
-title: "Setting Up SSH Keys for a VPS"
+title: Setting Up SSH Keys for a VPS
 date: 2024-10-04
-tags: 
-  - 100DaysToOffload
-  - linux
-  - ssh
+tags: 100DaysToOffload, linux, ssh
 ---
 
 ## Introduction
 
 Using SSH keys to access your Virtual Private Server (VPS) is one of the most secure methods of authentication. SSH keys provide a stronger layer of security compared to password logins by utilizing a cryptographic key pair. This guide will walk you through generating SSH keys, copying them to your server, and disabling password logins to enhance security.
 
-## Step 1: Generate SSH Keys
+### Step 1: Generate SSH Keys
 
 Before you can use SSH key-based authentication, you need to generate an SSH key pair on your local machine.
 

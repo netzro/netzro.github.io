@@ -11,10 +11,10 @@ I record my Doings, Thoughts and Writing.
 '''
 USE_FOLDER_AS_CATEGORY = False
 DISPLAY_CATEGORIES_ON_MENU = False
-SUMMARY_MAX_LENGTH = 17
+SUMMARY_MAX_LENGTH = 15
 DEFAULT_PAGINATION = 8
 
-ARTICLE_PATH = ["blog", "posts"]
+ARTICLE_PATH = ["posts"]
 PAGE_PATH = ["pages"]
 
 ARTICLE_URL = 'posts/{date:%Y}/{date:%b}/{date:%d}/{slug}/'
@@ -22,7 +22,7 @@ ARTICLE_SAVE_AS = 'posts/{date:%Y}/{date:%b}/{date:%d}/{slug}/index.html'
 PAGE_URL = 'pages/{slug}/'
 PAGE_SAVE_AS = 'pages/{slug}/index.html'
 
-COPYRIGHT = '©2024 - Gifted'
+COPYRIGHT = '©2025 - Gifted'
 THEME = 'theme/Papyrus'
 THEME_STATIC_PATHS = ['static']
 
