@@ -1,10 +1,10 @@
 AUTHOR = 'Gifted'
 SITENAME = 'Gifted Space'
-SITEURL = ""
 PATH = "content"
 TIMEZONE = 'Africa/Lagos'
 DEFAULT_LANG = 'en'
 
+SITEURL = ""
 SUBTITLE = 'Gifted say welcome'
 SUBTEXT = '''My allocated space on the internet where
 I record my Doings, Thoughts and Writing.
