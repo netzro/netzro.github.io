@@ -4,7 +4,7 @@ PATH = "content"
 TIMEZONE = 'Africa/Lagos'
 
 SITEURL = "https://netzro.github.io/bytedesk"
-OUTPUT_PATH = "../output/bytedesk/"
+OUTPUT_PATH = "../bytedesk/"
 ARTICLE_URL = "posts/{slug}/"
 ARTICLE_SAVE_AS = "posts/{slug}/index.html"
 DEFAULT_LANG = 'en'
