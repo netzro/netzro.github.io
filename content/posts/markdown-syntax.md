@@ -1,9 +1,7 @@
----
-title: "Why Markdown is the Best Way to Write for the Web"
-date: 2025-05-21
-tags: ["markdown", "writing", "productivity"]
-description: "Markdown simplifies writing for the web—here's why every developer and writer should use it."
----
+Title: Why Markdown is the Best Way to Write for the Web
+Date: 2025-05-21
+Tags: ["markdown", "writing", "productivity"]
+Summary: Markdown simplifies writing for the web—here's why every developer and writer should use it.
 
 ### Why Markdown is the Best Way to Write for the Web
 

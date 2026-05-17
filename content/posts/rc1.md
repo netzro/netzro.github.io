@@ -1,10 +1,6 @@
----
-title: "My Rubik's Cube (Part 1)"
-date: 2024-08-29
-tags: 
-  - 100DaysToOffload
-  - misc
----
+Title: My Rubik's Cube (Part 1)
+Date: 2024-08-29
+Tags: 100DaysToOffload, misc
 
 ## The Cube
 

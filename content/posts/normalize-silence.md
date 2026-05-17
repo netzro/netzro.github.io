@@ -1,11 +1,8 @@
----
-title: "Normalize Silence: Finding Greatness in Stillness"
-date: 2025-06-02
-tags:
-  - Self-Improvement
-  - Mindfulness
-description: "Embracing silence to build resilience, clarity, and greatness in a distracted world."
----
+Title: Normalize Silence: Finding Greatness in Stillness
+Date: 2025-06-02
+Tags: Self-Improvement, Mindfulness
+Summary: Embracing silence to build resilience, clarity, and greatness in a distracted world.
+
 ### Normalize Silence: Finding Greatness in Stillness
 
 In a world screaming for your attention—social media notifications pinging, Afrobeat blasting, and the hustle of Lagos life pulling you in every direction—*silence* is your superpower. As a Nigerian chasing big dreams, you need to *normalize silence* to unlock the clarity and strength that set you apart.

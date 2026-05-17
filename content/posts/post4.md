@@ -1,16 +1,8 @@
----
-title: "Forms of Revelation: Navigating Divine Communication"
-date: 2024-06-15
-tags:
-  - spirituality
-  - consciousness
-  - divine-guidance
-  - intuition
-categories:
-  - Spiritual Wisdom
-draft: false
-description: "Understanding the varied forms of divine revelation and how to discern their truth through heightened consciousness."
----
+Title: Forms of Revelation: Navigating Divine Communication
+Date: 2024-06-15
+Category: Spiritual Wisdom
+Tags: spirituality, consciousness, divine-guidance, intuition
+Summary: Understanding the varied forms of divine revelation and how to discern their truth through heightened consciousness.
 
 ## The Spectrum of Divine Revelation
 

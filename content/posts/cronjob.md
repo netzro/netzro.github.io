@@ -1,11 +1,8 @@
----
-title: "Setting Up Cronie and Scheduling Scripts in Termux"
-date: 2025-06-08
-tags:
-  - Termux
-  - Cronie
-description: "A step-by-step guide to installing cronie in Termux and scheduling scripts to run at specific times on Android."
----
+Title: Setting Up Cronie and Scheduling Scripts in Termux
+Date: 2025-06-08
+Tags: Termux, Cronie
+Summary: A step-by-step guide to installing cronie in Termux and scheduling scripts to run at specific times on Android.
+
 ### Setting Up Cronie and Scheduling Scripts in Termux
 
 Cronie is a powerful tool for scheduling recurring tasks in Termux, allowing you to automate scripts on your Android device without root access. This guide walks you through installing cronie, setting up cron jobs, and managing them effectively, with examples tailored for Termux users.

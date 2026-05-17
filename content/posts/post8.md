@@ -1,16 +1,8 @@
----
-title: "Hetty Green: The Paradox of America's Greatest Miser"
-date: 2024-06-11
-tags:
-  - history
-  - finance
-  - psychology
-  - unusual-figures
-categories:
-  - Historical Profiles
-draft: false
-description: "The astonishing life of Hetty Green, the Gilded Age's most notorious miser who turned frugality into pathology."
----
+Title: Hetty Green: The Paradox of America's Greatest Miser
+Date: 2024-06-11
+Category: Historical Profiles
+Tags: history, finance, psychology, unusual-figures
+Summary: The astonishing life of Hetty Green, the Gilded Age's most notorious miser who turned frugality into pathology.
 
 ![Portrait of Hetty Green](/media/stingy.png)
 

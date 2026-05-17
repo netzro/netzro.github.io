@@ -1,8 +1,6 @@
----
-title: Movies
-date: 2024-08-22
-status: hidden
----
+Title: Movies
+Date: 2024-08-22
+Status: Hidden
 
 A curated list of movies I have watched.
 

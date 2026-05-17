@@ -1,15 +1,8 @@
----
-title: "Fearlessness: How to Stop Running from Space"
-date: 2018-03-18T12:13:30+05:30
-tags:
-  - mindfulness
-  - personal growth
-  - digital detox
-categories:
-  - Mindfulness
-draft: false
-description: "Exploring our fear of empty space and how embracing stillness leads to freedom and presence."
----
+Title: Fearlessness: How to Stop Running from Space
+Date: 2018-03-18T12:13:30+05:30
+Category: Mindfulness
+Tags: mindfulness, personal growth, digital detox
+Summary: Exploring our fear of empty space and how embracing stillness leads to freedom and presence.
 
 ## The Space We Fear
 

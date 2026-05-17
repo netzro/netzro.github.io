@@ -1,11 +1,8 @@
----
-title: "The Kybalion: Unlocking the Seven Hermetic Principles"
-date: 2025-05-25
-description: "A dive into the seven Hermetic principles of The Kybalion, revealing the mental nature of the universe."
-tags:
-  - Hermeticism
-  - Kybalion
----
+Title: The Kybalion: Unlocking the Seven Hermetic Principles
+Date: 2025-05-25
+Tags: Hermeticism, Kybalion
+Summary: A dive into the seven Hermetic principles of The Kybalion, revealing the mental nature of the universe.
+
 ### The Kybalion: Unlocking the Seven Hermetic Principles
 
 As a seeker of wisdom in Nigeria, where spirituality runs deep like the Niger River, *The Kybalion*—a text attributed to the mysterious "Three Initiates"—offers timeless truths rooted in Hermetic philosophy. Its seven principles reveal the universe as a mental creation, empowering us to shape our reality with intention. Let’s explore these principles, blending ancient wisdom with the vibrant spirit of Naija.

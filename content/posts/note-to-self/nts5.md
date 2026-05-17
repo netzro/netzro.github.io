@@ -1,12 +1,8 @@
----
-title: "NTS:24-05"
-date: 2024-08-20T00:00:00Z
-tags:
-  - 100DaysToOffload
-  - nts
-draft: false
-description: "A reflective allegory about peace, faith, love, and hope, inspired by four candles."
----
+Title: NTS:24-05
+Date: 2024-08-20
+Tags: 100DaysToOffload, nts
+Summary: A reflective allegory about peace, faith, love, and hope, inspired by four candles.
+
 ![Candles](/media/candles.jpg)
 
 Four candles burned calmly, melting slowly. In the quiet, I could hear their whispers.

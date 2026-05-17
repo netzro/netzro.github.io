@@ -1,10 +1,7 @@
----
-title: "Why Reading Documentation is Crucial for Developers"
-date: 2025-05-21
-tags: ["documentation", "best practices", "development"]
-draft: false
-description: "Exploring why thorough documentation reading separates good developers from great ones"
----
+Title: Why Reading Documentation is Crucial for Developers
+Date: 2025-05-21
+Tags: ["documentation", "best practices", "development"]
+Summary: Exploring why thorough documentation reading separates good developers from great ones
 
 ### Why Reading Documentation Matters
 

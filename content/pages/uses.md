@@ -1,8 +1,6 @@
----
-title: Uses
-date: 2024-08-11
-status: hidden
----
+Title: Uses
+Date: 2024-08-11
+Status: Hidden
 
 # Uses  
 ## My Daily Driver Setup

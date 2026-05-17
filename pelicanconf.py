@@ -22,7 +22,7 @@ ARTICLE_SAVE_AS = 'posts/{date:%Y}/{date:%b}/{date:%d}/{slug}/index.html'
 PAGE_URL = 'pages/{slug}/'
 PAGE_SAVE_AS = 'pages/{slug}/index.html'
 
-COPYRIGHT = '©2025 - Gifted'
+COPYRIGHT = '©2026 - Gifted'
 THEME = 'theme/Papyrus'
 THEME_STATIC_PATHS = ['static']
 

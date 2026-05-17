@@ -1,11 +1,8 @@
----
-title: "Forex Trading Notes: Mastering Pips, Leverage, and Risk"
-date: 2025-05-25
-tags:
-  - Forex
-  - Trading
-description: "Detailed notes on forex trading essentials, covering pips, leverage, lot sizes, risk management, and market analysis strategies."
----
+Title: Forex Trading Notes: Mastering Pips, Leverage, and Risk
+Date: 2025-05-25
+Tags: Forex, Trading
+Summary: Detailed notes on forex trading essentials, covering pips, leverage, lot sizes, risk management, and market analysis strategies.
+
 ### Forex Trading Notes: Mastering the Market
 
 As a Nigerian hustler diving into forex, these notes are my roadmap to understanding the game. From pips to position sizing, here’s the breakdown to trade smart and stack pips like a Lagos boss.

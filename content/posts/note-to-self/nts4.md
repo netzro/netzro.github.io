@@ -1,12 +1,8 @@
----
-title: "NTS:24-04"
-date: 2024-08-18T10:12:00Z
-tags:
-  - 100DaysToOffload
-  - nts
-draft: false
-description: "Reflecting on Ralph Waldo Emerson's call to curate a personal collection of inspiring words and ideas."
----
+Title: NTS:24-04
+Date: 2024-08-18T10:12:00Z
+Tags: 100DaysToOffload, nts
+Summary: Reflecting on Ralph Waldo Emerson's call to curate a personal collection of inspiring words and ideas.
+
 > Make your own Bible. Select and collect all the words and sentences that in all your readings have been to you like the blast of a trumpet.  
 > — Ralph Waldo Emerson
 

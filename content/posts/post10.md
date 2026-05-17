@@ -1,15 +1,8 @@
----
-title: "The Middle-Age Dilemma: Truths We Can't Ignore"
-date: 2024-07-07
-tags:
-  - aging
-  - humor
-  - life lessons
-categories:
-  - Reflections
-draft: false
-description: "A humorous yet poignant look at the realities of middle age that had 700 alumni laughing and nodding in recognition."
----
+Title: The Middle-Age Dilemma: Truths We Can't Ignore
+Date: 2024-07-07
+Category: Reflections
+Tags: aging, humor, life lessons
+Summary: A humorous yet poignant look at the realities of middle age that had 700 alumni laughing and nodding in recognition.
 
 ## The Bittersweet Reality of Aging
 

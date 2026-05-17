@@ -1,7 +1,5 @@
----
-title: About
-date: 2024-08-06
----
+Title: About
+Date: 2024-08-06
 
 # About Me
 

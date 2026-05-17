@@ -1,12 +1,8 @@
----
-title: "NTS:24-06"
-date: 2024-08-22T00:00:00Z
-tags:
-  - 100DaysToOffload
-  - nts
-draft: false
-description: "A reflection on individual paths to growth, inspired by a Dostoevsky quote."
----
+Title: NTS:24-06
+Date: 2024-08-22
+Tags: 100DaysToOffload, nts
+Summary: A reflection on individual paths to growth, inspired by a Dostoevsky quote.
+
 > To go wrong in one's own way is better than to go right in someone else's.  
 > — Fyodor Dostoevsky
 

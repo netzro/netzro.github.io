@@ -1,14 +1,8 @@
----
-title: "Red Devils Roar: Naija Hopes for Europa League Final"
-date: 2025-05-21
-publisher: "Naija Red Army"
-description: "A Nigerian Man United fan's excitement for the 2025 Europa League final against Tottenham in Bilbao."
-tags:
-  - Manchester United
-  - Europa League
-  - Nigeria
-  - Football
----
+Title: Red Devils Roar: Naija Hopes for Europa League Final
+Date: 2025-05-21
+Tags: Manchester United, Europa League, Nigeria, Football
+Summary: A Nigerian Man United fan's excitement for the 2025 Europa League final against Tottenham in Bilbao.
+Publisher: Naija Red Army
 
 As a proud Man United fan from Lagos, Nigeria, I’m buzzing for the Europa League final against Tottenham tonight, May 21, 2025, in Bilbao! Despite our Premier League struggles, the Red Devils have been on fire in Europe, smashing Real Sociedad 5-2 and Athletic Club 7-1. Tonight, we face Spurs, who’ve beaten us thrice this season. But finals are different—Bruno Fernandes, Mason Mount, and a fit-again Diogo Dalot are ready to shine!
 

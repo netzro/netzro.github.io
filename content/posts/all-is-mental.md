@@ -1,11 +1,8 @@
----
-title: "All is Mental: The Hermetic Principle of Consciousness"
-date: 2025-05-23
-description: "Exploring the Hermetic Principle that the universe is mental, shaping reality through consciousness."
-tags:
-  - Hermeticism
-  - Consciousness
----
+Title: All is Mental: The Hermetic Principle of Consciousness
+Date: 2025-05-23
+Tags: Hermeticism, Consciousness
+Summary: Exploring the Hermetic Principle that the universe is mental, shaping reality through consciousness.
+
 # All is Mental: The Hermetic Principle of Consciousness
 
 The first Hermetic Principle declares: *The All is Mind; the Universe is Mental.* Everything—perception, experience, creation—arises from consciousness. Physical matter is crystallized thought, vibrating slowly. Before form, there’s idea; before movement, intent. The cosmos *is* intelligence.

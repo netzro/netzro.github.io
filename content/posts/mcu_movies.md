@@ -1,13 +1,9 @@
----
-title: Watching Marvel Movies in Order
-date: 2024-09-19T00:00:00Z
-tags:
-  - 100DaysToOffload
-  - movies
-slug: mcu-movies
-draft: false
-description: "A plan to watch Marvel Cinematic Universe (MCU) movies in release order, with a complete list of films by phase."
----
+Title: Watching Marvel Movies in Order
+Date: 2024-09-19
+Tags: 100DaysToOffload, movies
+Slug: mcu-movies
+Summary: A plan to watch Marvel Cinematic Universe (MCU) movies in release order, with a complete list of films by phase.
+
 The Marvel Cinematic Universe (MCU) spans both TV shows and movies. To fully immerse myself in the franchise, I’ve decided to watch the movies in release order, moving away from my previous random viewing approach. This method lets me experience the films as originally intended.
 
 I’ll watch the movies by phase and post updates after completing each one. Below is a comprehensive list of MCU movies, organized by phase.

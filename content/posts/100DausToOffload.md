@@ -1,11 +1,8 @@
----
-title: My First Post for #100DaysToOffload
-date: 2024-08-10T20:45:00Z
-tags: 
-  - 100DaysToOffload
-draft: false
-description: "Kicking off my commitment to the #100DaysToOffload challenge, documenting my journey and progress."
----
+Title: My First Post for #100DaysToOffload
+Date: 2024-08-10T20:45:00Z
+Tags: 100DaysToOffload
+Summary: Kicking off my commitment to the #100DaysToOffload challenge, documenting my journey and progress.
+
 While this isn't my first blog post, it marks my commitment to the #100DaysToOffload challenge.
 
 I discovered this challenge on [Kev Quirk's blog](https://kevquirk.com/blog/100-days-to-offload), where he introduced the initiative. To stay motivated, I've decided to embark on this journey and document my progress here.
