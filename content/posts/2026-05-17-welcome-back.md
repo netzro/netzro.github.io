@@ -5,7 +5,6 @@ Author: Gifted
 Category: Journal
 Tags: journal, update, personal
 Slug: welcome-back
-Status: draft
 Summary: Back after a long break to share updates on AI agents, trading, and more.
 ---
 
