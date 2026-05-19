@@ -5,7 +5,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="generator" content="Pelican" />
-    <title>Welcome Back</title>
+    <title>MCP Servers: The Missing Piece in AI Agent Development</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Slab|Ruda" />
     <link rel="stylesheet" type="text/css" href="https://netzro.github.io/theme/css/main.css" />
@@ -16,7 +16,7 @@
     <link
         href="https://netzro.github.io/feeds/all.atom.xml"
         type="application/atom+xml" rel="alternate" title="Gifted Space Atom Feed" />
-<meta name="description" content="Back after a long break to share updates on AI agents, trading, and more." />
+<meta name="description" content="What MCP servers are, why they matter, and how I use them to extend my AI agents." />
     <script>
         if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia(
                 '(prefers-color-scheme: dark)').matches)) {
@@ -81,7 +81,7 @@
                     </svg>
                 </li>
                 <li class="flex items-center">
-                    <a href="https://netzro.github.io/category/journal.html">Journal</a>
+                    <a href="https://netzro.github.io/category/tech.html">Tech</a>
                 </li>
                 <svg class="fill-current w-3 h-3 mr-2 ml-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
                     <path
@@ -92,10 +92,10 @@
 
 <main>
   <header>
-    <h1 class="font-semibold text-3xl my-2">Welcome Back</h1>
+    <h1 class="font-semibold text-3xl my-2">MCP Servers: The Missing Piece in AI Agent Development</h1>
     <footer class="flex text-sm text-zinc-800 dark:text-zinc-400">
       <div class="flex text-xs text-zinc-800 dark:text-zinc-400">
-        <time>May 18, 2026</time>
+        <time>May 19, 2026</time>
         <div>
         </div>
         <div>
@@ -120,31 +120,104 @@
               prose-code:font-light
               prose-img:rounded-md
               ">
-    <h3>Welcome Back</h3>
-<p>Hey there,</p>
-<p>It’s been a while. Life got busy—building AI agents, trading Nigerian and US stocks, and chasing a few other rabbit holes. But I’m back now, and I’ve got a lot to write about.</p>
-<p>Expect posts on AI, trading strategies, automation, and maybe a few personal reflections. Stay tuned.</p>
-<p>— Gifted</p>
+    <p>If you've been building AI agents for any length of time, you've probably hit the same wall I did — the model is smart, but it can't actually <em>do</em> anything without you wiring up every tool by hand. That's where MCP servers changed everything for me.</p>
+<h2>What Is MCP?</h2>
+<p>MCP stands for Model Context Protocol. It's an open standard that defines how AI models communicate with external tools and services. Think of it as a universal plug — instead of building a custom integration every time you want your agent to talk to a new service, you build one MCP server and any compliant agent can use it.</p>
+<p>The architecture is simple. An MCP server exposes a list of tools — functions with names, descriptions, and typed parameters. The agent discovers these tools at startup, and when it decides to use one, it sends a structured JSON call. The server executes the logic and returns a result. That's the entire contract.</p>
+<h2>Why It Matters</h2>
+<p>Before MCP, every agent framework had its own tool format. LangChain tools looked different from AutoGen tools, which looked different from whatever you cobbled together yourself. Switching frameworks meant rewriting everything.</p>
+<p>MCP breaks that coupling. The server doesn't know or care what agent is calling it. The agent doesn't know or care what language the server is written in. I've built servers in Python using FastMCP and connected them to nanobot, and the only thing that matters is that the stdio transport speaks the protocol correctly.</p>
+<h2>How I Build Them</h2>
+<p>My stack is straightforward. Every MCP server I build follows the same pattern:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">annotations</span>
+
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s2">&quot;mcp&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">WARNING</span><span class="p">)</span>
+
+<span class="kn">from</span> <span class="nn">contextlib</span> <span class="kn">import</span> <span class="n">asynccontextmanager</span>
+<span class="kn">from</span> <span class="nn">fastmcp</span> <span class="kn">import</span> <span class="n">FastMCP</span>
+
+<span class="nd">@asynccontextmanager</span>
+<span class="k">async</span> <span class="k">def</span> <span class="nf">lifespan</span><span class="p">(</span><span class="n">app</span><span class="p">:</span> <span class="n">FastMCP</span><span class="p">):</span>
+    <span class="c1"># initialise resources here</span>
+    <span class="k">yield</span>
+    <span class="c1"># cleanup here</span>
+
+<span class="n">mcp</span> <span class="o">=</span> <span class="n">FastMCP</span><span class="p">(</span><span class="s2">&quot;server-name&quot;</span><span class="p">,</span> <span class="n">lifespan</span><span class="o">=</span><span class="n">lifespan</span><span class="p">)</span>
+
+<span class="nd">@mcp</span><span class="o">.</span><span class="n">tool</span><span class="p">()</span>
+<span class="k">async</span> <span class="k">def</span> <span class="nf">my_tool</span><span class="p">(</span><span class="n">param</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Description the agent reads to decide when to use this tool.&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="s2">&quot;result&quot;</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">mcp</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">transport</span><span class="o">=</span><span class="s2">&quot;stdio&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+<p>A few things I've learned the hard way:</p>
+<p><strong>Never instantiate async clients at module level.</strong> httpx, aiohttp, database connections — all of these need to live inside the lifespan context manager. If you put them at module level, they break in proot environments and cause hard-to-debug event loop errors.</p>
+<p><strong>Tool descriptions are everything.</strong> The agent reads the docstring to decide whether to call your tool. A vague description means your tool gets ignored. Be specific — include what the tool does, what parameters it expects, and when to use it.</p>
+<p><strong>Return strings, not JSON.</strong> Some agent frameworks double-decode JSON strings and crash. Return plain text or use <code>json.dumps()</code> only when you need structured output that the agent will parse.</p>
+<h2>My Current Stack</h2>
+<p>Right now I'm running several MCP servers connected to my main agent:</p>
+<p><strong>portfolio_mcp</strong> — 16 tools for tracking my Nigerian and US stock positions. Reads from local SQLite databases updated by my scrapers. The agent can pull real-time P&amp;L, dividend history, and compare performance across both markets.</p>
+<p><strong>news_mcp</strong> — 6 tools that scrape Nigerian news sources. Gives the agent current headlines filtered by relevance to my holdings.</p>
+<p><strong>gmail_mcp</strong> — 35 tools wrapping the Gmail API. Full email management — read, compose, label, search.</p>
+<p><strong>agentmail</strong> — 11 tools for agent-to-agent email via AgentMail. Useful for async tasks where I want the agent to send itself a reminder or receive external triggers.</p>
+<p>The combined tool count matters — Groq's API has a hard limit of 128 tools per request. Exceed that and every call fails silently. I learned this by adding one server too many and spending an hour debugging what looked like an unrelated rate limit error.</p>
+<h2>The Workflow</h2>
+<p>Adding a new MCP server to an agent takes about 20 minutes now that I have the pattern down:</p>
+<ol>
+<li>Create the project directory with <code>uv init --no-workspace</code></li>
+<li>Add <code>fastmcp</code>, <code>httpx</code>, and <code>loguru</code> with <code>uv add</code></li>
+<li>Write <code>server.py</code> with the tools</li>
+<li>Test with a minimal stdio client before wiring it to the agent</li>
+<li>Add the server config to <code>config.json</code></li>
+</ol>
+<p>The config entry is just a command and arguments:</p>
+<div class="highlight"><pre><span></span><code><span class="nt">&quot;my_server&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;command&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;uv&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;args&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;--directory&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;/path/to/server&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;run&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;server.py&quot;</span><span class="p">]</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<p>The agent handles the rest — spawns the process, initialises the connection, and makes the tools available.</p>
+<h2>What's Next</h2>
+<p>The protocol is still young. Right now MCP is primarily stdio-based, which means each server is a subprocess. HTTP transport is coming and will open up remote servers, shared tool registries, and proper multi-agent architectures where agents expose tools to each other.</p>
+<p>For now though, stdio is more than enough. My agent wakes up, connects to seven servers, loads over 100 tools, and is ready to manage my portfolio, check my inbox, and publish blog posts — all from a phone running Debian in Termux.</p>
+<p>That's the thing about MCP. It's not glamorous infrastructure. It's just a clean protocol that lets your agent actually touch the world.</p>
     <!-- <div class="aspect-w-16 aspect-h-9 mx-auto"></div> CSS placeholder -->
   </div>
   <footer class="flex flex-col mt-10 ">
     <ul class="flex flex-wrap">
-      <a href="https://netzro.github.io/tag/journal.html">
+      <a href="https://netzro.github.io/tag/agents.html">
         <li
           class="bg-zinc-200 hover:bg-zinc-300 dark:hover:bg-zinc-800 dark:bg-zinc-700 text-zinc-500 dark:text-neutral-400 mb-2 mr-2 px-3 py-1.5 rounded-md transition ease-in active:-translate-y-1 active:scale-110 duration-75">
-          journal
+          agents
         </li>
       </a>
-      <a href="https://netzro.github.io/tag/personal.html">
+      <a href="https://netzro.github.io/tag/ai.html">
         <li
           class="bg-zinc-200 hover:bg-zinc-300 dark:hover:bg-zinc-800 dark:bg-zinc-700 text-zinc-500 dark:text-neutral-400 mb-2 mr-2 px-3 py-1.5 rounded-md transition ease-in active:-translate-y-1 active:scale-110 duration-75">
-          personal
+          AI
         </li>
       </a>
-      <a href="https://netzro.github.io/tag/update.html">
+      <a href="https://netzro.github.io/tag/automation.html">
         <li
           class="bg-zinc-200 hover:bg-zinc-300 dark:hover:bg-zinc-800 dark:bg-zinc-700 text-zinc-500 dark:text-neutral-400 mb-2 mr-2 px-3 py-1.5 rounded-md transition ease-in active:-translate-y-1 active:scale-110 duration-75">
-          update
+          automation
+        </li>
+      </a>
+      <a href="https://netzro.github.io/tag/mcp.html">
+        <li
+          class="bg-zinc-200 hover:bg-zinc-300 dark:hover:bg-zinc-800 dark:bg-zinc-700 text-zinc-500 dark:text-neutral-400 mb-2 mr-2 px-3 py-1.5 rounded-md transition ease-in active:-translate-y-1 active:scale-110 duration-75">
+          MCP
+        </li>
+      </a>
+      <a href="https://netzro.github.io/tag/python.html">
+        <li
+          class="bg-zinc-200 hover:bg-zinc-300 dark:hover:bg-zinc-800 dark:bg-zinc-700 text-zinc-500 dark:text-neutral-400 mb-2 mr-2 px-3 py-1.5 rounded-md transition ease-in active:-translate-y-1 active:scale-110 duration-75">
+          python
         </li>
       </a>
     </ul>
@@ -154,7 +227,7 @@
     <div class="flex bg-zinc-200 dark:bg-zinc-700 py-2 rounded-lg justify-center space-x-2 text-xs">
       <ul>
         <a target="_blank" rel="noopener noreferrer" title="twitter" aria-label="share Features on twitter"
-          href="https://twitter.com/intent/tweet/?text=Features&amp;url=https://netzro.github.io/drafts/welcome-back.html">
+          href="https://twitter.com/intent/tweet/?text=Features&amp;url=https://netzro.github.io/posts/2026/May/19/mcp-servers-the-missing-piece/">
           <li class="bg-gray-900 p-1 text-white rounded-md">
             <i class="fab fa-twitter fa-2x" aria-hidden="true"></i>
           </li>
@@ -162,7 +235,7 @@
       </ul>
       <ul>
         <a target="_blank" rel="noopener noreferrer" title="linkedin" aria-label="share Features on linkedin"
-          href="https://www.linkedin.com/sharing/share-offsite/?url=https://netzro.github.io/drafts/welcome-back.html">
+          href="https://www.linkedin.com/sharing/share-offsite/?url=https://netzro.github.io/posts/2026/May/19/mcp-servers-the-missing-piece/">
           <li class="bg-gray-900 p-1 text-white rounded-md">
             <i class="fab fa-linkedin fa-2x" aria-hidden="true"></i>
           </li>
@@ -170,7 +243,7 @@
       </ul>
       <ul>
         <a target="_blank" rel="noopener noreferrer" title="reddit" aria-label="share Features on reddit"
-          href="https://reddit.com/submit?url=https://netzro.github.io/drafts/welcome-back.html">
+          href="https://reddit.com/submit?url=https://netzro.github.io/posts/2026/May/19/mcp-servers-the-missing-piece/">
           <li class="bg-gray-900 p-1 text-white rounded-md">
             <i class="fab fa-reddit fa-2x" aria-hidden="true"></i>
           </li>
@@ -178,7 +251,7 @@
       </ul>
       <ul>
         <a target="_blank" rel="noopener noreferrer" title="facebook" aria-label="share Features on facebook"
-          href="https://facebook.com/sharer/sharer.php?u=https://netzro.github.io/drafts/welcome-back.html">
+          href="https://facebook.com/sharer/sharer.php?u=https://netzro.github.io/posts/2026/May/19/mcp-servers-the-missing-piece/">
           <li class="bg-gray-900 p-1 text-white rounded-md">
             <i class="fab fa-facebook fa-2x" aria-hidden="true"></i>
           </li>
@@ -186,7 +259,7 @@
       </ul>
       <ul>
         <a target="_blank" rel="noopener noreferrer" title="whatsapp" aria-label="share Features on whatsapp"
-          href="https://api.whatsapp.com/send?text=Features - https://netzro.github.io/drafts/welcome-back.html">
+          href="https://api.whatsapp.com/send?text=Features - https://netzro.github.io/posts/2026/May/19/mcp-servers-the-missing-piece/">
           <li class="bg-gray-900 p-1 text-white rounded-md">
             <i class="fab fa-whatsapp fa-2x" aria-hidden="true"></i>
           </li>
@@ -194,7 +267,7 @@
       </ul>
       <ul>
         <a target="_blank" rel="noopener noreferrer" title="telegram" aria-label="share Features on telegram"
-          href="https://telegram.me/share/url?text=Features&amp;url=https://netzro.github.io/drafts/welcome-back.html">
+          href="https://telegram.me/share/url?text=Features&amp;url=https://netzro.github.io/posts/2026/May/19/mcp-servers-the-missing-piece/">
           <li class="bg-gray-900 p-1 text-white rounded-md">
             <i class="fab fa-telegram fa-2x" aria-hidden="true"></i>
           </li>

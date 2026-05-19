@@ -1,10 +1,70 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Gifted Space</title><link href="https://netzro.github.io/" rel="alternate"></link><link href="https://netzro.github.io/feeds/all.atom.xml" rel="self"></link><id>https://netzro.github.io/</id><updated>2026-05-17T00:00:00+01:00</updated><entry><title>Welcome Back</title><link href="https://netzro.github.io/posts/2026/May/17/welcome-back/" rel="alternate"></link><published>2026-05-17T00:00:00+01:00</published><updated>2026-05-17T00:00:00+01:00</updated><author><name>Gifted</name></author><id>tag:netzro.github.io,2026-05-17:/posts/2026/May/17/welcome-back/</id><summary type="html">&lt;p&gt;Back after a long break to share updates on AI agents, trading, and more.&lt;/p&gt;</summary><content type="html">&lt;p&gt;After what feels like ages, I’m finally back. Life got busy—AI agents, trading, and a few other things took over—but I’m here now, ready to pick up where I left off.&lt;/p&gt;
-&lt;p&gt;Expect updates soon on:
-- AI agents and automation
-- Trading strategies and market insights
-- Personal reflections and projects&lt;/p&gt;
-&lt;p&gt;Stay tuned.&lt;/p&gt;</content><category term="Journal"></category><category term="journal"></category><category term="update"></category><category term="personal"></category></entry><entry><title>Weeknote 2025:36</title><link href="https://netzro.github.io/posts/2025/Jun/15/weeknote-202536/" rel="alternate"></link><published>2025-06-15T00:00:00+01:00</published><updated>2025-06-15T00:00:00+01:00</updated><author><name>Gifted</name></author><id>tag:netzro.github.io,2025-06-15:/posts/2025/Jun/15/weeknote-202536/</id><summary type="html">&lt;p&gt;A weekly roundup of articles, explorations, tutorials, music, and movies that inspired and informed.&lt;/p&gt;</summary><content type="html">&lt;p&gt;This week’s been a blend of learning, exploring, and vibing to some timeless tunes. From diving into plain text accounting to picking up JavaScript basics and getting lost in thrilling movies, here’s what shaped my week.&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Gifted Space</title><link href="https://netzro.github.io/" rel="alternate"></link><link href="https://netzro.github.io/feeds/all.atom.xml" rel="self"></link><id>https://netzro.github.io/</id><updated>2026-05-19T00:00:00+01:00</updated><entry><title>MCP Servers: The Missing Piece in AI Agent Development</title><link href="https://netzro.github.io/posts/2026/May/19/mcp-servers-the-missing-piece/" rel="alternate"></link><published>2026-05-19T00:00:00+01:00</published><updated>2026-05-19T00:00:00+01:00</updated><author><name>Gifted</name></author><id>tag:netzro.github.io,2026-05-19:/posts/2026/May/19/mcp-servers-the-missing-piece/</id><summary type="html">&lt;p&gt;What MCP servers are, why they matter, and how I use them to extend my AI agents.&lt;/p&gt;</summary><content type="html">&lt;p&gt;If you've been building AI agents for any length of time, you've probably hit the same wall I did — the model is smart, but it can't actually &lt;em&gt;do&lt;/em&gt; anything without you wiring up every tool by hand. That's where MCP servers changed everything for me.&lt;/p&gt;
+&lt;h2&gt;What Is MCP?&lt;/h2&gt;
+&lt;p&gt;MCP stands for Model Context Protocol. It's an open standard that defines how AI models communicate with external tools and services. Think of it as a universal plug — instead of building a custom integration every time you want your agent to talk to a new service, you build one MCP server and any compliant agent can use it.&lt;/p&gt;
+&lt;p&gt;The architecture is simple. An MCP server exposes a list of tools — functions with names, descriptions, and typed parameters. The agent discovers these tools at startup, and when it decides to use one, it sends a structured JSON call. The server executes the logic and returns a result. That's the entire contract.&lt;/p&gt;
+&lt;h2&gt;Why It Matters&lt;/h2&gt;
+&lt;p&gt;Before MCP, every agent framework had its own tool format. LangChain tools looked different from AutoGen tools, which looked different from whatever you cobbled together yourself. Switching frameworks meant rewriting everything.&lt;/p&gt;
+&lt;p&gt;MCP breaks that coupling. The server doesn't know or care what agent is calling it. The agent doesn't know or care what language the server is written in. I've built servers in Python using FastMCP and connected them to nanobot, and the only thing that matters is that the stdio transport speaks the protocol correctly.&lt;/p&gt;
+&lt;h2&gt;How I Build Them&lt;/h2&gt;
+&lt;p&gt;My stack is straightforward. Every MCP server I build follows the same pattern:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;__future__&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;annotations&lt;/span&gt;
+
+&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;logging&lt;/span&gt;
+&lt;span class="n"&gt;logging&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;getLogger&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;mcp&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;setLevel&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;logging&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;WARNING&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;contextlib&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;asynccontextmanager&lt;/span&gt;
+&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;fastmcp&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;FastMCP&lt;/span&gt;
+
+&lt;span class="nd"&gt;@asynccontextmanager&lt;/span&gt;
+&lt;span class="k"&gt;async&lt;/span&gt; &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;lifespan&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;app&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;FastMCP&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="c1"&gt;# initialise resources here&lt;/span&gt;
+    &lt;span class="k"&gt;yield&lt;/span&gt;
+    &lt;span class="c1"&gt;# cleanup here&lt;/span&gt;
+
+&lt;span class="n"&gt;mcp&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;FastMCP&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;server-name&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;lifespan&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;lifespan&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="nd"&gt;@mcp&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;tool&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;span class="k"&gt;async&lt;/span&gt; &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;my_tool&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;param&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="nb"&gt;str&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="nb"&gt;str&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="sd"&gt;&amp;quot;&amp;quot;&amp;quot;Description the agent reads to decide when to use this tool.&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;result&amp;quot;&lt;/span&gt;
+
+&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="vm"&gt;__name__&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;__main__&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="n"&gt;mcp&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;run&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;transport&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;stdio&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;A few things I've learned the hard way:&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Never instantiate async clients at module level.&lt;/strong&gt; httpx, aiohttp, database connections — all of these need to live inside the lifespan context manager. If you put them at module level, they break in proot environments and cause hard-to-debug event loop errors.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Tool descriptions are everything.&lt;/strong&gt; The agent reads the docstring to decide whether to call your tool. A vague description means your tool gets ignored. Be specific — include what the tool does, what parameters it expects, and when to use it.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Return strings, not JSON.&lt;/strong&gt; Some agent frameworks double-decode JSON strings and crash. Return plain text or use &lt;code&gt;json.dumps()&lt;/code&gt; only when you need structured output that the agent will parse.&lt;/p&gt;
+&lt;h2&gt;My Current Stack&lt;/h2&gt;
+&lt;p&gt;Right now I'm running several MCP servers connected to my main agent:&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;portfolio_mcp&lt;/strong&gt; — 16 tools for tracking my Nigerian and US stock positions. Reads from local SQLite databases updated by my scrapers. The agent can pull real-time P&amp;amp;L, dividend history, and compare performance across both markets.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;news_mcp&lt;/strong&gt; — 6 tools that scrape Nigerian news sources. Gives the agent current headlines filtered by relevance to my holdings.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;gmail_mcp&lt;/strong&gt; — 35 tools wrapping the Gmail API. Full email management — read, compose, label, search.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;agentmail&lt;/strong&gt; — 11 tools for agent-to-agent email via AgentMail. Useful for async tasks where I want the agent to send itself a reminder or receive external triggers.&lt;/p&gt;
+&lt;p&gt;The combined tool count matters — Groq's API has a hard limit of 128 tools per request. Exceed that and every call fails silently. I learned this by adding one server too many and spending an hour debugging what looked like an unrelated rate limit error.&lt;/p&gt;
+&lt;h2&gt;The Workflow&lt;/h2&gt;
+&lt;p&gt;Adding a new MCP server to an agent takes about 20 minutes now that I have the pattern down:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Create the project directory with &lt;code&gt;uv init --no-workspace&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Add &lt;code&gt;fastmcp&lt;/code&gt;, &lt;code&gt;httpx&lt;/code&gt;, and &lt;code&gt;loguru&lt;/code&gt; with &lt;code&gt;uv add&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Write &lt;code&gt;server.py&lt;/code&gt; with the tools&lt;/li&gt;
+&lt;li&gt;Test with a minimal stdio client before wiring it to the agent&lt;/li&gt;
+&lt;li&gt;Add the server config to &lt;code&gt;config.json&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;The config entry is just a command and arguments:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nt"&gt;&amp;quot;my_server&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="nt"&gt;&amp;quot;command&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;uv&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="nt"&gt;&amp;quot;args&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;--directory&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;/path/to/server&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;run&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;server.py&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;The agent handles the rest — spawns the process, initialises the connection, and makes the tools available.&lt;/p&gt;
+&lt;h2&gt;What's Next&lt;/h2&gt;
+&lt;p&gt;The protocol is still young. Right now MCP is primarily stdio-based, which means each server is a subprocess. HTTP transport is coming and will open up remote servers, shared tool registries, and proper multi-agent architectures where agents expose tools to each other.&lt;/p&gt;
+&lt;p&gt;For now though, stdio is more than enough. My agent wakes up, connects to seven servers, loads over 100 tools, and is ready to manage my portfolio, check my inbox, and publish blog posts — all from a phone running Debian in Termux.&lt;/p&gt;
+&lt;p&gt;That's the thing about MCP. It's not glamorous infrastructure. It's just a clean protocol that lets your agent actually touch the world.&lt;/p&gt;</content><category term="Tech"></category><category term="AI"></category><category term="MCP"></category><category term="agents"></category><category term="python"></category><category term="automation"></category></entry><entry><title>Weeknote 2025:36</title><link href="https://netzro.github.io/posts/2025/Jun/15/weeknote-202536/" rel="alternate"></link><published>2025-06-15T00:00:00+01:00</published><updated>2025-06-15T00:00:00+01:00</updated><author><name>Gifted</name></author><id>tag:netzro.github.io,2025-06-15:/posts/2025/Jun/15/weeknote-202536/</id><summary type="html">&lt;p&gt;A weekly roundup of articles, explorations, tutorials, music, and movies that inspired and informed.&lt;/p&gt;</summary><content type="html">&lt;p&gt;This week’s been a blend of learning, exploring, and vibing to some timeless tunes. From diving into plain text accounting to picking up JavaScript basics and getting lost in thrilling movies, here’s what shaped my week.&lt;/p&gt;
 &lt;h3&gt;Articles&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;&lt;a href="https://thebeanledger.com/posts/basics/"&gt;Plain Text Accounting Basics&lt;/a&gt;&lt;/strong&gt;&lt;br&gt;
