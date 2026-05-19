@@ -64,7 +64,69 @@
 &lt;h2&gt;What's Next&lt;/h2&gt;
 &lt;p&gt;The protocol is still young. Right now MCP is primarily stdio-based, which means each server is a subprocess. HTTP transport is coming and will open up remote servers, shared tool registries, and proper multi-agent architectures where agents expose tools to each other.&lt;/p&gt;
 &lt;p&gt;For now though, stdio is more than enough. My agent wakes up, connects to seven servers, loads over 100 tools, and is ready to manage my portfolio, check my inbox, and publish blog posts — all from a phone running Debian in Termux.&lt;/p&gt;
-&lt;p&gt;That's the thing about MCP. It's not glamorous infrastructure. It's just a clean protocol that lets your agent actually touch the world.&lt;/p&gt;</content><category term="Tech"></category><category term="AI"></category><category term="MCP"></category><category term="agents"></category><category term="python"></category><category term="automation"></category></entry><entry><title>Weeknote 2025:36</title><link href="https://netzro.github.io/posts/2025/Jun/15/weeknote-202536/" rel="alternate"></link><published>2025-06-15T00:00:00+01:00</published><updated>2025-06-15T00:00:00+01:00</updated><author><name>Gifted</name></author><id>tag:netzro.github.io,2025-06-15:/posts/2025/Jun/15/weeknote-202536/</id><summary type="html">&lt;p&gt;A weekly roundup of articles, explorations, tutorials, music, and movies that inspired and informed.&lt;/p&gt;</summary><content type="html">&lt;p&gt;This week’s been a blend of learning, exploring, and vibing to some timeless tunes. From diving into plain text accounting to picking up JavaScript basics and getting lost in thrilling movies, here’s what shaped my week.&lt;/p&gt;
+&lt;p&gt;That's the thing about MCP. It's not glamorous infrastructure. It's just a clean protocol that lets your agent actually touch the world.&lt;/p&gt;</content><category term="Tech"></category><category term="AI"></category><category term="MCP"></category><category term="agents"></category><category term="python"></category><category term="automation"></category></entry><entry><title>Setting Up Rustledger for Personal Accounting on Android</title><link href="https://netzro.github.io/posts/2026/May/19/setting-up-rustledger-android/" rel="alternate"></link><published>2026-05-19T00:00:00+01:00</published><updated>2026-05-19T00:00:00+01:00</updated><author><name>Gifted</name></author><id>tag:netzro.github.io,2026-05-19:/posts/2026/May/19/setting-up-rustledger-android/</id><summary type="html">&lt;p&gt;How I set up rustledger for double-entry accounting on Android using proot Debian.&lt;/p&gt;</summary><content type="html">&lt;p&gt;I've been meaning to get serious about personal accounting for a while. I tried beancount about a year ago, got the basics working for both my personal finances and my transport business, then life happened and I stopped updating it. The friction of opening a file, formatting entries correctly, and running checks manually was just too much after a long day.&lt;/p&gt;
+&lt;p&gt;What changed this time is that I now have an AI agent managing the workflow. But before I get to that — here's how I set up rustledger, which replaced beancount as my ledger engine.&lt;/p&gt;
+&lt;h2&gt;Why Rustledger&lt;/h2&gt;
+&lt;p&gt;Beancount is Python-based, which means a virtual environment, pip, and a runtime that adds weight to an already constrained Android setup. Rustledger is a Rust implementation of the same double-entry accounting system — fully compatible with beancount's file format, but distributed as a single static binary.&lt;/p&gt;
+&lt;p&gt;No Python. No venv. No pip. Just download and run.&lt;/p&gt;
+&lt;p&gt;The other reason: rustledger ships an MCP server. That means my AI agent can query the ledger, run balance reports, and record transactions directly. More on that in a future post.&lt;/p&gt;
+&lt;h2&gt;Installing on Android (proot Debian)&lt;/h2&gt;
+&lt;p&gt;I run everything inside proot-distro Debian on Termux. Standard ARM64 Linux binaries work fine here, but static builds are more reliable — they don't depend on shared libraries that may or may not exist in the proot environment.&lt;/p&gt;
+&lt;p&gt;First, find the right release asset:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;curl&lt;span class="w"&gt; &lt;/span&gt;-s&lt;span class="w"&gt; &lt;/span&gt;https://api.github.com/repos/rustledger/rustledger/releases/latest&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="se"&gt;\&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="p"&gt;|&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;grep&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;browser_download_url&amp;quot;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;|&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;grep&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;aarch64&amp;quot;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;You'll see four aarch64 options — GNU and musl, for Linux and Darwin. Pick the musl build — it's statically linked and works cleanly in proot:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;curl&lt;span class="w"&gt; &lt;/span&gt;-L&lt;span class="w"&gt; &lt;/span&gt;https://github.com/rustledger/rustledger/releases/download/v0.15.0/rustledger-v0.15.0-aarch64-unknown-linux-musl.tar.gz&lt;span class="w"&gt; &lt;/span&gt;-o&lt;span class="w"&gt; &lt;/span&gt;rledger.tar.gz
+tar&lt;span class="w"&gt; &lt;/span&gt;xzf&lt;span class="w"&gt; &lt;/span&gt;rledger.tar.gz
+mv&lt;span class="w"&gt; &lt;/span&gt;rledger&lt;span class="w"&gt; &lt;/span&gt;/usr/local/bin/
+rledger&lt;span class="w"&gt; &lt;/span&gt;--version
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;That should print &lt;code&gt;rledger 0.15.0&lt;/code&gt;. Installation done.&lt;/p&gt;
+&lt;h2&gt;The File Format&lt;/h2&gt;
+&lt;p&gt;Rustledger reads standard beancount format. Every entry is plain text — accounts are opened explicitly, transactions are double-entry, and everything must balance. A minimal personal file looks like this:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;option &amp;quot;operating_currency&amp;quot; &amp;quot;NGN&amp;quot;
+
+2026-01-01 open Assets:OPay
+2026-01-01 open Assets:Cash
+2026-01-01 open Expenses:Food
+2026-01-01 open Expenses:Transport
+2026-01-01 open Income:Salary
+
+2026-05-19 * &amp;quot;Daily expenses&amp;quot;
+  Expenses:Transport    2,000.00 NGN
+  Expenses:Food         5,000.00 NGN
+  Assets:Cash
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;The last line with no amount is the balancing entry — rustledger fills it in automatically.&lt;/p&gt;
+&lt;h2&gt;Validating the Files&lt;/h2&gt;
+&lt;p&gt;Before doing anything with a ledger file, run the check command:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;rledger&lt;span class="w"&gt; &lt;/span&gt;check&lt;span class="w"&gt; &lt;/span&gt;personal_2026.bean
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Rustledger gives precise error messages with line numbers. Common issues when starting out:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Account never opened&lt;/strong&gt; — you used an account in a transaction before declaring it with an &lt;code&gt;open&lt;/code&gt; directive&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Transaction does not balance&lt;/strong&gt; — debits and credits don't add up&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Wrong currency&lt;/strong&gt; — a typo like &lt;code&gt;NGM&lt;/code&gt; instead of &lt;code&gt;NGN&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;I had all three when cleaning up my 2025 files. The error output is clear enough that fixing them is straightforward.&lt;/p&gt;
+&lt;h2&gt;My Setup&lt;/h2&gt;
+&lt;p&gt;I maintain two separate files:&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;&lt;code&gt;personal_2026.bean&lt;/code&gt;&lt;/strong&gt; — daily personal expenses, salary, passive income, and an envelope budgeting system where I allocate cash to sub-accounts (food, transport, airtime, etc.) at the start of each week.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;&lt;code&gt;business_2026.bean&lt;/code&gt;&lt;/strong&gt; — my Korope transport business. Daily income, fuel, driver salary, repairs, and a weekly profit allocation policy: 40% owner salary, 35% retained earnings, 15% emergency fund, 10% savings.&lt;/p&gt;
+&lt;p&gt;A third file &lt;code&gt;main.bean&lt;/code&gt; just includes both:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;include &amp;quot;personal_2026.bean&amp;quot;
+include &amp;quot;business_2026.bean&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;This is the file the MCP server points to, so the agent can query across both contexts in one call.&lt;/p&gt;
+&lt;h2&gt;What's Next&lt;/h2&gt;
+&lt;p&gt;The real unlock is connecting rustledger to my AI agent via the MCP server. Instead of manually editing bean files, I tell Joe what I spent during the day and he records it, validates the files, and commits to git. The ledger stays accurate without any manual formatting work on my end.&lt;/p&gt;
+&lt;p&gt;That setup — and what it actually looks like in practice — is what the next post will cover.&lt;/p&gt;</content><category term="Tech"></category><category term="rustledger"></category><category term="beancount"></category><category term="accounting"></category><category term="android"></category><category term="termux"></category><category term="personal-finance"></category></entry><entry><title>Weeknote 2025:36</title><link href="https://netzro.github.io/posts/2025/Jun/15/weeknote-202536/" rel="alternate"></link><published>2025-06-15T00:00:00+01:00</published><updated>2025-06-15T00:00:00+01:00</updated><author><name>Gifted</name></author><id>tag:netzro.github.io,2025-06-15:/posts/2025/Jun/15/weeknote-202536/</id><summary type="html">&lt;p&gt;A weekly roundup of articles, explorations, tutorials, music, and movies that inspired and informed.&lt;/p&gt;</summary><content type="html">&lt;p&gt;This week’s been a blend of learning, exploring, and vibing to some timeless tunes. From diving into plain text accounting to picking up JavaScript basics and getting lost in thrilling movies, here’s what shaped my week.&lt;/p&gt;
 &lt;h3&gt;Articles&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;&lt;a href="https://thebeanledger.com/posts/basics/"&gt;Plain Text Accounting Basics&lt;/a&gt;&lt;/strong&gt;&lt;br&gt;
@@ -334,23 +396,4 @@ tar&lt;span class="w"&gt; &lt;/span&gt;-czf&lt;span class="w"&gt; &lt;/span&gt;&
 - Identity shift.
 - Becoming the person people whisper about.&lt;/p&gt;
 &lt;p&gt;This isn’t a challenge—it’s a transformation. It starts when you say &lt;em&gt;enough&lt;/em&gt;.&lt;/p&gt;
-&lt;p&gt;Ready to bury the old you? I’ll see you in June. 🗣️🔉🔊&lt;/p&gt;</content><category term="misc"></category><category term="nts"></category><category term="Transformation"></category></entry><entry><title>The Kybalion: Unlocking the Seven Hermetic Principles</title><link href="https://netzro.github.io/posts/2025/May/25/the-kybalion-unlocking-the-seven-hermetic-principles/" rel="alternate"></link><published>2025-05-25T00:00:00+01:00</published><updated>2025-05-25T00:00:00+01:00</updated><author><name>Gifted</name></author><id>tag:netzro.github.io,2025-05-25:/posts/2025/May/25/the-kybalion-unlocking-the-seven-hermetic-principles/</id><summary type="html">&lt;p&gt;A dive into the seven Hermetic principles of The Kybalion, revealing the mental nature of the universe.&lt;/p&gt;</summary><content type="html">&lt;h3&gt;The Kybalion: Unlocking the Seven Hermetic Principles&lt;/h3&gt;
-&lt;p&gt;As a seeker of wisdom in Nigeria, where spirituality runs deep like the Niger River, &lt;em&gt;The Kybalion&lt;/em&gt;—a text attributed to the mysterious "Three Initiates"—offers timeless truths rooted in Hermetic philosophy. Its seven principles reveal the universe as a mental creation, empowering us to shape our reality with intention. Let’s explore these principles, blending ancient wisdom with the vibrant spirit of Naija.&lt;/p&gt;
-&lt;h2&gt;1. Mentalism: The All is Mind&lt;/h2&gt;
-&lt;p&gt;“The All is Mind; the Universe is Mental.” Everything—your hustle in Lagos, the stars above, the dreams you chase—originates in consciousness. Matter is just thought vibrating slowly. Your mind isn’t trapped in your body; it’s a tool to project reality. As Naija people say, “Your mind na your power bank.” Charge it with intention, and you create your world.&lt;/p&gt;
-&lt;h2&gt;2. Correspondence: As Above, So Below&lt;/h2&gt;
-&lt;p&gt;What’s true in the cosmos mirrors your inner world. The hustle of Oshodi market reflects the ordered chaos of the stars. This principle teaches that patterns repeat across scales—your thoughts shape your life, just as universal laws shape galaxies. Look within to understand the universe, and vice versa.&lt;/p&gt;
-&lt;h2&gt;3. Vibration: Nothing Rests&lt;/h2&gt;
-&lt;p&gt;Everything moves—thoughts, emotions, even the jollof rice you’re craving. Nothing is still; all vibrates at different frequencies. High vibes (love, gratitude) align you with divine energy, while low vibes (fear, doubt) block your flow. Keep your frequency high, like Afrobeat on a Saturday night!&lt;/p&gt;
-&lt;h2&gt;4. Polarity: Everything Has Two Poles&lt;/h2&gt;
-&lt;p&gt;Every truth is a half-truth. Love and hate, success and struggle, are the same energy at different ends. Like the hot and cool sides of a Naija relationship, opposites are connected. Understanding this helps you balance extremes and find harmony in life’s drama.&lt;/p&gt;
-&lt;h2&gt;5. Rhythm: Life Moves in Cycles&lt;/h2&gt;
-&lt;p&gt;Life isn’t a straight line—it’s a spiral, like the dance moves at an Owambe party. Success ebbs, challenges flow, but nothing lasts forever. This principle teaches patience: when you’re down, know the tide will turn. Ride the rhythm, and you’ll move with life’s beat.&lt;/p&gt;
-&lt;h2&gt;6. Cause and Effect: Every Action Echoes&lt;/h2&gt;
-&lt;p&gt;Nothing happens by chance. Every thought, word, or action—like posting on social media or helping a neighbor—sends ripples into the universe. This is karma, Naija style: what you sow, you reap. Be mindful of your choices, for they shape your destiny.&lt;/p&gt;
-&lt;h2&gt;7. Gender: The Dance of Masculine and Feminine&lt;/h2&gt;
-&lt;p&gt;Everything holds masculine (active, directive) and feminine (receptive, nurturing) energies—not just biology, but spirit. Your focus (masculine) shapes ideas, while your intuition (feminine) gives them life. Unite these within, like a perfect jollof recipe, to become a conscious creator.&lt;/p&gt;
-&lt;h2&gt;Living the Kybalion&lt;/h2&gt;
-&lt;p&gt;These principles aren’t just philosophy—they’re a roadmap for mental mastery. In a world of noise, from Lagos traffic to global chaos, &lt;em&gt;The Kybalion&lt;/em&gt; reminds us: your mind is your shrine. Blend logic and intuition, action and reflection, to awaken your inner power. As we say in Naija, “No be by muscle, but by sense.” With these principles, you’re not just surviving—you’re crafting a life of purpose, radiating light like a Harmattan sunrise.&lt;/p&gt;
-&lt;p&gt;Unite with others in this wisdom, for our diversity is our strength, and our unity is our power. Start small: journal your thoughts, meditate on these principles, and watch your reality transform. The universe is mental, and you hold the key.&lt;/p&gt;
-&lt;p&gt;&lt;em&gt;Written by Ade, a seeker of truth from the heart of Nigeria.&lt;/em&gt;&lt;/p&gt;</content><category term="misc"></category><category term="Hermeticism"></category><category term="Kybalion"></category></entry></feed>
+&lt;p&gt;Ready to bury the old you? I’ll see you in June. 🗣️🔉🔊&lt;/p&gt;</content><category term="misc"></category><category term="nts"></category><category term="Transformation"></category></entry></feed>
