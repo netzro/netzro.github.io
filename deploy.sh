@@ -11,7 +11,7 @@ handle_error() {
 [ ${#1} -lt 10 ] && handle_error "Commit message must be at least 10 characters long"
 
 # Build Process
-uv run pelican content -s publishconf.py || handle_error "Build failed"
+uv run --with tzdata --with markdown pelican content -s publishconf.py || handle_error "Build failed"
 
 # Source Commit (if changes exist)
 if [ -n "$(git status --porcelain)" ]; then
