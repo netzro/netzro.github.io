@@ -5,92 +5,330 @@ Status: hidden
 # Movies
 _Updated as I watch. Last update: June 2026._
 
-## Favorites
+### Watchlist
 
-Movies rated 4 stars or above.
 
-- **Bad Boys: Ride or Die (2024)** — ⭐⭐⭐⭐⭐ — 18th July 2024
-- **Soul (2020)** — ⭐⭐⭐⭐⭐ — 11th July 2024
-- **Ransom (1996)** — ⭐⭐⭐⭐ — 1st October 2024
-- **The Avengers (2012)** — ⭐⭐⭐⭐ — 29th September 2024
-- **The Incredible Hulk (2008)** — ⭐⭐⭐⭐ — 28th September 2024
-- **Deadpool & Wolverine (2024)** — ⭐⭐⭐⭐ — 19th September 2024
-- **Deadpool (2010)** — ⭐⭐⭐⭐ — 18th September 2024
-- **Subservience (2024)** — ⭐⭐⭐⭐ — 18th September 2024
-- **Iron Man 3 (2013)** — ⭐⭐⭐⭐ — 15th September 2024
-- **Iron Man 2 (2010)** — ⭐⭐⭐⭐ — 15th September 2024
-- **Iron Man (2008)** — ⭐⭐⭐⭐ — 15th September 2024
-- **Thor (2011)** — ⭐⭐⭐⭐ — 15th September 2024
-- **Trap (2024)** — ⭐⭐⭐⭐ — 1st September 2024
-- **Greedy People (2024)** — ⭐⭐⭐⭐ — 24th August 2024
-- **Despicable Me 4 (2024)** — ⭐⭐⭐⭐ — 18th August 2024
-- **The Union (2024)** — ⭐⭐⭐⭐ — 18th August 2024
-- **Fly Me To The Moon (2024)** — ⭐⭐⭐⭐ — 18th August 2024
-- **The Shakedown (2024)** — ⭐⭐⭐⭐ — 11th August 2024
-- **The Instigators (2024)** — ⭐⭐⭐⭐ — 11th August 2024
-- **A Quiet Place: Day One (2020)** — ⭐⭐⭐⭐ — 11th July 2024
 
-## Recently Watched
+<details markdown='1'><summary>June 2025</summary>
 
-- **Predator: Killer of Killers (2025)** — ⭐⭐⭐ — 15th June 2025
-- **Sinners (2025)** — ⭐⭐⭐ — 15th June 2025
-- **The Amateur (2025)** — ⭐⭐⭐ — 14th June 2025
-- **G20 (2025)** — ⭐⭐⭐ — 18th May 2025
-- **Independence Day (1996)** — 11th May 2025
-- **Death of a Unicorn (2025)** — 1st May 2025
-- **Havoc (2025)** — 1st May 2025
-- **Exterriatorial (2025)** — 1st May 2025
-- **The Accountant 2 (2025)** — 1st May 2025
-- **Locked (2025)** — 27th April 2025
-- **In the Lost Lands (2025)** — 14th April 2025
-- **A Minecraft Movie (2025)** — 13th April 2025
-- **A Working Man (2025)** — 5th April 2025
-- **Cleaner (2025)** — 21st March 2025
-- **Novacaine (2025)** — 20th March 2025
-- **Captain America: Brave New World (2025)** — 8th March 2025
-- **Fight or Flight (2025)** — 6th March 2025
-- **Mickey 17 (2025)** — 25th February 2025
-- **Mufasa: The Lion King (2024)** — 20th February 2025
-- **Exam (2009)** — 17th February 2025
-- **Land of Bad (2024)** — 17th February 2025
-- **The Ministry of Ungentlemanly Warfare (2024)** — 17th February 2025
-- **Flight Risk (2025)** — 16th February 2025
-- **The Gorge (2025)** — 14th February 2025
-- **Get Out (2017)** — 13th February 2025
-- **Den of Thieves (2018)** — 9th February 2025
-- **Smile 2 (2024)** — 26th January 2025
-- **Back in Action (2025)** — 26th January 2025
-- **Kate (2021)** — 17th January 2025
-- **The 5th Wave (2016)** — 17th January 2025
-- **Wrath of the Titans (2012)** — 17th January 2025
-- **The Great Wall (2017)** — 17th January 2025
-- **Amor (2024)** — 6th January 2025
-- **Colombiana (2011)** — 3rd January 2025
-- **Kraven the Hunter (2024)** — 2nd January 2025
-- **Carry On (2024)** — 2nd January 2025
-- **Classified (2024)** — 29th December 2024
-- **Elevation (2024)** — 29th December 2024
-- **Canary Black (2024)** — 29th December 2024
-- **Moana 2 (2024)** — 29th December 2024
-- **Heretic (2024)** — 28th December 2024
-- **The Return (2024)** — 28th December 2024
-- **Red One (2024)** — 27th December 2024
-- **Dirty Angels (2024)** — 27th December 2024
-- **Gladiator (2000)** — 25th December 2024
-- **Venom: The Last Dance (2024)** — 24th December 2024
-- **Gladiator II (2024)** — 24th December 2024
-- **Last Straw (2024)** — ⭐⭐⭐ — 30th September 2024
-- **Blink Twice (2024)** — ⭐⭐⭐ — 20th September 2024
-- **The Crow (2024)** — ⭐⭐⭐ — 20th September 2024
-- **1992 (2024)** — ⭐⭐⭐ — 18th September 2024
-- **Tokunbo (2024)** — ⭐⭐⭐ — 1st September 2024
-- **Borderlands (2024)** — ⭐⭐⭐ — 1st September 2024
-- **The Killer (2024)** — ⭐⭐ — 31st August 2024
-- **Hell Hole (2024)** — ⭐⭐ — 28th August 2024
-- **Longlegs (2024)** — ⭐ — 28th August 2024
-- **Gunner (2024)** — ⭐⭐ — 24th August 2024
-- **Jackpot (2024)** — ⭐⭐ — 23rd August 2024
-- **The Beast Within (2024)** — ⭐ — 21st August 2024
-- **The Duel (2024)** — ⭐⭐⭐ — 18th August 2024
-- **Twisters (2024)** — ⭐⭐⭐ — 18th August 2024
-- **The One Fast Move (2024)** — ⭐ — 11th August 2024
+_Title_ - **Predator: Killer of Killers (2025)**  
+_My rating_ - ⭐⭐⭐  
+_Watched on_ - 15th June 2025
+
+_Title_ - **Sinners (2025)**    
+_My rating__ - ⭐⭐⭐  
+_Watched on_ - 15th June 2025
+
+_Title_ - **The Amateur (2025)**    
+_My rating_  - ⭐⭐⭐  
+_Watched on_ - 14th June 2025  
+
+_ 
+</details>
+
+<details markdown='1'><summary>May 2025</summary>
+
+_Title_ - **G20 (April, 10 2025)**  
+_My rating_ - ⭐⭐⭐  
+_Watched on_ - 18th May 2025
+
+_Title_ - **Independence Day (July 3, 1996)**  
+_Watched on_ - 11th May 2025
+
+_Title_ - **Death of a Unicorn (May 1, 2025)**  
+_Watched on_ - 1st May 2025
+
+_Title_ - **Havoc (May 1, 2025)**  
+_Watched on_ - 1st May 2025
+
+_Title_ - **Exterriatorial (April 30, 2025)**  
+_Watched on_ - 1st May 2025
+
+_Title_ - **The Accountant 2 (April 28, 2025)**  
+_Watched on_ - 1st May 2025
+</details>
+
+<details markdown='1'><summary>April 2025</summary>
+
+_Title_ - **Locked (April 25, 2025)**  
+_Watched on_ - 27th April 2025
+
+_Title_ - **In the Lost Lands (April 11, 2025)**  
+_Watched on_ - 14th April 2025
+
+_Title_ - **A Minecraft Movie (April 4, 2025)**  
+_Watched on_ - 13th April 2025
+
+_Title_ - **A Working Man (April 1, 2025)**  
+_Watched on_ - 5th April 2025
+</details>
+
+<details markdown='1'><summary>March 2025</summary>
+
+_Title_ - **Cleaner (March 14, 2025)**  
+_Watched on_ - 21st March 2025
+
+_Title_ - **Novacaine (March 17, 2025)**  
+_Watched on_ - 20th March 2025
+
+_Title_ - **Captain America: Brave New World (February 14, 2025)**  
+_Watched on_ - 8th March 2025
+
+_Title_ - **Fight or Flight (March 3, 2025)**  
+_Watched on_ - 6th March 2025
+</details>
+
+<details markdown='1'><summary>February 2025</summary>
+
+_Title_ - **Mickey 17 (January 31, 2025)**  
+_Watched on_ - 25th February 2025
+
+_Title_ - **Mufasa: The Lion King (December 20, 2024)**  
+_Watched on_ - 20th February 2025
+
+_Title_ - **Exam (January 14, 2009)**  
+_Watched on_ - 17th February 2025
+
+_Title_ - **Land of Bad (February 16, 2024)**  
+_Watched on_ - 17th February 2025
+
+_Title_ - **The Ministry of Ungentlemanly Warfare (April 19, 2024)**  
+_Watched on_ - 17th February 2025
+
+_Title_ - **Flight Risk (February 14, 2025)**  
+_Watched on_ - 16th February 2025
+
+_Title_ - **The Gorge (February 7, 2025)**  
+_Watched on_ - 14th February 2025
+
+_Title_ - **Get Out (February 24, 2017)**  
+_Watched on_ - 13th February 2025
+
+_Title_ - **Den of Thieves (January 19, 2018)**  
+_Watched on_ - 9th February 2025
+</details>
+
+<details markdown='1'><summary>January 2025</summary>
+
+_Title_ - **Smile 2 (October 18, 2024)**  
+_Watched on_ - 26th January 2025
+
+_Title_ - **Back in Action (January 15, 2025)**  
+_Watched on_ - 26th January 2025
+
+_Title_ - **Kate (September 10, 2021)**  
+_Watched on_ - 17th January 2025
+
+_Title_ - **The 5th Wave (January 22, 2016)**  
+_Watched on_ - 17th January 2025
+
+_Title_ - **Wrath of the Titans (March 30, 2012)**  
+_Watched on_ - 17th January 2025
+
+_Title_ - **The Great Wall (February 16, 2017)**  
+_Watched on_ - 17th January 2025
+
+_Title_ - **Amor (December 29, 2024)**  
+_Watched on_ - 6th January 2025
+
+_Title_ - **Colombiana (August 26, 2011)**  
+_Watched on_ - 3rd January 2025
+
+_Title_ - **Kraven the Hunter (December 13, 2024)**  
+_Watched on_ - 2nd January 2025
+
+_Title_ - **Carry On (December 27, 2024)**  
+_Watched on_ - 2nd January 2025
+</details>
+
+<details markdown='1'><summary>December 2024</summary>
+
+_Title_ - **Classified (December 18, 2024)**  
+_Watched on_ - 29th December 2024
+
+_Title_ - **Elevation (December 6, 2024)**  
+_Watched on_ - 29th December 2024
+
+_Title_ - **Canary Black (December 22, 2024)**  
+_Watched on_ - 29th December 2024
+
+_Title_ - **Moana 2 (November 27, 2024)**  
+_Watched on_ - 29th December 2024
+
+_Title_ - **Heretic (December 19, 2024)**  
+_Watched on_ - 28th December 2024
+
+_Title_ - **The Return (December 10, 2024)**  
+_Watched on_ - 28th December 2024
+
+_Title_ - **Red One (November 15, 2024)**  
+_Watched on_ - 27th December 2024
+
+_Title_ - **Dirty Angels (December 13, 2024)**  
+_Watched on_ - 27th December 2024
+
+_Title_ - **Gladiator (May 5, 2000)**  
+_Watched on_ - 25th December 2024
+
+_Title_ - **Venom: The Last Dance (October 25, 2024)**  
+_Watched on_ - 24th December 2024
+
+_Title_ - **Gladiator II (November 22, 2024)**  
+_Watched on_ - 24th December 2024
+</details>
+
+<details markdown='1'><summary>October 2024</summary>
+
+_Title_ - **Ransom (1996)**  
+_My rating_ - ⭐⭐⭐⭐  
+_Watched on_ 🔄 - 1st October 2024
+</details>
+
+<details markdown='1'><summary>September 2024</summary>
+
+_Title_ - **Last Straw (2024)**  
+_My rating_ - ⭐⭐⭐  
+_Watched on_ - 30th September 2024
+
+_Title_ - **The Avengers (2012)**  
+_My rating_ - ⭐⭐⭐⭐  
+_Watched on_ 🔄 - 29th September 2024
+
+_Title_ - **The Incredible Hulk (2008)**  
+_My rating_ - ⭐⭐⭐⭐  
+_Watched on_ 🔄 - 28th September 2024
+
+_Title_ - **Blink Twice (2024)**  
+_My rating_ - ⭐⭐⭐  
+_Watched on_ - 20th September 2024
+
+_Title_ - **The Crow (2024)**  
+_My rating_ - ⭐⭐⭐  
+_Watched on_ - 20th September 2024
+
+_Title_ - **Ant-Man (2015)**  
+_My rating_ - ⭐⭐⭐⭐  
+_Watched on_ 🔄 - 20th September 2024
+
+_Title_ - **Deadpool & Wolverine (2024)**  
+_My rating_ - ⭐⭐⭐⭐  
+_Watched on_ - 19th September 2024
+
+_Title_ - **Deadpool (2010)**  
+_My rating_ - ⭐⭐⭐⭐  
+_Watched on_ 🔄 - 18th September 2024
+
+_Title_ - **Subservience (2024)**  
+_My rating_ - ⭐⭐⭐⭐  
+_Watched on_ - 18th September 2024
+
+_Title_ - **1992 (2024)**  
+_My rating_ - ⭐⭐⭐  
+_Watched on_ - 18th September 2024
+
+_Title_ - **Iron Man 3 (2013)**  
+_My rating_ - ⭐⭐⭐⭐  
+_Watched on_ 🔄 - 15th September 2024
+
+_Title_ - **Iron Man 2 (2010)**  
+_My rating_ - ⭐⭐⭐⭐  
+_Watched on_ 🔄 - 15th September 2024
+
+_Title_ - **Iron Man (2008)**  
+_My rating_ - ⭐⭐⭐⭐  
+_Watched on_ 🔄 - 15th September 2024
+
+_Title_ - **Thor (2011)**  
+_My rating_ - ⭐⭐⭐⭐  
+_Watched on_ 🔄 - 15th September 2024
+
+_Title_ - **Trap (2024)**  
+_My rating_ - ⭐⭐⭐⭐  
+_Watched on_ - 1st September 2024
+
+_Title_ - **Tokunbo (2024)**  
+_My rating_ - ⭐⭐⭐  
+_Watched on_ - 1st September 2024
+
+_Title_ - **Borderlands (2024)**  
+_My rating_ - ⭐⭐⭐  
+_Watched on_ - 1st September 2024
+</details>
+
+<details markdown='1'><summary>August 2024</summary>
+
+_Title_ - **The Killer (2024)**  
+_My rating_ - ⭐⭐  
+_Watched on_ - 31st August 2024
+
+_Title_ - **Hell Hole (2024)**  
+_My rating_ - ⭐⭐  
+_Watched on_ - 28th August 2024
+
+_Title_ - **Longlegs (2024)**  
+_My rating_ - ⭐  
+_Watched on_ - 28th August 2024
+
+_Title_ - **Greedy People (2024)**  
+_My rating_ - ⭐⭐⭐⭐  
+_Watched on_ - 24th August 2024
+
+_Title_ - **Gunner (2024)**  
+_My rating_ - ⭐⭐  
+_Watched on_ - 24th August 2024
+
+_Title_ - **Jackpot (2024)**  
+_My rating_ - ⭐⭐  
+_Watched on_ - 23rd August 2024
+
+_Title_ - **The Beast Within (2024)**  
+_My rating_ - ⭐  
+_Watched on_ - 21st August 2024
+
+_Title_ - **Despicable Me 4 (2024)**  
+_My rating_ - ⭐⭐⭐⭐  
+_Watched on_ - 18th August 2024
+
+_Title_ - **The Duel (2024)**  
+_My rating_ - ⭐⭐⭐  
+_Watched on_ - 18th August 2024
+
+_Title_ - **The Union (2024)**  
+_My rating_ - ⭐⭐⭐⭐  
+_Watched on_ - 18th August 2024
+
+_Title_ - **Fly Me To The Moon (2024)**  
+_My rating_ - ⭐⭐⭐⭐  
+_Watched on_ - 18th August 2024
+
+_Title_ - **Twisters (2024)**  
+_My rating_ - ⭐⭐⭐  
+_Watched on_ - 18th August 2024
+
+_Title_ - **The Shakedown (2024)**  
+_My rating_ - ⭐⭐⭐⭐  
+_Watched on_ - 11th August 2024
+
+_Title_ - **The Instigators (2024)**  
+_My rating_ - ⭐⭐⭐⭐  
+_Watched on_ - 11th August 2024
+
+_Title_ - **The One Fast Move (2024)**  
+_My rating_ - ⭐  
+_Watched on_ - 11th August 2024
+</details>
+
+<details markdown='1'><summary>July 2024</summary>
+
+_Title_ - **Bad Boys: Ride or Die (2024)**  
+_My rating_ - ⭐⭐⭐⭐⭐  
+_Watched on_ - 18th July 2024
+
+_Title_ - **A Quiet Place: Day One (2020)**  
+_My rating_ - ⭐⭐⭐⭐  
+_Watched on_ - 11th July 2024
+
+_Title_ - **Soul (2020)**  
+_My rating_ - ⭐⭐⭐⭐⭐  
+_Watched on_ 🔄 - 11th July 2024
+</details>
