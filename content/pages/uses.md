@@ -6,11 +6,10 @@ _last updated 12th June, 2026_
 
 ## My Daily Driver Setup
 
-I do not own a laptop. Everything runs from an Android phone through Termux.
+I do not own a laptop. Everything runs from a Samsung A05 through Termux.
 
 ### Hardware
-- Android phone with Termux installed (F-Droid version, not Play Store)
-- 128 GB storage, 4 GB RAM
+- Samsung A05 — Android phone, Termux installed via F-Droid
 - No desktop or laptop — the phone is the computer
 
 ### Core Stack
@@ -18,19 +17,19 @@ I do not own a laptop. Everything runs from an Android phone through Termux.
 - **proot-distro** — runs a full Debian environment without root
 - **uv** — Python package management with UV_LINK_MODE=copy
 - **Git + SSH** — version control and GitHub access
+- **loguru** — structured logging across all my Python tools
 
 ### What I Run
 - **Hermes Agent** — personal AI agent with WebUI and Telegram bot
-- **OmniRoute** — LLM routing through free API tiers (Claude Sonnet 4.5 via Kiro)
+- **OpenRouter** — LLM routing through free API tiers
 - **ngx-portfolio** — CLI + MCP server for tracking my NGX stock portfolio
+- **movies-cli** — CLI for scraping, downloading, and managing my movie library
 - **Cron jobs** — daily backups, price refreshes, document organization
 - **Python** — all tooling, scripts, and automation
 
 ### Software I Use
 - **Termux** — Linux environment
 - **Acode** — code editor
-- **Markor** — Markdown editor
-- **Feeder** — RSS reader
 - **Via** — lightweight browser
 
 ### Principles
