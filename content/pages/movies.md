@@ -17,7 +17,7 @@ _Watched on_ - 10th June 2026
 _Title_ - **Seven Snipers (2025)**  
 _Watched on_ - 11th June 2026
 
-_Title_ - **The Passenger (2025)**  
+_Title_ - **The Passenger (2026)**  
 _Watched on_ - 11th June 2026
 </details>
 
