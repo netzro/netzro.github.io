@@ -1,7 +1,7 @@
 Title: Turning Vices into Virtues: Aristotle's Golden Mean
 Date: 2024-07-19
 Category: Philosophy
-Tags: philosophy, ethics, self-improvement
+Tags: philosophy, self-improvement
 Summary: Exploring Aristotle's concept of the Golden Mean and how to transform vices into virtues through balanced moderation.
 
 ## Aristotle's Timeless Wisdom

@@ -1,7 +1,7 @@
 Title: The Noble Knowledge of Self: Jacob Boehme's Path to Fulfillment
 Date: 2024-06-14
 Category: Wisdom
-Tags: philosophy, spirituality, self-knowledge
+Tags: philosophy, spirituality, self-improvement
 Summary: Exploring Jacob Boehme's timeless insight that true fulfillment comes from profound self-knowledge rather than external possessions.
 
 ## The Illusion of External Fulfillment

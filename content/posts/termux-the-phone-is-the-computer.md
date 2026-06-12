@@ -2,7 +2,7 @@ Title: Termux — The Phone Is The Computer
 Date: 2026-06-12
 Author: Gifted
 Category: Technology
-Tags: termux, android, linux, development, mobile
+Tags: termux, android, linux, development
 Slug: termux-the-phone-is-the-computer
 Summary: How I run a full development environment from an Android phone — and why you might want to.
 

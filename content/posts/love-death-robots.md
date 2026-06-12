@@ -1,6 +1,6 @@
 Title: Love, Death & Robots - A Stunning Anthology
 Date: 2025-06-07
-Tags: [TV Shows, Animation, Sci-Fi]
+Tags: movies
 
 # First Impressions: Love, Death & Robots  
 

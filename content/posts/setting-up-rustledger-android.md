@@ -2,7 +2,7 @@ Title: Setting Up Rustledger for Personal Accounting on Android
 Date: 2026-05-19
 Author: Gifted
 Category: Tech
-Tags: rustledger, beancount, accounting, android, termux, personal-finance
+Tags: finance, android, termux
 Slug: setting-up-rustledger-android
 Summary: How I set up rustledger for double-entry accounting on Android using proot Debian.
 

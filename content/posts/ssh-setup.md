@@ -1,6 +1,6 @@
 Title: Setting Up SSH Keys for a VPS
 Date: 2024-10-04
-Tags: 100DaysToOffload, linux, ssh
+Tags: 100daystooffload, linux, development
 
 ## Introduction
 

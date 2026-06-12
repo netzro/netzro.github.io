@@ -1,6 +1,6 @@
 Title: Hello World
 Date: 2024-10-25
-Tags: hello, world
+Tags: misc
 Summary: My first post on a new blog powered by Marmite, a simple blog generator supporting CommonMark and GFM Markdown.
 
 ## Hello World

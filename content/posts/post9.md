@@ -1,7 +1,7 @@
 Title: Sacred Steps: The Mystical Practice of Walking Barefoot on Dewy Grass
 Date: 2024-06-20
 Category: Spiritual Practices
-Tags: mysticism, nature-spirituality, grounding, rituals
+Tags: philosophy, spirituality
 Summary: Discover why mystics throughout history have treasured the sacred practice of barefoot dawn walks on dew-kissed grass.
 
 ![Barefoot on dewy grass](media/dewy-grass.jpg)  

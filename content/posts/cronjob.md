@@ -1,6 +1,6 @@
 Title: Setting Up Cronie and Scheduling Scripts in Termux
 Date: 2025-06-08
-Tags: Termux, Cronie
+Tags: termux, technology
 Summary: A step-by-step guide to installing cronie in Termux and scheduling scripts to run at specific times on Android.
 
 ### Setting Up Cronie and Scheduling Scripts in Termux

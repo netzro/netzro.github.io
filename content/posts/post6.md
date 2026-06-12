@@ -1,7 +1,7 @@
 Title: The Vital Difference Between Generosity and Kindness
 Date: 2024-06-16
 Category: Life Lessons
-Tags: compassion, human-nature, spiritual-growth
+Tags: spirituality, philosophy
 Summary: Exploring how kindness transcends mere generosity through a touching real-life encounter.
 
 ![Illustration of kindness](/media/kind.jpg)

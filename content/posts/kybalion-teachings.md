@@ -1,6 +1,6 @@
 Title: The Kybalion: Unlocking the Seven Hermetic Principles
 Date: 2025-05-25
-Tags: Hermeticism, Kybalion
+Tags: philosophy
 Summary: A dive into the seven Hermetic principles of The Kybalion, revealing the mental nature of the universe.
 
 ### The Kybalion: Unlocking the Seven Hermetic Principles

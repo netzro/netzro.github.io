@@ -1,7 +1,7 @@
 Title: The Divine Duality: Understanding the Sacred Balance of Good and Evil
 Date: 2024-06-17
 Category: Cosmic Wisdom
-Tags: theology, philosophy, duality, spirituality
+Tags: philosophy, spirituality
 Summary: Examining the sacred complementarity of opposing forces in divine cosmology and their role in spiritual evolution.
 
 ## The Paradox of Divine Responsibility

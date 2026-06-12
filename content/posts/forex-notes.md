@@ -1,6 +1,6 @@
 Title: Forex Trading Notes: Mastering Pips, Leverage, and Risk
 Date: 2025-05-25
-Tags: Forex, Trading
+Tags: finance
 Summary: Detailed notes on forex trading essentials, covering pips, leverage, lot sizes, risk management, and market analysis strategies.
 
 ### Forex Trading Notes: Mastering the Market

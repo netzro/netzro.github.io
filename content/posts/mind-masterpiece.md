@@ -1,6 +1,6 @@
 Title: Your Mind: From Mess to Masterpiece Through Journaling
 Date: 2025-05-21
-Tags: Journaling, Mental Clarity
+Tags: writing, mindfulness
 Summary: Journaling transforms chaotic thoughts into clarity and creativity.
 
 ### Your Mind Isn’t a Mess — It’s a Masterpiece in the Making

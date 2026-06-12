@@ -2,7 +2,7 @@ Title: Digital Minimalism: Reclaiming Your Data Sovereignty
 Date: 2026-06-11
 Author: Gifted
 Category: Minimalism
-Tags: digital-minimalism, data, productivity, lifestyle
+Tags: minimalism, misc, productivity
 Slug: digital-minimalism-data-sovereignty
 Summary: Exploring how intentional data stewardship and digital minimalism can lead to a more focused, uncluttered life.
 

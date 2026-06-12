@@ -48,6 +48,9 @@
         <ul class="flex flex-wrap lg:mr-24 md:pt-0">
             <li class="mr-4 pt-6"><a  href="https://netzro.github.io/pages/about/">About</a></li>
             <li class="mr-4 pt-6"><a  href="https://netzro.github.io/pages/more/">More/</a></li>
+            <li class="mr-4 pt-6"><a  href="https://netzro.github.io/pages/reading-list/">Reading List</a></li>
+            <li class="mr-4 pt-6"><a  class="border-b-2 border-zinc-800 dark:border-zinc-300"
+ href="https://netzro.github.io/pages/uses/">Uses</a></li>
             <li class="mr-4 pt-6"><a  href="https://netzro.github.io/archives.html">Archive</a></li>
             <li class="mr-4 pt-6"><a  href="https://netzro.github.io/tags.html">Tags</a></li>
         </ul>
@@ -96,39 +99,44 @@
             ">
         
         <h1>Uses</h1>
+<p><em>last updated 12th June, 2026</em></p>
 <h2>My Daily Driver Setup</h2>
-<p><em>last updated 11th August, 2024</em></p>
-<p>Not having a desktop computer or a laptop has not hampered my passion for tech in any way. Thankfully, I have a smartphone. As they say, what a computer can do, a smartphone can often do as well.</p>
-<p>So, I pursued my passion with my smartphone.</p>
-<p>In this post, I’ll document what I use as my daily driver.</p>
+<p>I do not own a laptop. Everything runs from an Android phone through Termux.</p>
 <h3>Hardware</h3>
-<p>My daily driver is a <strong>Xiaomi Redmi 10C</strong> that boasts:</p>
 <ul>
-<li>A 5000 mAh battery with 18W fast charging.</li>
-<li>4 GB RAM with up to 2.4 GHz octa-core CPU.</li>
-<li>An Adreno 610 GPU.</li>
-<li>Powered by a Qualcomm Snapdragon 680 4G (6 nm) chipset.</li>
-<li>64 GB internal storage with a dedicated MicroSD slot (up to 8GB).</li>
+<li>Android phone with Termux installed (F-Droid version, not Play Store)</li>
+<li>128 GB storage, 4 GB RAM</li>
+<li>No desktop or laptop — the phone is the computer</li>
 </ul>
-<h3>Software</h3>
-<p>The device comes with <strong>Android 11</strong> running <strong>MIUI 13</strong>. </p>
-<p>As with all smartphones, what you install makes all the difference—so I made it count.</p>
-<h3>Installed Apps</h3>
+<h3>Core Stack</h3>
 <ul>
-<li><strong>Termux</strong> - My Linux environment.</li>
-<li><strong>Unexpected Keyboard</strong> - A software keyboard with all the keys of a hardware keyboard.</li>
-<li><strong>Acode</strong> - A code editor.</li>
-<li><strong>Markor</strong> - A Markdown editor.</li>
-<li><strong>Feeder</strong> - An RSS reader.</li>
-<li><strong>Via</strong> - A lightweight browser.</li>
-<li></li>
+<li><strong>Termux</strong> — Linux terminal emulator, the foundation of everything</li>
+<li><strong>proot-distro</strong> — runs a full Debian environment without root</li>
+<li><strong>uv</strong> — Python package management with UV_LINK_MODE=copy</li>
+<li><strong>Git + SSH</strong> — version control and GitHub access</li>
 </ul>
-<h3>Tech I Use</h3>
+<h3>What I Run</h3>
 <ul>
-<li><strong>Python</strong> - My programming language of choice.</li>
-<li><strong>Git</strong> and <strong>GitHub</strong> - For version control and collaboration.</li>
-<li><strong>Pelican</strong> - A static site generator.</li>
-<li><strong>Beancount</strong> - Double-entry accounting from text files.</li>
+<li><strong>Hermes Agent</strong> — personal AI agent with WebUI and Telegram bot</li>
+<li><strong>OmniRoute</strong> — LLM routing through free API tiers (Claude Sonnet 4.5 via Kiro)</li>
+<li><strong>ngx-portfolio</strong> — CLI + MCP server for tracking my NGX stock portfolio</li>
+<li><strong>Cron jobs</strong> — daily backups, price refreshes, document organization</li>
+<li><strong>Python</strong> — all tooling, scripts, and automation</li>
+</ul>
+<h3>Software I Use</h3>
+<ul>
+<li><strong>Termux</strong> — Linux environment</li>
+<li><strong>Acode</strong> — code editor</li>
+<li><strong>Markor</strong> — Markdown editor</li>
+<li><strong>Feeder</strong> — RSS reader</li>
+<li><strong>Via</strong> — lightweight browser</li>
+</ul>
+<h3>Principles</h3>
+<ul>
+<li>Zero-cost: free API tiers only</li>
+<li>Phone-first: everything runs on Android</li>
+<li>Private: self-hosted, private repos, no cloud dependency for core services</li>
+<li>Minimal: every package justified, every service monitored</li>
 </ul>
         <!-- <div class="aspect-w-16 aspect-h-9 mx-auto"></div> CSS placeholder -->
     </div>

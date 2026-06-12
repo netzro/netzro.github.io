@@ -2,7 +2,7 @@ Title: Reflection on the Seven Hermetic Principles
 Date: 2026-06-11
 Author: Gifted
 Category: Philosophy
-Tags: hermetic, philosophy, reflection
+Tags: philosophy, reflections
 Slug: reflection-on-the-seven-hermetic-principles
 Summary: An exploration of how the ancient Hermetic principles shape my personal worldview and approach to life.
 

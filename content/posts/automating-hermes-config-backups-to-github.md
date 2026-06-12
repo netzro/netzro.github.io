@@ -2,7 +2,7 @@ Title: Automating Hermes Agent Configuration Backups to GitHub
 Date: 2026-06-10
 Author: Gifted
 Category: Tech
-Tags: Hermes, GitHub, backup, automation, configuration
+Tags: ai, development, technology
 Slug: automating-hermes-config-backups-to-github
 Status: published
 Summary: How I set up automated daily backups of my Hermes agent configuration to a private GitHub repository using cron jobs and custom scripts.

@@ -2,7 +2,7 @@ Title: MCP Servers: The Missing Piece in AI Agent Development
 Date: 2026-05-19
 Author: Gifted
 Category: Tech
-Tags: AI, MCP, agents, python, automation
+Tags: ai, python, technology
 Slug: mcp-servers-the-missing-piece
 Summary: What MCP servers are, why they matter, and how I use them to extend my AI agents.
 Status: published

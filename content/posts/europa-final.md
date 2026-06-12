@@ -1,6 +1,6 @@
 Title: Red Devils Roar: Naija Hopes for Europa League Final
 Date: 2025-05-21
-Tags: Manchester United, Europa League, Nigeria, Football
+Tags: manchester-united, finance
 Summary: A Nigerian Man United fan's excitement for the 2025 Europa League final against Tottenham in Bilbao.
 Publisher: Naija Red Army
 

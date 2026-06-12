@@ -2,7 +2,7 @@ Title: How LLMs Are Built — Inside The Architecture
 Date: 2026-06-12
 Author: Gifted
 Category: Technology
-Tags: llm, deep-learning, transformer, architecture, machine-learning
+Tags: ai, architecture
 Slug: how-llms-are-built-inside-the-architecture
 Summary: From tokenization to inference — a plain-language walk through how large language models are structured, trained, and named.
 

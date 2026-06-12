@@ -1,6 +1,6 @@
 Title: OMNISOPHY: The Highest Philosophy of Spirituality
 Date: 2025-05-21
-Tags: Omnisophy, Omnism, Spirituality, Philosophy, Universal Wisdom
+Tags: philosophy, spirituality
 Summary: Omnisophy is the exploration of all spiritual knowledge for self-maturity and evolution, recognizing the unity of all wisdom traditions.
 Publisher: The Omnist Church
 

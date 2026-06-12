@@ -1,42 +1,40 @@
 Title: Uses
-Date: 2024-08-11
-Status: Hidden
+Date: 2026-06-12
 
-# Uses  
+# Uses
+_last updated 12th June, 2026_
+
 ## My Daily Driver Setup
-_last updated 11th August, 2024_
 
-Not having a desktop computer or a laptop has not hampered my passion for tech in any way. Thankfully, I have a smartphone. As they say, what a computer can do, a smartphone can often do as well.
-
-So, I pursued my passion with my smartphone.
-
-In this post, I’ll document what I use as my daily driver.
+I do not own a laptop. Everything runs from an Android phone through Termux.
 
 ### Hardware
-My daily driver is a **Xiaomi Redmi 10C** that boasts:
+- Android phone with Termux installed (F-Droid version, not Play Store)
+- 128 GB storage, 4 GB RAM
+- No desktop or laptop — the phone is the computer
 
-- A 5000 mAh battery with 18W fast charging.
-- 4 GB RAM with up to 2.4 GHz octa-core CPU.
-- An Adreno 610 GPU.
-- Powered by a Qualcomm Snapdragon 680 4G (6 nm) chipset.
-- 64 GB internal storage with a dedicated MicroSD slot (up to 8GB).
+### Core Stack
+- **Termux** — Linux terminal emulator, the foundation of everything
+- **proot-distro** — runs a full Debian environment without root
+- **uv** — Python package management with UV_LINK_MODE=copy
+- **Git + SSH** — version control and GitHub access
 
-### Software
-The device comes with **Android 11** running **MIUI 13**. 
+### What I Run
+- **Hermes Agent** — personal AI agent with WebUI and Telegram bot
+- **OmniRoute** — LLM routing through free API tiers (Claude Sonnet 4.5 via Kiro)
+- **ngx-portfolio** — CLI + MCP server for tracking my NGX stock portfolio
+- **Cron jobs** — daily backups, price refreshes, document organization
+- **Python** — all tooling, scripts, and automation
 
-As with all smartphones, what you install makes all the difference—so I made it count.
+### Software I Use
+- **Termux** — Linux environment
+- **Acode** — code editor
+- **Markor** — Markdown editor
+- **Feeder** — RSS reader
+- **Via** — lightweight browser
 
-### Installed Apps
-- **Termux** - My Linux environment.
-- **Unexpected Keyboard** - A software keyboard with all the keys of a hardware keyboard.
-- **Acode** - A code editor.
-- **Markor** - A Markdown editor.
-- **Feeder** - An RSS reader.
-- **Via** - A lightweight browser.
-- 
-### Tech I Use
-- **Python** - My programming language of choice.
-- **Git** and **GitHub** - For version control and collaboration.
-- **Pelican** - A static site generator.
-- **Beancount** - Double-entry accounting from text files.
-
+### Principles
+- Zero-cost: free API tiers only
+- Phone-first: everything runs on Android
+- Private: self-hosted, private repos, no cloud dependency for core services
+- Minimal: every package justified, every service monitored

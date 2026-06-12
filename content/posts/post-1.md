@@ -1,6 +1,6 @@
 Title: Primer: When You Have Too Much to Do
 Date: 2018-03-18T02:01:58+05:30
-Tags: 100DaysToOffload, productivity, todo
+Tags: 100daystooffload, productivity
 Summary: Strategies for managing an overwhelming to-do list with focus, triage, and mindful simplicity.
 
 You have a to-do list that seems endless. You’re juggling multiple projects, receiving countless emails and messages across platforms, managing finances, maintaining personal health habits, and more.

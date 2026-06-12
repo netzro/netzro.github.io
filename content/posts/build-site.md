@@ -1,6 +1,6 @@
 Title: Building My Site/Blog (Parr 1)
 Date: 2024-08-09
-Tags: ["pelican", "python", "#100DaysToOffload"]
+Tags: pelican, python, 100daystooffload
 
 Today, I successfully set up this site/blog.
 

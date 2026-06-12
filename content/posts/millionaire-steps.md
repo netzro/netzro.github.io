@@ -2,7 +2,7 @@ Title: 5 Steps to Become a Millionaire in 10 Years
 Date: 2025-05-21
 Author: Gifted
 Category: Journal
-Tags: Wealth, Self-Improvement
+Tags: finance, self-improvement
 Slug: millionaire-steps
 Summary: Five intentional steps to transform your life and build wealth in a decade.
 

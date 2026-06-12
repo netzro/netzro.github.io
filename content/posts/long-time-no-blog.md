@@ -1,7 +1,7 @@
 Title: Long Time No Blog: Back with a Bang!
 Date: 2025-05-04T03:44:00Z
 Author: Netzro
-Tags: blogging, pelican
+Tags: writing, pelican
 Slug: long-time-no-blog
 Summary: Returning after a break with a cleaner blog setup using Pelican, testing the new deployment process.
 

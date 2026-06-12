@@ -1,7 +1,7 @@
 Title: Our Forefathers Were Not Fools: 10 Principles of Ancestral Wisdom
 Date: 2024-06-13
 Category: Cultural Heritage
-Tags: tradition, wisdom, african-philosophy, practical-living
+Tags: philosophy, minimalism
 Summary: Timeless principles showing the practical wisdom of our ancestors that remain relevant today.
 
 ## Practical Wisdom from Our Ancestors

@@ -3,8 +3,8 @@ date: 2024-08-15
 
 
 # More/  
-1. [Uses](../uses/index.html)  
-2. [Blogroll](../blogroll/index.html)  
-3. [Reading List](../reading-list/index.html)  
-4. [Movies List](../movies/index.html)  
-5. [Music List](../music/index.html)  
+1. [Uses](../uses/)  
+2. [Blogroll](../blogroll/)  
+3. [Reading List](../reading-list/)  
+4. [Movies List](../movies/)  
+5. [Music List](../music/)  

@@ -1,7 +1,7 @@
 Title: Master and Slave Morality: Crowley's Nietzschean Influence
 Date: 2024-07-13
 Category: Philosophical Analysis
-Tags: philosophy, morality, thelema, nietzsche
+Tags: philosophy, self-improvement
 Summary: Examining Aleister Crowley's appropriation of Nietzsche's master-slave morality dichotomy within Thelemic philosophy.
 
 ## The Nietzschean Foundation

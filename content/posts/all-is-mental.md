@@ -1,6 +1,6 @@
 Title: All is Mental: The Hermetic Principle of Consciousness
 Date: 2025-05-23
-Tags: Hermeticism, Consciousness
+Tags: philosophy
 Summary: Exploring the Hermetic Principle that the universe is mental, shaping reality through consciousness.
 
 # All is Mental: The Hermetic Principle of Consciousness

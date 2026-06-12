@@ -1,6 +1,6 @@
 Title: The Guardian Scroll: Psalm 121 Decrypted
 Date: 2025-05-24
-Tags: Psalm 121, Spirituality
+Tags: spirituality
 Summary: A mystical decryption of Psalm 121 as a divine protection protocol.
 
 ### THE GUARDIAN SCROLL – PSALM 121 (FULL DECRYPTION)

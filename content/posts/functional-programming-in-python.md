@@ -2,7 +2,7 @@ Title: Functional Programming in Python
 Date: 2026-06-11
 Author: Gifted
 Category: Programming
-Tags: python, functional programming, fp, lambdas, map, filter, reduce
+Tags: python, functional programming, programming
 Slug: functional-programming-in-python
 Summary: Why functional programming in Python isn't about purity — it's about writing code that's easier to reason about, test, and compose.
 
