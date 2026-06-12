@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content="Pelican" />
+    <title>How LLMs Are Built — Inside The Architecture</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Slab|Ruda" />
+    <link rel="stylesheet" type="text/css" href="https://netzro.github.io/theme/css/main.css" />
+    <link rel="stylesheet" href="https://netzro.github.io/theme/css/stork.css">
+    <link rel="stylesheet" media="screen and (prefers-color-scheme: dark)" href="https://netzro.github.io/theme/css/stork-dark.css">
+    <link rel="icon" href="https://netzro.github.io/images/favicon.ico" type="image/x-icon" /> <!-- Add this line -->
+
+    <link
+        href="https://netzro.github.io/feeds/all.atom.xml"
+        type="application/atom+xml" rel="alternate" title="Gifted Space Atom Feed" />
+<meta name="description" content="From tokenization to inference — a plain-language walk through how large language models are structured, trained, and named." />
+    <script>
+        if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia(
+                '(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark')
+        }
+    </script>
+</head>
+
+<body class="min-h-screen flex flex-col max-w-7xl lg:max-w-none text-zinc-800 bg-neutral-100 
+    dark:bg-neutral-900 dark:text-zinc-300 container mx-auto justify-center md:px-3 ">
+    <nav class="sm:flex sm:justify-between xl:ml-32 pl-4 items-center">
+        <div class="flex pt-4">
+            <h1 class="font-semibold text-2xl"><a href="https://netzro.github.io/">Gifted Space</a></h1>
+            <button id="theme-toggle" type="button"
+                class="text-zinc-700 dark:text-zinc-400 rounded-full focus:outline-none text-sm ml-2 p-1">
+                <svg id="theme-toggle-dark-icon" class="w-5 h-5 hidden" fill="currentColor" viewBox="0 0 20 20"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+                </svg>
+                <svg id="theme-toggle-light-icon" class="w-5 h-5 hidden" fill="currentColor" viewBox="0 0 20 20"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z"
+                        fill-rule="evenodd" clip-rule="evenodd"></path>
+                </svg>
+            </button>
+        </div>
+        <ul class="flex flex-wrap lg:mr-24 md:pt-0">
+            <li class="mr-4 pt-6"><a  href="https://netzro.github.io/pages/about/">About</a></li>
+            <li class="mr-4 pt-6"><a  href="https://netzro.github.io/pages/more/">More/</a></li>
+            <li class="mr-4 pt-6"><a  href="https://netzro.github.io/archives.html">Archive</a></li>
+            <li class="mr-4 pt-6"><a  href="https://netzro.github.io/tags.html">Tags</a></li>
+        </ul>
+    </nav>
+    <div class="flex-grow md:max-w-screen-md md:mx-auto md:w-3/4 px-4">
+        <nav class="text-zinc-800 dark:text-zinc-300 mt-12 pb-2 md:mt-16" aria-label="Breadcrumb">
+            <ul class="p-0 inline-flex items-center">
+                <li class="flex items-center">
+                    <a href="https://netzro.github.io/" class="text-zinc-800 dark:text-zinc-300 inline-flex items-center">
+                        <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z">
+                            </path>
+                        </svg>
+                        Home
+                    </a>
+                    <svg class="fill-current w-3 h-3 mr-2 ml-1" xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 320 512">
+                        <path
+                            d="M285.476 272.971L91.132 467.314c-9.373 9.373-24.569 9.373-33.941 0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941 0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z" />
+                    </svg>
+                </li>
+                <li class="flex items-center">
+                    <a href="https://netzro.github.io/categories.html">Categories</a>
+                    <svg class="fill-current w-3 h-3 mr-2 ml-1" xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 320 512">
+                        <path
+                            d="M285.476 272.971L91.132 467.314c-9.373 9.373-24.569 9.373-33.941 0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941 0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z" />
+                    </svg>
+                </li>
+                <li class="flex items-center">
+                    <a href="https://netzro.github.io/category/technology.html">Technology</a>
+                </li>
+                <svg class="fill-current w-3 h-3 mr-2 ml-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+                    <path
+                        d="M285.476 272.971L91.132 467.314c-9.373 9.373-24.569 9.373-33.941 0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941 0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z" />
+                </svg>
+            </ul>
+        </nav>
+
+<main>
+  <header>
+    <h1 class="font-semibold text-3xl my-2">How LLMs Are Built — Inside The Architecture</h1>
+    <footer class="flex text-sm text-zinc-800 dark:text-zinc-400">
+      <div class="flex text-xs text-zinc-800 dark:text-zinc-400">
+        <time>June 12, 2026</time>
+        <div>
+        </div>
+        <div>
+          <span>&nbsp;·&nbsp;Gifted</span>
+        </div>
+      </div>
+    </footer>
+  </header>
+  <div class="max-w-7xl container mx-auto my-8 text-zinc-800 dark:text-zinc-300  
+              prose lg:max-w-none prose-headings:text-zinc-800 prose-headings:dark:text-zinc-300 
+              prose-h1:text-3xl lg:prose-h1:text-3xl prose-headings:font-semibold 
+              prose-pre:bg-zinc-200 prose-pre:text-zinc-800
+              dark:prose-pre:bg-zinc-800 dark:prose-pre:text-zinc-200
+              prose-blockquote:text-zinc-800
+              dark:prose-blockquote:text-zinc-200
+              prose-a:text-gray-500
+              dark:prose-a:text-gray-400
+              dark:prose-strong:text-zinc-200 
+              dark:prose-code:text-zinc-200
+              dark:prose-code:bg-zinc-800
+              prose-code:bg-zinc-200
+              prose-code:font-light
+              prose-img:rounded-md
+              ">
+    <hr>
+<p>Every few months a new model drops. GPT-4o. Claude 3.5 Sonnet. Gemini 2.0 Flash. Qwen3. The names sound like car trims. The press releases sound like science fiction. But under the branding, the architecture is surprisingly consistent.</p>
+<p>This post is what I wish someone had handed me before I started building agents on top of these systems. What is actually inside a large language model. How it gets built. And what the names mean.</p>
+<h2>What An LLM Actually Is</h2>
+<p>A large language model is a function. You give it a sequence of tokens, it returns a probability distribution over the next token. That is it. Everything else — the persuasive essays, the code generation, the code-switching between languages — is emergent behavior from doing that one thing at scale.</p>
+<p>The "large" part refers to parameters. A parameter is a weight in the neural network. GPT-3 had 175 billion parameters. Current top models are rumored to be in the trillions. Each parameter is a floating-point number that gets learned during training. More parameters generally means more capacity to store patterns, but also more cost to train and run.</p>
+<p>The "language" part is a misnomer, by the way. These models do not understand language the way you and I do. They model statistical relationships between tokens. Whether that constitutes "understanding" is a philosophical question. For engineering purposes, it does not matter — the output is what matters.</p>
+<h2>The Name Game</h2>
+<p>Let me decode the naming conventions, because they are more structured than they look.</p>
+<p><strong>Company + Model Family + Variant + Size + Version</strong></p>
+<p>Take <code>claude-sonnet-4</code> as an example:</p>
+<ul>
+<li><code>claude</code> — the model family (Anthropic's brand)</li>
+<li><code>sonnet</code> — the tier (Anthropic names tiers after literary forms: Haiku &lt; Sonnet &lt; Opus, from light to heavy)</li>
+<li><code>4</code> — the generation</li>
+</ul>
+<p>Or <code>gpt-4o-mini</code>:</p>
+<ul>
+<li><code>gpt</code> — the family (OpenAI's Generative Pre-trained Transformer)</li>
+<li><code>4</code> — the generation</li>
+<li><code>o</code> — "omni," meaning multimodal (text + image + audio input)</li>
+<li><code>mini</code> — the size variant</li>
+</ul>
+<p>Or <code>gemini-2.0-flash</code>:</p>
+<ul>
+<li><code>gemini</code> — the family (Google)</li>
+<li><code>2.0</code> — the generation</li>
+<li><code>flash</code> — the size variant (speed-optimized, lighter than "pro" or "ultra")</li>
+</ul>
+<p>OpenRouter, which is what I use to route models, follows this pattern in their model slugs: <code>provider/model-name</code>. So <code>anthropic/claude-sonnet-4</code> means "Anthropic's Claude, Sonnet tier, generation 4."</p>
+<p>Some other patterns:</p>
+<ul>
+<li><strong>Parameter count in the name:</strong> Llama 3.1 70B means "70 billion parameters." GPT-3 meant "3rd generation GPT," not 3 billion parameters.</li>
+<li><strong>Suffixes:</strong> <code>-instruct</code>, <code>-chat</code>, <code>-turbo</code> — these distinguish base models from fine-tuned variants optimized for conversation. <code>llama-3.1-70b-instruct</code> is the instruct-tuned version. It has been further trained on dialogue data.</li>
+<li><strong>Context length:</strong> Sometimes appended as <code>128k</code> or <code>200k</code>, indicating the number of tokens the model can process in a single request.</li>
+</ul>
+<p>The names are not arbitrary. They encode the model's lineage, capability, and cost tier. Learn to read them and you can make better routing decisions before you spend a single token of inference.</p>
+<h2>The Architecture</h2>
+<p>Nearly every modern LLM is a <strong>transformer</strong>. The transformer architecture was introduced in the 2017 paper "Attention Is All You Need" — arguably the most cited paper in modern AI. Before transformers, language models used recurrent neural networks (RNNs). RNNs processed text sequentially, one token at a time, which made them slow and bad at long-range dependencies.</p>
+<p>The transformer changed everything with one mechanism: <strong>self-attention</strong>.</p>
+<p>Self-attention lets every token in a sequence look at every other token simultaneously. If the sentence is "The bank was steep so I sat by the river bank," the word "bank" can attend to both "steep" and "river" to disambiguate. An RNN would have to process the whole sentence sequentially to get there. The transformer does it in one pass.</p>
+<p>The transformer stack looks like this:</p>
+<ul>
+<li><strong>Input embeddings</strong> — each token is converted to a high-dimensional vector (a list of numbers)</li>
+<li><strong>Positional encoding</strong> — since the transformer has no notion of order, position information is added to each token's embedding</li>
+<li><strong>Multi-head self-attention</strong> — each layer computes attention across the entire sequence, with multiple "heads" capturing different relationship types simultaneously</li>
+<li><strong>Feed-forward network</strong> — a small two-layer network applied independently to each token</li>
+<li><strong>Layer normalization</strong> — stabilizes training</li>
+<li><strong>Repeat</strong> — this block is stacked. GPT-3 had 96 layers. Current models range from 32 to 120+. Each layer refines the representation</li>
+</ul>
+<p>The output is passed through a final linear layer and softmax to produce probabilities over the entire vocabulary (typically 32,000 to 200,000+ tokens).</p>
+<h2>The Training Pipeline</h2>
+<p>Training an LLM happens in three phases.</p>
+<p><strong>Phase 1: Pre-training (language modeling)</strong></p>
+<p>This is where 99% of the cost goes. The model is trained on a massive corpus of text — books, websites, code repositories, papers, conversations. The task is simple: given all previous tokens, predict the next one.</p>
+<p>If the input is "The cat sat on the," the model should assign high probability to "mat," "floor," "couch" and low probability to "refrigerator." The loss function measures how wrong the model is, and gradient descent updates all those billions of parameters to make it less wrong.</p>
+<p>This phase takes thousands of GPUs running for weeks or months. For GPT-4, estimates put the training cost above $100 million. For Llama 3 (405B parameters), Meta used 16,000 H100 GPUs for 54 days.</p>
+<p>The result is a <strong>base model</strong>. It is good at predicting text but not at following instructions. If you ask a base model "Write me a poem about Lagos," it might instead continue with "Lagos is the most populous city in Nigeria with an estimated population of..." — because training data is heavy on Wikipedia-style completions.</p>
+<p><strong>Phase 2: Supervised fine-tuning (SFT)</strong></p>
+<p>Humans write ideal responses to prompts, and the model is trained to produce those responses instead of generic continuations. This teaches the model to be helpful, follow instructions, and format outputs correctly.</p>
+<p>The dataset here is much smaller — tens of thousands of examples, not trillions of tokens. But the examples are high-quality, written by annotators with clear guidelines.</p>
+<p>The result is an <strong>instruct model</strong> or <strong>chat model</strong>. This is what most APIs serve by default.</p>
+<p><strong>Phase 3: Reinforcement learning from human feedback (RLHF) — or alternatives</strong></p>
+<p>This is where the model is aligned with human preferences. Humans rank multiple outputs from the model (e.g., "Response A is better than Response B because it's more concise and accurate"). A reward model is trained on these rankings, and then the LLM is optimized to maximize reward.</p>
+<p>Some systems use DPO (Direct Preference Optimization) or RLAIF (Reinforcement Learning from AI Feedback, where an AI does the ranking instead of humans). The goal is the same: shape the model's behavior beyond what SFT alone can achieve.</p>
+<p>The final product is what you interact with when you call an API.</p>
+<h2>The Inference Engine</h2>
+<p>When you send a prompt to an LLM, here is what happens:</p>
+<ul>
+<li><strong>Tokenization</strong> — your text is split into tokens. Not words. Subwords. A tokenizer (usually Byte-Pair Encoding or SentencePiece) breaks text into pieces. "Unbelievable" might become ["Un", "believ", "able"]. Code and tokenization are separate concerns but deeply intertwined — the choice of tokenizer affects how well the model handles different languages, code, and special characters.</li>
+<li><strong>Prefill phase</strong> — the model processes your entire prompt in one forward pass, building up the key-value cache for each layer. This is the expensive part for long prompts.</li>
+<li><strong>Decode phase</strong> — the model generates output one token at a time, autoregressively. Each new token is appended to the input, and the model runs again. This is why generation feels slow — it is inherently sequential.</li>
+<li><strong>Sampling</strong> — the raw probability distribution is adjusted by temperature and top-p/top-k sampling parameters before a token is selected. Temperature 0 means "always pick the most likely token." Higher values add randomness.</li>
+</ul>
+<p>This is why context window matters. A model with a 128k token context must maintain key-value caches for all 128,000 positions, which explodes memory usage. This is where techniques like grouped-query attention, sliding window attention, and mixture-of-experts come in — architectural innovations to make long contexts practical.</p>
+<h2>What Makes Models Different</h2>
+<p>If they all use transformers, why do models behave so differently?</p>
+<ul>
+<li><strong>Training data composition.</strong> A model trained heavily on code will be better at coding. A model trained on multilingual data will handle multiple languages. The data diet defines the model.</li>
+<li><strong>Data quality and filtering.</strong> More is not always better. Llama 3's team devoted enormous effort to data quality, deduplication, and filtering junk from the pre-training corpus.</li>
+<li><strong>Architecture tweaks.</strong> Mixture of Experts (MoE) activates only a subset of parameters per token, allowing larger models without proportionally larger compute. Some models use different attention variants (GQA, MLA) to reduce memory.</li>
+<li><strong>Post-training.</strong> Two models with identical pre-training can diverge dramatically based on SFT and RLHF. This is where Anthropic's safety focus, OpenAI's tool-use optimization, and Google's multimodal integration show up.</li>
+<li><strong>System prompt.</strong> The invisible instructions prepended to every conversation shape how the model behaves. It is part of the product, not the architecture, but it is often the biggest differentiator in practice.</li>
+</ul>
+<h2>Where This Is Going</h2>
+<p>The trend is toward efficiency. Qwen3 packs strong performance into a smaller parameter count through better training data and distillation. Ollama and llama.cpp make it possible to run quantized models on consumer hardware.</p>
+<p>The other trend is specialization. General-purpose models are being complemented by purpose-built models — code generation, document processing, audio understanding. The era of one-model-does-everything gives way to model routing, where different tasks get routed to different models optimized for that task. This is the problem OmniRoute solves in my stack.</p>
+<p>The architecture is not changing fundamentally. The transformer is still the backbone. But everything around it — training data quality, efficiency techniques, alignment methods, inference optimization — is evolving fast.</p>
+<p>The models will get smaller, faster, smarter, and cheaper. The names will keep sounding like car trims. And under the hood, it will still be tokens going in and probabilities coming out.</p>
+<hr>
+<p><em>I run multiple LLMs through OmniRoute on a self-hosted infrastructure. If you are building on top of these models, understanding the architecture helps you choose the right tool and set realistic expectations.</em></p>
+    <!-- <div class="aspect-w-16 aspect-h-9 mx-auto"></div> CSS placeholder -->
+  </div>
+  <footer class="flex flex-col mt-10 ">
+    <ul class="flex flex-wrap">
+      <a href="https://netzro.github.io/tag/architecture.html">
+        <li
+          class="bg-zinc-200 hover:bg-zinc-300 dark:hover:bg-zinc-800 dark:bg-zinc-700 text-zinc-500 dark:text-neutral-400 mb-2 mr-2 px-3 py-1.5 rounded-md transition ease-in active:-translate-y-1 active:scale-110 duration-75">
+          architecture
+        </li>
+      </a>
+      <a href="https://netzro.github.io/tag/deep-learning.html">
+        <li
+          class="bg-zinc-200 hover:bg-zinc-300 dark:hover:bg-zinc-800 dark:bg-zinc-700 text-zinc-500 dark:text-neutral-400 mb-2 mr-2 px-3 py-1.5 rounded-md transition ease-in active:-translate-y-1 active:scale-110 duration-75">
+          deep-learning
+        </li>
+      </a>
+      <a href="https://netzro.github.io/tag/llm.html">
+        <li
+          class="bg-zinc-200 hover:bg-zinc-300 dark:hover:bg-zinc-800 dark:bg-zinc-700 text-zinc-500 dark:text-neutral-400 mb-2 mr-2 px-3 py-1.5 rounded-md transition ease-in active:-translate-y-1 active:scale-110 duration-75">
+          llm
+        </li>
+      </a>
+      <a href="https://netzro.github.io/tag/machine-learning.html">
+        <li
+          class="bg-zinc-200 hover:bg-zinc-300 dark:hover:bg-zinc-800 dark:bg-zinc-700 text-zinc-500 dark:text-neutral-400 mb-2 mr-2 px-3 py-1.5 rounded-md transition ease-in active:-translate-y-1 active:scale-110 duration-75">
+          machine-learning
+        </li>
+      </a>
+      <a href="https://netzro.github.io/tag/transformer.html">
+        <li
+          class="bg-zinc-200 hover:bg-zinc-300 dark:hover:bg-zinc-800 dark:bg-zinc-700 text-zinc-500 dark:text-neutral-400 mb-2 mr-2 px-3 py-1.5 rounded-md transition ease-in active:-translate-y-1 active:scale-110 duration-75">
+          transformer
+        </li>
+      </a>
+    </ul>
+    <div class="flex w-full my-2 bg-zinc-200 dark:bg-zinc-700 rounded-lg">
+      <div class="w-1/2 rounded-l-lg"></div>
+    </div>
+    <div class="flex bg-zinc-200 dark:bg-zinc-700 py-2 rounded-lg justify-center space-x-2 text-xs">
+      <ul>
+        <a target="_blank" rel="noopener noreferrer" title="twitter" aria-label="share Features on twitter"
+          href="https://twitter.com/intent/tweet/?text=Features&amp;url=https://netzro.github.io/posts/2026/Jun/12/how-llms-are-built-inside-the-architecture/">
+          <li class="bg-gray-900 p-1 text-white rounded-md">
+            <i class="fab fa-twitter fa-2x" aria-hidden="true"></i>
+          </li>
+        </a>
+      </ul>
+      <ul>
+        <a target="_blank" rel="noopener noreferrer" title="linkedin" aria-label="share Features on linkedin"
+          href="https://www.linkedin.com/sharing/share-offsite/?url=https://netzro.github.io/posts/2026/Jun/12/how-llms-are-built-inside-the-architecture/">
+          <li class="bg-gray-900 p-1 text-white rounded-md">
+            <i class="fab fa-linkedin fa-2x" aria-hidden="true"></i>
+          </li>
+        </a>
+      </ul>
+      <ul>
+        <a target="_blank" rel="noopener noreferrer" title="reddit" aria-label="share Features on reddit"
+          href="https://reddit.com/submit?url=https://netzro.github.io/posts/2026/Jun/12/how-llms-are-built-inside-the-architecture/">
+          <li class="bg-gray-900 p-1 text-white rounded-md">
+            <i class="fab fa-reddit fa-2x" aria-hidden="true"></i>
+          </li>
+        </a>
+      </ul>
+      <ul>
+        <a target="_blank" rel="noopener noreferrer" title="facebook" aria-label="share Features on facebook"
+          href="https://facebook.com/sharer/sharer.php?u=https://netzro.github.io/posts/2026/Jun/12/how-llms-are-built-inside-the-architecture/">
+          <li class="bg-gray-900 p-1 text-white rounded-md">
+            <i class="fab fa-facebook fa-2x" aria-hidden="true"></i>
+          </li>
+        </a>
+      </ul>
+      <ul>
+        <a target="_blank" rel="noopener noreferrer" title="whatsapp" aria-label="share Features on whatsapp"
+          href="https://api.whatsapp.com/send?text=Features - https://netzro.github.io/posts/2026/Jun/12/how-llms-are-built-inside-the-architecture/">
+          <li class="bg-gray-900 p-1 text-white rounded-md">
+            <i class="fab fa-whatsapp fa-2x" aria-hidden="true"></i>
+          </li>
+        </a>
+      </ul>
+      <ul>
+        <a target="_blank" rel="noopener noreferrer" title="telegram" aria-label="share Features on telegram"
+          href="https://telegram.me/share/url?text=Features&amp;url=https://netzro.github.io/posts/2026/Jun/12/how-llms-are-built-inside-the-architecture/">
+          <li class="bg-gray-900 p-1 text-white rounded-md">
+            <i class="fab fa-telegram fa-2x" aria-hidden="true"></i>
+          </li>
+        </a>
+      </ul>
+    </div>
+  </footer>
+  <div>
+  </div>
+</main>
+
+    </div>
+    
+    <footer class="flex w-full text-xs justify-center mt-10 mb-6 text-zinc-500 dark:text-zinc-400">
+    <div class="px-4">
+        <span>©2026 - Gifted&nbsp;&#8226;&nbsp;</span>
+        Powered by
+        <a class="underline" href="https://getpelican.com/">Pelican</a>&nbsp;and&nbsp;
+        <a class="underline" href="https://github.com/aleylara/Papyrus">Papyrus</a>
+        
+        <span></span>
+    
+    </div>
+</footer>
+
+
+
+
+
+    <script>
+        let themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
+        let themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
+        if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia(
+                '(prefers-color-scheme: dark)').matches)) {
+            themeToggleLightIcon.classList.remove('hidden');
+        } else {
+            themeToggleDarkIcon.classList.remove('hidden');
+        }
+        let themeToggleBtn = document.getElementById('theme-toggle');
+        themeToggleBtn.addEventListener('click', function () {
+            themeToggleDarkIcon.classList.toggle('hidden');
+            themeToggleLightIcon.classList.toggle('hidden');
+            if (localStorage.getItem('color-theme')) {
+                if (localStorage.getItem('color-theme') === 'light') {
+                    document.documentElement.classList.add('dark');
+                    localStorage.setItem('color-theme', 'dark');
+                } else {
+                    document.documentElement.classList.remove('dark');
+                    localStorage.setItem('color-theme', 'light');
+                }
+            } else {
+                if (document.documentElement.classList.contains('dark')) {
+                    document.documentElement.classList.remove('dark');
+                    localStorage.setItem('color-theme', 'light');
+                } else {
+                    document.documentElement.classList.add('dark');
+                    localStorage.setItem('color-theme', 'dark');
+                }
+            }
+        });
+    </script>
+    <script src="https://files.stork-search.net/releases/v1.4.0/stork.js"></script>
+    <script>
+        stork.register("sitesearch", "https://netzro.github.io/search-index.st")
+    </script>
+
+</body>
+
+
+</html>
