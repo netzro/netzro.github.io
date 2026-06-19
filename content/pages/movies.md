@@ -11,20 +11,20 @@ _Updated as I watch. Last update: June 2026._
 
 <details markdown='1'><summary>June 2026</summary>
 
-_Title_ - **Oblivion (2013)**  
-_Watched on_ - 10th June 2026
-
-_Title_ - **Seven Snipers (2025)**  
-_Watched on_ - 11th June 2026
-
-_Title_ - **The Passenger (2026)**  
-_Watched on_ - 11th June 2026
-
 _Title_ - **Deep Water (2026)**  
 _Watched on_ - 18th June 2026
 
 _Title_ - **Neglected (2026)**  
 _Watched on_ - 18th June 2026
+
+_Title_ - **The Passenger (2026)**  
+_Watched on_ - 11th June 2026
+
+_Title_ - **Seven Snipers (2025)**  
+_Watched on_ - 11th June 2026
+
+_Title_ - **Oblivion (2013)**  
+_Watched on_ - 10th June 2026
 </details>
 
 <details markdown='1'><summary>June 2025</summary>
