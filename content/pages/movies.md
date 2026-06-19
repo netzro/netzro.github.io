@@ -1,24 +1,24 @@
-Title: Movies
+---
+title: Movies
 Date: 2026-06-12
 Status: hidden
+---
 
 # Movies
 _Updated as I watch. Last update: June 2026._
 
 ### Watchlist
 
-
-
 <details markdown='1'><summary>June 2026</summary>
 
-_Title_ - **Oblivion (2013)**  
-_Watched on_ - 10th June 2026
+_Title_ - **Deep Water 2026**  
+_Watched on_ - 18th June 2026
 
-_Title_ - **Seven Snipers (2025)**  
-_Watched on_ - 11th June 2026
+_Title_ - **Deep Water 2026**  
+_Watched on_ - 18th June 2026
 
-_Title_ - **The Passenger (2026)**  
-_Watched on_ - 11th June 2026
+_Title_ - **Deep Water 2026**  
+_Watched on_ - 18th June 2026
 </details>
 
 <details markdown='1'><summary>June 2025</summary>
@@ -35,7 +35,8 @@ _Title_ - **The Amateur (2025)**
 _My rating_  - ⭐⭐⭐  
 _Watched on_ - 14th June 2025  
 
-_ 
+_
+
 </details>
 
 <details markdown='1'><summary>May 2025</summary>
@@ -58,6 +59,7 @@ _Watched on_ - 1st May 2025
 
 _Title_ - **The Accountant 2 (April 28, 2025)**  
 _Watched on_ - 1st May 2025
+
 </details>
 
 <details markdown='1'><summary>April 2025</summary>
@@ -73,6 +75,7 @@ _Watched on_ - 13th April 2025
 
 _Title_ - **A Working Man (April 1, 2025)**  
 _Watched on_ - 5th April 2025
+
 </details>
 
 <details markdown='1'><summary>March 2025</summary>
@@ -88,6 +91,7 @@ _Watched on_ - 8th March 2025
 
 _Title_ - **Fight or Flight (March 3, 2025)**  
 _Watched on_ - 6th March 2025
+
 </details>
 
 <details markdown='1'><summary>February 2025</summary>
@@ -118,6 +122,7 @@ _Watched on_ - 13th February 2025
 
 _Title_ - **Den of Thieves (January 19, 2018)**  
 _Watched on_ - 9th February 2025
+
 </details>
 
 <details markdown='1'><summary>January 2025</summary>
@@ -151,6 +156,7 @@ _Watched on_ - 2nd January 2025
 
 _Title_ - **Carry On (December 27, 2024)**  
 _Watched on_ - 2nd January 2025
+
 </details>
 
 <details markdown='1'><summary>December 2024</summary>
@@ -187,6 +193,7 @@ _Watched on_ - 24th December 2024
 
 _Title_ - **Gladiator II (November 22, 2024)**  
 _Watched on_ - 24th December 2024
+
 </details>
 
 <details markdown='1'><summary>October 2024</summary>
@@ -265,6 +272,7 @@ _Watched on_ - 1st September 2024
 _Title_ - **Borderlands (2024)**  
 _My rating_ - ⭐⭐⭐  
 _Watched on_ - 1st September 2024
+
 </details>
 
 <details markdown='1'><summary>August 2024</summary>
@@ -328,6 +336,7 @@ _Watched on_ - 11th August 2024
 _Title_ - **The One Fast Move (2024)**  
 _My rating_ - ⭐  
 _Watched on_ - 11th August 2024
+
 </details>
 
 <details markdown='1'><summary>July 2024</summary>
@@ -343,4 +352,5 @@ _Watched on_ - 11th July 2024
 _Title_ - **Soul (2020)**  
 _My rating_ - ⭐⭐⭐⭐⭐  
 _Watched on_ 🔄 - 11th July 2024
+
 </details>
