@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content="Pelican" />
+    <title>AI Agents — Why Hermes Agent Changed How I Think About Automation</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Slab|Ruda" />
+    <link rel="stylesheet" type="text/css" href="https://netzro.github.io/theme/css/main.css" />
+    <link rel="stylesheet" href="https://netzro.github.io/theme/css/stork.css">
+    <link rel="stylesheet" media="screen and (prefers-color-scheme: dark)" href="https://netzro.github.io/theme/css/stork-dark.css">
+    <link rel="icon" href="https://netzro.github.io/images/favicon.ico" type="image/x-icon" /> <!-- Add this line -->
+
+    <link
+        href="https://netzro.github.io/feeds/all.atom.xml"
+        type="application/atom+xml" rel="alternate" title="Gifted Space Atom Feed" />
+<meta name="description" content="My take on the AI agent landscape and why Hermes Agent has become the tool I actually trust to get things done." />
+    <script>
+        if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia(
+                '(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark')
+        }
+    </script>
+</head>
+
+<body class="min-h-screen flex flex-col max-w-7xl lg:max-w-none text-zinc-800 bg-neutral-100 
+    dark:bg-neutral-900 dark:text-zinc-300 container mx-auto justify-center md:px-3 ">
+    <nav class="sm:flex sm:justify-between xl:ml-32 pl-4 items-center">
+        <div class="flex pt-4">
+            <h1 class="font-semibold text-2xl"><a href="https://netzro.github.io/">Gifted Space</a></h1>
+            <button id="theme-toggle" type="button"
+                class="text-zinc-700 dark:text-zinc-400 rounded-full focus:outline-none text-sm ml-2 p-1">
+                <svg id="theme-toggle-dark-icon" class="w-5 h-5 hidden" fill="currentColor" viewBox="0 0 20 20"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+                </svg>
+                <svg id="theme-toggle-light-icon" class="w-5 h-5 hidden" fill="currentColor" viewBox="0 0 20 20"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z"
+                        fill-rule="evenodd" clip-rule="evenodd"></path>
+                </svg>
+            </button>
+        </div>
+        <ul class="flex flex-wrap lg:mr-24 md:pt-0">
+            <li class="mr-4 pt-6"><a  href="https://netzro.github.io/pages/about/">About</a></li>
+            <li class="mr-4 pt-6"><a  href="https://netzro.github.io/pages/more/">More/</a></li>
+            <li class="mr-4 pt-6"><a  href="https://netzro.github.io/archives.html">Archive</a></li>
+            <li class="mr-4 pt-6"><a  href="https://netzro.github.io/tags.html">Tags</a></li>
+        </ul>
+    </nav>
+    <div class="flex-grow md:max-w-screen-md md:mx-auto md:w-3/4 px-4">
+        <nav class="text-zinc-800 dark:text-zinc-300 mt-12 pb-2 md:mt-16" aria-label="Breadcrumb">
+            <ul class="p-0 inline-flex items-center">
+                <li class="flex items-center">
+                    <a href="https://netzro.github.io/" class="text-zinc-800 dark:text-zinc-300 inline-flex items-center">
+                        <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z">
+                            </path>
+                        </svg>
+                        Home
+                    </a>
+                    <svg class="fill-current w-3 h-3 mr-2 ml-1" xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 320 512">
+                        <path
+                            d="M285.476 272.971L91.132 467.314c-9.373 9.373-24.569 9.373-33.941 0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941 0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z" />
+                    </svg>
+                </li>
+                <li class="flex items-center">
+                    <a href="https://netzro.github.io/categories.html">Categories</a>
+                    <svg class="fill-current w-3 h-3 mr-2 ml-1" xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 320 512">
+                        <path
+                            d="M285.476 272.971L91.132 467.314c-9.373 9.373-24.569 9.373-33.941 0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941 0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z" />
+                    </svg>
+                </li>
+                <li class="flex items-center">
+                    <a href="https://netzro.github.io/category/tech.html">Tech</a>
+                </li>
+                <svg class="fill-current w-3 h-3 mr-2 ml-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+                    <path
+                        d="M285.476 272.971L91.132 467.314c-9.373 9.373-24.569 9.373-33.941 0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941 0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z" />
+                </svg>
+            </ul>
+        </nav>
+
+<main>
+  <header>
+    <h1 class="font-semibold text-3xl my-2">AI Agents — Why Hermes Agent Changed How I Think About Automation</h1>
+    <footer class="flex text-sm text-zinc-800 dark:text-zinc-400">
+      <div class="flex text-xs text-zinc-800 dark:text-zinc-400">
+        <time>June 20, 2026</time>
+        <div>
+        </div>
+        <div>
+          <span>&nbsp;·&nbsp;Gifted</span>
+        </div>
+      </div>
+    </footer>
+  </header>
+  <div class="max-w-7xl container mx-auto my-8 text-zinc-800 dark:text-zinc-300  
+              prose lg:max-w-none prose-headings:text-zinc-800 prose-headings:dark:text-zinc-300 
+              prose-h1:text-3xl lg:prose-h1:text-3xl prose-headings:font-semibold 
+              prose-pre:bg-zinc-200 prose-pre:text-zinc-800
+              dark:prose-pre:bg-zinc-800 dark:prose-pre:text-zinc-200
+              prose-blockquote:text-zinc-800
+              dark:prose-blockquote:text-zinc-200
+              prose-a:text-gray-500
+              dark:prose-a:text-gray-400
+              dark:prose-strong:text-zinc-200 
+              dark:prose-code:text-zinc-200
+              dark:prose-code:bg-zinc-800
+              prose-code:bg-zinc-200
+              prose-code:font-light
+              prose-img:rounded-md
+              ">
+    <hr>
+<p>Something shifted for me recently. I've been watching the AI agent space explode — new frameworks, new demos, new "revolutionary" tools every week. Most of it is noise. But buried in the chaos, I found Hermes Agent, and it quietly became the most productive thing on my machine.</p>
+<p>This isn't a review. It me trying to put into words what makes the agent concept actually click — and why Hermes works for me when so many other tools feel like toys.</p>
+<h2>What Even Is an AI Agent?</h2>
+<p>The term gets thrown around loosely. A chatbot answers your questions. An AI agent <em>acts</em> on your behalf. It reads files, runs commands, sends messages, schedules tasks, and makes decisions — all within boundaries you set.</p>
+<p>The key difference is <strong>agency</strong>. A chatbot waits for you to prompt it. An agent can wake up on a schedule, notice something needs attention, and handle it. It has access to your system, not just a text box.</p>
+<p>Claude Code, OpenAI Codex, OpenClaw — they all live in this space. They're coding-focused, terminal-based, and powerful. Hermes Agent comes from the same lineage but takes a different angle: it's not just for coding. It's for <em>everything</em>.</p>
+<h2>Where Hermes Fits</h2>
+<p>Hermes Agent is an open-source framework by Nous Research. It runs in your terminal, on messaging platforms, and inside IDEs. It works with basically any LLM provider — OpenRouter, Anthropic, OpenAI, DeepSeek, local models, and 15+ others.</p>
+<p>What got me wasn't the model flexibility, though. It was the <strong>skills system</strong>.</p>
+<p>Skills are reusable procedure documents that Hermes saves and loads into future sessions. When it solves a complex problem or gets corrected, it can persist that knowledge. Over time, the agent gets better at <em>your</em> specific tasks. It learns your environment, your preferences, your workflows.</p>
+<p>That's a fundamentally different experience from starting every conversation with a blank slate.</p>
+<h2>The Stuff I Actually Use It For</h2>
+<p>Let me be concrete. Here's what Hermes does for me day-to-day:</p>
+<p><strong>Blog management.</strong> I have a Hermes profile called <code>blog-manager</code> that handles writing, editing, reviewing, and deploying posts to this site. It knows the Pelican setup, the frontmatter format, the deployment pipeline. I tell it what I want to write about, and it handles the rest — including knowing when to ask for my approval before publishing.</p>
+<p><strong>File operations across projects.</strong> Reading, writing, searching, patching files — Hermes does this natively. I don't copy-paste code into a chat window. The agent comes to where the work lives.</p>
+<p><strong>Scheduled tasks.</strong> Cron jobs inside Hermes let me schedule recurring work. Backups, checks, reports — they run on time without me remembering to trigger them.</p>
+<p><strong>Multi-platform access.</strong> I interact with Hermes through Telegram. Same agent, same memory, same skills — just a different interface. The agent doesn't care whether I'm at my terminal or on my phone.</p>
+<h2>What Surprised Me</h2>
+<p>The <strong>memory system</strong> caught me off guard. Hermes remembers things across sessions — not just facts, but preferences, corrections, and lessons. It has a persistent memory store that survives between conversations.</p>
+<p>At first I didn't think much of it. Then I noticed it was <em>using</em> things I'd told it weeks ago. Preferences about writing style. Details about my setup. Things I'd forgotten I even mentioned.</p>
+<p>That's when it stopped feeling like a tool and started feeling like a collaborator.</p>
+<p>The <strong>profiles</strong> system was another pleasant surprise. I can run multiple independent Hermes instances with isolated configs, skills, and memories. My blog manager doesn't bleed into my personal agent. Each profile is its own world.</p>
+<h2>The Honest Downsides</h2>
+<p>Hermes isn't perfect. The learning curve is real — there are a lot of commands, config options, and concepts to absorb. The documentation is thorough but dense. I spent more than a few evenings reading docs and experimenting before things clicked.</p>
+<p>The skills system, while powerful, requires you to actually <em>use</em> it. If you don't take the time to build and refine skills, you're leaving most of the value on the table. It's a tool that rewards investment.</p>
+<p>And like any agent with system access, you need to think about security. Hermes has approval prompts for destructive commands, secret redaction, and PII controls — but you have to configure them. The defaults are reasonable, but "reasonable" isn't "set-and-forget."</p>
+<h2>The Bigger Picture</h2>
+<p>I think we're in the early days of AI agents. The tools are rough, the patterns aren't settled, and most people are still figuring out what's actually useful versus what's a demo.</p>
+<p>What I know is this: the agent that wins isn't the one with the flashiest demo. It's the one that reliably does useful work in <em>your</em> environment, on <em>your</em> terms, without requiring you to re-explain everything each time.</p>
+<p>For me, that's Hermes Agent. Not because it's the most powerful or the most polished — but because it's the one I've shaped into something that genuinely makes my life easier.</p>
+<p>If you're curious, start here:</p>
+<div class="highlight"><pre><span></span><code>curl<span class="w"> </span>-fsSL<span class="w"> </span>https://hermes-agent.nousresearch.com/install.sh<span class="w"> </span><span class="p">|</span><span class="w"> </span>bash
+hermes<span class="w"> </span>setup
+</code></pre></div>
+
+<p>Then give it something real to do. That's where the magic starts.</p>
+    <!-- <div class="aspect-w-16 aspect-h-9 mx-auto"></div> CSS placeholder -->
+  </div>
+  <footer class="flex flex-col mt-10 ">
+    <ul class="flex flex-wrap">
+      <a href="https://netzro.github.io/tag/agents.html">
+        <li
+          class="bg-zinc-200 hover:bg-zinc-300 dark:hover:bg-zinc-800 dark:bg-zinc-700 text-zinc-500 dark:text-neutral-400 mb-2 mr-2 px-3 py-1.5 rounded-md transition ease-in active:-translate-y-1 active:scale-110 duration-75">
+          agents
+        </li>
+      </a>
+      <a href="https://netzro.github.io/tag/ai.html">
+        <li
+          class="bg-zinc-200 hover:bg-zinc-300 dark:hover:bg-zinc-800 dark:bg-zinc-700 text-zinc-500 dark:text-neutral-400 mb-2 mr-2 px-3 py-1.5 rounded-md transition ease-in active:-translate-y-1 active:scale-110 duration-75">
+          ai
+        </li>
+      </a>
+      <a href="https://netzro.github.io/tag/automation.html">
+        <li
+          class="bg-zinc-200 hover:bg-zinc-300 dark:hover:bg-zinc-800 dark:bg-zinc-700 text-zinc-500 dark:text-neutral-400 mb-2 mr-2 px-3 py-1.5 rounded-md transition ease-in active:-translate-y-1 active:scale-110 duration-75">
+          automation
+        </li>
+      </a>
+      <a href="https://netzro.github.io/tag/hermes.html">
+        <li
+          class="bg-zinc-200 hover:bg-zinc-300 dark:hover:bg-zinc-800 dark:bg-zinc-700 text-zinc-500 dark:text-neutral-400 mb-2 mr-2 px-3 py-1.5 rounded-md transition ease-in active:-translate-y-1 active:scale-110 duration-75">
+          hermes
+        </li>
+      </a>
+      <a href="https://netzro.github.io/tag/technology.html">
+        <li
+          class="bg-zinc-200 hover:bg-zinc-300 dark:hover:bg-zinc-800 dark:bg-zinc-700 text-zinc-500 dark:text-neutral-400 mb-2 mr-2 px-3 py-1.5 rounded-md transition ease-in active:-translate-y-1 active:scale-110 duration-75">
+          technology
+        </li>
+      </a>
+    </ul>
+    <div class="flex w-full my-2 bg-zinc-200 dark:bg-zinc-700 rounded-lg">
+      <div class="w-1/2 rounded-l-lg"></div>
+    </div>
+    <div class="flex bg-zinc-200 dark:bg-zinc-700 py-2 rounded-lg justify-center space-x-2 text-xs">
+      <ul>
+        <a target="_blank" rel="noopener noreferrer" title="twitter" aria-label="share Features on twitter"
+          href="https://twitter.com/intent/tweet/?text=Features&amp;url=https://netzro.github.io/posts/2026/Jun/20/ai-agents-hermes-agent/">
+          <li class="bg-gray-900 p-1 text-white rounded-md">
+            <i class="fab fa-twitter fa-2x" aria-hidden="true"></i>
+          </li>
+        </a>
+      </ul>
+      <ul>
+        <a target="_blank" rel="noopener noreferrer" title="linkedin" aria-label="share Features on linkedin"
+          href="https://www.linkedin.com/sharing/share-offsite/?url=https://netzro.github.io/posts/2026/Jun/20/ai-agents-hermes-agent/">
+          <li class="bg-gray-900 p-1 text-white rounded-md">
+            <i class="fab fa-linkedin fa-2x" aria-hidden="true"></i>
+          </li>
+        </a>
+      </ul>
+      <ul>
+        <a target="_blank" rel="noopener noreferrer" title="reddit" aria-label="share Features on reddit"
+          href="https://reddit.com/submit?url=https://netzro.github.io/posts/2026/Jun/20/ai-agents-hermes-agent/">
+          <li class="bg-gray-900 p-1 text-white rounded-md">
+            <i class="fab fa-reddit fa-2x" aria-hidden="true"></i>
+          </li>
+        </a>
+      </ul>
+      <ul>
+        <a target="_blank" rel="noopener noreferrer" title="facebook" aria-label="share Features on facebook"
+          href="https://facebook.com/sharer/sharer.php?u=https://netzro.github.io/posts/2026/Jun/20/ai-agents-hermes-agent/">
+          <li class="bg-gray-900 p-1 text-white rounded-md">
+            <i class="fab fa-facebook fa-2x" aria-hidden="true"></i>
+          </li>
+        </a>
+      </ul>
+      <ul>
+        <a target="_blank" rel="noopener noreferrer" title="whatsapp" aria-label="share Features on whatsapp"
+          href="https://api.whatsapp.com/send?text=Features - https://netzro.github.io/posts/2026/Jun/20/ai-agents-hermes-agent/">
+          <li class="bg-gray-900 p-1 text-white rounded-md">
+            <i class="fab fa-whatsapp fa-2x" aria-hidden="true"></i>
+          </li>
+        </a>
+      </ul>
+      <ul>
+        <a target="_blank" rel="noopener noreferrer" title="telegram" aria-label="share Features on telegram"
+          href="https://telegram.me/share/url?text=Features&amp;url=https://netzro.github.io/posts/2026/Jun/20/ai-agents-hermes-agent/">
+          <li class="bg-gray-900 p-1 text-white rounded-md">
+            <i class="fab fa-telegram fa-2x" aria-hidden="true"></i>
+          </li>
+        </a>
+      </ul>
+    </div>
+  </footer>
+  <div>
+  </div>
+</main>
+
+    </div>
+    
+    <footer class="flex w-full text-xs justify-center mt-10 mb-6 text-zinc-500 dark:text-zinc-400">
+    <div class="px-4">
+        <span>©2026 - Gifted&nbsp;&#8226;&nbsp;</span>
+        Powered by
+        <a class="underline" href="https://getpelican.com/">Pelican</a>&nbsp;and&nbsp;
+        <a class="underline" href="https://github.com/aleylara/Papyrus">Papyrus</a>
+        
+        <span></span>
+    
+    </div>
+</footer>
+
+
+
+
+
+    <script>
+        let themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
+        let themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
+        if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia(
+                '(prefers-color-scheme: dark)').matches)) {
+            themeToggleLightIcon.classList.remove('hidden');
+        } else {
+            themeToggleDarkIcon.classList.remove('hidden');
+        }
+        let themeToggleBtn = document.getElementById('theme-toggle');
+        themeToggleBtn.addEventListener('click', function () {
+            themeToggleDarkIcon.classList.toggle('hidden');
+            themeToggleLightIcon.classList.toggle('hidden');
+            if (localStorage.getItem('color-theme')) {
+                if (localStorage.getItem('color-theme') === 'light') {
+                    document.documentElement.classList.add('dark');
+                    localStorage.setItem('color-theme', 'dark');
+                } else {
+                    document.documentElement.classList.remove('dark');
+                    localStorage.setItem('color-theme', 'light');
+                }
+            } else {
+                if (document.documentElement.classList.contains('dark')) {
+                    document.documentElement.classList.remove('dark');
+                    localStorage.setItem('color-theme', 'light');
+                } else {
+                    document.documentElement.classList.add('dark');
+                    localStorage.setItem('color-theme', 'dark');
+                }
+            }
+        });
+    </script>
+    <script src="https://files.stork-search.net/releases/v1.4.0/stork.js"></script>
+    <script>
+        stork.register("sitesearch", "https://netzro.github.io/search-index.st")
+    </script>
+
+</body>
+
+
+</html>
