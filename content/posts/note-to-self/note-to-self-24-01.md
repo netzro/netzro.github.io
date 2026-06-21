@@ -1,5 +1,5 @@
 ---
-Title: Always think
+Title: note-to-self:24-01
 Date: 2024-08-09
 Tags: nts
 Slug: note-to-self-24-01

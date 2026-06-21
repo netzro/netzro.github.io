@@ -10,9 +10,9 @@ handle_error() {
 [ -z "$1" ] && handle_error "Usage: $0 \"Your deploy message\""
 [ ${#1} -lt 10 ] && handle_error "Commit message must be at least 10 characters long"
 
-# Build Process - capture output
-BUILD_OUTPUT=$(uv run pelican content -s publishconf.py 2>&1)
-BUILD_STATUS=$?
+# Build Process - show output and capture it
+BUILD_OUTPUT=$(uv run pelican content -s publishconf.py 2>&1 | tee /dev/tty)
+BUILD_STATUS=${PIPESTATUS[0]}
 if [ $BUILD_STATUS -ne 0 ]; then
   handle_error "Build failed"
 fi
