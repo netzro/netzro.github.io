@@ -38,5 +38,5 @@ Live at https://netzro.github.io"
 uv run ghp-import output -b gh-pages -m "$DEPLOY_MSG" -f || handle_error "Deployment failed"
 git push origin gh-pages --force || handle_error "Deployment push failed"
 
-echo "Success! Deploy Message:
+echo "Deploy Message:
 $DEPLOY_MSG"
