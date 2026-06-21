@@ -1,11 +1,11 @@
 ---
-Title: note-to-self:26-08
+Title: The Life You Want Requires the Discipline You've Been Avoiding
 Date: 2026-06-21
 Tags: nts, Discipline
-Slug: note-to-self-26-08
+Slug: the-life-you-want
 ---
 
-### Note To Self
+### note-to-self:26-08
 
 The life you want is on the other side of the thing you're avoiding.
 
