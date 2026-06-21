@@ -1,0 +1,30 @@
+---
+Title: note-to-self:25-04
+Date: 2025-05-25
+Tags: nts, Transformation
+Slug: note-to-self-25-04
+---
+
+### note-to-self:25-04
+
+What if I told you 30 days could make you unrecognizable?
+
+Not by magic, but by *war* against the version of you playing small, stuck on "I'm not ready," negotiating with destiny.
+
+*It's not up for debate.*
+
+The cost of your new life is your old one. Stop negotiating. 🧏‍♂️
+
+There's a version of you the world hasn't seen, hidden behind doubt and distractions. That ends now.
+
+June isn't just another month. It's your line in the sand. Your rebirth. Your resurrection. A war against the "you" holding you back.
+
+30 days of:
+- Hard discipline.
+- Atomic habits.
+- Identity shift.
+- Becoming the person people whisper about.
+
+This isn't a challenge — it's a transformation. It starts when you say *enough*.
+
+Ready to bury the old you? I'll see you in June. 🗣️🔉🔊
