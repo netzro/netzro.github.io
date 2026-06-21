@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content="Pelican" />
+    <title>Config File Formats in Python: A Practical Guide</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Slab|Ruda" />
+    <link rel="stylesheet" type="text/css" href="https://netzro.github.io/theme/css/main.css" />
+    <link rel="stylesheet" href="https://netzro.github.io/theme/css/stork.css">
+    <link rel="stylesheet" media="screen and (prefers-color-scheme: dark)" href="https://netzro.github.io/theme/css/stork-dark.css">
+    <link rel="icon" href="https://netzro.github.io/images/favicon.ico" type="image/x-icon" /> <!-- Add this line -->
+
+    <link
+        href="https://netzro.github.io/feeds/all.atom.xml"
+        type="application/atom+xml" rel="alternate" title="Gifted Space Atom Feed" />
+<meta name="description" content="A hands-on look at every config format Python projects actually use — INI, JSON, YAML, TOML, and env files — with real code examples and when each..." />
+    <script>
+        if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia(
+                '(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark')
+        }
+    </script>
+</head>
+
+<body class="min-h-screen flex flex-col max-w-7xl lg:max-w-none text-zinc-800 bg-neutral-100 
+    dark:bg-neutral-900 dark:text-zinc-300 container mx-auto justify-center md:px-3 ">
+    <nav class="sm:flex sm:justify-between xl:ml-32 pl-4 items-center">
+        <div class="flex pt-4">
+            <h1 class="font-semibold text-2xl"><a href="https://netzro.github.io/">Gifted Space</a></h1>
+            <button id="theme-toggle" type="button"
+                class="text-zinc-700 dark:text-zinc-400 rounded-full focus:outline-none text-sm ml-2 p-1">
+                <svg id="theme-toggle-dark-icon" class="w-5 h-5 hidden" fill="currentColor" viewBox="0 0 20 20"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+                </svg>
+                <svg id="theme-toggle-light-icon" class="w-5 h-5 hidden" fill="currentColor" viewBox="0 0 20 20"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z"
+                        fill-rule="evenodd" clip-rule="evenodd"></path>
+                </svg>
+            </button>
+        </div>
+        <ul class="flex flex-wrap lg:mr-24 md:pt-0">
+            <li class="mr-4 pt-6"><a  href="https://netzro.github.io/pages/about/">About</a></li>
+            <li class="mr-4 pt-6"><a  href="https://netzro.github.io/pages/more/">More/</a></li>
+            <li class="mr-4 pt-6"><a  href="https://netzro.github.io/archives.html">Archive</a></li>
+            <li class="mr-4 pt-6"><a  href="https://netzro.github.io/tags.html">Tags</a></li>
+        </ul>
+    </nav>
+    <div class="flex-grow md:max-w-screen-md md:mx-auto md:w-3/4 px-4">
+        <nav class="text-zinc-800 dark:text-zinc-300 mt-12 pb-2 md:mt-16" aria-label="Breadcrumb">
+            <ul class="p-0 inline-flex items-center">
+                <li class="flex items-center">
+                    <a href="https://netzro.github.io/" class="text-zinc-800 dark:text-zinc-300 inline-flex items-center">
+                        <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z">
+                            </path>
+                        </svg>
+                        Home
+                    </a>
+                    <svg class="fill-current w-3 h-3 mr-2 ml-1" xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 320 512">
+                        <path
+                            d="M285.476 272.971L91.132 467.314c-9.373 9.373-24.569 9.373-33.941 0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941 0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z" />
+                    </svg>
+                </li>
+                <li class="flex items-center">
+                    <a href="https://netzro.github.io/categories.html">Categories</a>
+                    <svg class="fill-current w-3 h-3 mr-2 ml-1" xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 320 512">
+                        <path
+                            d="M285.476 272.971L91.132 467.314c-9.373 9.373-24.569 9.373-33.941 0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941 0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z" />
+                    </svg>
+                </li>
+                <li class="flex items-center">
+                    <a href="https://netzro.github.io/category/misc.html">misc</a>
+                </li>
+                <svg class="fill-current w-3 h-3 mr-2 ml-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+                    <path
+                        d="M285.476 272.971L91.132 467.314c-9.373 9.373-24.569 9.373-33.941 0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941 0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z" />
+                </svg>
+            </ul>
+        </nav>
+
+<main>
+  <header>
+    <h1 class="font-semibold text-3xl my-2">Config File Formats in Python: A Practical Guide</h1>
+    <footer class="flex text-sm text-zinc-800 dark:text-zinc-400">
+      <div class="flex text-xs text-zinc-800 dark:text-zinc-400">
+        <time>June 21, 2026</time>
+        <div>
+        </div>
+        <div>
+          <span>&nbsp;·&nbsp;Gifted</span>
+        </div>
+      </div>
+    </footer>
+  </header>
+  <div class="max-w-7xl container mx-auto my-8 text-zinc-800 dark:text-zinc-300  
+              prose lg:max-w-none prose-headings:text-zinc-800 prose-headings:dark:text-zinc-300 
+              prose-h1:text-3xl lg:prose-h1:text-3xl prose-headings:font-semibold 
+              prose-pre:bg-zinc-200 prose-pre:text-zinc-800
+              dark:prose-pre:bg-zinc-800 dark:prose-pre:text-zinc-200
+              prose-blockquote:text-zinc-800
+              dark:prose-blockquote:text-zinc-200
+              prose-a:text-gray-500
+              dark:prose-a:text-gray-400
+              dark:prose-strong:text-zinc-200 
+              dark:prose-code:text-zinc-200
+              dark:prose-code:bg-zinc-800
+              prose-code:bg-zinc-200
+              prose-code:font-light
+              prose-img:rounded-md
+              ">
+    <hr>
+<p>Every Python project needs configuration at some point. Database credentials, feature flags, API keys, logging levels — something has to live outside your code. The question is: what format do you put it in?</p>
+<p>There's no single right answer. There are, however, clear trade-offs. Here's what I've learned from using all of them.</p>
+<h2>The Contenders</h2>
+<p>Python projects typically use one of these formats:</p>
+<table>
+<thead>
+<tr>
+<th>Format</th>
+<th>Standard Library Support</th>
+<th>Human-Friendly</th>
+<th>Comments</th>
+<th>Data Types</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>INI / CFG</td>
+<td><code>configparser</code> (built-in)</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Strings only</td>
+</tr>
+<tr>
+<td>JSON</td>
+<td><code>json</code> (built-in)</td>
+<td>Moderate</td>
+<td>No</td>
+<td>Full</td>
+</tr>
+<tr>
+<td>YAML</td>
+<td><code>PyYAML</code> (third-party)</td>
+<td>Very</td>
+<td>Yes</td>
+<td>Full</td>
+</tr>
+<tr>
+<td>TOML</td>
+<td><code>tomllib</code> (3.11+ built-in)</td>
+<td>Very</td>
+<td>Yes</td>
+<td>Full</td>
+</tr>
+<tr>
+<td>.env</td>
+<td><code>python-dotenv</code> (third-party)</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Strings only</td>
+</tr>
+<tr>
+<td>Python files</td>
+<td>Nothing needed</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Anything</td>
+</tr>
+</tbody>
+</table>
+<p>Let's walk through each one.</p>
+<h2>INI: The Old Reliable</h2>
+<p>INI files have been around since MS-DOS. Python's <code>configparser</code> module handles them natively.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">configparser</span>
+
+<span class="n">config</span> <span class="o">=</span> <span class="n">configparser</span><span class="o">.</span><span class="n">ConfigParser</span><span class="p">()</span>
+<span class="n">config</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="s1">&#39;config.ini&#39;</span><span class="p">)</span>
+
+<span class="n">db_host</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;database&#39;</span><span class="p">][</span><span class="s1">&#39;host&#39;</span><span class="p">]</span>
+<span class="n">db_port</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">getint</span><span class="p">(</span><span class="s1">&#39;database&#39;</span><span class="p">,</span> <span class="s1">&#39;port&#39;</span><span class="p">)</span>
+</code></pre></div>
+
+<div class="highlight"><pre><span></span><code><span class="c1"># config.ini</span>
+<span class="k">[database]</span>
+<span class="na">host</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">localhost</span>
+<span class="na">port</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">5432</span>
+<span class="na">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">myapp</span>
+
+<span class="k">[logging]</span>
+<span class="na">level</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">INFO</span>
+<span class="na">file</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">/var/log/myapp.log</span>
+</code></pre></div>
+
+<p><strong>When to use it:</strong> Legacy projects, simple key-value configs, or when you want zero dependencies. INI is readable, supports sections, and everyone understands it immediately.</p>
+<p><strong>When to skip it:</strong> Everything is a string. No native support for lists, booleans, or nested structures. If your config has any complexity, you'll end up writing parsing code on top of <code>configparser</code>.</p>
+<h2>JSON: The Universal Language</h2>
+<p>JSON is everywhere. Python's <code>json</code> module is built in.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;config.json&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">config</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+
+<span class="n">api_key</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;api&#39;</span><span class="p">][</span><span class="s1">&#39;key&#39;</span><span class="p">]</span>
+<span class="n">debug</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;debug&#39;</span><span class="p">]</span>
+</code></pre></div>
+
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;debug&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;api&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;key&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;abc123&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;timeout&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">30</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="nt">&quot;features&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;auth&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;billing&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;notifications&quot;</span><span class="p">]</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<p><strong>When to use it:</strong> Machine-generated configs, API responses, or when your config is produced/consumed by other systems. JSON is the lingua franca of web services.</p>
+<p><strong>When to skip it:</strong> No comments. Trailing commas cause errors. Humans editing JSON by hand will make mistakes. If people need to maintain the file directly, JSON fights you.</p>
+<h2>YAML: The Human-First Format</h2>
+<p>YAML is designed to be readable. It supports comments, anchors, aliases, and complex nesting.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">yaml</span>  <span class="c1"># pip install pyyaml</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;config.yaml&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">config</span> <span class="o">=</span> <span class="n">yaml</span><span class="o">.</span><span class="n">safe_load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+
+<span class="n">db</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;database&#39;</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">db</span><span class="p">[</span><span class="s1">&#39;host&#39;</span><span class="p">],</span> <span class="n">db</span><span class="p">[</span><span class="s1">&#39;port&#39;</span><span class="p">])</span>
+</code></pre></div>
+
+<div class="highlight"><pre><span></span><code><span class="c1"># config.yaml</span>
+<span class="nt">database</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">host</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">localhost</span>
+<span class="w">  </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5432</span>
+<span class="w">  </span><span class="nt">credentials</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">username</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">admin</span>
+<span class="w">    </span><span class="nt">password</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${DB_PASSWORD}</span><span class="w">  </span><span class="c1"># substituted at runtime</span>
+
+<span class="nt">logging</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">level</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">INFO</span>
+<span class="w">  </span><span class="nt">handlers</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">console</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">file</span>
+</code></pre></div>
+
+<p><strong>When to use it:</strong> Complex configs with deep nesting, or when non-developers need to edit the file. Docker Compose, Ansible, and GitHub Actions all use YAML for this reason.</p>
+<p><strong>When to skip it:</strong> PyYAML is a third-party dependency. YAML's flexibility is a double-edged sword — indentation errors, unexpected type coercion (<code>yes</code> becomes <code>True</code>), and the infamous <a href="https://hitchdev.com/strictyaml/why/implicit-typing-removed/">Norway problem</a>. Always use <code>safe_load()</code>, never <code>load()</code>.</p>
+<h2>TOML: The Modern Default</h2>
+<p>TOML was created specifically as a better INI. Python 3.11+ includes <code>tomllib</code> in the standard library.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">tomllib</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;config.toml&#39;</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">config</span> <span class="o">=</span> <span class="n">tomllib</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+
+<span class="n">title</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;project&#39;</span><span class="p">][</span><span class="s1">&#39;title&#39;</span><span class="p">]</span>
+<span class="n">version</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;project&#39;</span><span class="p">][</span><span class="s1">&#39;version&#39;</span><span class="p">]</span>
+</code></pre></div>
+
+<div class="highlight"><pre><span></span><code><span class="c1"># config.toml</span>
+<span class="k">[project]</span>
+<span class="n">title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;My App&quot;</span>
+<span class="n">version</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;1.2.0&quot;</span>
+
+<span class="k">[database]</span>
+<span class="n">host</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;localhost&quot;</span>
+<span class="n">port</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5432</span>
+
+<span class="k">[logging]</span>
+<span class="n">level</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;INFO&quot;</span>
+</code></pre></div>
+
+<p><strong>When to use it:</strong> New Python projects. <code>pyproject.toml</code> is already the standard for Python packaging, so your team already knows TOML. It supports comments, has clear syntax, and handles types properly.</p>
+<p><strong>When to skip it:</strong> If you need to support Python &lt; 3.11, you'll need the <code>tomli</code> backport package. Also, deeply nested TOML gets verbose — the <code>[a.b.c.d]</code> header syntax doesn't scale as gracefully as YAML's indentation.</p>
+<h2>.env Files: Secrets and Environment</h2>
+<p><code>.env</code> files aren't a config format so much as a convention. Each line is a key-value pair.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">dotenv</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_dotenv</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+
+<span class="n">load_dotenv</span><span class="p">()</span>  <span class="c1"># loads .env into os.environ</span>
+
+<span class="n">db_url</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">&#39;DATABASE_URL&#39;</span><span class="p">]</span>
+<span class="n">secret_key</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">&#39;SECRET_KEY&#39;</span><span class="p">]</span>
+</code></pre></div>
+
+<div class="highlight"><pre><span></span><code><span class="err">#</span><span class="w"> </span><span class="p">.</span><span class="n">env</span>
+<span class="n">DATABASE_URL</span><span class="o">=</span><span class="nl">postgresql</span><span class="p">:</span><span class="o">//</span><span class="k">user</span><span class="err">:</span><span class="n">pass</span><span class="nv">@localhost</span><span class="o">/</span><span class="n">myapp</span>
+<span class="n">SECRET_KEY</span><span class="o">=</span><span class="n">super</span><span class="o">-</span><span class="n">secret</span><span class="o">-</span><span class="k">value</span>
+<span class="n">DEBUG</span><span class="o">=</span><span class="k">true</span>
+</code></pre></div>
+
+<p><strong>When to use it:</strong> Environment-specific secrets and variables. The 12-factor app methodology recommends storing config in the environment, and <code>.env</code> files are the local development equivalent.</p>
+<p><strong>When to skip it:</strong> Everything is a string. No nesting, no lists, no structure. <code>.env</code> files work best for a flat set of variables, not complex configuration. And never commit them to version control.</p>
+<h2>Python Files: Just Use Code</h2>
+<p>Some projects skip config files entirely and use a Python module.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># config.py</span>
+<span class="n">DEBUG</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="n">DATABASE</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;host&#39;</span><span class="p">:</span> <span class="s1">&#39;localhost&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;port&#39;</span><span class="p">:</span> <span class="mi">5432</span><span class="p">,</span>
+    <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;myapp&#39;</span><span class="p">,</span>
+<span class="p">}</span>
+<span class="n">ALLOWED_HOSTS</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;localhost&#39;</span><span class="p">,</span> <span class="s1">&#39;127.0.0.1&#39;</span><span class="p">]</span>
+</code></pre></div>
+
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">config</span><span class="w"> </span><span class="kn">import</span> <span class="n">DEBUG</span><span class="p">,</span> <span class="n">DATABASE</span>
+</code></pre></div>
+
+<p><strong>When to use it:</strong> When your config needs logic, or when you want IDE autocompletion and type checking. Django's <code>settings.py</code> is the canonical example.</p>
+<p><strong>When to skip it:</strong> Now you're executing untrusted code. If anyone can modify the config file, they can run arbitrary Python. This also makes it harder to generate or validate config programmatically.</p>
+<h2>What I Actually Use</h2>
+<p>For new Python projects, my default stack is:</p>
+<ul>
+<li><strong><code>pyproject.toml</code></strong> — project metadata and tool configuration (already standard)</li>
+<li><strong><code>.env</code></strong> — secrets and environment-specific values (loaded via <code>python-dotenv</code>)</li>
+<li><strong><code>config.yaml</code></strong> or <strong><code>config.toml</code></strong> — application-level configuration that humans edit</li>
+</ul>
+<p>I avoid INI unless I'm maintaining something old. I avoid JSON for anything humans write. I avoid Python config files unless the project already uses that pattern.</p>
+<h2>The Real Rule</h2>
+<p>The best config format is the one your team will actually maintain correctly. A perfectly structured YAML file that nobody wants to edit is worse than a simple <code>.env</code> file people understand.</p>
+<p>Pick the simplest format that handles your actual requirements. Add complexity only when the config demands it — not because a format is popular.</p>
+    <!-- <div class="aspect-w-16 aspect-h-9 mx-auto"></div> CSS placeholder -->
+  </div>
+  <footer class="flex flex-col mt-10 ">
+    <ul class="flex flex-wrap">
+      <a href="https://netzro.github.io/tag/best-practices.html">
+        <li
+          class="bg-zinc-200 hover:bg-zinc-300 dark:hover:bg-zinc-800 dark:bg-zinc-700 text-zinc-500 dark:text-neutral-400 mb-2 mr-2 px-3 py-1.5 rounded-md transition ease-in active:-translate-y-1 active:scale-110 duration-75">
+          best-practices
+        </li>
+      </a>
+      <a href="https://netzro.github.io/tag/configuration.html">
+        <li
+          class="bg-zinc-200 hover:bg-zinc-300 dark:hover:bg-zinc-800 dark:bg-zinc-700 text-zinc-500 dark:text-neutral-400 mb-2 mr-2 px-3 py-1.5 rounded-md transition ease-in active:-translate-y-1 active:scale-110 duration-75">
+          configuration
+        </li>
+      </a>
+      <a href="https://netzro.github.io/tag/ini.html">
+        <li
+          class="bg-zinc-200 hover:bg-zinc-300 dark:hover:bg-zinc-800 dark:bg-zinc-700 text-zinc-500 dark:text-neutral-400 mb-2 mr-2 px-3 py-1.5 rounded-md transition ease-in active:-translate-y-1 active:scale-110 duration-75">
+          ini
+        </li>
+      </a>
+      <a href="https://netzro.github.io/tag/json.html">
+        <li
+          class="bg-zinc-200 hover:bg-zinc-300 dark:hover:bg-zinc-800 dark:bg-zinc-700 text-zinc-500 dark:text-neutral-400 mb-2 mr-2 px-3 py-1.5 rounded-md transition ease-in active:-translate-y-1 active:scale-110 duration-75">
+          json
+        </li>
+      </a>
+      <a href="https://netzro.github.io/tag/python.html">
+        <li
+          class="bg-zinc-200 hover:bg-zinc-300 dark:hover:bg-zinc-800 dark:bg-zinc-700 text-zinc-500 dark:text-neutral-400 mb-2 mr-2 px-3 py-1.5 rounded-md transition ease-in active:-translate-y-1 active:scale-110 duration-75">
+          python
+        </li>
+      </a>
+      <a href="https://netzro.github.io/tag/toml.html">
+        <li
+          class="bg-zinc-200 hover:bg-zinc-300 dark:hover:bg-zinc-800 dark:bg-zinc-700 text-zinc-500 dark:text-neutral-400 mb-2 mr-2 px-3 py-1.5 rounded-md transition ease-in active:-translate-y-1 active:scale-110 duration-75">
+          toml
+        </li>
+      </a>
+      <a href="https://netzro.github.io/tag/yaml.html">
+        <li
+          class="bg-zinc-200 hover:bg-zinc-300 dark:hover:bg-zinc-800 dark:bg-zinc-700 text-zinc-500 dark:text-neutral-400 mb-2 mr-2 px-3 py-1.5 rounded-md transition ease-in active:-translate-y-1 active:scale-110 duration-75">
+          yaml
+        </li>
+      </a>
+    </ul>
+    <div class="flex w-full my-2 bg-zinc-200 dark:bg-zinc-700 rounded-lg">
+      <div class="w-1/2 rounded-l-lg"></div>
+    </div>
+    <div class="flex bg-zinc-200 dark:bg-zinc-700 py-2 rounded-lg justify-center space-x-2 text-xs">
+      <ul>
+        <a target="_blank" rel="noopener noreferrer" title="twitter" aria-label="share Features on twitter"
+          href="https://twitter.com/intent/tweet/?text=Features&amp;url=https://netzro.github.io/posts/2026/Jun/21/python-config-formats/">
+          <li class="bg-gray-900 p-1 text-white rounded-md">
+            <i class="fab fa-twitter fa-2x" aria-hidden="true"></i>
+          </li>
+        </a>
+      </ul>
+      <ul>
+        <a target="_blank" rel="noopener noreferrer" title="linkedin" aria-label="share Features on linkedin"
+          href="https://www.linkedin.com/sharing/share-offsite/?url=https://netzro.github.io/posts/2026/Jun/21/python-config-formats/">
+          <li class="bg-gray-900 p-1 text-white rounded-md">
+            <i class="fab fa-linkedin fa-2x" aria-hidden="true"></i>
+          </li>
+        </a>
+      </ul>
+      <ul>
+        <a target="_blank" rel="noopener noreferrer" title="reddit" aria-label="share Features on reddit"
+          href="https://reddit.com/submit?url=https://netzro.github.io/posts/2026/Jun/21/python-config-formats/">
+          <li class="bg-gray-900 p-1 text-white rounded-md">
+            <i class="fab fa-reddit fa-2x" aria-hidden="true"></i>
+          </li>
+        </a>
+      </ul>
+      <ul>
+        <a target="_blank" rel="noopener noreferrer" title="facebook" aria-label="share Features on facebook"
+          href="https://facebook.com/sharer/sharer.php?u=https://netzro.github.io/posts/2026/Jun/21/python-config-formats/">
+          <li class="bg-gray-900 p-1 text-white rounded-md">
+            <i class="fab fa-facebook fa-2x" aria-hidden="true"></i>
+          </li>
+        </a>
+      </ul>
+      <ul>
+        <a target="_blank" rel="noopener noreferrer" title="whatsapp" aria-label="share Features on whatsapp"
+          href="https://api.whatsapp.com/send?text=Features - https://netzro.github.io/posts/2026/Jun/21/python-config-formats/">
+          <li class="bg-gray-900 p-1 text-white rounded-md">
+            <i class="fab fa-whatsapp fa-2x" aria-hidden="true"></i>
+          </li>
+        </a>
+      </ul>
+      <ul>
+        <a target="_blank" rel="noopener noreferrer" title="telegram" aria-label="share Features on telegram"
+          href="https://telegram.me/share/url?text=Features&amp;url=https://netzro.github.io/posts/2026/Jun/21/python-config-formats/">
+          <li class="bg-gray-900 p-1 text-white rounded-md">
+            <i class="fab fa-telegram fa-2x" aria-hidden="true"></i>
+          </li>
+        </a>
+      </ul>
+    </div>
+  </footer>
+  <div>
+  </div>
+</main>
+
+    </div>
+    
+    <footer class="flex w-full text-xs justify-center mt-10 mb-6 text-zinc-500 dark:text-zinc-400">
+    <div class="px-4">
+        <span>©2026 - Gifted&nbsp;&#8226;&nbsp;</span>
+        Powered by
+        <a class="underline" href="https://getpelican.com/">Pelican</a>&nbsp;and&nbsp;
+        <a class="underline" href="https://github.com/aleylara/Papyrus">Papyrus</a>
+        
+        <span></span>
+    
+    </div>
+</footer>
+
+
+
+
+
+    <script>
+        let themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
+        let themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
+        if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia(
+                '(prefers-color-scheme: dark)').matches)) {
+            themeToggleLightIcon.classList.remove('hidden');
+        } else {
+            themeToggleDarkIcon.classList.remove('hidden');
+        }
+        let themeToggleBtn = document.getElementById('theme-toggle');
+        themeToggleBtn.addEventListener('click', function () {
+            themeToggleDarkIcon.classList.toggle('hidden');
+            themeToggleLightIcon.classList.toggle('hidden');
+            if (localStorage.getItem('color-theme')) {
+                if (localStorage.getItem('color-theme') === 'light') {
+                    document.documentElement.classList.add('dark');
+                    localStorage.setItem('color-theme', 'dark');
+                } else {
+                    document.documentElement.classList.remove('dark');
+                    localStorage.setItem('color-theme', 'light');
+                }
+            } else {
+                if (document.documentElement.classList.contains('dark')) {
+                    document.documentElement.classList.remove('dark');
+                    localStorage.setItem('color-theme', 'light');
+                } else {
+                    document.documentElement.classList.add('dark');
+                    localStorage.setItem('color-theme', 'dark');
+                }
+            }
+        });
+    </script>
+    <script src="https://files.stork-search.net/releases/v1.4.0/stork.js"></script>
+    <script>
+        stork.register("sitesearch", "https://netzro.github.io/search-index.st")
+    </script>
+
+</body>
+
+
+</html>
