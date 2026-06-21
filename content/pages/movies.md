@@ -5,11 +5,20 @@ Status: hidden
 ---
 
 # Movies
-_Updated as I watch. Last update: June 2026._
+_Updated as I watch. Last update: 21st June 2026._
 
 ### Watchlist
 
 <details markdown='1'><summary>June 2026</summary>
+
+_Title_ - **The Mummy (2026)**  
+_Watched on_ - 21st June 2026
+
+_Title_ - **The Wasp (2024)**  
+_Watched on_ - 21st June 2026
+
+_Title_ - **Voicemails for Isabelle (2026)**  
+_Watched on_ - 21st June 2026
 
 _Title_ - **Deep Water (2026)**  
 _Watched on_ - 18th June 2026
