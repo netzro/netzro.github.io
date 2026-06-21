@@ -1,8 +1,8 @@
 ---
-Title: note-to-self:25-05
+Title: Keep Going
 Date: 2025-05-27
 Tags: nts, Motivation
-Slug: note-to-self-25-05
+Slug: keep-going
 ---
 
 ### note-to-self:25-05

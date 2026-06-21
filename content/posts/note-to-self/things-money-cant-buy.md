@@ -1,8 +1,8 @@
 ---
-Title: note-to-self:24-01
+Title: Things Money Can't Buy
 Date: 2024-08-09
 Tags: nts
-Slug: note-to-self-24-01
+Slug: things-money-cant-buy
 ---
 
 ### note-to-self:24-01

@@ -1,8 +1,8 @@
 ---
-Title: note-to-self:24-04
+Title: Make Your Own Bible
 Date: 2024-08-18
 Tags: nts
-Slug: note-to-self-24-04
+Slug: make-your-own-bible
 ---
 
 ### note-to-self:24-04

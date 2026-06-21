@@ -1,8 +1,8 @@
 ---
-Title: note-to-self:25-04
+Title: 30 Days to Unrecognizable
 Date: 2025-05-25
 Tags: nts, Transformation
-Slug: note-to-self-25-04
+Slug: 30-days-to-unrecognizable
 ---
 
 ### note-to-self:25-04

@@ -1,8 +1,8 @@
 ---
-Title: note-to-self:24-07
+Title: Stop Seeking Validation
 Date: 2024-09-21
 Tags: nts
-Slug: note-to-self-24-07
+Slug: stop-seeking-validation
 ---
 
 ### note-to-self:24-07

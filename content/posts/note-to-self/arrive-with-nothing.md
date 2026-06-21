@@ -1,8 +1,8 @@
 ---
-Title: note-to-self:24-08
+Title: Arrive With Nothing
 Date: 2024-09-28
 Tags: nts
-Slug: note-to-self-24-08
+Slug: arrive-with-nothing
 ---
 
 ### note-to-self:24-08

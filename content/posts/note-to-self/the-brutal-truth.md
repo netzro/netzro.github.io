@@ -1,8 +1,8 @@
 ---
-Title: note-to-self:25-06
+Title: The Brutal Truth
 Date: 2025-06-02
 Tags: nts, Transformation
-Slug: note-to-self-25-06
+Slug: the-brutal-truth
 ---
 
 ### note-to-self:25-06

@@ -1,8 +1,8 @@
 ---
-Title: note-to-self:24-02
+Title: The Art of Detachment
 Date: 2024-08-10
 Tags: nts
-Slug: note-to-self-24-02
+Slug: the-art-of-detachment
 ---
 
 ### note-to-self:24-02

@@ -1,8 +1,8 @@
 ---
-Title: note-to-self:24-03
+Title: The Divine in Nature
 Date: 2024-08-11
 Tags: nts
-Slug: note-to-self-24-03
+Slug: the-divine-in-nature
 ---
 
 ### note-to-self:24-03

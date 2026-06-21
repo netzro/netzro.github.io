@@ -1,8 +1,8 @@
 ---
-Title: note-to-self:25-01
+Title: The Light Within
 Date: 2025-05-21
 Tags: nts, Spirituality
-Slug: note-to-self-25-01
+Slug: the-light-within
 ---
 
 ### note-to-self:25-01

@@ -1,5 +1,5 @@
 ---
-Title: The Life You Want Requires the Discipline You've Been Avoiding
+Title: The Life You Want
 Date: 2026-06-21
 Tags: nts, Discipline
 Slug: the-life-you-want

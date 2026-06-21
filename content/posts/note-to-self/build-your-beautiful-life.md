@@ -1,8 +1,8 @@
 ---
-Title: note-to-self:25-03
+Title: Build Your Beautiful Life
 Date: 2025-05-23
 Tags: nts, Motivation
-Slug: note-to-self-25-03
+Slug: build-your-beautiful-life
 ---
 
 ### note-to-self:25-03

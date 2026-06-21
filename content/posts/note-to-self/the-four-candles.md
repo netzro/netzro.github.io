@@ -1,8 +1,8 @@
 ---
-Title: note-to-self:24-05
+Title: The Four Candles
 Date: 2024-08-20
 Tags: nts
-Slug: note-to-self-24-05
+Slug: the-four-candles
 ---
 
 ### note-to-self:24-05

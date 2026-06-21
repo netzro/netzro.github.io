@@ -1,8 +1,8 @@
 ---
-Title: note-to-self:24-06
+Title: Your Own Path
 Date: 2024-08-22
 Tags: nts
-Slug: note-to-self-24-06
+Slug: your-own-path
 ---
 
 ### note-to-self:24-06

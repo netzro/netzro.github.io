@@ -1,8 +1,8 @@
 ---
-Title: note-to-self:26-07
+Title: Grace Has Limits
 Date: 2026-06-18
 Tags: nts
-Slug: note-to-self-26-07
+Slug: grace-has-limits
 ---
 
 ### note-to-self:26-07

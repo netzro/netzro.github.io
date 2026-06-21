@@ -1,8 +1,8 @@
 ---
-Title: note-to-self:25-02
+Title: Shine Unapologetically
 Date: 2025-05-22
 Tags: nts, Positivity
-Slug: note-to-self-25-02
+Slug: shine-unapologetically
 ---
 
 ### note-to-self:25-02
