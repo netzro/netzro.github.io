@@ -1581,33 +1581,37 @@ html {
     margin-left: 8rem;
   }
 
-/* --- YouTube embed: hide branding --- */
-.yt-embed {
+/* --- YouTube audio embed: compact player, no video --- */
+.yt-audio {
   position: relative;
   display: inline-block;
   overflow: hidden;
+  border-radius: 8px;
 }
 
-.yt-embed iframe {
+.yt-audio iframe {
   display: block;
   border: none;
+  /* Crop to show only the controls bar */
+  position: relative;
+  top: -120px;
 }
 
-/* Cover YouTube logo + title bar area */
-.yt-embed::after {
+/* Cover YouTube logo + branding */
+.yt-audio::after {
   content: '';
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
-  height: 48px;
+  height: 50%;
   background: #0f0f0f;
   pointer-events: none;
   z-index: 2;
+  border-radius: 8px 8px 0 0;
 }
 
-/* On hover, reveal controls */
-.yt-embed:hover::after {
+.yt-audio:hover::after {
   opacity: 0;
   transition: opacity 0.3s;
 }
