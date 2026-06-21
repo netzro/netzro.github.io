@@ -42,7 +42,12 @@
 &lt;p&gt;I find that compelling. Not because I believe in Ammit or fire-breathing serpents, but because the underlying instinct feels right. The things that matter — really matter — require preparation. Courage. A willingness to walk through the dark even when you can't see the other side.&lt;/p&gt;
 &lt;p&gt;The Egyptians built their entire civilization around death as passage. Tombs filled with spells. Guides inscribed on walls. Generations of priests maintaining the knowledge the dead would need. All of it for a journey that might not even be real.&lt;/p&gt;
 &lt;p&gt;But maybe that's not the point. Maybe the preparation &lt;em&gt;was&lt;/em&gt; the point. Maybe you live differently when you believe what comes next depends on what you know and who you've become.&lt;/p&gt;
-&lt;p&gt;Every journey worth taking has thresholds. The Duat just made that literal. Twelve of them, guarded by gods and fire, and the only way through was forward.&lt;/p&gt;</content><category term="Mythology"/><category term="egyptian mythology"/><category term="duat"/><category term="afterlife"/><category term="ancient egypt"/><category term="mythology"/></entry><entry><title>AI Agents — Why Hermes Agent Changed How I Think About Automation</title><link href="https://netzro.github.io/posts/2026/Jun/20/ai-agents-hermes-agent/" rel="alternate"/><published>2026-06-20T00:00:00+01:00</published><updated>2026-06-20T00:00:00+01:00</updated><author><name>Gifted</name></author><id>tag:netzro.github.io,2026-06-20:/posts/2026/Jun/20/ai-agents-hermes-agent/</id><summary type="html">&lt;p&gt;My take on the AI agent landscape and why Hermes Agent has become the tool I actually trust to get things done.&lt;/p&gt;</summary><content type="html">&lt;hr&gt;
+&lt;p&gt;Every journey worth taking has thresholds. The Duat just made that literal. Twelve of them, guarded by gods and fire, and the only way through was forward.&lt;/p&gt;</content><category term="Mythology"/><category term="egyptian mythology"/><category term="duat"/><category term="afterlife"/><category term="ancient egypt"/><category term="mythology"/></entry><entry><title>The Life You Want Requires the Discipline You've Been Avoiding</title><link href="https://netzro.github.io/posts/2026/Jun/21/the-life-you-want/" rel="alternate"/><published>2026-06-21T00:00:00+01:00</published><updated>2026-06-21T00:00:00+01:00</updated><author><name>Gifted</name></author><id>tag:netzro.github.io,2026-06-21:/posts/2026/Jun/21/the-life-you-want/</id><summary type="html">&lt;p&gt;A note to self about the gap between wanting something and doing what it takes to get it.&lt;/p&gt;</summary><content type="html">&lt;h1&gt;The Life You Want Requires the Discipline You've Been Avoiding&lt;/h1&gt;
+&lt;p&gt;The life you want is on the other side of the thing you're avoiding.&lt;/p&gt;
+&lt;p&gt;You already know what it is. You don't need another book, another video, another plan. You need to close the app, sit in the discomfort, and start — not tomorrow, not when you feel ready.&lt;/p&gt;
+&lt;p&gt;Right now.&lt;/p&gt;
+&lt;p&gt;Discipline isn't dramatic. It's just doing the thing you already know you should do, at the moment you least want to do it. Again and again, until the life you want stops being a fantasy and starts being a Tuesday.&lt;/p&gt;
+&lt;p&gt;Stop waiting. Start.&lt;/p&gt;</content><category term="Notes"/><category term="discipline"/><category term="focus"/><category term="growth"/><category term="notes-to-self"/></entry><entry><title>AI Agents — Why Hermes Agent Changed How I Think About Automation</title><link href="https://netzro.github.io/posts/2026/Jun/20/ai-agents-hermes-agent/" rel="alternate"/><published>2026-06-20T00:00:00+01:00</published><updated>2026-06-20T00:00:00+01:00</updated><author><name>Gifted</name></author><id>tag:netzro.github.io,2026-06-20:/posts/2026/Jun/20/ai-agents-hermes-agent/</id><summary type="html">&lt;p&gt;My take on the AI agent landscape and why Hermes Agent has become the tool I actually trust to get things done.&lt;/p&gt;</summary><content type="html">&lt;hr&gt;
 &lt;p&gt;Something shifted for me recently. I've been watching the AI agent space explode — new frameworks, new demos, new "revolutionary" tools every week. Most of it is noise. But buried in the chaos, I found Hermes Agent, and it quietly became the most productive thing on my machine.&lt;/p&gt;
 &lt;p&gt;This isn't a review. It me trying to put into words what makes the agent concept actually click — and why Hermes works for me when so many other tools feel like toys.&lt;/p&gt;
 &lt;h2&gt;What Even Is an AI Agent?&lt;/h2&gt;
@@ -395,57 +400,4 @@ cat&lt;span class="w"&gt; &lt;/span&gt;~/.ssh/id_ed25519.pub
 &lt;p&gt;The Principle of Cause and Effect teaches accountability. Every bug I encounter is a lesson in causation. By understanding the underlying variables, I gain control over my own outcomes.&lt;/p&gt;
 &lt;p&gt;Finally, the Principle of Gender reminds me that creation requires both logic and intuition. Coding is the masculine act of structure, while the vision behind it is the feminine act of conception. Both must be balanced to create anything of lasting value.&lt;/p&gt;
 &lt;p&gt;These principles do not provide easy answers, but they provide a framework for enduring questions. They anchor me when the world seems chaotic and remind me that I have agency in shaping my own reality.&lt;/p&gt;
-&lt;!-- TODO: verify word count is under 1000 --&gt;</content><category term="Philosophy"/><category term="philosophy"/><category term="reflections"/></entry><entry><title>Automating Hermes Agent Configuration Backups to GitHub</title><link href="https://netzro.github.io/posts/2026/Jun/10/automating-hermes-config-backups-to-github/" rel="alternate"/><published>2026-06-10T00:00:00+01:00</published><updated>2026-06-10T00:00:00+01:00</updated><author><name>Gifted</name></author><id>tag:netzro.github.io,2026-06-10:/posts/2026/Jun/10/automating-hermes-config-backups-to-github/</id><summary type="html">&lt;p&gt;How I set up automated daily backups of my Hermes agent configuration to a private GitHub repository using cron jobs and custom scripts.&lt;/p&gt;</summary><content type="html">&lt;p&gt;As my Hermes agent setup has grown more complex with custom skills, memories, and configurations, I realized I needed a reliable backup system. Losing my agent's learned memories or carefully crafted skills would be a significant setback. Here's how I implemented automated daily backups to GitHub.&lt;/p&gt;
-&lt;h2&gt;The Challenge&lt;/h2&gt;
-&lt;p&gt;Hermes stores all its configuration in &lt;code&gt;~/.hermes/&lt;/code&gt;, including:
-- &lt;code&gt;config.yaml&lt;/code&gt; - Main configuration file
-- &lt;code&gt;SOUL.md&lt;/code&gt; - Personal notes and reflections
-- &lt;code&gt;memories/&lt;/code&gt; - User and agent memories
-- &lt;code&gt;skills/&lt;/code&gt; - Custom skills and skill collections
-- &lt;code&gt;cron/&lt;/code&gt; - Scheduled jobs and their outputs&lt;/p&gt;
-&lt;p&gt;Manually backing this up was error-prone and I often forgot. I needed an automated solution that would run reliably without my intervention.&lt;/p&gt;
-&lt;h2&gt;The Solution&lt;/h2&gt;
-&lt;p&gt;I created a three-part system:&lt;/p&gt;
-&lt;h3&gt;1. Private GitHub Repository&lt;/h3&gt;
-&lt;p&gt;First, I created a private repository &lt;code&gt;netzro/hermes-config-backup&lt;/code&gt; to store the backups securely.&lt;/p&gt;
-&lt;h3&gt;2. Backup Script&lt;/h3&gt;
-&lt;p&gt;I wrote a bash script that:
-- Clones or pulls the backup repository
-- Copies the essential Hermes configuration files and directories
-- Commits changes with a timestamp
-- Pushes to GitHub
-- Logs all operations for monitoring&lt;/p&gt;
-&lt;p&gt;The script specifically backs up:
-- &lt;code&gt;config.yaml&lt;/code&gt; (excluding &lt;code&gt;.env&lt;/code&gt; for security)
-- &lt;code&gt;SOUL.md&lt;/code&gt;
-- &lt;code&gt;memories/&lt;/code&gt; directory
-- &lt;code&gt;skills/&lt;/code&gt; directory&lt;br&gt;
-- &lt;code&gt;cron/&lt;/code&gt; directory&lt;/p&gt;
-&lt;h3&gt;3. Automated Scheduling&lt;/h3&gt;
-&lt;p&gt;Using Hermes' built-in cron system, I scheduled the backup script to run daily at 2:00 AM.&lt;/p&gt;
-&lt;h2&gt;Key Features&lt;/h2&gt;
-&lt;p&gt;&lt;strong&gt;Selective Backups&lt;/strong&gt;: Only backs up configuration and data, excluding large caches and temporary files.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Timestamped Commits&lt;/strong&gt;: Each backup commit includes the exact timestamp: "Agent backup YYYY-MM-DD HH:MM:SS"&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Error Handling&lt;/strong&gt;: The script exits on any error and logs detailed output.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Efficient&lt;/strong&gt;: Only commits and pushes when there are actual changes.&lt;/p&gt;
-&lt;h2&gt;The Cron Job&lt;/h2&gt;
-&lt;p&gt;I configured a Hermes cron job with:
-- Schedule: &lt;code&gt;0 2 * * *&lt;/code&gt; (daily at 2:00 AM)
-- Workdir: &lt;code&gt;/data/data/com.termux/files/home/workspace&lt;/code&gt; 
-- Toolsets: terminal (for git operations)
-- Delivery: local (logs stored in ~/.hermes/logs/backup.log)&lt;/p&gt;
-&lt;h2&gt;Results&lt;/h2&gt;
-&lt;p&gt;Since implementation, the system has been running flawlessly:
-- Daily backups occur without manual intervention
-- The GitHub repository shows a clear history of configuration changes
-- I can easily roll back to any previous state if needed
-- Peace of mind knowing my agent's learned state is preserved&lt;/p&gt;
-&lt;h2&gt;Lessons Learned&lt;/h2&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;strong&gt;Security First&lt;/strong&gt;: Always exclude sensitive files like &lt;code&gt;.env&lt;/code&gt; containing API keys&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Logging Matters&lt;/strong&gt;: Detailed logs make troubleshooting much easier&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Test Thoroughly&lt;/strong&gt;: Test the backup script manually before automating it&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Monitor Regularly&lt;/strong&gt;: Check the logs and GitHub repository periodically to ensure everything works&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;This backup system gives me confidence to continue experimenting with my Hermes agent, knowing that I can always recover to a previous working state if something goes wrong.&lt;/p&gt;
-&lt;p&gt;The setup took about an hour to implement but will save countless hours of potential rework and frustration. Sometimes the best productivity tools are the ones that protect your existing work.&lt;/p&gt;</content><category term="Tech"/><category term="ai"/><category term="development"/><category term="technology"/></entry></feed>
+&lt;!-- TODO: verify word count is under 1000 --&gt;</content><category term="Philosophy"/><category term="philosophy"/><category term="reflections"/></entry></feed>
