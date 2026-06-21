@@ -1580,4 +1580,35 @@ html {
   .xl\:ml-32 {
     margin-left: 8rem;
   }
+
+/* --- YouTube embed: hide branding --- */
+.yt-embed {
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+}
+
+.yt-embed iframe {
+  display: block;
+  border: none;
+}
+
+/* Cover YouTube logo + title bar area */
+.yt-embed::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 48px;
+  background: #0f0f0f;
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* On hover, reveal controls */
+.yt-embed:hover::after {
+  opacity: 0;
+  transition: opacity 0.3s;
+}
 }
