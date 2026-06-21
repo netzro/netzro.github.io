@@ -11,6 +11,9 @@ _Updated as I watch. Last update: 21st June 2026._
 
 <details markdown='1'><summary>June 2026</summary>
 
+_Title_ - **Arena (2011)**  
+_Watched on_ - 21st June 2026
+
 _Title_ - **The Mummy (2026)**  
 _Watched on_ - 21st June 2026
 
