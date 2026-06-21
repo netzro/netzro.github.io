@@ -111,7 +111,215 @@ I love you.&lt;/p&gt;</content><category term="misc"/><category term="nts"/><cat
 &lt;/ol&gt;
 &lt;p&gt;Live with it for a week. Notice what changes. Then move to the next room.&lt;/p&gt;
 &lt;p&gt;Your space is the stage on which your life happens. Most people never think about the stage — they just keep performing on it and wondering why everything feels harder than it should.&lt;/p&gt;
-&lt;p&gt;Rearrange the stage. The performance follows.&lt;/p&gt;</content><category term="misc"/><category term="feng shui"/><category term="home"/><category term="productivity"/><category term="mindfulness"/><category term="environment"/></entry><entry><title>The 12 Gates of Duat</title><link href="https://netzro.github.io/posts/2026/Jun/21/the-12-gates-of-duat/" rel="alternate"/><published>2026-06-21T00:00:00+01:00</published><updated>2026-06-21T00:00:00+01:00</updated><author><name>Gifted</name></author><id>tag:netzro.github.io,2026-06-21:/posts/2026/Jun/21/the-12-gates-of-duat/</id><summary type="html">&lt;p&gt;A journey through the twelve gates of the Egyptian underworld — what they were, who guarded them, and why the dead had to pass through them.&lt;/p&gt;</summary><content type="html">&lt;h1&gt;The 12 Gates of Duat&lt;/h1&gt;
+&lt;p&gt;Rearrange the stage. The performance follows.&lt;/p&gt;</content><category term="misc"/><category term="feng shui"/><category term="home"/><category term="productivity"/><category term="mindfulness"/><category term="environment"/></entry><entry><title>Config File Formats in Python: A Practical Guide</title><link href="https://netzro.github.io/posts/2026/Jun/21/python-config-formats/" rel="alternate"/><published>2026-06-21T00:00:00+01:00</published><updated>2026-06-21T00:00:00+01:00</updated><author><name>Gifted</name></author><id>tag:netzro.github.io,2026-06-21:/posts/2026/Jun/21/python-config-formats/</id><summary type="html">&lt;p&gt;A hands-on look at every config format Python projects actually use — INI, JSON, YAML, TOML, and env files — with real code examples and when each one makes sense.&lt;/p&gt;</summary><content type="html">&lt;hr&gt;
+&lt;p&gt;Every Python project needs configuration at some point. Database credentials, feature flags, API keys, logging levels — something has to live outside your code. The question is: what format do you put it in?&lt;/p&gt;
+&lt;p&gt;There's no single right answer. There are, however, clear trade-offs. Here's what I've learned from using all of them.&lt;/p&gt;
+&lt;h2&gt;The Contenders&lt;/h2&gt;
+&lt;p&gt;Python projects typically use one of these formats:&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Format&lt;/th&gt;
+&lt;th&gt;Standard Library Support&lt;/th&gt;
+&lt;th&gt;Human-Friendly&lt;/th&gt;
+&lt;th&gt;Comments&lt;/th&gt;
+&lt;th&gt;Data Types&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;INI / CFG&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;configparser&lt;/code&gt; (built-in)&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;td&gt;Strings only&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;JSON&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;json&lt;/code&gt; (built-in)&lt;/td&gt;
+&lt;td&gt;Moderate&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;td&gt;Full&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;YAML&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;PyYAML&lt;/code&gt; (third-party)&lt;/td&gt;
+&lt;td&gt;Very&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;td&gt;Full&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;TOML&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;tomllib&lt;/code&gt; (3.11+ built-in)&lt;/td&gt;
+&lt;td&gt;Very&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;td&gt;Full&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;.env&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;python-dotenv&lt;/code&gt; (third-party)&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;td&gt;Strings only&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Python files&lt;/td&gt;
+&lt;td&gt;Nothing needed&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;td&gt;Anything&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;Let's walk through each one.&lt;/p&gt;
+&lt;h2&gt;INI: The Old Reliable&lt;/h2&gt;
+&lt;p&gt;INI files have been around since MS-DOS. Python's &lt;code&gt;configparser&lt;/code&gt; module handles them natively.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;import&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nn"&gt;configparser&lt;/span&gt;
+
+&lt;span class="n"&gt;config&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;configparser&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;ConfigParser&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;span class="n"&gt;config&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;read&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;config.ini&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="n"&gt;db_host&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;config&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;database&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;][&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;host&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;span class="n"&gt;db_port&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;config&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;getint&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;database&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;port&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="c1"&gt;# config.ini&lt;/span&gt;
+&lt;span class="k"&gt;[database]&lt;/span&gt;
+&lt;span class="na"&gt;host&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s"&gt;localhost&lt;/span&gt;
+&lt;span class="na"&gt;port&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s"&gt;5432&lt;/span&gt;
+&lt;span class="na"&gt;name&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s"&gt;myapp&lt;/span&gt;
+
+&lt;span class="k"&gt;[logging]&lt;/span&gt;
+&lt;span class="na"&gt;level&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s"&gt;INFO&lt;/span&gt;
+&lt;span class="na"&gt;file&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s"&gt;/var/log/myapp.log&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;When to use it:&lt;/strong&gt; Legacy projects, simple key-value configs, or when you want zero dependencies. INI is readable, supports sections, and everyone understands it immediately.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;When to skip it:&lt;/strong&gt; Everything is a string. No native support for lists, booleans, or nested structures. If your config has any complexity, you'll end up writing parsing code on top of &lt;code&gt;configparser&lt;/code&gt;.&lt;/p&gt;
+&lt;h2&gt;JSON: The Universal Language&lt;/h2&gt;
+&lt;p&gt;JSON is everywhere. Python's &lt;code&gt;json&lt;/code&gt; module is built in.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;import&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nn"&gt;json&lt;/span&gt;
+
+&lt;span class="k"&gt;with&lt;/span&gt; &lt;span class="nb"&gt;open&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;config.json&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;as&lt;/span&gt; &lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="n"&gt;config&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;json&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;load&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="n"&gt;api_key&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;config&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;api&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;][&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;key&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;span class="n"&gt;debug&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;config&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;debug&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="p"&gt;{&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="nt"&gt;&amp;quot;debug&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="kc"&gt;true&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="nt"&gt;&amp;quot;api&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="nt"&gt;&amp;quot;key&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;abc123&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="nt"&gt;&amp;quot;timeout&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;30&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="p"&gt;},&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="nt"&gt;&amp;quot;features&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;auth&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;billing&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;notifications&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;When to use it:&lt;/strong&gt; Machine-generated configs, API responses, or when your config is produced/consumed by other systems. JSON is the lingua franca of web services.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;When to skip it:&lt;/strong&gt; No comments. Trailing commas cause errors. Humans editing JSON by hand will make mistakes. If people need to maintain the file directly, JSON fights you.&lt;/p&gt;
+&lt;h2&gt;YAML: The Human-First Format&lt;/h2&gt;
+&lt;p&gt;YAML is designed to be readable. It supports comments, anchors, aliases, and complex nesting.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;import&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nn"&gt;yaml&lt;/span&gt;  &lt;span class="c1"&gt;# pip install pyyaml&lt;/span&gt;
+
+&lt;span class="k"&gt;with&lt;/span&gt; &lt;span class="nb"&gt;open&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;config.yaml&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;as&lt;/span&gt; &lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="n"&gt;config&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;yaml&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;safe_load&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="n"&gt;db&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;config&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;database&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;db&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;host&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; &lt;span class="n"&gt;db&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;port&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="c1"&gt;# config.yaml&lt;/span&gt;
+&lt;span class="nt"&gt;database&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="nt"&gt;host&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l l-Scalar l-Scalar-Plain"&gt;localhost&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="nt"&gt;port&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l l-Scalar l-Scalar-Plain"&gt;5432&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="nt"&gt;credentials&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="nt"&gt;username&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l l-Scalar l-Scalar-Plain"&gt;admin&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="nt"&gt;password&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l l-Scalar l-Scalar-Plain"&gt;${DB_PASSWORD}&lt;/span&gt;&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="c1"&gt;# substituted at runtime&lt;/span&gt;
+
+&lt;span class="nt"&gt;logging&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="nt"&gt;level&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l l-Scalar l-Scalar-Plain"&gt;INFO&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="nt"&gt;handlers&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="p p-Indicator"&gt;-&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l l-Scalar l-Scalar-Plain"&gt;console&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="p p-Indicator"&gt;-&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l l-Scalar l-Scalar-Plain"&gt;file&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;When to use it:&lt;/strong&gt; Complex configs with deep nesting, or when non-developers need to edit the file. Docker Compose, Ansible, and GitHub Actions all use YAML for this reason.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;When to skip it:&lt;/strong&gt; PyYAML is a third-party dependency. YAML's flexibility is a double-edged sword — indentation errors, unexpected type coercion (&lt;code&gt;yes&lt;/code&gt; becomes &lt;code&gt;True&lt;/code&gt;), and the infamous &lt;a href="https://hitchdev.com/strictyaml/why/implicit-typing-removed/"&gt;Norway problem&lt;/a&gt;. Always use &lt;code&gt;safe_load()&lt;/code&gt;, never &lt;code&gt;load()&lt;/code&gt;.&lt;/p&gt;
+&lt;h2&gt;TOML: The Modern Default&lt;/h2&gt;
+&lt;p&gt;TOML was created specifically as a better INI. Python 3.11+ includes &lt;code&gt;tomllib&lt;/code&gt; in the standard library.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;import&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nn"&gt;tomllib&lt;/span&gt;
+
+&lt;span class="k"&gt;with&lt;/span&gt; &lt;span class="nb"&gt;open&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;config.toml&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;rb&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;as&lt;/span&gt; &lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="n"&gt;config&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;tomllib&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;load&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="n"&gt;title&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;config&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;project&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;][&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;title&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;span class="n"&gt;version&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;config&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;project&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;][&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;version&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="c1"&gt;# config.toml&lt;/span&gt;
+&lt;span class="k"&gt;[project]&lt;/span&gt;
+&lt;span class="n"&gt;title&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;My App&amp;quot;&lt;/span&gt;
+&lt;span class="n"&gt;version&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;1.2.0&amp;quot;&lt;/span&gt;
+
+&lt;span class="k"&gt;[database]&lt;/span&gt;
+&lt;span class="n"&gt;host&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;localhost&amp;quot;&lt;/span&gt;
+&lt;span class="n"&gt;port&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;5432&lt;/span&gt;
+
+&lt;span class="k"&gt;[logging]&lt;/span&gt;
+&lt;span class="n"&gt;level&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;INFO&amp;quot;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;When to use it:&lt;/strong&gt; New Python projects. &lt;code&gt;pyproject.toml&lt;/code&gt; is already the standard for Python packaging, so your team already knows TOML. It supports comments, has clear syntax, and handles types properly.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;When to skip it:&lt;/strong&gt; If you need to support Python &amp;lt; 3.11, you'll need the &lt;code&gt;tomli&lt;/code&gt; backport package. Also, deeply nested TOML gets verbose — the &lt;code&gt;[a.b.c.d]&lt;/code&gt; header syntax doesn't scale as gracefully as YAML's indentation.&lt;/p&gt;
+&lt;h2&gt;.env Files: Secrets and Environment&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;.env&lt;/code&gt; files aren't a config format so much as a convention. Each line is a key-value pair.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;from&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nn"&gt;dotenv&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;load_dotenv&lt;/span&gt;
+&lt;span class="kn"&gt;import&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nn"&gt;os&lt;/span&gt;
+
+&lt;span class="n"&gt;load_dotenv&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;  &lt;span class="c1"&gt;# loads .env into os.environ&lt;/span&gt;
+
+&lt;span class="n"&gt;db_url&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;os&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;environ&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;DATABASE_URL&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;span class="n"&gt;secret_key&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;os&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;environ&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;SECRET_KEY&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="err"&gt;#&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;env&lt;/span&gt;
+&lt;span class="n"&gt;DATABASE_URL&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nl"&gt;postgresql&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="o"&gt;//&lt;/span&gt;&lt;span class="k"&gt;user&lt;/span&gt;&lt;span class="err"&gt;:&lt;/span&gt;&lt;span class="n"&gt;pass&lt;/span&gt;&lt;span class="nv"&gt;@localhost&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;myapp&lt;/span&gt;
+&lt;span class="n"&gt;SECRET_KEY&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;super&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;secret&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="k"&gt;value&lt;/span&gt;
+&lt;span class="n"&gt;DEBUG&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="k"&gt;true&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;When to use it:&lt;/strong&gt; Environment-specific secrets and variables. The 12-factor app methodology recommends storing config in the environment, and &lt;code&gt;.env&lt;/code&gt; files are the local development equivalent.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;When to skip it:&lt;/strong&gt; Everything is a string. No nesting, no lists, no structure. &lt;code&gt;.env&lt;/code&gt; files work best for a flat set of variables, not complex configuration. And never commit them to version control.&lt;/p&gt;
+&lt;h2&gt;Python Files: Just Use Code&lt;/h2&gt;
+&lt;p&gt;Some projects skip config files entirely and use a Python module.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="c1"&gt;# config.py&lt;/span&gt;
+&lt;span class="n"&gt;DEBUG&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="kc"&gt;True&lt;/span&gt;
+&lt;span class="n"&gt;DATABASE&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="s1"&gt;&amp;#39;host&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;localhost&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="s1"&gt;&amp;#39;port&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;5432&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="s1"&gt;&amp;#39;name&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;myapp&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;span class="n"&gt;ALLOWED_HOSTS&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;localhost&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;127.0.0.1&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;from&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nn"&gt;config&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;DEBUG&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;DATABASE&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;When to use it:&lt;/strong&gt; When your config needs logic, or when you want IDE autocompletion and type checking. Django's &lt;code&gt;settings.py&lt;/code&gt; is the canonical example.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;When to skip it:&lt;/strong&gt; Now you're executing untrusted code. If anyone can modify the config file, they can run arbitrary Python. This also makes it harder to generate or validate config programmatically.&lt;/p&gt;
+&lt;h2&gt;What I Actually Use&lt;/h2&gt;
+&lt;p&gt;For new Python projects, my default stack is:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;pyproject.toml&lt;/code&gt;&lt;/strong&gt; — project metadata and tool configuration (already standard)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;.env&lt;/code&gt;&lt;/strong&gt; — secrets and environment-specific values (loaded via &lt;code&gt;python-dotenv&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;config.yaml&lt;/code&gt;&lt;/strong&gt; or &lt;strong&gt;&lt;code&gt;config.toml&lt;/code&gt;&lt;/strong&gt; — application-level configuration that humans edit&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;I avoid INI unless I'm maintaining something old. I avoid JSON for anything humans write. I avoid Python config files unless the project already uses that pattern.&lt;/p&gt;
+&lt;h2&gt;The Real Rule&lt;/h2&gt;
+&lt;p&gt;The best config format is the one your team will actually maintain correctly. A perfectly structured YAML file that nobody wants to edit is worse than a simple &lt;code&gt;.env&lt;/code&gt; file people understand.&lt;/p&gt;
+&lt;p&gt;Pick the simplest format that handles your actual requirements. Add complexity only when the config demands it — not because a format is popular.&lt;/p&gt;</content><category term="misc"/><category term="python"/><category term="configuration"/><category term="yaml"/><category term="toml"/><category term="json"/><category term="ini"/><category term="best-practices"/></entry><entry><title>The 12 Gates of Duat</title><link href="https://netzro.github.io/posts/2026/Jun/21/the-12-gates-of-duat/" rel="alternate"/><published>2026-06-21T00:00:00+01:00</published><updated>2026-06-21T00:00:00+01:00</updated><author><name>Gifted</name></author><id>tag:netzro.github.io,2026-06-21:/posts/2026/Jun/21/the-12-gates-of-duat/</id><summary type="html">&lt;p&gt;A journey through the twelve gates of the Egyptian underworld — what they were, who guarded them, and why the dead had to pass through them.&lt;/p&gt;</summary><content type="html">&lt;h1&gt;The 12 Gates of Duat&lt;/h1&gt;
 &lt;p&gt;The ancient Egyptians didn't see death as an ending. They saw it as a journey — dangerous, elaborate, and utterly specific. At the heart of that journey stood twelve gates, each one a threshold the dead had to cross to reach eternity.&lt;/p&gt;
 &lt;p&gt;But here's what gets me: you couldn't just walk through. You had to &lt;em&gt;know&lt;/em&gt; things. The right names. The right words. The afterlife wasn't a reward for dying — it was a test you had to pass.&lt;/p&gt;
 &lt;h2&gt;What Was the Duat?&lt;/h2&gt;
@@ -394,11 +602,4 @@ cat&lt;span class="w"&gt; &lt;/span&gt;~/.ssh/id_ed25519.pub
 &lt;/ol&gt;
 &lt;p&gt;You do not need to replicate my setup. You need to find what works for you. The point is not that a phone can replace a laptop. The point is that you might not need the laptop in the first place.&lt;/p&gt;
 &lt;hr&gt;
-&lt;p&gt;&lt;em&gt;I run Hermes, OmniRoute, and a handful of cron jobs from a Termux session on Android. If you want to see what a phone-first development setup looks like in practice, the configs are on my GitHub.&lt;/em&gt;&lt;/p&gt;</content><category term="Technology"/><category term="termux"/><category term="android"/><category term="linux"/><category term="development"/></entry><entry><title>Digital Minimalism: Reclaiming Your Data Sovereignty</title><link href="https://netzro.github.io/posts/2026/Jun/11/digital-minimalism-data-sovereignty/" rel="alternate"/><published>2026-06-11T00:00:00+01:00</published><updated>2026-06-11T00:00:00+01:00</updated><author><name>Gifted</name></author><id>tag:netzro.github.io,2026-06-11:/posts/2026/Jun/11/digital-minimalism-data-sovereignty/</id><summary type="html">&lt;p&gt;Exploring how intentional data stewardship and digital minimalism can lead to a more focused, uncluttered life.&lt;/p&gt;</summary><content type="html">&lt;p&gt;The concept of minimalism is often associated with physical possessions—decluttering our homes to create space for what truly matters. Yet, in our hyper-connected age, the digital clutter we accumulate is often more burdensome than physical objects. Our hard drives, cloud accounts, and notification centers have become digital landfills.&lt;/p&gt;
-&lt;p&gt;Digital minimalism is not about total abandonment of technology; it is about intentionality. It is the conscious choice to curate our digital environment so that it serves our goals rather than our distractions. This starts with data stewardship.&lt;/p&gt;
-&lt;p&gt;Every byte of data we hold has a cost, not just in storage space, but in mental overhead. I have found that the more data I keep, the less clear my focus becomes. True stewardship involves aggressive deletion: if it doesn't serve a clear purpose or spark joy, it should be archived or purged.&lt;/p&gt;
-&lt;p&gt;Start by auditing your storage. We often hoard files "just in case," but this rarely results in actual utility. If a document or photo hasn't been accessed in a year, it is likely clutter. Applying a "delete by default" rule to temporary files and downloads is a simple way to regain control.&lt;/p&gt;
-&lt;p&gt;Beyond deletion, digital minimalism is about simplifying workflows. I prefer tools that are lightweight and ephemeral, like CLI-based utilities or local text-based note systems. By minimizing my dependence on bloated, proprietary ecosystems, I reduce the risk of "data lock-in" and reclaim my sovereignty over the information I create.&lt;/p&gt;
-&lt;p&gt;Building a minimal digital space requires regular maintenance, much like cleaning a physical room. It is a recurring practice of letting go, organizing the essential, and discarding the noise. When our digital environment is uncluttered, our minds follow suit.&lt;/p&gt;
-&lt;p&gt;We are the architects of our digital reality. By treating our data as a limited, valuable resource, we can transform our relationship with technology from one of reactive consumption to proactive creation. Minimalism, in this context, is the path back to sanity.&lt;/p&gt;
-&lt;!-- TODO: verify word count --&gt;</content><category term="Minimalism"/><category term="minimalism"/><category term="misc"/><category term="productivity"/></entry></feed>
+&lt;p&gt;&lt;em&gt;I run Hermes, OmniRoute, and a handful of cron jobs from a Termux session on Android. If you want to see what a phone-first development setup looks like in practice, the configs are on my GitHub.&lt;/em&gt;&lt;/p&gt;</content><category term="Technology"/><category term="termux"/><category term="android"/><category term="linux"/><category term="development"/></entry></feed>
