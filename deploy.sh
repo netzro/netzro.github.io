@@ -10,8 +10,12 @@ handle_error() {
 [ -z "$1" ] && handle_error "Usage: $0 \"Your deploy message\""
 [ ${#1} -lt 10 ] && handle_error "Commit message must be at least 10 characters long"
 
-# Build Process
-uv run pelican content -s publishconf.py || handle_error "Build failed"
+# Build Process - capture output
+BUILD_OUTPUT=$(uv run pelican content -s publishconf.py 2>&1)
+BUILD_STATUS=$?
+if [ $BUILD_STATUS -ne 0 ]; then
+  handle_error "Build failed"
+fi
 
 # Source Commit (if changes exist)
 if [ -n "$(git status --porcelain)" ]; then
@@ -25,10 +29,14 @@ rm -rf output/venv output/__pycache__ output/*.pyc 2>/dev/null
 
 # Deployment
 DEPLOY_HASH=$(git rev-parse --short HEAD)
-DEPLOY_MSG="Deploy ${DEPLOY_HASH}: $(date +'%Y-%m-%d %H:%M') - $1"
+DEPLOY_MSG="Deploy ${DEPLOY_HASH}: $(date +'%Y-%m-%d %H:%M') - $1
+
+$BUILD_OUTPUT
+
+Live at https://netzro.github.io"
 
 uv run ghp-import output -b gh-pages -m "$DEPLOY_MSG" -f || handle_error "Deployment failed"
 git push origin gh-pages --force || handle_error "Deployment push failed"
 
-echo "Success! Live at https://netzro.github.io"
-echo "Deploy Message: $DEPLOY_MSG"
+echo "Success! Deploy Message:
+$DEPLOY_MSG"
