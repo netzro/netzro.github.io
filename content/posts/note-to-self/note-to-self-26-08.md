@@ -1,8 +1,8 @@
 ---
-Title: nts:21-06
+Title: note-to-self:26-08
 Date: 2026-06-21
 Tags: nts, Discipline
-Slug: nts-21-06
+Slug: note-to-self-26-08
 ---
 
 ### Note To Self
