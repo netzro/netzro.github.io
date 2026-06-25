@@ -1,33 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Gifted Space</title><link href="https://netzro.github.io/" rel="alternate"/><link href="https://netzro.github.io/feeds/all.atom.xml" rel="self"/><id>https://netzro.github.io/</id><updated>2026-06-25T00:00:00+01:00</updated><entry><title>A Note on Gratitude</title><link href="https://netzro.github.io/posts/2026/Jun/25/a-note-on-gratitude/" rel="alternate"/><published>2026-06-25T00:00:00+01:00</published><updated>2026-06-25T00:00:00+01:00</updated><author><name>Gifted</name></author><id>tag:netzro.github.io,2026-06-25:/posts/2026/Jun/25/a-note-on-gratitude/</id><summary type="html">&lt;p&gt;Gratitude is not a feeling — it is a practice, a discipline, and the foundation of a life well-lived.&lt;/p&gt;</summary><content type="html">&lt;h1&gt;A Note on Gratitude&lt;/h1&gt;
-&lt;p&gt;I've been thinking about gratitude lately — not as a social media platitude, but as something deeper. Something structural.&lt;/p&gt;
-&lt;hr&gt;
-&lt;h2&gt;The Temptation of Complaint&lt;/h2&gt;
-&lt;p&gt;It's easy to focus on what's missing. The money isn't enough. The progress is too slow. The people aren't showing up. The system is broken.&lt;/p&gt;
-&lt;p&gt;Complaint is effortless. It requires nothing from you. It flows naturally from the gap between expectation and reality.&lt;/p&gt;
-&lt;p&gt;But here's the thing: complaint has never built anything. It has never funded a dream, repaired a relationship, or gotten you through a hard season. It is a drain disguised as analysis.&lt;/p&gt;
-&lt;hr&gt;
-&lt;h2&gt;Gratitude as Discipline&lt;/h2&gt;
-&lt;p&gt;Real gratitude is not a feeling. Feelings come and go. Gratitude is a &lt;strong&gt;discipline&lt;/strong&gt; — a conscious decision to name what is good, what is working, and what you have been given.&lt;/p&gt;
-&lt;p&gt;It doesn't mean ignoring problems. It doesn't mean pretending everything is fine when it isn't. It means refusing to let what's missing consume what's present.&lt;/p&gt;
-&lt;p&gt;When I look at what I have — a working mind, a roof, food, the ability to write, people who show up, the freedom to build — the list is long. Longer than most. And I didn't earn most of it. Some of it was grace. Some of it was luck. Some of it was someone else's sacrifice.&lt;/p&gt;
-&lt;p&gt;Gratitude is the honest acknowledgment of that.&lt;/p&gt;
-&lt;hr&gt;
-&lt;h2&gt;The Practice&lt;/h2&gt;
-&lt;p&gt;Every day — but especially on the hard days — I want to ask myself three questions:&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;strong&gt;What do I have that I didn't earn?&lt;/strong&gt; (Humility)&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;What is working right now that I'm taking for granted?&lt;/strong&gt; (Awareness)&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Who has contributed to my life that I haven't properly thanked?&lt;/strong&gt; (Connection)&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;These questions don't solve problems. But they reframe them. They remind you that your life is not defined by the gap. It's defined by what's already there.&lt;/p&gt;
-&lt;hr&gt;
-&lt;h2&gt;Why This Matters&lt;/h2&gt;
-&lt;p&gt;Gratitude is not soft. It's not weakness. It's the foundation of resilience.&lt;/p&gt;
-&lt;p&gt;A grateful person can survive hardship because they haven't lost sight of what's good. A person who only sees what's missing will break under the weight of it.&lt;/p&gt;
-&lt;p&gt;I refuse to be that person.&lt;/p&gt;
-&lt;hr&gt;
-&lt;p&gt;&lt;em&gt;Write this down. Read it again when you forget.&lt;/em&gt;&lt;/p&gt;</content><category term="misc"/><category term="[note-to-self"/><category term="gratitude"/><category term="philosophy"/><category term="personal-growth]"/></entry><entry><title>The Various Protocols Used in AI</title><link href="https://netzro.github.io/posts/2026/Jun/25/the-various-protocols-used-in-ai/" rel="alternate"/><published>2026-06-25T00:00:00+01:00</published><updated>2026-06-25T00:00:00+01:00</updated><author><name>Gifted</name></author><id>tag:netzro.github.io,2026-06-25:/posts/2026/Jun/25/the-various-protocols-used-in-ai/</id><summary type="html">&lt;p&gt;A deep dive into the emerging protocols that let AI agents talk to tools and each other — MCP, A2A, ACP, AG2/AutoGen, and LangGraph.&lt;/p&gt;</summary><content type="html">&lt;h1&gt;The Various Protocols Used in AI&lt;/h1&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Gifted Space</title><link href="https://netzro.github.io/" rel="alternate"/><link href="https://netzro.github.io/feeds/all.atom.xml" rel="self"/><id>https://netzro.github.io/</id><updated>2026-06-25T00:00:00+01:00</updated><entry><title>On Gratitude</title><link href="https://netzro.github.io/posts/2026/Jun/25/on-gratitude/" rel="alternate"/><published>2026-06-25T00:00:00+01:00</published><updated>2026-06-25T00:00:00+01:00</updated><author><name>Gifted</name></author><id>tag:netzro.github.io,2026-06-25:/posts/2026/Jun/25/on-gratitude/</id><summary type="html">&lt;p&gt;Gratitude is not a feeling — it's a discipline. Name what is good before you chase what is missing.&lt;/p&gt;</summary><content type="html">&lt;h1&gt;On Gratitude&lt;/h1&gt;
+&lt;h3&gt;note-to-self:25-06&lt;/h3&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Complaint has never built anything. It is a drain disguised as analysis.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Gratitude is not soft. It is the discipline of naming what is present before obsessing over what is missing. It doesn't ignore problems — it refuses to let the gap consume what's already there.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;What do I have that I didn't earn?&lt;/strong&gt; Humility.
+&lt;strong&gt;What am I taking for granted?&lt;/strong&gt; Awareness.
+&lt;strong&gt;Who hasn't been thanked?&lt;/strong&gt; Connection.&lt;/p&gt;
+&lt;p&gt;Write this down. Read it when you forget.&lt;/p&gt;</content><category term="misc"/><category term="[note-to-self"/><category term="gratitude"/><category term="stoicism]"/></entry><entry><title>The Various Protocols Used in AI</title><link href="https://netzro.github.io/posts/2026/Jun/25/the-various-protocols-used-in-ai/" rel="alternate"/><published>2026-06-25T00:00:00+01:00</published><updated>2026-06-25T00:00:00+01:00</updated><author><name>Gifted</name></author><id>tag:netzro.github.io,2026-06-25:/posts/2026/Jun/25/the-various-protocols-used-in-ai/</id><summary type="html">&lt;p&gt;A deep dive into the emerging protocols that let AI agents talk to tools and each other — MCP, A2A, ACP, AG2/AutoGen, and LangGraph.&lt;/p&gt;</summary><content type="html">&lt;h1&gt;The Various Protocols Used in AI&lt;/h1&gt;
 &lt;p&gt;If you've been building with AI in the last year, you've probably noticed something: everyone's talking about &lt;em&gt;protocols&lt;/em&gt;. Not HTTP, not gRPC — the new protocols. The ones that let an AI agent use a calculator, call another agent, or orchestrate a multi-step workflow without everything collapsing into spaghetti.&lt;/p&gt;
 &lt;p&gt;I've spent the last few months deep in this space, and here's my attempt to make sense of it. There are five major players right now: &lt;strong&gt;MCP (Model Context Protocol)&lt;/strong&gt;, &lt;strong&gt;A2A (Agent-to-Agent)&lt;/strong&gt;, &lt;strong&gt;ACP (Agent Communication Protocol)&lt;/strong&gt;, &lt;strong&gt;AG2/AutoGen&lt;/strong&gt;, and &lt;strong&gt;LangGraph&lt;/strong&gt;. Each solves a different slice of the "how do AI agents actually do things" problem. Let me break them down.&lt;/p&gt;
 &lt;hr&gt;
