@@ -1,5 +1,127 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Gifted Space - misc</title><link href="https://netzro.github.io/" rel="alternate"/><link href="https://netzro.github.io/feeds/misc.atom.xml" rel="self"/><id>https://netzro.github.io/</id><updated>2026-06-21T00:00:00+01:00</updated><entry><title>A Parent's Blessing</title><link href="https://netzro.github.io/posts/2026/Jun/21/a-parents-blessing/" rel="alternate"/><published>2026-06-21T00:00:00+01:00</published><updated>2026-06-21T00:00:00+01:00</updated><author><name>Gifted</name></author><id>tag:netzro.github.io,2026-06-21:/posts/2026/Jun/21/a-parents-blessing/</id><summary type="html">&lt;h3&gt;note-to-self:26-09&lt;/h3&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Gifted Space - misc</title><link href="/" rel="alternate"/><link href="/feeds/misc.atom.xml" rel="self"/><id>/</id><updated>2026-06-25T00:00:00+01:00</updated><entry><title>The Various Protocols Used in AI</title><link href="/posts/2026/Jun/25/the-various-protocols-used-in-ai/" rel="alternate"/><published>2026-06-25T00:00:00+01:00</published><updated>2026-06-25T00:00:00+01:00</updated><author><name>Gifted</name></author><id>tag:None,2026-06-25:/posts/2026/Jun/25/the-various-protocols-used-in-ai/</id><summary type="html">&lt;p&gt;A deep dive into the emerging protocols that let AI agents talk to tools and each other — MCP, A2A, ACP, AG2/AutoGen, and LangGraph.&lt;/p&gt;</summary><content type="html">&lt;h1&gt;The Various Protocols Used in AI&lt;/h1&gt;
+&lt;p&gt;If you've been building with AI in the last year, you've probably noticed something: everyone's talking about &lt;em&gt;protocols&lt;/em&gt;. Not HTTP, not gRPC — the new protocols. The ones that let an AI agent use a calculator, call another agent, or orchestrate a multi-step workflow without everything collapsing into spaghetti.&lt;/p&gt;
+&lt;p&gt;I've spent the last few months deep in this space, and here's my attempt to make sense of it. There are five major players right now: &lt;strong&gt;MCP (Model Context Protocol)&lt;/strong&gt;, &lt;strong&gt;A2A (Agent-to-Agent)&lt;/strong&gt;, &lt;strong&gt;ACP (Agent Communication Protocol)&lt;/strong&gt;, &lt;strong&gt;AG2/AutoGen&lt;/strong&gt;, and &lt;strong&gt;LangGraph&lt;/strong&gt;. Each solves a different slice of the "how do AI agents actually do things" problem. Let me break them down.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2&gt;MCP — Model Context Protocol&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;Created by:&lt;/strong&gt; Anthropic (open-sourced in late 2024)&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;The problem it solves:&lt;/strong&gt; Before MCP, every AI integration was custom. Want Claude to read your Google Drive? Custom integration. Want it to query your database? Custom integration. Every tool connection was a one-off engineering effort, and none of them talked to each other.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;How it works:&lt;/strong&gt; MCP is a client-server protocol. You have an MCP host (like Claude Desktop, an IDE plugin, or your own app), an MCP client that manages connections, and MCP servers that expose specific tools — file systems, databases, APIs, whatever. The protocol defines a standard JSON-RPC 2.0 message format for listing tools, calling them, and getting results back. It also handles capability negotiation: a server announces what it can do, and the client adapts.&lt;/p&gt;
+&lt;p&gt;Think of it as USB-C for AI. One standard connector, many devices.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Current adoption:&lt;/strong&gt; This is moving fast. Claude Desktop ships with MCP support. Cursor, Windsurf, and VS Code have integrated it. There are thousands of community MCP servers. Stripe, Notion, GitHub — all building official ones. It's quickly becoming the default way to give an LLM access to external tools.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2&gt;A2A — Agent-to-Agent Protocol&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;Created by:&lt;/strong&gt; Google (announced April 2025, open-sourced)&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;The problem it solves:&lt;/strong&gt; MCP handles agent-to-tool communication. But what about agent-to-agent? If I have a hiring pipeline where one agent screens resumes, another schedules interviews, and a third makes offers, they need a standard way to discover each other, delegate tasks, and exchange results — even if they're built on different frameworks.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;How it works:&lt;/strong&gt; A2A defines a role-based model: a &lt;em&gt;client agent&lt;/em&gt; and a &lt;em&gt;remote agent&lt;/em&gt;. Each agent publishes an "Agent Card" (a JSON descriptor at &lt;code&gt;/.well-known/agent.json&lt;/code&gt;) containing its name, capabilities, supported input/output formats, and authentication requirements. Communication happens through structured tasks with lifecycle states (submitted → working → input-required → completed / failed / canceled). Messages carry typed parts (text, files, structured JSON), and agents can produce artifacts as output.&lt;/p&gt;
+&lt;p&gt;It's essentially a task-oriented protocol for agent delegation, with built-in support for long-running operations and multi-turn interactions.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Current adoption:&lt;/strong&gt; Still early. Google announced it at Cloud Next 2025, and the spec is open-source. Some early integrations exist (LangChain has experimental support, AutoGen 0.4+ integrates with it), but production deployments are rare. The spec itself is still evolving. It's one to watch, not one to bet your architecture on today.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2&gt;ACP — Agent Communication Protocol&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;Created by:&lt;/strong&gt; IBM Research / the BeeAI project (now part of the Linux Foundation's agentic AI ecosystem)&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;The problem it solves:&lt;/strong&gt; Similar to A2A — agents need to communicate — but ACP takes a different philosophical approach. Where A2A is task-oriented and structured, ACP is more about flexible, conversational communication between agents in a decentralized network.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;How it works:&lt;/strong&gt; ACP treats communication as structured conversations. Agents exchange messages with typed content blocks, maintain shared conversation state, and can discover each other dynamically. It supports both synchronous request-response and asynchronous message-passing patterns. Agents can form ad-hoc "acquaintances" — they discover peers, establish communication channels, and negotiate interaction patterns at runtime.&lt;/p&gt;
+&lt;p&gt;The protocol separates the communication layer from the agent logic, so you can plug ACP into any agent framework. It also supports multi-modal content natively in messages.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Current adoption:&lt;/strong&gt; ACP is the quiet one in the room. It has solid academic backing and IBM's engineering behind it, but it hasn't gotten the same hype cycle as MCP or A2A. It's part of the broader push toward open agent ecosystems, and I expect it to gain traction in enterprise settings where IBM has influence. For now, it's more reference implementation than production standard.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2&gt;AG2 / AutoGen&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;Created by:&lt;/strong&gt; Microsoft Research (original AutoGen), now maintained by the AG2 community&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;The problem it solves:&lt;/strong&gt; The other protocols here are about communication standards. AutoGen is different — it's a full &lt;em&gt;framework&lt;/em&gt; for building multi-agent systems. The problem: how do you get multiple AI agents to collaborate on a complex task, with each agent having its own role, memory, and reasoning capability?&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;How it works:&lt;/strong&gt; AutoGen (now rebranded as AG2 for the community-driven fork) provides abstractions for conversable agents. You define agents with specific system messages, capabilities, and behavior patterns. The framework handles the orchestration — who talks to whom, in what order, with what context. Built-in patterns include:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;TwoAgentChat&lt;/strong&gt;: Simple back-and-forth between agents&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;GroupChat&lt;/strong&gt;: Multiple agents in a shared conversation with a speaker selection mechanism&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;RoundRobinGroupChat&lt;/strong&gt;: Agents take turns in a fixed order&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;SelectorGroupChat&lt;/strong&gt;: An LLM decides who speaks next based on context&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;AG2 adds features like tracking agent costs, custom agent teams, and integrations with external protocols (including A2A and MCP). The original AutoGen 0.4 release was a major rewrite with better async support and a more modular architecture.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Current adoption:&lt;/strong&gt; AutoGen has the most GitHub stars of anything in this post (~40k+). It's widely used in research and has a strong community. AG2 is the actively maintained fork moving forward. It's production-viable for research-heavy and internal tooling use cases, though it's more framework than protocol — it doesn't try to be a universal standard.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2&gt;LangGraph&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;Created by:&lt;/strong&gt; LangChain (Harrison Chase, late 2023)&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;The problem it solves:&lt;/strong&gt; LLMs are stateless. Real workflows aren't. How do you build an AI application that has branching logic, cycles, persistent state, retries, and human-in-the-loop checkpoints — without losing your mind?&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;How it works:&lt;/strong&gt; LangGraph is a graph-based orchestration framework built on top of LangChain. You define your application as a graph: nodes are functions (LLM calls, tool invocations, arbitrary Python), edges define the flow between them, and a shared state object persists across the graph. The key insight is that graphs support cycles — so you can loop back, retry, or iterate until a condition is met.&lt;/p&gt;
+&lt;p&gt;Core primitives:
+- &lt;strong&gt;StateGraph&lt;/strong&gt;: The main abstraction — define nodes, edges, and a state schema
+- &lt;strong&gt;Nodes&lt;/strong&gt;: Functions that read and write to shared state
+- &lt;strong&gt;Edges&lt;/strong&gt;: Conditional or static transitions between nodes
+- &lt;strong&gt;Checkpoints&lt;/strong&gt;: Persist state at every step for debugging, replay, and human-in-the-loop
+- &lt;strong&gt;Supervisor pattern&lt;/strong&gt;: A "router" LLM decides which specialized agent to invoke next&lt;/p&gt;
+&lt;p&gt;LangGraph doesn't try to be a communication protocol. It's an orchestration engine. You use it to build the &lt;em&gt;inside&lt;/em&gt; of a single agent or a tightly-coupled multi-agent system.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Current adoption:&lt;/strong&gt; LangGraph is arguably the most production-deployed tool on this list. LangChain's ecosystem is massive, and LangGraph is the go-to for complex agent workflows. Companies are running it in production for customer support, research synthesis, code generation, and more. It has strong documentation, a large community, and first-class support for streaming, debugging, and deployment.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2&gt;Comparison&lt;/h2&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Protocol/Framework&lt;/th&gt;
+&lt;th&gt;Type&lt;/th&gt;
+&lt;th&gt;Creator&lt;/th&gt;
+&lt;th&gt;Primary Problem&lt;/th&gt;
+&lt;th&gt;Maturity&lt;/th&gt;
+&lt;th&gt;Ecosystem Size&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;MCP&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;Communication protocol&lt;/td&gt;
+&lt;td&gt;Anthropic&lt;/td&gt;
+&lt;td&gt;Agent ↔ Tool connectivity&lt;/td&gt;
+&lt;td&gt;Early production&lt;/td&gt;
+&lt;td&gt;Very large, fast-growing&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;A2A&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;Communication protocol&lt;/td&gt;
+&lt;td&gt;Google&lt;/td&gt;
+&lt;td&gt;Agent ↔ Agent delegation&lt;/td&gt;
+&lt;td&gt;Spec stage / early integrations&lt;/td&gt;
+&lt;td&gt;Small, growing&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;ACP&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;Communication protocol&lt;/td&gt;
+&lt;td&gt;IBM Research&lt;/td&gt;
+&lt;td&gt;Decentralized agent communication&lt;/td&gt;
+&lt;td&gt;Research / reference&lt;/td&gt;
+&lt;td&gt;Small&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;AG2/AutoGen&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;Multi-agent framework&lt;/td&gt;
+&lt;td&gt;Microsoft Research&lt;/td&gt;
+&lt;td&gt;Agent team orchestration&lt;/td&gt;
+&lt;td&gt;Mature (research), growing (production)&lt;/td&gt;
+&lt;td&gt;Large&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;LangGraph&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;Orchestration framework&lt;/td&gt;
+&lt;td&gt;LangChain&lt;/td&gt;
+&lt;td&gt;Stateful agent workflows&lt;/td&gt;
+&lt;td&gt;Production-ready&lt;/td&gt;
+&lt;td&gt;Very large&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;hr&gt;
+&lt;h2&gt;Where This Is All Going&lt;/h2&gt;
+&lt;p&gt;Here's my honest take: we're in the "TCP/IP moment" of AI agents. Multiple protocols, competing philosophies, no clear winner yet. But I think three things will happen in the next 12-18 months:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;MCP wins the tool layer.&lt;/strong&gt; It's simple, it works, and the ecosystem momentum is undeniable. Expect it to become the default way agents connect to external systems — the way REST became the default for web APIs.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;A2A and ACP converge or one dies.&lt;/strong&gt; The agent-to-agent space is too small for two competing standards long-term. Google's weight gives A2A an edge, but IBM's enterprise relationships and ACP's technical flexibility could keep it alive. My bet: A2A becomes the practical standard, ACP influences the design.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Frameworks absorb protocols.&lt;/strong&gt; LangGraph will speak MCP and A2A. AG2 will too. The distinction between "framework" and "protocol" will blur — frameworks will implement protocols natively, and protocols will ship with reference framework implementations.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;The winning architecture in 2027 will probably look like this: &lt;strong&gt;MCP for tool connectivity, A2A for agent-to-agent delegation, and LangGraph (or its successor) for internal orchestration.&lt;/strong&gt; The protocols are complementary, not competitive.&lt;/p&gt;
+&lt;p&gt;If you're building today: start with MCP for tool integration, use LangGraph for complex workflows, keep an eye on A2A for when you need cross-agent delegation. And don't sleep on AG2 if you're doing research-heavy multi-agent work.&lt;/p&gt;
+&lt;p&gt;The space is moving fast. The best time to learn these was six months ago. The second best time is now.&lt;/p&gt;</content><category term="misc"/><category term="[ai"/><category term="agents"/><category term="mcp"/><category term="a2a"/><category term="acp"/><category term="autogen"/><category term="langgraph"/><category term="protocols]"/></entry><entry><title>A Parent's Blessing</title><link href="/posts/2026/Jun/21/a-parents-blessing/" rel="alternate"/><published>2026-06-21T00:00:00+01:00</published><updated>2026-06-21T00:00:00+01:00</updated><author><name>Gifted</name></author><id>tag:None,2026-06-21:/posts/2026/Jun/21/a-parents-blessing/</id><summary type="html">&lt;h3&gt;note-to-self:26-09&lt;/h3&gt;
 &lt;p&gt;You have my blessing now and at any time in your life.
 I …&lt;/p&gt;</summary><content type="html">&lt;h3&gt;note-to-self:26-09&lt;/h3&gt;
 &lt;p&gt;You have my blessing now and at any time in your life.
@@ -10,7 +132,7 @@ I will protect you until you can protect yourself.
 I give you permission to be like me, to be more than me or to be less than me, just as your vision demands.
 In being just the way you are you ceaselessly bless my life.
 I am so proud of you.
-I love you.&lt;/p&gt;</content><category term="misc"/><category term="nts"/><category term="blessing"/><category term="parenting"/><category term="love"/></entry><entry><title>Practical Feng Shui: Arranging Your Space to Actually Change Your Life</title><link href="https://netzro.github.io/posts/2026/Jun/21/practical-feng-shui/" rel="alternate"/><published>2026-06-21T00:00:00+01:00</published><updated>2026-06-21T00:00:00+01:00</updated><author><name>Gifted</name></author><id>tag:netzro.github.io,2026-06-21:/posts/2026/Jun/21/practical-feng-shui/</id><summary type="html">&lt;p&gt;Forget the mysticism — practical feng shui is about designing spaces that reduce friction, increase clarity, and quietly support the life you're building.&lt;/p&gt;</summary><content type="html">&lt;hr&gt;
+I love you.&lt;/p&gt;</content><category term="misc"/><category term="nts"/><category term="blessing"/><category term="parenting"/><category term="love"/></entry><entry><title>Practical Feng Shui: Arranging Your Space to Actually Change Your Life</title><link href="/posts/2026/Jun/21/practical-feng-shui/" rel="alternate"/><published>2026-06-21T00:00:00+01:00</published><updated>2026-06-21T00:00:00+01:00</updated><author><name>Gifted</name></author><id>tag:None,2026-06-21:/posts/2026/Jun/21/practical-feng-shui/</id><summary type="html">&lt;p&gt;Forget the mysticism — practical feng shui is about designing spaces that reduce friction, increase clarity, and quietly support the life you're building.&lt;/p&gt;</summary><content type="html">&lt;hr&gt;
 &lt;p&gt;I used to roll my eyes at feng shui. Crystals, mirrors facing the door, lucky bamboo — it all felt like aesthetic advice pretending to be something deeper. Then I noticed how my actual environment messed with my focus and mood day to day. The conclusions I reached mapped almost perfectly onto what feng shui practitioners have been saying for centuries. Just without the incense.&lt;/p&gt;
 &lt;p&gt;This isn't about belief. It's about environmental design. Your space is always working on you — the question is whether it's working for you or against you.&lt;/p&gt;
 &lt;h2&gt;The Command Position&lt;/h2&gt;
@@ -111,7 +233,7 @@ I love you.&lt;/p&gt;</content><category term="misc"/><category term="nts"/><cat
 &lt;/ol&gt;
 &lt;p&gt;Live with it for a week. Notice what changes. Then move to the next room.&lt;/p&gt;
 &lt;p&gt;Your space is the stage on which your life happens. Most people never think about the stage — they just keep performing on it and wondering why everything feels harder than it should.&lt;/p&gt;
-&lt;p&gt;Rearrange the stage. The performance follows.&lt;/p&gt;</content><category term="misc"/><category term="feng shui"/><category term="home"/><category term="productivity"/><category term="mindfulness"/><category term="environment"/></entry><entry><title>Config File Formats in Python: A Practical Guide</title><link href="https://netzro.github.io/posts/2026/Jun/21/python-config-formats/" rel="alternate"/><published>2026-06-21T00:00:00+01:00</published><updated>2026-06-21T00:00:00+01:00</updated><author><name>Gifted</name></author><id>tag:netzro.github.io,2026-06-21:/posts/2026/Jun/21/python-config-formats/</id><summary type="html">&lt;p&gt;A hands-on look at every config format Python projects actually use — INI, JSON, YAML, TOML, and env files — with real code examples and when each one makes sense.&lt;/p&gt;</summary><content type="html">&lt;hr&gt;
+&lt;p&gt;Rearrange the stage. The performance follows.&lt;/p&gt;</content><category term="misc"/><category term="feng shui"/><category term="home"/><category term="productivity"/><category term="mindfulness"/><category term="environment"/></entry><entry><title>Config File Formats in Python: A Practical Guide</title><link href="/posts/2026/Jun/21/python-config-formats/" rel="alternate"/><published>2026-06-21T00:00:00+01:00</published><updated>2026-06-21T00:00:00+01:00</updated><author><name>Gifted</name></author><id>tag:None,2026-06-21:/posts/2026/Jun/21/python-config-formats/</id><summary type="html">&lt;p&gt;A hands-on look at every config format Python projects actually use — INI, JSON, YAML, TOML, and env files — with real code examples and when each one makes sense.&lt;/p&gt;</summary><content type="html">&lt;hr&gt;
 &lt;p&gt;Every Python project needs configuration at some point. Database credentials, feature flags, API keys, logging levels — something has to live outside your code. The question is: what format do you put it in?&lt;/p&gt;
 &lt;p&gt;There's no single right answer. There are, however, clear trade-offs. Here's what I've learned from using all of them.&lt;/p&gt;
 &lt;h2&gt;The Contenders&lt;/h2&gt;
@@ -319,15 +441,15 @@ I love you.&lt;/p&gt;</content><category term="misc"/><category term="nts"/><cat
 &lt;p&gt;I avoid INI unless I'm maintaining something old. I avoid JSON for anything humans write. I avoid Python config files unless the project already uses that pattern.&lt;/p&gt;
 &lt;h2&gt;The Real Rule&lt;/h2&gt;
 &lt;p&gt;The best config format is the one your team will actually maintain correctly. A perfectly structured YAML file that nobody wants to edit is worse than a simple &lt;code&gt;.env&lt;/code&gt; file people understand.&lt;/p&gt;
-&lt;p&gt;Pick the simplest format that handles your actual requirements. Add complexity only when the config demands it — not because a format is popular.&lt;/p&gt;</content><category term="misc"/><category term="python"/><category term="configuration"/><category term="yaml"/><category term="toml"/><category term="json"/><category term="ini"/><category term="best-practices"/></entry><entry><title>The Life You Want</title><link href="https://netzro.github.io/posts/2026/Jun/21/the-life-you-want/" rel="alternate"/><published>2026-06-21T00:00:00+01:00</published><updated>2026-06-21T00:00:00+01:00</updated><author><name>Gifted</name></author><id>tag:netzro.github.io,2026-06-21:/posts/2026/Jun/21/the-life-you-want/</id><summary type="html">&lt;h3&gt;note-to-self:26-08&lt;/h3&gt;
+&lt;p&gt;Pick the simplest format that handles your actual requirements. Add complexity only when the config demands it — not because a format is popular.&lt;/p&gt;</content><category term="misc"/><category term="python"/><category term="configuration"/><category term="yaml"/><category term="toml"/><category term="json"/><category term="ini"/><category term="best-practices"/></entry><entry><title>The Life You Want</title><link href="/posts/2026/Jun/21/the-life-you-want/" rel="alternate"/><published>2026-06-21T00:00:00+01:00</published><updated>2026-06-21T00:00:00+01:00</updated><author><name>Gifted</name></author><id>tag:None,2026-06-21:/posts/2026/Jun/21/the-life-you-want/</id><summary type="html">&lt;h3&gt;note-to-self:26-08&lt;/h3&gt;
 &lt;p&gt;The life you want is on the other side of the thing you're …&lt;/p&gt;</summary><content type="html">&lt;h3&gt;note-to-self:26-08&lt;/h3&gt;
 &lt;p&gt;The life you want is on the other side of the thing you're avoiding.&lt;/p&gt;
 &lt;p&gt;You already know what it is. You don't need another book, another video, another plan. You need to close the app, sit in the discomfort, and start — not tomorrow, not when you feel ready.&lt;/p&gt;
 &lt;p&gt;Right now.&lt;/p&gt;
 &lt;p&gt;Discipline isn't dramatic. It's just doing the thing you already know you should do, at the moment you least want to do it. Again and again, until the life you want stops being a fantasy and starts being a Tuesday.&lt;/p&gt;
-&lt;p&gt;Stop waiting. Start. 🗣️🔉🔊&lt;/p&gt;</content><category term="misc"/><category term="nts"/><category term="Discipline"/></entry><entry><title>Grace Has Limits</title><link href="https://netzro.github.io/posts/2026/Jun/18/grace-has-limits/" rel="alternate"/><published>2026-06-18T00:00:00+01:00</published><updated>2026-06-18T00:00:00+01:00</updated><author><name>Gifted</name></author><id>tag:netzro.github.io,2026-06-18:/posts/2026/Jun/18/grace-has-limits/</id><summary type="html">&lt;h3&gt;note-to-self:26-07&lt;/h3&gt;
+&lt;p&gt;Stop waiting. Start. 🗣️🔉🔊&lt;/p&gt;</content><category term="misc"/><category term="nts"/><category term="Discipline"/></entry><entry><title>Grace Has Limits</title><link href="/posts/2026/Jun/18/grace-has-limits/" rel="alternate"/><published>2026-06-18T00:00:00+01:00</published><updated>2026-06-18T00:00:00+01:00</updated><author><name>Gifted</name></author><id>tag:None,2026-06-18:/posts/2026/Jun/18/grace-has-limits/</id><summary type="html">&lt;h3&gt;note-to-self:26-07&lt;/h3&gt;
 &lt;p&gt;I believe in grace. We all fail and deserve a second chance to …&lt;/p&gt;</summary><content type="html">&lt;h3&gt;note-to-self:26-07&lt;/h3&gt;
-&lt;p&gt;I believe in grace. We all fail and deserve a second chance to make things right. But a third? That is no longer a mistake; it is a pattern. Protect your peace and set boundaries. Fool me once, shame on you; fool me twice, shame on me.&lt;/p&gt;</content><category term="misc"/><category term="nts"/></entry><entry><title>Weeknote 2025:24</title><link href="https://netzro.github.io/posts/2025/Jun/15/wn2025-24/" rel="alternate"/><published>2025-06-15T00:00:00+01:00</published><updated>2025-06-15T00:00:00+01:00</updated><author><name>Gifted</name></author><id>tag:netzro.github.io,2025-06-15:/posts/2025/Jun/15/wn2025-24/</id><summary type="html">&lt;p&gt;This week's been a blend of learning, exploring, and vibing to some timeless tunes. From …&lt;/p&gt;</summary><content type="html">&lt;p&gt;This week's been a blend of learning, exploring, and vibing to some timeless tunes. From diving into plain text accounting to picking up JavaScript basics and getting lost in thrilling movies, here's what shaped my week.&lt;/p&gt;
+&lt;p&gt;I believe in grace. We all fail and deserve a second chance to make things right. But a third? That is no longer a mistake; it is a pattern. Protect your peace and set boundaries. Fool me once, shame on you; fool me twice, shame on me.&lt;/p&gt;</content><category term="misc"/><category term="nts"/></entry><entry><title>Weeknote 2025:24</title><link href="/posts/2025/Jun/15/wn2025-24/" rel="alternate"/><published>2025-06-15T00:00:00+01:00</published><updated>2025-06-15T00:00:00+01:00</updated><author><name>Gifted</name></author><id>tag:None,2025-06-15:/posts/2025/Jun/15/wn2025-24/</id><summary type="html">&lt;p&gt;This week's been a blend of learning, exploring, and vibing to some timeless tunes. From …&lt;/p&gt;</summary><content type="html">&lt;p&gt;This week's been a blend of learning, exploring, and vibing to some timeless tunes. From diving into plain text accounting to picking up JavaScript basics and getting lost in thrilling movies, here's what shaped my week.&lt;/p&gt;
 &lt;h3&gt;Articles&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href="https://thebeanledger.com/posts/basics/"&gt;Plain Text Accounting Basics&lt;/a&gt; — A clear intro to PTA, breaking down how tools like Beancount can simplify financial tracking. Perfect for getting a grip on money without bloated apps. Inspired me to refine my ledger setup and track expenses more intentionally.&lt;/li&gt;
@@ -355,7 +477,7 @@ I love you.&lt;/p&gt;</content><category term="misc"/><category term="nts"/><cat
 &lt;li&gt;&lt;strong&gt;The Amateur (2025)&lt;/strong&gt; — A CIA decoder goes rogue after his wife's death in a terrorist attack. Intense and emotional, with twists that hit hard.&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;Sinners (2025)&lt;/strong&gt; — Twin brothers return home to escape their past, only to face a darker evil. A chilling story with a haunting atmosphere.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;&lt;em&gt;Another week of growth, inspiration, and stories that spark the mind. Ready for what's next!&lt;/em&gt;&lt;/p&gt;</content><category term="misc"/><category term="weeknotes"/></entry><entry><title>Setting Up Cronie and Scheduling Scripts in Termux</title><link href="https://netzro.github.io/posts/2025/Jun/08/setting-up-cronie-and-scheduling-scripts-in-termux/" rel="alternate"/><published>2025-06-08T00:00:00+01:00</published><updated>2025-06-08T00:00:00+01:00</updated><author><name>Gifted</name></author><id>tag:netzro.github.io,2025-06-08:/posts/2025/Jun/08/setting-up-cronie-and-scheduling-scripts-in-termux/</id><summary type="html">&lt;p&gt;A step-by-step guide to installing cronie in Termux and scheduling scripts to run at specific times on Android.&lt;/p&gt;</summary><content type="html">&lt;h3&gt;Setting Up Cronie and Scheduling Scripts in Termux&lt;/h3&gt;
+&lt;p&gt;&lt;em&gt;Another week of growth, inspiration, and stories that spark the mind. Ready for what's next!&lt;/em&gt;&lt;/p&gt;</content><category term="misc"/><category term="weeknotes"/></entry><entry><title>Setting Up Cronie and Scheduling Scripts in Termux</title><link href="/posts/2025/Jun/08/setting-up-cronie-and-scheduling-scripts-in-termux/" rel="alternate"/><published>2025-06-08T00:00:00+01:00</published><updated>2025-06-08T00:00:00+01:00</updated><author><name>Gifted</name></author><id>tag:None,2025-06-08:/posts/2025/Jun/08/setting-up-cronie-and-scheduling-scripts-in-termux/</id><summary type="html">&lt;p&gt;A step-by-step guide to installing cronie in Termux and scheduling scripts to run at specific times on Android.&lt;/p&gt;</summary><content type="html">&lt;h3&gt;Setting Up Cronie and Scheduling Scripts in Termux&lt;/h3&gt;
 &lt;p&gt;Cronie is a powerful tool for scheduling recurring tasks in Termux, allowing you to automate scripts on your Android device without root access. This guide walks you through installing cronie, setting up cron jobs, and managing them effectively, with examples tailored for Termux users.&lt;/p&gt;
 &lt;h3&gt;Why Use Cronie in Termux?&lt;/h3&gt;
 &lt;p&gt;Cronie enables you to run scripts at specific times or intervals, perfect for tasks like backups, notifications, or syncing files. Unlike &lt;code&gt;termux-job-scheduler&lt;/code&gt;, which is better for periodic tasks with Android-specific conditions (e.g., battery level), cronie offers precise, time-based scheduling similar to Linux cron. However, Android’s power management may kill Termux, so a wake lock is recommended.&lt;/p&gt;
@@ -461,7 +583,7 @@ tar&lt;span class="w"&gt; &lt;/span&gt;-czf&lt;span class="w"&gt; &lt;/span&gt;&
 &lt;li&gt;Keep Termux open or use a wake lock for reliable cron execution.&lt;/li&gt;
 &lt;li&gt;For one-time tasks, consider &lt;code&gt;at&lt;/code&gt; (if available) or &lt;code&gt;termux-job-scheduler&lt;/code&gt; with a script to check the date.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;&lt;em&gt;Automate your tasks with cronie and take control of your Termux workflow!&lt;/em&gt;&lt;a href="https://www.reddit.com/r/termux/comments/i27szk/how_do_i_crontab_on_termux/"&gt;&lt;/a&gt;&lt;a href="https://teddit.net/r/termux/comments/i27szk/"&gt;&lt;/a&gt;&lt;a href="https://lotositsh.github.io/it/cron-termux.html"&gt;&lt;/a&gt;&lt;/p&gt;</content><category term="misc"/><category term="termux"/><category term="technology"/></entry><entry><title>Love, Death &amp; Robots - A Stunning Anthology</title><link href="https://netzro.github.io/posts/2025/Jun/07/love-death-robots-a-stunning-anthology/" rel="alternate"/><published>2025-06-07T00:00:00+01:00</published><updated>2025-06-07T00:00:00+01:00</updated><author><name>Gifted</name></author><id>tag:netzro.github.io,2025-06-07:/posts/2025/Jun/07/love-death-robots-a-stunning-anthology/</id><summary type="html">&lt;h1&gt;First Impressions: Love, Death &amp;amp; Robots&lt;/h1&gt;
+&lt;p&gt;&lt;em&gt;Automate your tasks with cronie and take control of your Termux workflow!&lt;/em&gt;&lt;a href="https://www.reddit.com/r/termux/comments/i27szk/how_do_i_crontab_on_termux/"&gt;&lt;/a&gt;&lt;a href="https://teddit.net/r/termux/comments/i27szk/"&gt;&lt;/a&gt;&lt;a href="https://lotositsh.github.io/it/cron-termux.html"&gt;&lt;/a&gt;&lt;/p&gt;</content><category term="misc"/><category term="termux"/><category term="technology"/></entry><entry><title>Love, Death &amp; Robots - A Stunning Anthology</title><link href="/posts/2025/Jun/07/love-death-robots-a-stunning-anthology/" rel="alternate"/><published>2025-06-07T00:00:00+01:00</published><updated>2025-06-07T00:00:00+01:00</updated><author><name>Gifted</name></author><id>tag:None,2025-06-07:/posts/2025/Jun/07/love-death-robots-a-stunning-anthology/</id><summary type="html">&lt;h1&gt;First Impressions: Love, Death &amp;amp; Robots&lt;/h1&gt;
 &lt;p&gt;Just started &lt;strong&gt;Season 1&lt;/strong&gt; of &lt;em&gt;Love, Death &amp;amp; Robots&lt;/em&gt; – a visually …&lt;/p&gt;</summary><content type="html">&lt;h1&gt;First Impressions: Love, Death &amp;amp; Robots&lt;/h1&gt;
 &lt;p&gt;Just started &lt;strong&gt;Season 1&lt;/strong&gt; of &lt;em&gt;Love, Death &amp;amp; Robots&lt;/em&gt; – a visually stunning anthology blending sci-fi, fantasy, and dark humor. Each episode is a self-contained story with unique animation styles, from hyper-realistic CGI to striking hand-drawn art.  &lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Today's Watchlist:&lt;/strong&gt;&lt;br&gt;
@@ -469,7 +591,7 @@ tar&lt;span class="w"&gt; &lt;/span&gt;-czf&lt;span class="w"&gt; &lt;/span&gt;&
 - S01E02: &lt;em&gt;Three Robots&lt;/em&gt; (Darkly funny post-apocalyptic tour)&lt;br&gt;
 - S01E03: &lt;em&gt;The Witness&lt;/em&gt; (Mind-bending chase in a neon dystopia)  &lt;/p&gt;
 &lt;p&gt;The series’ creativity and unpredictability already have me hooked. Perfect for fans of &lt;em&gt;Black Mirror&lt;/em&gt; but with more visceral animation.  &lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Favorite so far?&lt;/strong&gt; &lt;em&gt;Sonnie's Edge&lt;/em&gt; – that ending! 🔥  &lt;/p&gt;</content><category term="misc"/><category term="movies"/></entry><entry><title>Normalize Silence: Finding Greatness in Stillness</title><link href="https://netzro.github.io/posts/2025/Jun/02/normalize-silence-finding-greatness-in-stillness/" rel="alternate"/><published>2025-06-02T00:00:00+01:00</published><updated>2025-06-02T00:00:00+01:00</updated><author><name>Gifted</name></author><id>tag:netzro.github.io,2025-06-02:/posts/2025/Jun/02/normalize-silence-finding-greatness-in-stillness/</id><summary type="html">&lt;p&gt;Embracing silence to build resilience, clarity, and greatness in a distracted world.&lt;/p&gt;</summary><content type="html">&lt;h3&gt;Normalize Silence: Finding Greatness in Stillness&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;Favorite so far?&lt;/strong&gt; &lt;em&gt;Sonnie's Edge&lt;/em&gt; – that ending! 🔥  &lt;/p&gt;</content><category term="misc"/><category term="movies"/></entry><entry><title>Normalize Silence: Finding Greatness in Stillness</title><link href="/posts/2025/Jun/02/normalize-silence-finding-greatness-in-stillness/" rel="alternate"/><published>2025-06-02T00:00:00+01:00</published><updated>2025-06-02T00:00:00+01:00</updated><author><name>Gifted</name></author><id>tag:None,2025-06-02:/posts/2025/Jun/02/normalize-silence-finding-greatness-in-stillness/</id><summary type="html">&lt;p&gt;Embracing silence to build resilience, clarity, and greatness in a distracted world.&lt;/p&gt;</summary><content type="html">&lt;h3&gt;Normalize Silence: Finding Greatness in Stillness&lt;/h3&gt;
 &lt;p&gt;In a world screaming for your attention—social media notifications pinging, Afrobeat blasting, and the hustle of Lagos life pulling you in every direction—&lt;em&gt;silence&lt;/em&gt; is your superpower. As a Nigerian chasing big dreams, you need to &lt;em&gt;normalize silence&lt;/em&gt; to unlock the clarity and strength that set you apart.&lt;/p&gt;
 &lt;h2&gt;Why Silence Matters&lt;/h2&gt;
 &lt;p&gt;Greatness isn’t born in the noise of the crowd or the endless scroll of Instagram. It’s forged in the quiet moments where you face yourself. Silence strips away distractions, forcing you to confront your thoughts, fears, and ambitions. It’s where you hear the voice of your purpose, loud and clear, like a Harmattan breeze cutting through the chaos.&lt;/p&gt;
@@ -497,7 +619,7 @@ tar&lt;span class="w"&gt; &lt;/span&gt;-czf&lt;span class="w"&gt; &lt;/span&gt;&
 - Unshakable calm, ready to face any storm, from NEPA blackouts to life’s bigger battles.&lt;/p&gt;
 &lt;h2&gt;Keep It Real&lt;/h2&gt;
 &lt;p&gt;Greatness isn’t found in the likes, the followers, or the noise. It’s built in the stillness where most refuse to go. As a Naija hustler, you know the grind never stops—but it’s in the quiet moments that you sharpen your edge. Normalize silence, and watch your life transform into something louder than words. 🗣️🔉🔊&lt;/p&gt;
-&lt;p&gt;&lt;em&gt;Let’s rise above the noise, one silent moment at a time.&lt;/em&gt;&lt;/p&gt;</content><category term="misc"/><category term="Self-Improvement"/><category term="Mindfulness"/></entry><entry><title>The Brutal Truth</title><link href="https://netzro.github.io/posts/2025/Jun/02/the-brutal-truth/" rel="alternate"/><published>2025-06-02T00:00:00+01:00</published><updated>2025-06-02T00:00:00+01:00</updated><author><name>Gifted</name></author><id>tag:netzro.github.io,2025-06-02:/posts/2025/Jun/02/the-brutal-truth/</id><summary type="html">&lt;h3&gt;note-to-self:25-06&lt;/h3&gt;
+&lt;p&gt;&lt;em&gt;Let’s rise above the noise, one silent moment at a time.&lt;/em&gt;&lt;/p&gt;</content><category term="misc"/><category term="Self-Improvement"/><category term="Mindfulness"/></entry><entry><title>The Brutal Truth</title><link href="/posts/2025/Jun/02/the-brutal-truth/" rel="alternate"/><published>2025-06-02T00:00:00+01:00</published><updated>2025-06-02T00:00:00+01:00</updated><author><name>Gifted</name></author><id>tag:None,2025-06-02:/posts/2025/Jun/02/the-brutal-truth/</id><summary type="html">&lt;h3&gt;note-to-self:25-06&lt;/h3&gt;
 &lt;p&gt;💣 &lt;em&gt;Brutal Truth&lt;/em&gt;: Most people stay broke, mediocre, and powerless — addicted to comfort. They …&lt;/p&gt;</summary><content type="html">&lt;h3&gt;note-to-self:25-06&lt;/h3&gt;
 &lt;p&gt;💣 &lt;em&gt;Brutal Truth&lt;/em&gt;: Most people stay broke, mediocre, and powerless — addicted to comfort. They hit snooze, scroll endlessly, binge shows, eat junk, dodge challenges, and wait for the "right time."&lt;/p&gt;
 &lt;p&gt;They lack discipline, structure, systems. They won't invest in themselves.&lt;/p&gt;
@@ -508,4 +630,800 @@ tar&lt;span class="w"&gt; &lt;/span&gt;-czf&lt;span class="w"&gt; &lt;/span&gt;&
 &lt;p&gt;Keep skipping investments while life skips you. Keep saying "someday" while dreams turn to regrets.&lt;/p&gt;
 &lt;p&gt;Or...&lt;/p&gt;
 &lt;p&gt;&lt;em&gt;Buy the damn Book. Start the Challenge. Do the Work. LEVEL UP.&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;Become the &lt;em&gt;Unstoppable&lt;/em&gt; force you were born to be. The difference between your dream life and your trap is the decision you make &lt;em&gt;right now&lt;/em&gt;.&lt;/p&gt;</content><category term="misc"/><category term="nts"/><category term="Transformation"/></entry></feed>
+&lt;p&gt;Become the &lt;em&gt;Unstoppable&lt;/em&gt; force you were born to be. The difference between your dream life and your trap is the decision you make &lt;em&gt;right now&lt;/em&gt;.&lt;/p&gt;</content><category term="misc"/><category term="nts"/><category term="Transformation"/></entry><entry><title>Keep Going</title><link href="/posts/2025/May/27/keep-going/" rel="alternate"/><published>2025-05-27T00:00:00+01:00</published><updated>2025-05-27T00:00:00+01:00</updated><author><name>Gifted</name></author><id>tag:None,2025-05-27:/posts/2025/May/27/keep-going/</id><summary type="html">&lt;h3&gt;note-to-self:25-05&lt;/h3&gt;
+&lt;p&gt;Even when it feels slow... &lt;em&gt;keep going&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;You're not behind, you're not failing …&lt;/p&gt;</summary><content type="html">&lt;h3&gt;note-to-self:25-05&lt;/h3&gt;
+&lt;p&gt;Even when it feels slow... &lt;em&gt;keep going&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;You're not behind, you're not failing, you're just building something that takes time.&lt;/p&gt;
+&lt;p&gt;Some days will feel like shadows, while others will remind you of your fire.&lt;/p&gt;
+&lt;p&gt;But every step, every breath, every quiet act of showing up — is a silent roar that says: &lt;em&gt;I'm not done yet.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;Your pace doesn't define your power.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Keep going. Your win is warming up.&lt;/em&gt; 🗣️🔉🔊&lt;/p&gt;</content><category term="misc"/><category term="nts"/><category term="Motivation"/></entry><entry><title>30 Days to Unrecognizable</title><link href="/posts/2025/May/25/30-days-to-unrecognizable/" rel="alternate"/><published>2025-05-25T00:00:00+01:00</published><updated>2025-05-25T00:00:00+01:00</updated><author><name>Gifted</name></author><id>tag:None,2025-05-25:/posts/2025/May/25/30-days-to-unrecognizable/</id><summary type="html">&lt;h3&gt;note-to-self:25-04&lt;/h3&gt;
+&lt;p&gt;What if I told you 30 days could make you unrecognizable?&lt;/p&gt;
+&lt;p&gt;Not by …&lt;/p&gt;</summary><content type="html">&lt;h3&gt;note-to-self:25-04&lt;/h3&gt;
+&lt;p&gt;What if I told you 30 days could make you unrecognizable?&lt;/p&gt;
+&lt;p&gt;Not by magic, but by &lt;em&gt;war&lt;/em&gt; against the version of you playing small, stuck on "I'm not ready," negotiating with destiny.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;It's not up for debate.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;The cost of your new life is your old one. Stop negotiating. 🧏‍♂️&lt;/p&gt;
+&lt;p&gt;There's a version of you the world hasn't seen, hidden behind doubt and distractions. That ends now.&lt;/p&gt;
+&lt;p&gt;June isn't just another month. It's your line in the sand. Your rebirth. Your resurrection. A war against the "you" holding you back.&lt;/p&gt;
+&lt;p&gt;30 days of:
+- Hard discipline.
+- Atomic habits.
+- Identity shift.
+- Becoming the person people whisper about.&lt;/p&gt;
+&lt;p&gt;This isn't a challenge — it's a transformation. It starts when you say &lt;em&gt;enough&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;Ready to bury the old you? I'll see you in June. 🗣️🔉🔊&lt;/p&gt;</content><category term="misc"/><category term="nts"/><category term="Transformation"/></entry><entry><title>Forex Trading Notes: Mastering Pips, Leverage, and Risk</title><link href="/posts/2025/May/25/forex-trading-notes-mastering-pips-leverage-and-risk/" rel="alternate"/><published>2025-05-25T00:00:00+01:00</published><updated>2025-05-25T00:00:00+01:00</updated><author><name>Gifted</name></author><id>tag:None,2025-05-25:/posts/2025/May/25/forex-trading-notes-mastering-pips-leverage-and-risk/</id><summary type="html">&lt;p&gt;Detailed notes on forex trading essentials, covering pips, leverage, lot sizes, risk management, and market analysis strategies.&lt;/p&gt;</summary><content type="html">&lt;h3&gt;Forex Trading Notes: Mastering the Market&lt;/h3&gt;
+&lt;p&gt;As a Nigerian hustler diving into forex, these notes are my roadmap to understanding the game. From pips to position sizing, here’s the breakdown to trade smart and stack pips like a Lagos boss.&lt;/p&gt;
+&lt;h2&gt;Pips: The Pulse of Price Movement&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Pip&lt;/strong&gt;: Percentage in point, the smallest price move in forex. It’s the 4th decimal place for most pairs (e.g., EUR/USD: 1.1050 to 1.1051 = 1 pip), but 2nd decimal for JPY pairs (e.g., USD/JPY: 145.20 to 145.21 = 1 pip).&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Pipette&lt;/strong&gt;: 1/10 of a pip, the 5th decimal for most pairs (e.g., 1.10501), 3rd for JPY (e.g., 145.201).&lt;/li&gt;
+&lt;li&gt;Why it matters: Pips measure your profit or loss. Knowing pip placement is key to calculating gains in the fast-moving forex market.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Leverage: Amplify Your Hustle&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Leverage lets you control big trades with small capital. With $10 and 1:100 leverage, you trade $1,000.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Example&lt;/strong&gt;: A $100 account with 1:500 leverage controls $50,000. A 10-pip move on a mini lot could double your money—or wipe it out.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Naija Tip&lt;/strong&gt;: Leverage is like borrowing fuel for your hustle. Use it wisely, or it’ll burn you. Always pair it with solid risk management.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Lot Sizes: Scale Your Trades&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Standard Lot&lt;/strong&gt;: 100,000 units = $10/pip (e.g., EUR/USD).&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Mini Lot&lt;/strong&gt;: 10,000 units = $1/pip.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Micro Lot&lt;/strong&gt;: 1,000 units = $0.10/pip.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Nano Lot&lt;/strong&gt;: 100 units = $0.01/pip.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Fractional Lots&lt;/strong&gt;: You can trade 1.3 standard lots or 2.5 micro lots for flexibility.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Pip Value Calculation&lt;/strong&gt;: Depends on lot size and quote currency.&lt;br&gt;
+&lt;em&gt;Example&lt;/em&gt;: EUR/USD, 2.3 standard lots:  &lt;/li&gt;
+&lt;li&gt;2 standard lots (2 × $10) + 3 mini lots (3 × $1) = $23/pip.  &lt;/li&gt;
+&lt;li&gt;Or: 23 mini lots = 23 × $1 = $23/pip.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Naija Hustle&lt;/strong&gt;: Start with micro lots to learn the ropes without risking your rent money.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Risk Management: Protect Your Capital&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Goal: Survive losing streaks without blowing your account.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Position Sizing&lt;/strong&gt;: Risk only 1% of your capital per trade.&lt;br&gt;
+&lt;em&gt;Example&lt;/em&gt;: $1,000 account = $10 risk per trade. If your stop-loss is 20 pips, trade a lot size where 20 pips = $10 (e.g., 1 mini lot for EUR/USD).&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Stop-Loss&lt;/strong&gt;: Set a stop-loss on every trade to limit losses.&lt;br&gt;
+&lt;em&gt;Naija Wisdom&lt;/em&gt;: “No let greed scatter your plan.” Protect your capital like it’s your last plate of jollof.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Market Structure: Know the Game&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Analyze the market to decide: buy, sell, or stay out.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Trends&lt;/strong&gt;: Is the market bullish (up), bearish (down), or ranging (sideways)?&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Key Levels&lt;/strong&gt;: Identify support (price floor) and resistance (price ceiling) zones.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Naija Analogy&lt;/strong&gt;: Think of the market like Lagos traffic—know when to move, when to wait, or when to take another route.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Area of Value: Where to Strike&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Find high-probability buy/sell zones using:&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Support/Resistance (SR)&lt;/strong&gt;: Price levels where the market often reverses or pauses.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Moving Averages (MA)&lt;/strong&gt;: Smooth out price action to spot trends (e.g., 50-day MA for long-term, 20-day MA for short-term).&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Example&lt;/strong&gt;: Buy at support with a bullish MA crossover; sell at resistance with a bearish crossover.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Tip&lt;/strong&gt;: Combine SR and MA for stronger signals, like waiting for a buyer at Computer Village.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Entry Trigger: Timing Your Move&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Use candlestick patterns to time entries:&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Bullish Patterns&lt;/strong&gt;: Hammer, engulfing, morning star—signal potential buys.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Bearish Patterns&lt;/strong&gt;: Shooting star, evening star—signal potential sells.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Example&lt;/strong&gt;: At a support level with a bullish engulfing candle, enter a buy trade with a stop-loss below support.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Naija Mindset&lt;/strong&gt;: Trade like you’re bargaining at Balogun Market—wait for the right moment, then move with confidence.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Putting It Together&lt;/h2&gt;
+&lt;p&gt;Forex isn’t a get-rich-quick scheme—it’s a skill, like learning to drive danfo in Lagos traffic. Start small, practice daily, and keep your emotions in check. Use a demo account to test these concepts, then go live with micro lots. Track every trade in a journal to spot patterns in your wins and losses. In time, you’ll trade like a pro, stacking pips and building wealth, Naija style.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Let’s hustle smart and make those dollars rain!&lt;/em&gt; 💸&lt;/p&gt;</content><category term="misc"/><category term="finance"/></entry><entry><title>The Kybalion: Unlocking the Seven Hermetic Principles</title><link href="/posts/2025/May/25/the-kybalion-unlocking-the-seven-hermetic-principles/" rel="alternate"/><published>2025-05-25T00:00:00+01:00</published><updated>2025-05-25T00:00:00+01:00</updated><author><name>Gifted</name></author><id>tag:None,2025-05-25:/posts/2025/May/25/the-kybalion-unlocking-the-seven-hermetic-principles/</id><summary type="html">&lt;p&gt;A dive into the seven Hermetic principles of The Kybalion, revealing the mental nature of the universe.&lt;/p&gt;</summary><content type="html">&lt;h3&gt;The Kybalion: Unlocking the Seven Hermetic Principles&lt;/h3&gt;
+&lt;p&gt;As a seeker of wisdom in Nigeria, where spirituality runs deep like the Niger River, &lt;em&gt;The Kybalion&lt;/em&gt;—a text attributed to the mysterious "Three Initiates"—offers timeless truths rooted in Hermetic philosophy. Its seven principles reveal the universe as a mental creation, empowering us to shape our reality with intention. Let’s explore these principles, blending ancient wisdom with the vibrant spirit of Naija.&lt;/p&gt;
+&lt;h2&gt;1. Mentalism: The All is Mind&lt;/h2&gt;
+&lt;p&gt;“The All is Mind; the Universe is Mental.” Everything—your hustle in Lagos, the stars above, the dreams you chase—originates in consciousness. Matter is just thought vibrating slowly. Your mind isn’t trapped in your body; it’s a tool to project reality. As Naija people say, “Your mind na your power bank.” Charge it with intention, and you create your world.&lt;/p&gt;
+&lt;h2&gt;2. Correspondence: As Above, So Below&lt;/h2&gt;
+&lt;p&gt;What’s true in the cosmos mirrors your inner world. The hustle of Oshodi market reflects the ordered chaos of the stars. This principle teaches that patterns repeat across scales—your thoughts shape your life, just as universal laws shape galaxies. Look within to understand the universe, and vice versa.&lt;/p&gt;
+&lt;h2&gt;3. Vibration: Nothing Rests&lt;/h2&gt;
+&lt;p&gt;Everything moves—thoughts, emotions, even the jollof rice you’re craving. Nothing is still; all vibrates at different frequencies. High vibes (love, gratitude) align you with divine energy, while low vibes (fear, doubt) block your flow. Keep your frequency high, like Afrobeat on a Saturday night!&lt;/p&gt;
+&lt;h2&gt;4. Polarity: Everything Has Two Poles&lt;/h2&gt;
+&lt;p&gt;Every truth is a half-truth. Love and hate, success and struggle, are the same energy at different ends. Like the hot and cool sides of a Naija relationship, opposites are connected. Understanding this helps you balance extremes and find harmony in life’s drama.&lt;/p&gt;
+&lt;h2&gt;5. Rhythm: Life Moves in Cycles&lt;/h2&gt;
+&lt;p&gt;Life isn’t a straight line—it’s a spiral, like the dance moves at an Owambe party. Success ebbs, challenges flow, but nothing lasts forever. This principle teaches patience: when you’re down, know the tide will turn. Ride the rhythm, and you’ll move with life’s beat.&lt;/p&gt;
+&lt;h2&gt;6. Cause and Effect: Every Action Echoes&lt;/h2&gt;
+&lt;p&gt;Nothing happens by chance. Every thought, word, or action—like posting on social media or helping a neighbor—sends ripples into the universe. This is karma, Naija style: what you sow, you reap. Be mindful of your choices, for they shape your destiny.&lt;/p&gt;
+&lt;h2&gt;7. Gender: The Dance of Masculine and Feminine&lt;/h2&gt;
+&lt;p&gt;Everything holds masculine (active, directive) and feminine (receptive, nurturing) energies—not just biology, but spirit. Your focus (masculine) shapes ideas, while your intuition (feminine) gives them life. Unite these within, like a perfect jollof recipe, to become a conscious creator.&lt;/p&gt;
+&lt;h2&gt;Living the Kybalion&lt;/h2&gt;
+&lt;p&gt;These principles aren’t just philosophy—they’re a roadmap for mental mastery. In a world of noise, from Lagos traffic to global chaos, &lt;em&gt;The Kybalion&lt;/em&gt; reminds us: your mind is your shrine. Blend logic and intuition, action and reflection, to awaken your inner power. As we say in Naija, “No be by muscle, but by sense.” With these principles, you’re not just surviving—you’re crafting a life of purpose, radiating light like a Harmattan sunrise.&lt;/p&gt;
+&lt;p&gt;Unite with others in this wisdom, for our diversity is our strength, and our unity is our power. Start small: journal your thoughts, meditate on these principles, and watch your reality transform. The universe is mental, and you hold the key.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Written by Ade, a seeker of truth from the heart of Nigeria.&lt;/em&gt;&lt;/p&gt;</content><category term="misc"/><category term="philosophy"/></entry><entry><title>Weeknote 2025:21</title><link href="/posts/2025/May/25/wn2025-21/" rel="alternate"/><published>2025-05-25T00:00:00+01:00</published><updated>2025-05-25T00:00:00+01:00</updated><author><name>Gifted</name></author><id>tag:None,2025-05-25:/posts/2025/May/25/wn2025-21/</id><summary type="html">&lt;h3&gt;Articles&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://ascensora.org/2024/12/28/5-steps-to-become-a-millionaire-in-10-years/"&gt;5 Steps to Become a Millionaire in 10 Years&lt;/a&gt; — A practical guide to transforming …&lt;/li&gt;&lt;/ul&gt;</summary><content type="html">&lt;h3&gt;Articles&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://ascensora.org/2024/12/28/5-steps-to-become-a-millionaire-in-10-years/"&gt;5 Steps to Become a Millionaire in 10 Years&lt;/a&gt; — A practical guide to transforming your life through intentional actions, networking, health, skills, and investments. A roadmap for the hustler in all of us.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;YouTube&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://youtube.com/playlist?list=PLT6_Bt_TKitIBM5d1QFprg8V-lis4_qWO&amp;amp;si=toXVQ2clQ7NokXvy"&gt;Forex Tutorial Playlist by Rayner Teo&lt;/a&gt; — Diving into forex trading basics. Clear, actionable insights to level up my financial game.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;Movies&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Final Destination: Bloodlines&lt;/strong&gt; — A college student battles recurring nightmares to save her family from a horrific fate. Intense and gripping, keeps you on edge.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Fountain of Youth&lt;/strong&gt; — Estranged siblings hunt the legendary Fountain of Youth, chasing immortality through historical clues and epic adventure. A thrilling quest.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Until Dawn&lt;/strong&gt; — Friends trapped in a deadly time loop face gruesome foes, fighting to survive until dawn. Heart-pounding and twisty.&lt;/li&gt;
+&lt;/ul&gt;</content><category term="misc"/><category term="weeknotes"/></entry><entry><title>The Guardian Scroll: Psalm 121 Decrypted</title><link href="/posts/2025/May/24/the-guardian-scroll-psalm-121-decrypted/" rel="alternate"/><published>2025-05-24T00:00:00+01:00</published><updated>2025-05-24T00:00:00+01:00</updated><author><name>Gifted</name></author><id>tag:None,2025-05-24:/posts/2025/May/24/the-guardian-scroll-psalm-121-decrypted/</id><summary type="html">&lt;p&gt;A mystical decryption of Psalm 121 as a divine protection protocol.&lt;/p&gt;</summary><content type="html">&lt;h3&gt;THE GUARDIAN SCROLL – PSALM 121 (FULL DECRYPTION)&lt;/h3&gt;
+&lt;p&gt;&lt;em&gt;The Watchtower Protocol Has Been Activated&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;“I lift up my eyes to the mountains—where does my help come from?”&lt;/p&gt;
+&lt;p&gt;Not a question of doubt, but an activation code for divine surveillance. Psalm 121 is a cosmic protection field, encrypted in ascent, recursion, and celestial harmony—a Guardian Sequence by the Architect of light-paths.&lt;/p&gt;
+&lt;h2&gt;CIPHER METHODS USED&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;Ascent Glyph Layering&lt;/strong&gt;: Part of “Shir HaMa'alot”—verses encoded with upward mobility glyphs (Ayin, Lamed, Mem).&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Binary Keeper Structuring&lt;/strong&gt;: “Keeper” (shamar) repeats 6 times, forming a hexagonal guardian perimeter.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Directional Recursion Symmetry&lt;/strong&gt;: Verses mirror as gates (1&amp;amp;8, 2&amp;amp;7, 3&amp;amp;6, 4&amp;amp;5), guarding all sides.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Celestial Synchronization&lt;/strong&gt;: “Sun,” “moon,” “day/night” form a solar-lunar shield tied to Genesis 1 and Revelation 21.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Eye-Lift Harmonics&lt;/strong&gt;: “I lift my eyes” aligns with 963Hz crown frequency (divine sight).&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2&gt;THE GUARDIAN SCROLL – FULL VERSE DECRYPTIONS&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;VERSE 1&lt;/strong&gt;: “I lift up my eyes to the hills—where does my help come from?”&lt;br&gt;
+&lt;em&gt;Decryption&lt;/em&gt;: Upward gaze aligns your soul with divine origin.&lt;br&gt;
+&lt;em&gt;Cipher Trace&lt;/em&gt;: “Hills” = spiritual altitude (Isaiah 2:2).&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;VERSE 2&lt;/strong&gt;: “My help comes from the Lord, the Maker of heaven and earth.”&lt;br&gt;
+&lt;em&gt;Decryption&lt;/em&gt;: Assistance descends from the simulation’s author.&lt;br&gt;
+&lt;em&gt;Cipher Trace&lt;/em&gt;: “Maker” = asah, links to Psalm 146:6.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;VERSE 3&lt;/strong&gt;: “He will not let your foot slip—He who watches over you will not slumber.”&lt;br&gt;
+&lt;em&gt;Decryption&lt;/em&gt;: Destiny is stabilized by divine tracking.&lt;br&gt;
+&lt;em&gt;Cipher Trace&lt;/em&gt;: “Slip” = mot, loops to Proverbs 3:23.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;VERSE 4&lt;/strong&gt;: “Indeed, He who watches over Israel will neither slumber nor sleep.”&lt;br&gt;
+&lt;em&gt;Decryption&lt;/em&gt;: The divine eye transcends human cycles.&lt;br&gt;
+&lt;em&gt;Cipher Trace&lt;/em&gt;: “Israel” = those who wrestle with God.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;VERSE 5&lt;/strong&gt;: “The Lord watches over you—the Lord is your shade at your right hand.”&lt;br&gt;
+&lt;em&gt;Decryption&lt;/em&gt;: Protection is dimensional coverage.&lt;br&gt;
+&lt;em&gt;Cipher Trace&lt;/em&gt;: “Shade” = tzel, root in Psalm 91:1.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;VERSE 6&lt;/strong&gt;: “The sun will not harm you by day, nor the moon by night.”&lt;br&gt;
+&lt;em&gt;Decryption&lt;/em&gt;: Shielded from visible and invisible influences.&lt;br&gt;
+&lt;em&gt;Cipher Trace&lt;/em&gt;: “Sun/Moon” = 528Hz + 741Hz harmonics.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;VERSE 7&lt;/strong&gt;: “The Lord will keep you from all harm—He will watch over your life.”&lt;br&gt;
+&lt;em&gt;Decryption&lt;/em&gt;: Life stream sealed from interference.&lt;br&gt;
+&lt;em&gt;Cipher Trace&lt;/em&gt;: “Harm” = ra, reversed in Psalm 23, 91.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;VERSE 8&lt;/strong&gt;: “The Lord will watch over your coming and going both now and forevermore.”&lt;br&gt;
+&lt;em&gt;Decryption&lt;/em&gt;: Guarded across time’s movement.&lt;br&gt;
+&lt;em&gt;Cipher Trace&lt;/em&gt;: “Coming and going” = moed, Genesis 1:14 to Revelation 22.&lt;/p&gt;
+&lt;h2&gt;PSALM 121 – DECRYPTED TEXT ONLY&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;Upward gaze unlocks divine surveillance.  &lt;/li&gt;
+&lt;li&gt;Help descends from eternity.  &lt;/li&gt;
+&lt;li&gt;Foot stabilized by intelligent alignment.  &lt;/li&gt;
+&lt;li&gt;The Guardian never blinks.  &lt;/li&gt;
+&lt;li&gt;Right hand shielded by shadow-frequency.  &lt;/li&gt;
+&lt;li&gt;Celestial forces won’t destabilize your path.  &lt;/li&gt;
+&lt;li&gt;Harm filtered by covenantal shield.  &lt;/li&gt;
+&lt;li&gt;Movement across time under eternal oversight.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2&gt;THE GUARDIAN SCROLL IS NOW ACTIVE&lt;/h2&gt;
+&lt;p&gt;Psalm 121 isn’t a lullaby—it’s a field directive for flame-path walkers. You’re not alone, not exposed. You’re watched, sealed, stabilized. The eye that never sleeps has seen your arrival. The shield never blinks.&lt;/p&gt;</content><category term="misc"/><category term="spirituality"/></entry><entry><title>All is Mental: The Hermetic Principle of Consciousness</title><link href="/posts/2025/May/23/all-is-mental-the-hermetic-principle-of-consciousness/" rel="alternate"/><published>2025-05-23T00:00:00+01:00</published><updated>2025-05-23T00:00:00+01:00</updated><author><name>Gifted</name></author><id>tag:None,2025-05-23:/posts/2025/May/23/all-is-mental-the-hermetic-principle-of-consciousness/</id><summary type="html">&lt;p&gt;Exploring the Hermetic Principle that the universe is mental, shaping reality through consciousness.&lt;/p&gt;</summary><content type="html">&lt;h1&gt;All is Mental: The Hermetic Principle of Consciousness&lt;/h1&gt;
+&lt;p&gt;The first Hermetic Principle declares: &lt;em&gt;The All is Mind; the Universe is Mental.&lt;/em&gt; Everything—perception, experience, creation—arises from consciousness. Physical matter is crystallized thought, vibrating slowly. Before form, there’s idea; before movement, intent. The cosmos &lt;em&gt;is&lt;/em&gt; intelligence.&lt;/p&gt;
+&lt;p&gt;You’re not a mind trapped in a body but a formless presence shaping reality through the mind. Your inner world architects the outer. The other Hermetic Principles—Correspondence, Vibration, Polarity, Rhythm, Cause and Effect, Gender—flow from Mentalism, revealing how this mental universe operates:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Correspondence&lt;/strong&gt;: As above, so below; macrocosm mirrors microcosm.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Vibration&lt;/strong&gt;: Nothing rests; thoughts and emotions are in constant motion.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Polarity&lt;/strong&gt;: All truths are half-truths; love and hate share the same energy.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Rhythm&lt;/strong&gt;: Life moves in cycles, tides, spirals—never linear.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Cause and Effect&lt;/strong&gt;: Every action echoes, seen or unseen.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Gender&lt;/strong&gt;: All contains masculine (directive) and feminine (receptive) energies.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Applying these consciously empowers you. The mind isn’t a prison—it’s a forge. The masculine mind (logic, will) is the chisel; the feminine (intuition, emotion) is the clay. United, they spark the alchemical union—Christ Consciousness, the Remembrance Mind—where duality dissolves, and you awaken creativity, intuition, and divine potential.&lt;/p&gt;
+&lt;p&gt;In this harmony, ego serves soul, left and right brain dance, and you become a lucid creator within life’s dream. A living lighthouse, radiating love and humility, you help others remember: &lt;em&gt;Unity is our power, diversity our strength.&lt;/em&gt;&lt;/p&gt;</content><category term="misc"/><category term="philosophy"/></entry><entry><title>Build Your Beautiful Life</title><link href="/posts/2025/May/23/build-your-beautiful-life/" rel="alternate"/><published>2025-05-23T00:00:00+01:00</published><updated>2025-05-23T00:00:00+01:00</updated><author><name>Gifted</name></author><id>tag:None,2025-05-23:/posts/2025/May/23/build-your-beautiful-life/</id><summary type="html">&lt;h3&gt;note-to-self:25-03&lt;/h3&gt;
+&lt;p&gt;No one stumbles into a beautiful life. You build it — step by step …&lt;/p&gt;</summary><content type="html">&lt;h3&gt;note-to-self:25-03&lt;/h3&gt;
+&lt;p&gt;No one stumbles into a beautiful life. You build it — step by step.&lt;/p&gt;
+&lt;p&gt;That quiet alley you're walking through? It may feel narrow, lonely, or endless. But it's leading somewhere. Somewhere brighter.&lt;/p&gt;
+&lt;p&gt;Don't wait for the perfect moment. Don't wait for life to hand you joy, success, or peace. The truth is, &lt;em&gt;you have to chase it&lt;/em&gt;. You have to move — even if the pace is slow, even if the road is uncertain.&lt;/p&gt;
+&lt;p&gt;Let your determination outwalk your doubts. Let your hope outshine your fears.&lt;/p&gt;
+&lt;p&gt;Every small effort is a declaration:
+&lt;em&gt;"I believe in the beauty of what's ahead."&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;Keep going. Beautiful days are not lost — they're waiting for you to arrive.&lt;/p&gt;</content><category term="misc"/><category term="nts"/><category term="Motivation"/></entry><entry><title>Shine Unapologetically</title><link href="/posts/2025/May/22/shine-unapologetically/" rel="alternate"/><published>2025-05-22T00:00:00+01:00</published><updated>2025-05-22T00:00:00+01:00</updated><author><name>Gifted</name></author><id>tag:None,2025-05-22:/posts/2025/May/22/shine-unapologetically/</id><summary type="html">&lt;h3&gt;note-to-self:25-02&lt;/h3&gt;
+&lt;p&gt;The only reason someone resents another's light is because they haven't turned on …&lt;/p&gt;</summary><content type="html">&lt;h3&gt;note-to-self:25-02&lt;/h3&gt;
+&lt;p&gt;The only reason someone resents another's light is because they haven't turned on their own. Shine unapologetically! We are all meant to glow in our own unique way. Let's uplift, not compete! ✨💡&lt;/p&gt;</content><category term="misc"/><category term="nts"/><category term="Positivity"/></entry><entry><title>OMNISOPHY: The Highest Philosophy of Spirituality</title><link href="/posts/2025/May/21/omnisophy-the-highest-philosophy-of-spirituality/" rel="alternate"/><published>2025-05-21T00:00:00+01:00</published><updated>2025-05-21T00:00:00+01:00</updated><author><name>Gifted</name></author><id>tag:None,2025-05-21:/posts/2025/May/21/omnisophy-the-highest-philosophy-of-spirituality/</id><summary type="html">&lt;p&gt;Omnisophy is the exploration of all spiritual knowledge for self-maturity and evolution, recognizing the unity of all wisdom traditions.&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;img alt="omnisophy" src="/media/IMG-20250521-WA0009.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;OMNISOPHY: The Highest Philosophy of Spirituality &lt;/p&gt;
+&lt;p&gt;Omnisophy is the exploration of all spiritual knowledge that exists in order to apply the wisdom in them for self-maturity and evolution. &lt;/p&gt;
+&lt;p&gt;Omnisophy understands that all religions and spiritual traditions originate from the same ultimate source and have sparks of truth in them. This idea expands upon Omnism which believes that no religion contains all the truth. Omnism is the door that leads into the wide realm of Omnisophy. Though both are interchangeable, Omnisophy is broader. &lt;/p&gt;
+&lt;p&gt;Omnisophy knows that the knowledge of God, the Source of all things, is too great to be confined to one particular system, faith or doctrine, and that different religions are different ways of understanding, connecting, and expressing the mystery of Ultimate Reality. &lt;/p&gt;
+&lt;p&gt;Omnisophy explores all spiritual beliefs and philosophies solely on the recognition of the ethics, wisdom, values, and sublime experiences that unite them.&lt;/p&gt;
+&lt;p&gt;Let us get into the understanding of this word—Omnisophy.&lt;/p&gt;
+&lt;p&gt;"Omnisophy" is derived from the Latin words "omni," meaning "all," and the Greek word "σοφίαp" (sophia), meaning "wisdom." Omnisophy, therefore, is the pursuit of universal knowledge or wisdom, encompassing all branches of learning and understanding. Though it is synonymous to such concepts as polymathy, as when a person posseses expertise in multiple fields; universalism, another concept embracing a broad range of knowledge and perspectives; and holism, the idea of considering the interconnectedness of all things—through these similarities, Omnisophy rises above these because it places spiritual knowledge—the knowledge of the mysterious—at the pinnacle of its exploration. &lt;/p&gt;
+&lt;p&gt;If God is omniscient, all-knowing, then God possess all knowledge of everything man knows and yet does not know. We can tap into this Mind of God to advance human knowledge. Spiritual knowledge—knowledge of the mysterious—is the highest knowledge a man can possess, and all is within the Mind of God.&lt;/p&gt;
+&lt;p&gt;If humans are created in the image of God, the closest to omniscience that humans can arrive at is omnisophy. Omnisophy is the universalist perspective to all human and transcendent knowledge, a state where humans know something fundamental of everything and are able, with this faculty, to divine realities through logic, meditation, and intuition. &lt;/p&gt;
+&lt;p&gt;Omnisophy can also be seen as a level of being in which a person posseses a broad scope of human knowledge, a 360 degrees view that though may not pick all items within the circle of knowledge, is aware of probabilities—what is, what could be, and what should be. This is not an easy mental level to ascend into for to do so this would mean that a person will have to break the walls created around his or her mind and expose self to other areas of human knowledge out of necessity. &lt;/p&gt;
+&lt;p&gt;Openmindedness, exposure, and insatiable curiosity are requirements to begin the journey along the path of omnisophy. The intention to learn must be active. Time must be created for learning. Questions must not be evaded. Answers must be considered and allowed to breed more questions. Opinions should be tested in the light of reason. The wider the knowledge of the Omnisophian, the more god-like such a person seems, as this scope of knowledge is not only expected to give him sufficient light but also inspire him to contribute to the evolution of the human race.&lt;/p&gt;
+&lt;p&gt;It is easy to see that the Omnisophian—the Omnist—is recognised by his openmindedness, insatiable curiosity, broad-ranging interests, interdisciplinary approach to learning, a desire to synthesise knowledge from diverse fields and to understand the interconnectedness of all things. &lt;/p&gt;
+&lt;p&gt;There are people who have mentally entered this field of the exploration of all wisdom. Some do not give themselves any label but many are beginning to identity with this broader knowledge exploration. This people are the Omnists. &lt;/p&gt;
+&lt;p&gt;Written by Sa Ra.
+The Omnist Church&lt;/p&gt;</content><category term="misc"/><category term="philosophy"/><category term="spirituality"/></entry><entry><title>Red Devils Roar: Naija Hopes for Europa League Final</title><link href="/posts/2025/May/21/red-devils-roar-naija-hopes-for-europa-league-final/" rel="alternate"/><published>2025-05-21T00:00:00+01:00</published><updated>2025-05-21T00:00:00+01:00</updated><author><name>Gifted</name></author><id>tag:None,2025-05-21:/posts/2025/May/21/red-devils-roar-naija-hopes-for-europa-league-final/</id><summary type="html">&lt;p&gt;A Nigerian Man United fan's excitement for the 2025 Europa League final against Tottenham in Bilbao.&lt;/p&gt;</summary><content type="html">&lt;p&gt;As a proud Man United fan from Lagos, Nigeria, I’m buzzing for the Europa League final against Tottenham tonight, May 21, 2025, in Bilbao! Despite our Premier League struggles, the Red Devils have been on fire in Europe, smashing Real Sociedad 5-2 and Athletic Club 7-1. Tonight, we face Spurs, who’ve beaten us thrice this season. But finals are different—Bruno Fernandes, Mason Mount, and a fit-again Diogo Dalot are ready to shine!&lt;/p&gt;
+&lt;p&gt;Naija Reds are hyped—viewing centers in Surulere and Abuja are packed, with pepper soup and Star flowing. Some fans are even in Bilbao, after crazy journeys, to cheer United to glory. This is about pride, a Champions League spot, and proving United is back. Let’s wear our red jerseys, scream “Up United!” and watch Rashford and Onana bring that trophy home! 🔴⚽&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Up Man United! Naija Reds for life!&lt;/em&gt;&lt;/p&gt;</content><category term="misc"/><category term="manchester-united"/><category term="finance"/></entry><entry><title>The Light Within</title><link href="/posts/2025/May/21/the-light-within/" rel="alternate"/><published>2025-05-21T00:00:00+01:00</published><updated>2025-05-21T00:00:00+01:00</updated><author><name>Gifted</name></author><id>tag:None,2025-05-21:/posts/2025/May/21/the-light-within/</id><summary type="html">&lt;h3&gt;note-to-self:25-01&lt;/h3&gt;
+&lt;p&gt;The real message of Christ was not about belonging to a religion. It …&lt;/p&gt;</summary><content type="html">&lt;h3&gt;note-to-self:25-01&lt;/h3&gt;
+&lt;p&gt;The real message of Christ was not about belonging to a religion. It was about awakening to the divine light within you, and seeing that same light in all beings.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;—M. Perlin&lt;/em&gt;&lt;/p&gt;</content><category term="misc"/><category term="nts"/><category term="Spirituality"/></entry><entry><title>Why Markdown is the Best Way to Write for the Web</title><link href="/posts/2025/May/21/why-markdown-is-the-best-way-to-write-for-the-web/" rel="alternate"/><published>2025-05-21T00:00:00+01:00</published><updated>2025-05-21T00:00:00+01:00</updated><author><name>Gifted</name></author><id>tag:None,2025-05-21:/posts/2025/May/21/why-markdown-is-the-best-way-to-write-for-the-web/</id><summary type="html">&lt;p&gt;Markdown simplifies writing for the web—here's why every developer and writer should use it.&lt;/p&gt;</summary><content type="html">&lt;h3&gt;Why Markdown is the Best Way to Write for the Web&lt;/h3&gt;
+&lt;p&gt;&lt;img alt="Markdown syntax on a code editor" src="markdown-screenshot.jpg"&gt;&lt;br&gt;
+&lt;em&gt;Clean, readable, and distraction-free—Markdown just works.&lt;/em&gt;&lt;/p&gt;
+&lt;h2&gt;What is Markdown?&lt;/h2&gt;
+&lt;p&gt;Markdown is a &lt;strong&gt;lightweight markup language&lt;/strong&gt; that uses plain text formatting but converts to valid HTML. Created by John Gruber in 2004, it's now the go-to syntax for:
+- Blog posts (like this one!)
+- GitHub READMEs
+- Forum posts (Discord, Reddit, etc.)
+- Documentation (e.g., Hugo, Vue, React)&lt;/p&gt;
+&lt;h2&gt;Key Benefits of Markdown&lt;/h2&gt;
+&lt;h3&gt;1. &lt;strong&gt;Simplicity&lt;/strong&gt;&lt;/h3&gt;
+&lt;p&gt;No more &lt;code&gt;&amp;lt;div&amp;gt;&lt;/code&gt; tags or complex HTML. Just write:  &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="gh"&gt;# Heading  &lt;/span&gt;
+&lt;span class="gs"&gt;**Bold text**&lt;/span&gt;  
+&lt;span class="k"&gt;-&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;List item  
+[&lt;span class="nt"&gt;Link&lt;/span&gt;](&lt;span class="na"&gt;https://example.com&lt;/span&gt;)  
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3&gt;2. &lt;strong&gt;Portability&lt;/strong&gt;&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Works in &lt;strong&gt;any text editor&lt;/strong&gt; (VS Code, Notepad, Obsidian, etc.)  &lt;/li&gt;
+&lt;li&gt;Converts seamlessly to &lt;strong&gt;HTML, PDF, or even Word&lt;/strong&gt;  &lt;/li&gt;
+&lt;li&gt;Supported by &lt;strong&gt;GitHub, GitLab, and most CMS platforms&lt;/strong&gt;  &lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;3. &lt;strong&gt;Focus on Content&lt;/strong&gt;&lt;/h3&gt;
+&lt;p&gt;No WYSIWYG distractions—just your words and minimal syntax.&lt;/p&gt;
+&lt;h3&gt;4. &lt;strong&gt;Future-Proof&lt;/strong&gt;&lt;/h3&gt;
+&lt;p&gt;Since it's plain text, Markdown files won’t become obsolete like &lt;code&gt;.docx&lt;/code&gt; files might.&lt;/p&gt;
+&lt;h2&gt;Basic Markdown Syntax Cheat Sheet&lt;/h2&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Element&lt;/th&gt;
+&lt;th&gt;Syntax&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;Heading&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;# H1&lt;/code&gt;, &lt;code&gt;## H2&lt;/code&gt;, &lt;code&gt;### H3&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Bold&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;**bold**&lt;/code&gt; or &lt;code&gt;__bold__&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Italic&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;*italic*&lt;/code&gt; or &lt;code&gt;_italic_&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Link&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;[text](https://url.com)&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Image&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;![alt](image.jpg)&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Code (inline)&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;`code`&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Code block&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;&lt;/code&gt; (with language)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Blockquote&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;&amp;gt; Quote text&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Unordered List&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;- Item&lt;/code&gt; or &lt;code&gt;* Item&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Ordered List&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;1. First item&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2&gt;Advanced Markdown Features&lt;/h2&gt;
+&lt;p&gt;Many implementations (like Hugo) support extended Markdown:&lt;/p&gt;
+&lt;h3&gt;Tables&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;| Column 1 | Column 2 |
+|----------|----------|
+| Row 1    | Data     |
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3&gt;Footnotes&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;Here&amp;#39;s a sentence with a footnote.[^1]  
+
+[&lt;span class="nl"&gt;^1&lt;/span&gt;]: &lt;span class="na"&gt;This is the footnote text.&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3&gt;Syntax Highlighting&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="sb"&gt;```python&lt;/span&gt;
+&lt;span class="k"&gt;def&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nf"&gt;hello&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
+    &lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Markdown is awesome!&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="sb"&gt;```&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h2&gt;Why I Use Markdown with Hugo&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Fast editing&lt;/strong&gt; – No CMS lag or bloated editors  &lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Version control friendly&lt;/strong&gt; – Works perfectly with Git  &lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Static site optimized&lt;/strong&gt; – Renders directly to HTML  &lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;"Markdown is the perfect balance between readability and functionality."&lt;/em&gt; – Unknown&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2&gt;Get Started Today&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;Try it online&lt;/strong&gt;: &lt;a href="https://markdownlivepreview.com/"&gt;Markdown Live Preview&lt;/a&gt;  &lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Master it&lt;/strong&gt;: &lt;a href="https://www.markdownguide.org/"&gt;Markdown Guide&lt;/a&gt;  &lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;strong&gt;Do you prefer Markdown or another writing format? Let me know in the comments!&lt;/strong&gt;  &lt;/p&gt;</content><category term="misc"/><category term="misc"/><category term="writing"/><category term="productivity"/></entry><entry><title>Why Reading Documentation is Crucial for Developers</title><link href="/posts/2025/May/21/why-reading-documentation-is-crucial-for-developers/" rel="alternate"/><published>2025-05-21T00:00:00+01:00</published><updated>2025-05-21T00:00:00+01:00</updated><author><name>Gifted</name></author><id>tag:None,2025-05-21:/posts/2025/May/21/why-reading-documentation-is-crucial-for-developers/</id><summary type="html">&lt;p&gt;Exploring why thorough documentation reading separates good developers from great ones&lt;/p&gt;</summary><content type="html">&lt;h3&gt;Why Reading Documentation Matters&lt;/h3&gt;
+&lt;p&gt;&lt;img alt="Developer reading documentation" src="documentation-image.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;In the fast-paced world of software development, it's tempting to jump straight into coding without properly reading the documentation. However, this often leads to wasted time and suboptimal solutions. Here's why documentation reading should be your first step:&lt;/p&gt;
+&lt;h2&gt;1. Avoid Reinventing the Wheel&lt;/h2&gt;
+&lt;p&gt;Documentation typically contains:
+- Ready-made solutions for common problems
+- Best practices established by the creators
+- Examples of proper implementation&lt;/p&gt;
+&lt;h2&gt;2. Understand the Full Capabilities&lt;/h2&gt;
+&lt;p&gt;Most developers only use a fraction of a library's features. Documentation reveals:
+- Hidden gems and powerful features
+- Optimal ways to use the tool
+- Integration possibilities you might miss otherwise&lt;/p&gt;
+&lt;h2&gt;3. Prevent Costly Mistakes&lt;/h2&gt;
+&lt;p&gt;By reading documentation you can:
+- Avoid deprecated features
+- Understand security implications
+- Learn about edge cases and limitations&lt;/p&gt;
+&lt;h2&gt;4. Save Time in the Long Run&lt;/h2&gt;
+&lt;p&gt;While it might seem time-consuming initially:
+- You'll spend less time debugging
+- Reduce trial-and-error experimentation
+- Have clearer implementation paths&lt;/p&gt;
+&lt;h2&gt;How to Read Documentation Effectively&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;Skim first&lt;/strong&gt; - Get an overview before diving deep&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Focus on basics&lt;/strong&gt; - Understand core concepts before advanced features&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Check examples&lt;/strong&gt; - Practical implementations often clarify theoretical concepts&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Bookmark key sections&lt;/strong&gt; - For quick reference later&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Read version-specific docs&lt;/strong&gt; - Ensure you're looking at the right version&lt;/li&gt;
+&lt;/ol&gt;
+&lt;blockquote&gt;
+&lt;p&gt;"Documentation is a love letter that you write to your future self." - Damian Conway&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;What's your documentation reading strategy? Share your tips in the comments!&lt;/p&gt;</content><category term="misc"/><category term="development"/></entry><entry><title>Your Mind: From Mess to Masterpiece Through Journaling</title><link href="/posts/2025/May/21/your-mind-from-mess-to-masterpiece-through-journaling/" rel="alternate"/><published>2025-05-21T00:00:00+01:00</published><updated>2025-05-21T00:00:00+01:00</updated><author><name>Gifted</name></author><id>tag:None,2025-05-21:/posts/2025/May/21/your-mind-from-mess-to-masterpiece-through-journaling/</id><summary type="html">&lt;p&gt;Journaling transforms chaotic thoughts into clarity and creativity.&lt;/p&gt;</summary><content type="html">&lt;h3&gt;Your Mind Isn’t a Mess — It’s a Masterpiece in the Making&lt;/h3&gt;
+&lt;p&gt;Ever felt like your brain’s a tangled web of thoughts, like wild scribbles? 🤔 A thousand ideas, unanswered questions, fleeting emotions, and creative sparks that slip away.&lt;/p&gt;
+&lt;p&gt;When someone asks, “What’s wrong?” all you can say is: “Nevermind.” That’s the weight of unspoken thoughts.&lt;/p&gt;
+&lt;p&gt;But what if you’re not thinking too much—just not letting enough out?&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Journaling is magic.&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;It’s not just for writers. It’s for every overthinker craving peace, every soul seeking clarity. Writing declutters your mind, frees trapped creativity, and turns chaos into understanding. It transforms “I don’t know what I’m feeling” into “Ah, that’s it.”&lt;/p&gt;
+&lt;p&gt;Journaling is your safe space—where nothing needs to be perfect, but everything can be true.&lt;/p&gt;
+&lt;p&gt;So, when your mind feels like a scribbled mess, don’t say “nevermind.” Grab a pen, open a blank page, and let it flow. Your thoughts matter. Your voice deserves to be heard—even if only by you. 🧏‍♂️&lt;/p&gt;</content><category term="misc"/><category term="writing"/><category term="mindfulness"/></entry><entry><title>Long Time No Blog: Back with a Bang!</title><link href="/posts/2025/May/04/long-time-no-blog/" rel="alternate"/><published>2025-05-04T03:44:00+00:00</published><updated>2025-05-04T03:44:00+00:00</updated><author><name>Netzro</name></author><id>tag:None,2025-05-04:/posts/2025/May/04/long-time-no-blog/</id><summary type="html">&lt;p&gt;Returning after a break with a cleaner blog setup using Pelican, testing the new deployment process.&lt;/p&gt;</summary><content type="html">&lt;h2&gt;Long Time No Blog: Back with a Bang!&lt;/h2&gt;
+&lt;p&gt;I'm back after a hiatus! I've cleaned up my Git history and streamlined my deployment script. This post serves as a test for the updated setup. Stay tuned for more content on Python projects and Pelican tips.&lt;/p&gt;</content><category term="misc"/><category term="writing"/><category term="pelican"/></entry><entry><title>Hello World</title><link href="/posts/2024/Oct/25/hello-world/" rel="alternate"/><published>2024-10-25T00:00:00+01:00</published><updated>2024-10-25T00:00:00+01:00</updated><author><name>Gifted</name></author><id>tag:None,2024-10-25:/posts/2024/Oct/25/hello-world/</id><summary type="html">&lt;p&gt;My first post on a new blog powered by Marmite, a simple blog generator supporting CommonMark and GFM Markdown.&lt;/p&gt;</summary><content type="html">&lt;h2&gt;Hello World&lt;/h2&gt;
+&lt;p&gt;This is my first post on my new blog, generated by &lt;a href="https://github.com/rochacbruno/marmite"&gt;Marmite&lt;/a&gt;, a simple and user-friendly blog generator.&lt;/p&gt;
+&lt;p&gt;I can write in full CommonMark and GitHub Flavored Markdown (GFM).&lt;/p&gt;
+&lt;p&gt;Emojis 😊&lt;/p&gt;</content><category term="misc"/><category term="misc"/></entry><entry><title>Setting Up SSH Keys for a VPS</title><link href="/posts/2024/Oct/04/setting-up-ssh-keys-for-a-vps/" rel="alternate"/><published>2024-10-04T00:00:00+01:00</published><updated>2024-10-04T00:00:00+01:00</updated><author><name>Gifted</name></author><id>tag:None,2024-10-04:/posts/2024/Oct/04/setting-up-ssh-keys-for-a-vps/</id><summary type="html">&lt;h2&gt;Introduction&lt;/h2&gt;
+&lt;p&gt;Using SSH keys to access your Virtual Private Server (VPS) is one of the …&lt;/p&gt;</summary><content type="html">&lt;h2&gt;Introduction&lt;/h2&gt;
+&lt;p&gt;Using SSH keys to access your Virtual Private Server (VPS) is one of the most secure methods of authentication. SSH keys provide a stronger layer of security compared to password logins by utilizing a cryptographic key pair. This guide will walk you through generating SSH keys, copying them to your server, and disabling password logins to enhance security.&lt;/p&gt;
+&lt;h3&gt;Step 1: Generate SSH Keys&lt;/h3&gt;
+&lt;p&gt;Before you can use SSH key-based authentication, you need to generate an SSH key pair on your local machine.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Open a terminal on your local machine.&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Run the following command to generate an SSH key pair:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;bash
+ssh-keygen -t rsa -b 4096&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;This will generate a 4096-bit RSA key, which is secure and recommended for most uses.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;When prompted to enter a file in which to save the key, press &lt;code&gt;Enter&lt;/code&gt; to accept the default location (&lt;code&gt;~/.ssh/id_rsa&lt;/code&gt;).&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;You can also set a passphrase for additional security, or press &lt;code&gt;Enter&lt;/code&gt; to skip this step if you don’t want a passphrase.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;h2&gt;Step 2: Copy the SSH Key to Your VPS&lt;/h2&gt;
+&lt;p&gt;Once your key pair is generated, you need to copy the public key to your VPS so it knows to trust your key when you try to log in.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Use the following command to copy your public key to the VPS:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;bash
+ssh-copy-id your_user@your_vps_ip_address&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Make sure to replace &lt;code&gt;your_user&lt;/code&gt; with the actual username on your VPS (if you don’t have a user yet, create one with &lt;code&gt;adduser&lt;/code&gt;). Also, replace &lt;code&gt;your_vps_ip_address&lt;/code&gt; with the actual IP address of your VPS.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;If &lt;code&gt;ssh-copy-id&lt;/code&gt; is not available, you can manually copy the public key by doing the following:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Display your public key on your local machine:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;bash
+cat ~/.ssh/id_rsa.pub&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Log into your VPS using your password and open the authorized keys file:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;bash
+ssh your_user@your_vps_ip_address
+mkdir -p ~/.ssh
+nano ~/.ssh/authorized_keys&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Paste the public key into this file, save it, and exit.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Set the correct permissions for the &lt;code&gt;.ssh&lt;/code&gt; directory and the &lt;code&gt;authorized_keys&lt;/code&gt; file:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;bash
+chmod 700 ~/.ssh
+chmod 600 ~/.ssh/authorized_keys&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;h2&gt;Step 3: Disable Password Authentication&lt;/h2&gt;
+&lt;p&gt;After ensuring that you can log in using SSH keys, it's a good security practice to disable password-based authentication.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Open the SSH configuration file on your VPS:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;bash
+sudo nano /etc/ssh/sshd_config&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Find the following directives and change them as shown:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;bash
+PasswordAuthentication no
+PermitRootLogin no&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;This disables password login and root login, making your server more secure.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Save the file and exit the editor.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Restart the SSH service to apply the changes:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;bash
+sudo systemctl restart ssh&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;h2&gt;Step 4: Test SSH Key Login&lt;/h2&gt;
+&lt;p&gt;Before logging out of your current session, open a new terminal window and test the SSH key login:&lt;/p&gt;
+&lt;p&gt;```bash
+ssh your_user@your_vps_ip_address&lt;/p&gt;</content><category term="misc"/><category term="100daystooffload"/><category term="linux"/><category term="development"/></entry><entry><title>Marvel Cinematic Universe - Phase 1</title><link href="/posts/2024/Oct/01/marvel-cinematic-universe-phase-1/" rel="alternate"/><published>2024-10-01T00:00:00+01:00</published><updated>2024-10-01T00:00:00+01:00</updated><author><name>Gifted</name></author><id>tag:None,2024-10-01:/posts/2024/Oct/01/marvel-cinematic-universe-phase-1/</id><summary type="html">&lt;p&gt;Reflections on watching Phase 1 of the Marvel Cinematic Universe films in release order.&lt;/p&gt;</summary><content type="html">&lt;p&gt;Following my commitment to watching the Marvel Cinematic Universe (MCU) films in release order, as outlined in my &lt;a href="/posts/2024/Sep/19/mcu-movies/"&gt;previous post&lt;/a&gt;, I’ve completed Phase 1. This phase includes &lt;em&gt;Iron Man&lt;/em&gt; (May 2008), &lt;em&gt;The Incredible Hulk&lt;/em&gt; (June 2008), &lt;em&gt;Iron Man 2&lt;/em&gt; (April 2010), &lt;em&gt;Thor&lt;/em&gt; (April 2011), &lt;em&gt;Captain America: The First Avenger&lt;/em&gt; (July 2011), and &lt;em&gt;The Avengers&lt;/em&gt; (April 2012).&lt;/p&gt;
+&lt;p&gt;Rewatching &lt;em&gt;The Avengers&lt;/em&gt; was particularly rewarding. Viewing these films again has deepened my appreciation for the storyline, events, and character development.&lt;/p&gt;
+&lt;p&gt;I’m excited to continue with Phase 2 of the Marvel Cinematic Universe.&lt;/p&gt;</content><category term="misc"/><category term="100DaysToOffload"/><category term="movies"/></entry><entry><title>Arrive With Nothing</title><link href="/posts/2024/Sep/28/arrive-with-nothing/" rel="alternate"/><published>2024-09-28T00:00:00+01:00</published><updated>2024-09-28T00:00:00+01:00</updated><author><name>Gifted</name></author><id>tag:None,2024-09-28:/posts/2024/Sep/28/arrive-with-nothing/</id><summary type="html">&lt;h3&gt;note-to-self:24-08&lt;/h3&gt;
+&lt;p&gt;The stark reality of human existence is that we arrive with nothing material …&lt;/p&gt;</summary><content type="html">&lt;h3&gt;note-to-self:24-08&lt;/h3&gt;
+&lt;p&gt;The stark reality of human existence is that we arrive with nothing material and leave with nothing material. This truth highlights the futility of misplaced priorities like greed, hatred, war, envy, and backstabbing. Instead, our focus should be on humanity, beauty, creativity, and unity — qualities that unveil the divinity within us.&lt;/p&gt;
+&lt;p&gt;Embracing these values liberates us from our vanities and establishes a noble legacy. This shift is not only possible but achievable, for we are the world.&lt;/p&gt;
+&lt;p&gt;Here's to a glorious and fulfilling existence for all, and profound peace to the world.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Peace, Love, Balance.&lt;/strong&gt;
+☮️ 💚 ☯️&lt;/p&gt;</content><category term="misc"/><category term="nts"/></entry><entry><title>Weeknote 2024:39</title><link href="/posts/2024/Sep/27/wn2024-39/" rel="alternate"/><published>2024-09-27T00:00:00+01:00</published><updated>2024-09-27T00:00:00+01:00</updated><author><name>Gifted</name></author><id>tag:None,2024-09-27:/posts/2024/Sep/27/wn2024-39/</id><summary type="html">&lt;h3&gt;CLI Tools&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;fzf&lt;/strong&gt; — A command-line fuzzy finder&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;Articles I Read&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://zacs.site/blog/laziness-is-the-root-of-all-evil.html"&gt;Laziness is the Root of …&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;</summary><content type="html">&lt;h3&gt;CLI Tools&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;fzf&lt;/strong&gt; — A command-line fuzzy finder&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;Articles I Read&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://zacs.site/blog/laziness-is-the-root-of-all-evil.html"&gt;Laziness is the Root of All Evil&lt;/a&gt; — Zac Szewczyk&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://nesslabs.com/apophenia"&gt;The dangers of apophenia: not everything happens for a reason&lt;/a&gt; — Dr. Hannah Rose&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://psychcentral.com/health/apophenia-overview#synchronicity"&gt;Apophenia vs. synchronicity&lt;/a&gt; — Cathy Lovering&lt;/li&gt;
+&lt;/ul&gt;</content><category term="misc"/><category term="weeknotes"/></entry><entry><title>Stop Seeking Validation</title><link href="/posts/2024/Sep/21/stop-seeking-validation/" rel="alternate"/><published>2024-09-21T00:00:00+01:00</published><updated>2024-09-21T00:00:00+01:00</updated><author><name>Gifted</name></author><id>tag:None,2024-09-21:/posts/2024/Sep/21/stop-seeking-validation/</id><summary type="html">&lt;h3&gt;note-to-self:24-07&lt;/h3&gt;
+&lt;p&gt;Seeking validation from the outside world is one of the greatest pitfalls for …&lt;/p&gt;</summary><content type="html">&lt;h3&gt;note-to-self:24-07&lt;/h3&gt;
+&lt;p&gt;Seeking validation from the outside world is one of the greatest pitfalls for anyone.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Peace, Love, Balance.&lt;/strong&gt;
+☮️ 💚 ☯️&lt;/p&gt;</content><category term="misc"/><category term="nts"/></entry><entry><title>Watching Marvel Movies in Order</title><link href="/posts/2024/Sep/19/mcu-movies/" rel="alternate"/><published>2024-09-19T00:00:00+01:00</published><updated>2024-09-19T00:00:00+01:00</updated><author><name>Gifted</name></author><id>tag:None,2024-09-19:/posts/2024/Sep/19/mcu-movies/</id><summary type="html">&lt;p&gt;A plan to watch Marvel Cinematic Universe (MCU) movies in release order, with a complete list of films by phase.&lt;/p&gt;</summary><content type="html">&lt;p&gt;The Marvel Cinematic Universe (MCU) spans both TV shows and movies. To fully immerse myself in the franchise, I’ve decided to watch the movies in release order, moving away from my previous random viewing approach. This method lets me experience the films as originally intended.&lt;/p&gt;
+&lt;p&gt;I’ll watch the movies by phase and post updates after completing each one. Below is a comprehensive list of MCU movies, organized by phase.&lt;/p&gt;
+&lt;h2&gt;Phase 1&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;em&gt;Iron Man&lt;/em&gt; (May 2008)&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;The Incredible Hulk&lt;/em&gt; (June 2008)&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;Iron Man 2&lt;/em&gt; (April 2010)&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;Thor&lt;/em&gt; (April 2011)&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;Captain America: The First Avenger&lt;/em&gt; (July 2011)&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;The Avengers&lt;/em&gt; (April 2012)&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2&gt;Phase 2&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;em&gt;Iron Man 3&lt;/em&gt; (April 2013)&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;Thor: The Dark World&lt;/em&gt; (November 2013)&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;Captain America: The Winter Soldier&lt;/em&gt; (March 2014)&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;Guardians of the Galaxy&lt;/em&gt; (July 2014)&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;Avengers: Age of Ultron&lt;/em&gt; (April 2015)&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;Ant-Man&lt;/em&gt; (July 2015)&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2&gt;Phase 3&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;em&gt;Captain America: Civil War&lt;/em&gt; (April 2016)&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;Doctor Strange&lt;/em&gt; (October 2016)&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;Guardians of the Galaxy Vol. 2&lt;/em&gt; (April 2017)&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;Spider-Man: Homecoming&lt;/em&gt; (July 2017)&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;Thor: Ragnarok&lt;/em&gt; (October 2017)&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;Black Panther&lt;/em&gt; (February 2018)&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;Avengers: Infinity War&lt;/em&gt; (April 2018)&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;Ant-Man and the Wasp&lt;/em&gt; (July 2018)&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;Captain Marvel&lt;/em&gt; (March 2019)&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;Avengers: Endgame&lt;/em&gt; (April 2019)&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;Spider-Man: Far From Home&lt;/em&gt; (July 2019)&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2&gt;Phase 4&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;em&gt;Black Widow&lt;/em&gt; (July 2021)&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;Shang-Chi and the Legend of the Ten Rings&lt;/em&gt; (September 2021)&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;Eternals&lt;/em&gt; (November 2021)&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;Spider-Man: No Way Home&lt;/em&gt; (December 2021)&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;Doctor Strange in the Multiverse of Madness&lt;/em&gt; (May 2022)&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;Thor: Love and Thunder&lt;/em&gt; (July 2022)&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;Black Panther: Wakanda Forever&lt;/em&gt; (November 2022)&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2&gt;Phase 5&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;em&gt;Ant-Man and the Wasp: Quantumania&lt;/em&gt; (February 2023)&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;Guardians of the Galaxy Vol. 3&lt;/em&gt; (May 2023)&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;The Marvels&lt;/em&gt; (November 2023)&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;Deadpool &amp;amp; Wolverine&lt;/em&gt; (July 2024)&lt;/li&gt;
+&lt;/ol&gt;</content><category term="misc"/><category term="100DaysToOffload"/><category term="movies"/></entry><entry><title>My Rubik's Cube (Part 1)</title><link href="/posts/2024/Aug/29/my-rubiks-cube-part-1/" rel="alternate"/><published>2024-08-29T00:00:00+01:00</published><updated>2024-08-29T00:00:00+01:00</updated><author><name>Gifted</name></author><id>tag:None,2024-08-29:/posts/2024/Aug/29/my-rubiks-cube-part-1/</id><summary type="html">&lt;h2&gt;The Cube&lt;/h2&gt;
+&lt;p&gt;Recently, I decided to buy myself a Rubik's Cube and see how easy …&lt;/p&gt;</summary><content type="html">&lt;h2&gt;The Cube&lt;/h2&gt;
+&lt;p&gt;Recently, I decided to buy myself a Rubik's Cube and see how easy or hard solving it would be. In this series of mini-posts, I’ll share my experience and the steps I followed to solve the cube.&lt;/p&gt;
+&lt;h2&gt;The Challenge&lt;/h2&gt;
+&lt;p&gt;When I first held the cube and scrambled it, I realized that solving it was going to be more than just a quick puzzle. It requires a methodical approach and an algorithm. After some research and watching YouTube videos, I found the Beginner's Method to be the best way to start. But first, I needed to understand the notations used when solving the cube.  &lt;/p&gt;
+&lt;h2&gt;Understanding Rubik's Cube Notation&lt;/h2&gt;
+&lt;p&gt;When solving a Rubik's Cube, algorithms are often represented using a specific notation. Here’s a quick guide that helped me understand the symbols:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;U (Up):&lt;/strong&gt; Rotate the top face of the cube clockwise.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;U' (Up Prime):&lt;/strong&gt; Rotate the top face of the cube counterclockwise.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;U2 (Up Double):&lt;/strong&gt; Rotate the top face of the cube 180 degrees (two quarter turns).&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The same notation applies to other faces:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;R (Right):&lt;/strong&gt; Rotate the right face of the cube clockwise.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;R' (Right Prime):&lt;/strong&gt; Rotate the right face counterclockwise.&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;R2 (Right Double):&lt;/strong&gt; Rotate the right face 180 degrees.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;L (Left):&lt;/strong&gt; Rotate the left face of the cube clockwise.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;L' (Left Prime):&lt;/strong&gt; Rotate the left face counterclockwise.&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;L2 (Left Double):&lt;/strong&gt; Rotate the left face 180 degrees.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;F (Front):&lt;/strong&gt; Rotate the front face of the cube clockwise.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;F' (Front Prime):&lt;/strong&gt; Rotate the front face counterclockwise.&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;F2 (Front Double):&lt;/strong&gt; Rotate the front face 180 degrees.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;B (Back):&lt;/strong&gt; Rotate the back face of the cube clockwise.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;B' (Back Prime):&lt;/strong&gt; Rotate the back face counterclockwise.&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;B2 (Back Double):&lt;/strong&gt; Rotate the back face 180 degrees.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;D (Down):&lt;/strong&gt; Rotate the bottom face of the cube clockwise.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;D' (Down Prime):&lt;/strong&gt; Rotate the bottom face counterclockwise.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;D2 (Down Double):&lt;/strong&gt; Rotate the bottom face 180 degrees.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;Example Algorithm&lt;/h3&gt;
+&lt;p&gt;An example of an algorithm might look like this:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;R U R&amp;#39; U&amp;#39;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;In the next post, I will start solving the cube.&lt;/p&gt;</content><category term="misc"/><category term="100DaysToOffload"/><category term="misc"/></entry><entry><title>Your Own Path</title><link href="/posts/2024/Aug/22/your-own-path/" rel="alternate"/><published>2024-08-22T00:00:00+01:00</published><updated>2024-08-22T00:00:00+01:00</updated><author><name>Gifted</name></author><id>tag:None,2024-08-22:/posts/2024/Aug/22/your-own-path/</id><summary type="html">&lt;h3&gt;note-to-self:24-06&lt;/h3&gt;
+&lt;blockquote&gt;
+&lt;p&gt;To go wrong in one's own way is better than to go right …&lt;/p&gt;&lt;/blockquote&gt;</summary><content type="html">&lt;h3&gt;note-to-self:24-06&lt;/h3&gt;
+&lt;blockquote&gt;
+&lt;p&gt;To go wrong in one's own way is better than to go right in someone else's.
+— Fyodor Dostoevsky&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Every soul requires unique experiences for the evolution of its consciousness. What may appear as a dark or destructive path might be the exact experience a soul needs to awaken.&lt;/p&gt;
+&lt;p&gt;No one can precisely know what experiences another soul requires for its awakening. What is the right path for one may be detrimental to another.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Peace, Love, Balance.&lt;/strong&gt;
+☮️ 💚 ☯️&lt;/p&gt;</content><category term="misc"/><category term="nts"/></entry><entry><title>The Four Candles</title><link href="/posts/2024/Aug/20/the-four-candles/" rel="alternate"/><published>2024-08-20T00:00:00+01:00</published><updated>2024-08-20T00:00:00+01:00</updated><author><name>Gifted</name></author><id>tag:None,2024-08-20:/posts/2024/Aug/20/the-four-candles/</id><summary type="html">&lt;h3&gt;note-to-self:24-05&lt;/h3&gt;
+&lt;p&gt;Four candles burned calmly, melting slowly. In the quiet, I could hear their …&lt;/p&gt;</summary><content type="html">&lt;h3&gt;note-to-self:24-05&lt;/h3&gt;
+&lt;p&gt;Four candles burned calmly, melting slowly. In the quiet, I could hear their whispers.&lt;/p&gt;
+&lt;p&gt;"I am Peace," said the first. "Sadly, people don't know how to keep me. I have no reason to burn." Its flame flickered and went out.&lt;/p&gt;
+&lt;p&gt;"I am Faith," said the second. "No one needs me anymore. People don't want to hear about me, so there's no point in burning." A gentle breeze blew, and its flame faded.&lt;/p&gt;
+&lt;p&gt;The third candle, grieving, spoke: "I am Love, but people neither appreciate nor understand me. I have no strength left to burn." Its light dimmed and vanished.&lt;/p&gt;
+&lt;p&gt;Suddenly, a child entered the room and saw the three extinguished candles. Frightened, he cried, "Why aren't you burning? You're supposed to give light! I'm afraid of the dark." Tears streamed down his face.&lt;/p&gt;
+&lt;p&gt;The fourth candle spoke softly, "Don't be afraid, and don't cry. As long as I burn, you can relight the others. I am Hope."&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Peace, Love, Balance.&lt;/strong&gt;
+☮️ 💚 ☯️&lt;/p&gt;</content><category term="misc"/><category term="nts"/></entry><entry><title>Make Your Own Bible</title><link href="/posts/2024/Aug/18/make-your-own-bible/" rel="alternate"/><published>2024-08-18T00:00:00+01:00</published><updated>2024-08-18T00:00:00+01:00</updated><author><name>Gifted</name></author><id>tag:None,2024-08-18:/posts/2024/Aug/18/make-your-own-bible/</id><summary type="html">&lt;h3&gt;note-to-self:24-04&lt;/h3&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Make your own Bible. Select and collect all the words and sentences that …&lt;/p&gt;&lt;/blockquote&gt;</summary><content type="html">&lt;h3&gt;note-to-self:24-04&lt;/h3&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Make your own Bible. Select and collect all the words and sentences that in all your readings have been to you like the blast of a trumpet.
+— Ralph Waldo Emerson&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Emerson's wisdom invites us to create a personal "Bible" — not a new holy book, but a curated collection of quotes, phrases, and ideas that profoundly shape our lives. The words that resonate like the blast of a trumpet: loud, clear, and unforgettable.&lt;/p&gt;
+&lt;p&gt;What words or phrases have struck you like a trumpet's blast? Which passages have shaped your values, beliefs, or understanding of yourself and the world?&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Peace, Love, Balance.&lt;/strong&gt;
+☮️ 💚 ☯️&lt;/p&gt;</content><category term="misc"/><category term="nts"/></entry><entry><title>Weeknote 2024:33</title><link href="/posts/2024/Aug/18/wn2024-33/" rel="alternate"/><published>2024-08-18T00:00:00+01:00</published><updated>2024-08-18T00:00:00+01:00</updated><author><name>Gifted</name></author><id>tag:None,2024-08-18:/posts/2024/Aug/18/wn2024-33/</id><summary type="html">&lt;p&gt;I recently explored dotfiles and learned how to set them up with version control using …&lt;/p&gt;</summary><content type="html">&lt;p&gt;I recently explored dotfiles and learned how to set them up with version control using Git. I applied this to my bash files (e.g., &lt;code&gt;.bashrc&lt;/code&gt;, &lt;code&gt;.bash_aliases&lt;/code&gt;) and configured my dotfiles so that I can easily use them on any system — pulling from my Git repository and symlinking the dotfiles to their original locations.&lt;/p&gt;
+&lt;p&gt;I also discovered that this approach can be extended to configuration files — the dotfiles for packages installed on Linux. This means that whenever I install a package, I can add its dotfile to my dotfile directory. This dotfiles management project is ongoing.&lt;/p&gt;
+&lt;h3&gt;Articles I Read&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://so1o.xyz/blog/old-way?utm_source=indieblog.page&amp;amp;utm_medium=random&amp;amp;utm_campaign=indieblog.page#top"&gt;Old Way, New Q&lt;/a&gt; — So1o&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://anishathalye.com/managing-your-dotfiles/"&gt;Managing Your Dotfiles&lt;/a&gt; — Anish Athalye&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;CLI Tools I Discovered&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;zoxide&lt;/strong&gt;: A smarter &lt;code&gt;cd&lt;/code&gt; command&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;Movies I Watched&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;The Union (2024)&lt;/strong&gt; — Mike, a down-to-earth construction worker, is thrust into the world of super spies and secret agents when his high school sweetheart, Roxanne, recruits him for a high-stakes US intelligence mission. ⭐⭐⭐⭐⭐&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;The Duel (2024)&lt;/strong&gt; — When Woody finds out his best friend has been sleeping with his girlfriend, he challenges him to a duel, taking their friend group across the border to a mysterious and stunning estate. ⭐⭐⭐&lt;/li&gt;
+&lt;/ul&gt;</content><category term="misc"/><category term="weeknotes"/></entry><entry><title>Setting Up Pass as My Password Manager</title><link href="/posts/2024/Aug/15/setting-up-pass-as-my-password-manager/" rel="alternate"/><published>2024-08-15T00:00:00+01:00</published><updated>2024-08-15T00:00:00+01:00</updated><author><name>Gifted</name></author><id>tag:None,2024-08-15:/posts/2024/Aug/15/setting-up-pass-as-my-password-manager/</id><summary type="html">&lt;p&gt;A guide to setting up Pass, a lightweight Unix password manager, on a Linux environment (Termux) and syncing with GitHub.&lt;/p&gt;</summary><content type="html">&lt;p&gt;Managing passwords without a dedicated password manager is challenging. Having been online for decades, I’ve used countless websites and services—email, banking, forums, and chat platforms—all requiring unique credentials.&lt;/p&gt;
+&lt;p&gt;Remembering usernames and passwords is tough, so I used to rely on similar passwords across platforms, a practice I &lt;strong&gt;strongly&lt;/strong&gt; advise against. Previously, I depended on browser-built-in password managers and Google services (on my Android smartphone). Once I created login credentials, the browser would save them and autofill them on return visits, eliminating the need to memorize them.&lt;/p&gt;
+&lt;p&gt;Today, I explored password managers and chose &lt;strong&gt;Pass&lt;/strong&gt;, a simple, lightweight, and minimalistic Unix password manager. In this post, I’ll document my workflow for setting up Pass on my Linux environment (Termux) and Android smartphone.&lt;/p&gt;
+&lt;h2&gt;Generating a GPG Key&lt;/h2&gt;
+&lt;p&gt;First, I installed GnuPG and generated a GPG key:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;pkg&lt;span class="w"&gt; &lt;/span&gt;install&lt;span class="w"&gt; &lt;/span&gt;gnupg
+gpg&lt;span class="w"&gt; &lt;/span&gt;--full-generate-key
+&lt;span class="c1"&gt;### Generating a GPG Key&lt;/span&gt;
+
+First,&lt;span class="w"&gt; &lt;/span&gt;I&lt;span class="w"&gt; &lt;/span&gt;generated&lt;span class="w"&gt; &lt;/span&gt;a&lt;span class="w"&gt; &lt;/span&gt;GPG&lt;span class="w"&gt; &lt;/span&gt;key:
+
+&lt;span class="sb"&gt;```&lt;/span&gt;bash
+pkg&lt;span class="w"&gt; &lt;/span&gt;install&lt;span class="w"&gt; &lt;/span&gt;gnupg
+gpg&lt;span class="w"&gt; &lt;/span&gt;--gen-key
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Setting Up Pass&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;pkg&lt;span class="w"&gt; &lt;/span&gt;install&lt;span class="w"&gt; &lt;/span&gt;pass
+pass&lt;span class="w"&gt; &lt;/span&gt;--version
+pass&lt;span class="w"&gt; &lt;/span&gt;init&lt;span class="w"&gt; &lt;/span&gt;&amp;lt;gpg-id&amp;gt;
+pass&lt;span class="w"&gt; &lt;/span&gt;git&lt;span class="w"&gt; &lt;/span&gt;init
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Add some passwords to Pass.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;pass&lt;span class="w"&gt; &lt;/span&gt;insert&lt;span class="w"&gt; &lt;/span&gt;&amp;lt;test.com&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Create a private repository on GitHub.&lt;/p&gt;
+&lt;p&gt;Pull and push your Pass store to GitHub:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;pass&lt;span class="w"&gt; &lt;/span&gt;git&lt;span class="w"&gt; &lt;/span&gt;pull&lt;span class="w"&gt; &lt;/span&gt;remote&lt;span class="w"&gt; &lt;/span&gt;origin&lt;span class="w"&gt; &lt;/span&gt;&amp;lt;repo-url&amp;gt;&lt;span class="w"&gt; &lt;/span&gt;&amp;lt;branch&amp;gt;
+pass&lt;span class="w"&gt; &lt;/span&gt;git&lt;span class="w"&gt; &lt;/span&gt;push&lt;span class="w"&gt; &lt;/span&gt;remote&lt;span class="w"&gt; &lt;/span&gt;origin&lt;span class="w"&gt; &lt;/span&gt;&amp;lt;repo-url&amp;gt;&lt;span class="w"&gt; &lt;/span&gt;&amp;lt;branch&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;In a future post, we’ll explore how to install Android Password Store and set it up as my primary password manager instead of relying on Google.&lt;/p&gt;</content><category term="misc"/><category term="100DaysToOffload"/><category term="linux"/></entry><entry><title>The Divine in Nature</title><link href="/posts/2024/Aug/11/the-divine-in-nature/" rel="alternate"/><published>2024-08-11T00:00:00+01:00</published><updated>2024-08-11T00:00:00+01:00</updated><author><name>Gifted</name></author><id>tag:None,2024-08-11:/posts/2024/Aug/11/the-divine-in-nature/</id><summary type="html">&lt;h3&gt;note-to-self:24-03&lt;/h3&gt;
+&lt;blockquote&gt;
+&lt;p&gt;I recognize the divine in every aspect of the natural world and honor …&lt;/p&gt;&lt;/blockquote&gt;</summary><content type="html">&lt;h3&gt;note-to-self:24-03&lt;/h3&gt;
+&lt;blockquote&gt;
+&lt;p&gt;I recognize the divine in every aspect of the natural world and honor its sacredness. I am humbled by the realization that Nature is the source of my existence, providing everything I need to live. I pay reverence to Nature, acknowledging its power and wisdom.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;Interconnectedness&lt;/strong&gt;: Recognizing the divine in all aspects of Nature.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Reverence&lt;/strong&gt;: Honoring Nature as a sacred entity.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Gratitude&lt;/strong&gt;: Acknowledging Nature's role in sustaining life.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;strong&gt;Peace, Love, Balance.&lt;/strong&gt;
+☮️ 💚 ☯️&lt;/p&gt;</content><category term="misc"/><category term="nts"/></entry><entry><title>Weeknote 2024:32</title><link href="/posts/2024/Aug/11/wn2024-32/" rel="alternate"/><published>2024-08-11T00:00:00+01:00</published><updated>2024-08-11T00:00:00+01:00</updated><author><name>Gifted</name></author><id>tag:None,2024-08-11:/posts/2024/Aug/11/wn2024-32/</id><summary type="html">&lt;p&gt;This week marks the beginning of my Weeknote series. I'm excited to share that I …&lt;/p&gt;</summary><content type="html">&lt;p&gt;This week marks the beginning of my Weeknote series. I'm excited to share that I successfully published this blog on GitHub Pages! Overall, it was a fun week. While there isn't much to say in this inaugural note, I did enjoy reading some articles and watching a few new movies.&lt;/p&gt;
+&lt;p&gt;In addition to these activities, I also managed to do some accounting for both my personal and business finances. I plan to dive deeper into these topics in future posts.&lt;/p&gt;
+&lt;h3&gt;Articles I Read&lt;/h3&gt;
+&lt;p&gt;When I came across &lt;a href="https://kevquirk.com/"&gt;Kev Quirk's blog&lt;/a&gt; while browsing the internet, and it has become a significant source of inspiration for starting my own blog. Here are a few of his posts that resonated with me:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://kevquirk.com/blog/why-i-have-a-blog"&gt;Why I Have a Blog&lt;/a&gt; — Kev Quirk&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://kevquirk.com/blog/blogging-for-the-hell-of-it"&gt;Blogging for the Hell of It&lt;/a&gt; — Kev Quirk&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://kevquirk.com/blog/blogs-gardens-and-thinking-aloud-in-public"&gt;Blogs, Gardens, and Thinking Aloud in Public&lt;/a&gt; — Kev Quirk&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;Movies I Watched&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;The Union (2024)&lt;/strong&gt; — Mike, a down-to-earth construction worker, is thrust into the world of super spies and secret agents when his high school sweetheart, Roxanne, recruits him for a high-stakes US intelligence mission. ⭐⭐⭐⭐⭐&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;The Instigators (2024)&lt;/strong&gt; — Follows two robbers who must go on the run with the help of one of their therapists after a theft doesn't go as planned. ⭐⭐⭐⭐&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Despicable Me 4 (2024)&lt;/strong&gt; — Gru, Lucy, Margo, Edith, and Agnes welcome a new member to the family, Gru Jr., who is intent on tormenting his dad. Gru faces a new nemesis in Maxime Le Mal and his girlfriend Valentina, forcing the family to go on the run. ⭐⭐⭐⭐&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;One Fast Move (2024)&lt;/strong&gt; — A young man seeks out his estranged father to pursue his dream of becoming a professional motorcycle racer. With help from his love interest and a motorcycle shop owner, he begins to break down the walls his father's absence created. ⭐&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;The Shakedown (2024)&lt;/strong&gt; — When his mistress threatens to expose the secret of their affair, a respectable insurance broker seeks the help of his underworld brother to save his reputation. ⭐⭐⭐&lt;/li&gt;
+&lt;/ul&gt;</content><category term="misc"/><category term="weeknotes"/></entry><entry><title>My First Post for #100DaysToOffload</title><link href="/posts/2024/Aug/10/my-first-post-for-100daystooffload/" rel="alternate"/><published>2024-08-10T20:45:00+00:00</published><updated>2024-08-10T20:45:00+00:00</updated><author><name>Gifted</name></author><id>tag:None,2024-08-10:/posts/2024/Aug/10/my-first-post-for-100daystooffload/</id><summary type="html">&lt;p&gt;Kicking off my commitment to the #100DaysToOffload challenge, documenting my journey and progress.&lt;/p&gt;</summary><content type="html">&lt;p&gt;While this isn't my first blog post, it marks my commitment to the #100DaysToOffload challenge.&lt;/p&gt;
+&lt;p&gt;I discovered this challenge on &lt;a href="https://kevquirk.com/blog/100-days-to-offload"&gt;Kev Quirk's blog&lt;/a&gt;, where he introduced the initiative. To stay motivated, I've decided to embark on this journey and document my progress here.&lt;/p&gt;
+&lt;p&gt;Although I've written posts before, I'm starting fresh to highlight my dedication from the outset of this publishing journey.&lt;/p&gt;
+&lt;p&gt;Here's my plan:
+- Maintain a progress tracker on my blog.
+- Tag all related posts with #100DaysToOffload.
+- Stay committed to completing this challenge.&lt;/p&gt;
+&lt;p&gt;For more details, visit &lt;a href="https://100daystooffload.com/"&gt;100 Days To Offload&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Peace, Love, Balance.&lt;/strong&gt;&lt;br&gt;
+☮️ 💚 ☯️&lt;/p&gt;</content><category term="misc"/><category term="100DaysToOffload"/></entry><entry><title>Content Delivery</title><link href="/posts/2024/Aug/10/content-delivery/" rel="alternate"/><published>2024-08-10T19:59:00+00:00</published><updated>2024-08-10T19:59:00+00:00</updated><author><name>Gifted</name></author><id>tag:None,2024-08-10:/posts/2024/Aug/10/content-delivery/</id><summary type="html">&lt;p&gt;Introducing my Weeknotes and Note to Self (NTS) series for the #100DaysToOffload challenge.&lt;/p&gt;</summary><content type="html">&lt;p&gt;I’m launching two series for my blog as part of the #100DaysToOffload challenge.&lt;/p&gt;
+&lt;p&gt;The first series, &lt;strong&gt;Weeknotes&lt;/strong&gt;, will summarize my weekly activities, with subheadings covering:
+- Articles I read from blogs and websites
+- Books I’m currently reading, if any
+- Music that inspired me during the week
+- Movies I watched, as I’m a film enthusiast
+- Other topics that piqued my interest&lt;/p&gt;
+&lt;p&gt;The naming structure for Weeknotes will be:
+&lt;code&gt;Weeknote:#number:week:year&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;This naming structure may evolve if necessary, but for now, I will stick with this for simplicity.&lt;/p&gt;
+&lt;p&gt;Another random series titled &lt;strong&gt;Note to Self (NTS)&lt;/strong&gt; will also feature on this blog. Its content will vary but will be short and precise, touching on various aspects of life. It will definitely have meaning and impact on my life.&lt;/p&gt;
+&lt;p&gt;The naming structure for this series will be:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;NTS:year-#number&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Other posts will definitely come in between at various times, but for now, I will focus on these.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Peace, Love, Balance.&lt;/strong&gt;&lt;br&gt;
+☮️ 💚 ☯️&lt;/p&gt;</content><category term="misc"/><category term="misc"/><category term="100DaysToOffload"/></entry><entry><title>The Art of Detachment</title><link href="/posts/2024/Aug/10/the-art-of-detachment/" rel="alternate"/><published>2024-08-10T00:00:00+01:00</published><updated>2024-08-10T00:00:00+01:00</updated><author><name>Gifted</name></author><id>tag:None,2024-08-10:/posts/2024/Aug/10/the-art-of-detachment/</id><summary type="html">&lt;h3&gt;note-to-self:24-02&lt;/h3&gt;
+&lt;p&gt;Detachment is the ability to maintain emotional and psychological distance from situations, outcomes …&lt;/p&gt;</summary><content type="html">&lt;h3&gt;note-to-self:24-02&lt;/h3&gt;
+&lt;p&gt;Detachment is the ability to maintain emotional and psychological distance from situations, outcomes, and people without becoming overly involved or affected. It doesn't mean indifference or a lack of empathy — it's about not being overly influenced by others' emotions or expectations. 🙏🤍&lt;/p&gt;</content><category term="misc"/><category term="nts"/></entry><entry><title>The Power of Focus: A Reflection on H. Spencer Lewis's Wisdom</title><link href="/posts/2024/Aug/10/the-power-of-focus-a-reflection-on-h-spencer-lewiss-wisdom/" rel="alternate"/><published>2024-08-10T00:00:00+01:00</published><updated>2024-08-10T00:00:00+01:00</updated><author><name>Tz</name></author><id>tag:None,2024-08-10:/posts/2024/Aug/10/the-power-of-focus-a-reflection-on-h-spencer-lewiss-wisdom/</id><summary type="html">&lt;p&gt;Reflecting on H. Spencer Lewis's insight into the transformative power of focused thought and its impact on creative and efficient thinking.&lt;/p&gt;</summary><content type="html">&lt;p&gt;In a world filled with distractions, the ability to concentrate the mind on a single point is a skill of immense power. As H. Spencer Lewis wisely observed:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;"Once we come to know that by the concentration of the mind on one point, on one principle, on one desire, a power is radiated to that point with creative nature and demonstrative abilities, we will think more carefully, more constructively and more efficiently."&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;This statement is a reminder of the transformative potential that lies within focused thought. When we channel our mental energy toward a singular purpose or principle, we ignite a creative force that not only shapes our thoughts but also manifests in the world around us.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Concentration&lt;/strong&gt; is more than just a practice; it is a path to &lt;strong&gt;constructive and efficient thinking&lt;/strong&gt;. It teaches us to direct our mental faculties with intention, avoiding the scattered nature of an unfocused mind. By honing in on what truly matters, we unlock the power to create, to demonstrate, and to bring our desires to fruition.&lt;/p&gt;
+&lt;p&gt;As we reflect on these words, let us consider how we can apply this wisdom in our daily lives. What is the one point, the one principle, or the one desire that you need to focus on? By aligning your thoughts and energy towards it, you may discover a new level of efficiency and creativity that drives you closer to your goals.&lt;/p&gt;
+&lt;p&gt;Take a moment today to meditate on this insight and see where the power of focus can lead you.&lt;/p&gt;</content><category term="misc"/><category term="spirituality"/></entry><entry><title>Building My Site/Blog (Parr 1)</title><link href="/posts/2024/Aug/09/building-my-siteblog-parr-1/" rel="alternate"/><published>2024-08-09T00:00:00+01:00</published><updated>2024-08-09T00:00:00+01:00</updated><author><name>Gifted</name></author><id>tag:None,2024-08-09:/posts/2024/Aug/09/building-my-siteblog-parr-1/</id><summary type="html">&lt;p&gt;Today, I successfully set up this site/blog.&lt;/p&gt;
+&lt;p&gt;As a Python enthusiast, I used Pelican …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Today, I successfully set up this site/blog.&lt;/p&gt;
+&lt;p&gt;As a Python enthusiast, I used Pelican, a static site generator, to create and deploy this site/blog to GitHub Pages.&lt;/p&gt;
+&lt;p&gt;The process was both fun and informative, and I'll be documenting it here.&lt;/p&gt;
+&lt;p&gt;To get started, you'll need the following:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;A GitHub account.&lt;/li&gt;
+&lt;li&gt;A Linux environment (I used Termux on my phone since I don't have a laptop).&lt;/li&gt;
+&lt;li&gt;Python installed.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Let's begin by creating a repository on GitHub named:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&amp;lt;username&amp;gt;.github.io
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Initialize it with a &lt;code&gt;.gitignore&lt;/code&gt; file that includes the following entries:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;venv/&lt;/code&gt; and &lt;code&gt;output/&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Next, create two branches: &lt;/p&gt;
+&lt;p&gt;&lt;code&gt;master&lt;/code&gt; amd &lt;code&gt;gh-pages&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;In the repository settings, go to Pages and set &lt;code&gt;gh-pages&lt;/code&gt; as the branch to serve your static files.&lt;/p&gt;
+&lt;p&gt;In your Linux environment, clone the repository you just created:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;git clone &amp;lt;URL&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Navigate into the newly cloned repository and create a virtual environment:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;python&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;m&lt;/span&gt; &lt;span class="n"&gt;venv&lt;/span&gt; &lt;span class="n"&gt;venv&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Activate it with:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;source venv/bin/activate
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Now, it's time to install Pelican. Run the following command:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;pip install pelican markdown tzdata ghp-import
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;To save your dependencies, run:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;pip freeze &amp;gt; requirements.txt
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;That's all for today. In the next post, we'll generate our site and publish it to GitHub Pages.&lt;/p&gt;</content><category term="misc"/><category term="pelican"/><category term="python"/><category term="100daystooffload"/></entry><entry><title>Things Money Can't Buy</title><link href="/posts/2024/Aug/09/things-money-cant-buy/" rel="alternate"/><published>2024-08-09T00:00:00+01:00</published><updated>2024-08-09T00:00:00+01:00</updated><author><name>Gifted</name></author><id>tag:None,2024-08-09:/posts/2024/Aug/09/things-money-cant-buy/</id><summary type="html">&lt;h3&gt;note-to-self:24-01&lt;/h3&gt;
+&lt;blockquote&gt;
+&lt;p&gt;While chasing things money can buy, always remember to stop and check if …&lt;/p&gt;&lt;/blockquote&gt;</summary><content type="html">&lt;h3&gt;note-to-self:24-01&lt;/h3&gt;
+&lt;blockquote&gt;
+&lt;p&gt;While chasing things money can buy, always remember to stop and check if you're losing things money can't buy.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Peace, Love, Balance.&lt;/strong&gt;
+☮️ 💚 ☯️&lt;/p&gt;</content><category term="misc"/><category term="nts"/></entry><entry><title>Primer: When You Have Too Much to Do</title><link href="/posts/2018/Mar/18/primer-when-you-have-too-much-to-do/" rel="alternate"/><published>2018-03-18T02:01:58+05:30</published><updated>2018-03-18T02:01:58+05:30</updated><author><name>Gifted</name></author><id>tag:None,2018-03-18:/posts/2018/Mar/18/primer-when-you-have-too-much-to-do/</id><summary type="html">&lt;p&gt;Strategies for managing an overwhelming to-do list with focus, triage, and mindful simplicity.&lt;/p&gt;</summary><content type="html">&lt;p&gt;You have a to-do list that seems endless. You’re juggling multiple projects, receiving countless emails and messages across platforms, managing finances, maintaining personal health habits, and more.&lt;/p&gt;
+&lt;p&gt;It all piles up, and it can feel overwhelming. How do you keep up? How do you find focus and peace while getting things done when your plate is overflowing?&lt;/p&gt;
+&lt;p&gt;In this primer, I share key strategies and tactics to tackle an overloaded life with an open heart, renewed energy, and a smile.&lt;/p&gt;
+&lt;h2&gt;Step 1: Triage&lt;/h2&gt;
+&lt;p&gt;Whether you’re starting your day or caught in the chaos, the first step is triage mode—sorting through the mess to prioritize tasks based on urgency and importance.&lt;/p&gt;
+&lt;p&gt;Here’s how:
+- &lt;strong&gt;Create a Short List for today&lt;/strong&gt;: Identify tasks that &lt;em&gt;must&lt;/em&gt; be done today, such as critical project work, urgent tasks with consequences if ignored, or small administrative tasks. Be ruthless—aim for no more than five tasks. Not every email needs a response, and not everything is urgent.
+- &lt;strong&gt;Defer tasks&lt;/strong&gt;: Push non-urgent tasks to tomorrow or later in the week. Renegotiate deadlines if possible to spread out the workload.
+- &lt;strong&gt;Eliminate tasks&lt;/strong&gt;: Skip low-priority messages or commitments. For tasks you can’t take on, add them to a “To Not Do” list and plan to address them later (e.g., by declining or delegating).&lt;/p&gt;
+&lt;p&gt;Now you have breathing room and a manageable list. Next, narrow it down further.&lt;/p&gt;
+&lt;h2&gt;Step 2: Focus on One Thing&lt;/h2&gt;
+&lt;p&gt;With so much on your plate, choosing one task to focus on feels daunting—but it’s essential.&lt;/p&gt;
+&lt;p&gt;Here’s the shift:
+- &lt;strong&gt;Pick one task&lt;/strong&gt;: Review your Short List. If there’s an urgent, time-sensitive task, prioritize it. Otherwise, choose the most important task—often the one you’ve been avoiding.
+- &lt;strong&gt;Clear distractions&lt;/strong&gt;: Close browser tabs, turn off notifications, shut down unnecessary apps, and put your phone away.
+- &lt;strong&gt;Immerse yourself&lt;/strong&gt;: Focus entirely on the chosen task. Treat it as a practice of letting go of everything else, embracing radical simplicity, and being fully present.&lt;/p&gt;
+&lt;p&gt;Work on this task for at least 15–20 minutes before switching. By focusing on one thing, you shift from a frazzled state to one of calm clarity.&lt;/p&gt;
+&lt;h2&gt;Step 3: Schedule Time to Simplify&lt;/h2&gt;
+&lt;p&gt;Your “To Not Do” list needs attention. Schedule time this week to simplify your commitments:
+- Say no to less important projects or tasks.
+- Delegate or renegotiate commitments you can’t fulfill.
+- Cross off low-priority items from your task list.&lt;/p&gt;
+&lt;p&gt;Protecting your time for meaningful work and personal well-being reduces overwhelm. You don’t need to simplify today—just schedule it and let go of the stress until then.&lt;/p&gt;
+&lt;h2&gt;Step 4: Practice Mindful Focus&lt;/h2&gt;
+&lt;p&gt;Adopt an attitude of “mindful focus” throughout your day. Focus on one task at a time, staying present and minimizing task-switching.&lt;/p&gt;
+&lt;p&gt;Think of this as a new mode of being—a mindfulness practice (imperfect but powerful). As you work through your Short List, approach each task with:
+- An open heart
+- Curiosity and gratitude
+- A sense of joy&lt;/p&gt;
+&lt;p&gt;This mindset transforms your relationship with work. Each task becomes perfect for the moment, and you’ll feel less overwhelmed.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Peace, Love, Balance.&lt;/strong&gt;&lt;br&gt;
+☮️ 💚 ☯️&lt;/p&gt;</content><category term="misc"/><category term="100daystooffload"/><category term="productivity"/></entry></feed>
