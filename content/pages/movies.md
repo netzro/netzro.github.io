@@ -9,6 +9,13 @@ _Updated as I watch. Last update: 28th June 2026._
 
 ### Watchlist
 
+<details markdown='1'><summary>July 2026</summary>
+
+_Title_ - **The Awakening (2011)**  
+_Watched on_ - 02th July 2026
+
+</details>
+
 <details markdown='1'><summary>June 2026</summary>
 
 _Title_ - **Sheep Detectives (2026)**  
