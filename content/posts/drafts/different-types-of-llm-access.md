@@ -1,6 +1,6 @@
 ---
-title: "Different Types of LLM Access"
-slug: "different-types-of-llm-access"
+title: Different Types of LLM Access
+slug: different-types-of-llm-access
 date: 2026-07-02
 tags: [LLM, API, OpenRouter, Self-Hosted]
 summary: "An overview of the three main ways to access large language models: direct API, inference routing services, and local/self‑hosted deployments."
