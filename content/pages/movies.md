@@ -5,7 +5,7 @@ Status: hidden
 ---
 
 # Movies
-_Updated as I watch. Last update: 28th June 2026._
+_Updated as I watch. Last update: 05th July 2026._
 
 ### Watchlist
 
@@ -13,6 +13,15 @@ _Updated as I watch. Last update: 28th June 2026._
 
 _Title_ - **The Awakening (2011)**  
 _Watched on_ - 02th July 2026
+
+_Title_ - **Enola Holmes 3 (2026)**  
+_Watched on_ - 05th July 2026
+
+_Title_ - **House of the Dragon S03E01 (2026)**  
+_Watched on_ - 05th July 2026
+
+_Title_ - **House of the Dragon S03E02 (2026)**  
+_Watched on_ - 05th July 2026
 
 </details>
 
