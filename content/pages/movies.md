@@ -11,9 +11,6 @@ _Updated as I watch. Last update: 05th July 2026._
 
 <details markdown='1'><summary>July 2026</summary>
 
-_Title_ - **The Awakening (2011)**  
-_Watched on_ - 02th July 2026
-
 _Title_ - **Enola Holmes 3 (2026)**  
 _Watched on_ - 05th July 2026
 
@@ -22,6 +19,9 @@ _Watched on_ - 05th July 2026
 
 _Title_ - **House of the Dragon S03E02 (2026)**  
 _Watched on_ - 05th July 2026
+
+_Title_ - **The Awakening (2011)**  
+_Watched on_ - 02nd July 2026
 
 </details>
 
