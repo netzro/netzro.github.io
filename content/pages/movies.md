@@ -5,11 +5,20 @@ Status: hidden
 ---
 
 # Movies
-_Updated as I watch. Last update: 07th July 2026._
+_Updated as I watch. Last update: 09th July 2026._
 
 ### Watchlist
 
 <details markdown='1'><summary>July 2026</summary>
+
+_Title_ - **Blackbar (2026)**  \
+_Watched on_ - 09th July 2026
+
+_Title_ - **Man of War (2026)**  \
+_Watched on_ - 09th July 2026
+
+_Title_ - **House of the Dragon S03E03 (2026)**  \
+_Watched on_ - 09th July 2026
 
 _Title_ - **You Are Not My Mother (2021)**  
 _Watched on_ - 07th July 2026
