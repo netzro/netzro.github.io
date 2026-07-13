@@ -1,5 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Gifted Space - misc</title><link href="https://netzro.github.io/" rel="alternate"/><link href="https://netzro.github.io/feeds/misc.atom.xml" rel="self"/><id>https://netzro.github.io/</id><updated>2026-07-05T00:00:00+01:00</updated><entry><title>How the 52-Card Deck Maps to Almost Everything in Nature</title><link href="https://netzro.github.io/posts/2026/Jul/05/how-the-52-card-deck-maps-to-nature/" rel="alternate"/><published>2026-07-05T00:00:00+01:00</published><updated>2026-07-05T00:00:00+01:00</updated><author><name>Gifted</name></author><id>tag:netzro.github.io,2026-07-05:/posts/2026/Jul/05/how-the-52-card-deck-maps-to-nature/</id><summary type="html">&lt;p&gt;The humble 52-card deck turns out to be a calendar, a body, and a seasonal compass disguised as entertainment.&lt;/p&gt;</summary><content type="html">&lt;p&gt;Something sits on the shelf in almost every home and never gets accused of being deep. A fifty-two-card deck. Four suits. Thirteen ranks. You shuffle it, deal it, and forget it. But the numbers inside are stubborn. They keep showing up in places the rules of hearts and spades never intended — like the calendar, like the body, like the turning world outside.&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Gifted Space - misc</title><link href="https://netzro.github.io/" rel="alternate"/><link href="https://netzro.github.io/feeds/misc.atom.xml" rel="self"/><id>https://netzro.github.io/</id><updated>2026-07-13T00:00:00+01:00</updated><entry><title>Using Your Android Phone as a PC Replacement</title><link href="https://netzro.github.io/posts/2026/Jul/13/android-as-pc-replacement/" rel="alternate"/><published>2026-07-13T00:00:00+01:00</published><updated>2026-07-13T00:00:00+01:00</updated><author><name>Gifted</name></author><id>tag:netzro.github.io,2026-07-13:/posts/2026/Jul/13/android-as-pc-replacement/</id><summary type="html">&lt;p&gt;How I run a full development and automation stack from an Android phone using Termux and proot Debian — and where the limits still bite.&lt;/p&gt;</summary><content type="html">&lt;p&gt;A few years ago, doing real work from a phone meant squinting at a trimmed-down app and giving up halfway. That changed for me the day I stopped treating my Android phone like a phone and started treating it like a small, always-on computer that happens to make calls.&lt;/p&gt;
+&lt;p&gt;This is not a stunt about what a phone can do. It is the setup I actually use. The thing writing this post is running on it.&lt;/p&gt;
+&lt;h2&gt;What "replacement" means&lt;/h2&gt;
+&lt;p&gt;Be clear about the claim. I am not saying a phone replaces a desktop for everyone. Video editing, heavy local ML training, and CAD are still better on a real machine. What I am saying is that for coding, server management, automation, and most knowledge work, my phone is now the primary device. The laptop mostly collects dust.&lt;/p&gt;
+&lt;p&gt;The trick is not one magic app. It is a stack.&lt;/p&gt;
+&lt;h2&gt;Layer one: Termux&lt;/h2&gt;
+&lt;p&gt;Termux is the foundation. It is a terminal emulator for Android that ships a real Linux userspace, with a package manager, a shell, and a proper filesystem under your home directory. From it I install Python, Node, git, and basically anything that compiles for aarch64.&lt;/p&gt;
+&lt;p&gt;On this device that means Python 3.13, the uv package manager, and Node 22 and 26 are all present and current. I install libraries, run scripts, and manage projects exactly as I would in a shell on a server.&lt;/p&gt;
+&lt;p&gt;One gotcha worth naming: Android's /tmp is locked down, so scratch work lives in a project temp directory instead. Small friction, easy habit.&lt;/p&gt;
+&lt;h2&gt;Layer two: a real Linux inside the phone&lt;/h2&gt;
+&lt;p&gt;Termux alone is a sandbox. The bigger win is proot Debian, a full Debian environment running alongside it, with its own apt, system libraries, and even Rust's cargo toolchain. The two share a projects folder, so files I create in one are visible in the other.&lt;/p&gt;
+&lt;p&gt;This matters because some packages only build cleanly against a full glibc Debian environment rather than Termux's bionic-linked setup. When an install stalls or tries to compile from source on the native side, dropping into Debian almost always resolves it. The phone becomes two machines that agree on a shared disk.&lt;/p&gt;
+&lt;h2&gt;Layer three: the agent in your pocket&lt;/h2&gt;
+&lt;p&gt;The part that actually changed my behavior is running an AI agent directly on the device. An agent that can read files, run terminal commands, keep a memory graph, and schedule its own jobs turns the phone from a client into a workstation.&lt;/p&gt;
+&lt;p&gt;Mine wakes up to a daily brief, runs maintenance on its own, and executes multi-step tasks while I am away. None of that needs a laptop open. The phone is the server.&lt;/p&gt;
+&lt;h2&gt;The things that still bite&lt;/h2&gt;
+&lt;p&gt;I will skip the "phone is all you need" hype, because it is not true and the people who say it never edited a video on one.&lt;/p&gt;
+&lt;p&gt;No desktop GUI. If a task needs a browser-based admin panel or a graphical installer, you are either remote-shelling into something else or using a web interface somewhere else.&lt;/p&gt;
+&lt;p&gt;Battery and thermals. Long compiles warm the device and drain it fast. For sustained jobs I lean on a VPS and keep the phone as the remote control.&lt;/p&gt;
+&lt;p&gt;Input. A Bluetooth keyboard is not optional if you write code seriously. The on-screen keyboard is fine for short replies and useless for a 200-line refactor.&lt;/p&gt;
+&lt;p&gt;File plumbing. Android's storage model is opinionated. Symlinks and shared-storage paths need care, and a careless command can land in the wrong sandbox.&lt;/p&gt;
+&lt;p&gt;None of these are dealbreakers. They are just the parts where you still reach for a bigger box.&lt;/p&gt;
+&lt;h2&gt;Why bother&lt;/h2&gt;
+&lt;p&gt;Two reasons. Continuity, first. The device is always with me, so the gap between "I had an idea" and "I started it" shrinks to the time it takes to open a terminal. Cost, second. A capable phone you already own beats buying and maintaining a laptop you use twice a week.&lt;/p&gt;
+&lt;p&gt;There is a quieter benefit too. Constraints force simplicity. When every megabyte and every background process is visible, you stop building sprawling, fragile setups. You build tight ones.&lt;/p&gt;
+&lt;h2&gt;Getting started&lt;/h2&gt;
+&lt;p&gt;If you want to try this, the path is short. Install Termux, learn a handful of shell commands, then add a Linux environment once you outgrow the sandbox. Pick one real task, a script, a bot, a static site, and run it end to end from the phone. The abstraction collapses the moment you do it once.&lt;/p&gt;
+&lt;p&gt;The laptop is not dead. It is just no longer the default. For most of what I do, the small machine in my pocket already won.&lt;/p&gt;</content><category term="misc"/><category term="android"/><category term="termux"/><category term="productivity"/><category term="mobile"/><category term="linux"/></entry><entry><title>How the 52-Card Deck Maps to Almost Everything in Nature</title><link href="https://netzro.github.io/posts/2026/Jul/05/how-the-52-card-deck-maps-to-nature/" rel="alternate"/><published>2026-07-05T00:00:00+01:00</published><updated>2026-07-05T00:00:00+01:00</updated><author><name>Gifted</name></author><id>tag:netzro.github.io,2026-07-05:/posts/2026/Jul/05/how-the-52-card-deck-maps-to-nature/</id><summary type="html">&lt;p&gt;The humble 52-card deck turns out to be a calendar, a body, and a seasonal compass disguised as entertainment.&lt;/p&gt;</summary><content type="html">&lt;p&gt;Something sits on the shelf in almost every home and never gets accused of being deep. A fifty-two-card deck. Four suits. Thirteen ranks. You shuffle it, deal it, and forget it. But the numbers inside are stubborn. They keep showing up in places the rules of hearts and spades never intended — like the calendar, like the body, like the turning world outside.&lt;/p&gt;
 &lt;h2&gt;The Calendar in Your Hand&lt;/h2&gt;
 &lt;p&gt;The oldest trick is also the cleanest: fifty-two cards, fifty-two weeks in a year. Hold a deck and you are holding a year. Not a metaphor for a year — a literal one-to-one match.&lt;/p&gt;
 &lt;p&gt;Four suits for four seasons. It is not creative interpretation. Clubs, spring, growth, things pushing through dirt. Diamonds, summer, openness, everything exposed. Hearts, autumn, ripening. Spades, winter, what remains hidden. Each suit carries thirteen ranks, Ace through King. There are thirteen weeks in every season. The math closes on itself cleanly.&lt;/p&gt;
@@ -570,110 +597,4 @@ I love you.&lt;/p&gt;</content><category term="misc"/><category term="nts"/><cat
 &lt;li&gt;&lt;strong&gt;The Amateur (2025)&lt;/strong&gt; — A CIA decoder goes rogue after his wife's death in a terrorist attack. Intense and emotional, with twists that hit hard.&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;Sinners (2025)&lt;/strong&gt; — Twin brothers return home to escape their past, only to face a darker evil. A chilling story with a haunting atmosphere.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;&lt;em&gt;Another week of growth, inspiration, and stories that spark the mind. Ready for what's next!&lt;/em&gt;&lt;/p&gt;</content><category term="misc"/><category term="weeknotes"/></entry><entry><title>Setting Up Cronie and Scheduling Scripts in Termux</title><link href="https://netzro.github.io/posts/2025/Jun/08/setting-up-cronie-and-scheduling-scripts-in-termux/" rel="alternate"/><published>2025-06-08T00:00:00+01:00</published><updated>2025-06-08T00:00:00+01:00</updated><author><name>Gifted</name></author><id>tag:netzro.github.io,2025-06-08:/posts/2025/Jun/08/setting-up-cronie-and-scheduling-scripts-in-termux/</id><summary type="html">&lt;p&gt;A step-by-step guide to installing cronie in Termux and scheduling scripts to run at specific times on Android.&lt;/p&gt;</summary><content type="html">&lt;h3&gt;Setting Up Cronie and Scheduling Scripts in Termux&lt;/h3&gt;
-&lt;p&gt;Cronie is a powerful tool for scheduling recurring tasks in Termux, allowing you to automate scripts on your Android device without root access. This guide walks you through installing cronie, setting up cron jobs, and managing them effectively, with examples tailored for Termux users.&lt;/p&gt;
-&lt;h3&gt;Why Use Cronie in Termux?&lt;/h3&gt;
-&lt;p&gt;Cronie enables you to run scripts at specific times or intervals, perfect for tasks like backups, notifications, or syncing files. Unlike &lt;code&gt;termux-job-scheduler&lt;/code&gt;, which is better for periodic tasks with Android-specific conditions (e.g., battery level), cronie offers precise, time-based scheduling similar to Linux cron. However, Android’s power management may kill Termux, so a wake lock is recommended.&lt;/p&gt;
-&lt;h3&gt;Prerequisites&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;Termux installed from F-Droid (not Google Play Store).&lt;/li&gt;
-&lt;li&gt;Scripts you want to schedule (e.g., Bash, Python) in a known path (e.g., &lt;code&gt;$HOME/scripts/&lt;/code&gt;).&lt;/li&gt;
-&lt;li&gt;Basic familiarity with Termux commands and a text editor like &lt;code&gt;nano&lt;/code&gt; or &lt;code&gt;vi&lt;/code&gt;.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3&gt;Step 1: Install Cronie and Termux-Services&lt;/h3&gt;
-&lt;ol&gt;
-&lt;li&gt;Update Termux packages:
-   &lt;code&gt;pkg update &amp;amp;&amp;amp; pkg upgrade&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;Install cronie and termux-services:
-   &lt;code&gt;pkg install cronie termux-services&lt;/code&gt;&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h2&gt;Step 2: Enable Cronie Service&lt;/h2&gt;
-&lt;p&gt;Enable the crond daemon to run cron jobs:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;sv-enable crond
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;If you see an error like “unable to change to service directory,” restart Termux and retry. Verify crond is running:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;sv status crond
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h2&gt;Step 3: Create and Schedule Cron Jobs&lt;/h2&gt;
-&lt;ol&gt;
-&lt;li&gt;Open the crontab editor:
-   &lt;code&gt;crontab -e&lt;/code&gt;
-   This opens the default editor (usually &lt;code&gt;vi&lt;/code&gt;). If you prefer &lt;code&gt;nano&lt;/code&gt;, set it first:
-   &lt;code&gt;export EDITOR=nano
-   crontab -e&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;Add cron job entries using the cron syntax: &lt;code&gt;minute hour day-of-month month day-of-week command&lt;/code&gt;. For example:
-   ```
-   # Run a script every day at 8:00 AM
-   0 8 * * * /data/data/com.termux/files/home/scripts/backup.sh&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;# Run a Python script every Monday at 9:00 AM
-   0 9 * * 1 /data/data/com.termux/files/usr/bin/python /data/data/com.termux/files/home/scripts/notify.py&lt;/p&gt;
-&lt;p&gt;# Run a script every hour
-   0 * * * * /data/data/com.termux/files/home/scripts/sync.sh
-   &lt;code&gt;3. Save and exit (`:wq` in `vi`, or `Ctrl+O`, `Enter`, `Ctrl+X` in `nano`).
-4. Verify cron jobs:&lt;/code&gt;
-   crontab -l
-   ```&lt;/p&gt;
-&lt;h2&gt;Example Scripts&lt;/h2&gt;
-&lt;h3&gt;Backup Script (&lt;code&gt;backup.sh&lt;/code&gt;)&lt;/h3&gt;
-&lt;p&gt;Create a script to back up files:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="ch"&gt;#!/data/data/com.termux/files/usr/bin/bash&lt;/span&gt;
-mkdir&lt;span class="w"&gt; &lt;/span&gt;-p&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;$HOME&lt;/span&gt;/backups
-tar&lt;span class="w"&gt; &lt;/span&gt;-czf&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;$HOME&lt;/span&gt;/backups/backup-&lt;span class="k"&gt;$(&lt;/span&gt;date&lt;span class="w"&gt; &lt;/span&gt;+%F&lt;span class="k"&gt;)&lt;/span&gt;.tar.gz&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;$HOME&lt;/span&gt;/storage/documents
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;Make it executable:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;chmod +x $HOME/scripts/backup.sh
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;Schedule it to run daily at 8:00 AM:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="mf"&gt;0&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mf"&gt;8&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="kd"&gt;data&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="kd"&gt;data&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;com&lt;/span&gt;&lt;span class="mf"&gt;.&lt;/span&gt;&lt;span class="n"&gt;termux&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;files&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;home&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;scripts&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;backup&lt;/span&gt;&lt;span class="mf"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sh&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h3&gt;Notification Script (&lt;code&gt;notify.py&lt;/code&gt;)&lt;/h3&gt;
-&lt;p&gt;Create a Python script to send a Termux notification:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="ch"&gt;#!/data/data/com.termux/files/usr/bin/python&lt;/span&gt;
-&lt;span class="kn"&gt;import&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nn"&gt;os&lt;/span&gt;
-&lt;span class="n"&gt;os&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;system&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;termux-notification -t &amp;quot;Weekly Reminder&amp;quot; -c &amp;quot;Time to review your goals!&amp;quot;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;Make it executable:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;chmod +x $HOME/scripts/notify.py
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;Schedule it to run every Monday at 9:00 AM:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="mf"&gt;0&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mf"&gt;9&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mf"&gt;1&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="kd"&gt;data&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="kd"&gt;data&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;com&lt;/span&gt;&lt;span class="mf"&gt;.&lt;/span&gt;&lt;span class="n"&gt;termux&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;files&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nb"&gt;usr&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;bin&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;python&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="kd"&gt;data&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="kd"&gt;data&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;com&lt;/span&gt;&lt;span class="mf"&gt;.&lt;/span&gt;&lt;span class="n"&gt;termux&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;files&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;home&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;scripts&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="ow"&gt;not&lt;/span&gt;&lt;span class="kr"&gt;if&lt;/span&gt;&lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="mf"&gt;.&lt;/span&gt;&lt;span class="n"&gt;py&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h2&gt;Step 4: Prevent Termux Termination&lt;/h2&gt;
-&lt;p&gt;Android may kill Termux in the background, stopping cron jobs. To mitigate:
-- &lt;strong&gt;Acquire a Wake Lock&lt;/strong&gt;:
-  &lt;code&gt;termux-wake-lock&lt;/code&gt;
-  Run this before starting crond to keep Termux active. Note: This may drain battery, so use sparingly.
-- &lt;strong&gt;Disable Battery Optimization&lt;/strong&gt;: Go to Android Settings &amp;gt; Apps &amp;gt; Termux &amp;gt; Battery &amp;gt; Disable optimization.
-- &lt;strong&gt;Optional: Termux:Boot&lt;/strong&gt;: Install Termux:Boot from F-Droid, enable it, and add &lt;code&gt;termux-wake-lock&lt;/code&gt; to &lt;code&gt;$HOME/.termux/boot/&lt;/code&gt; scripts to run on device startup.&lt;/p&gt;
-&lt;h2&gt;Troubleshooting&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;Cron Jobs Not Running&lt;/strong&gt;:&lt;/li&gt;
-&lt;li&gt;Check if crond is active: &lt;code&gt;sv status crond&lt;/code&gt;.&lt;/li&gt;
-&lt;li&gt;Ensure script paths are absolute (e.g., &lt;code&gt;/data/data/com.termux/files/home/scripts/backup.sh&lt;/code&gt;).&lt;/li&gt;
-&lt;li&gt;Verify script permissions: &lt;code&gt;ls -l $HOME/scripts/backup.sh&lt;/code&gt; (should show &lt;code&gt;-rwxr-xr-x&lt;/code&gt;).&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Logs&lt;/strong&gt;: Check cron logs at &lt;code&gt;$PREFIX/var/log/sv/crond/current&lt;/code&gt; for errors.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Termux Killed&lt;/strong&gt;: Re-run &lt;code&gt;termux-wake-lock&lt;/code&gt; and &lt;code&gt;sv-enable crond&lt;/code&gt; after app restarts.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2&gt;Cronie vs. Termux-Job-Scheduler&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;Cronie&lt;/strong&gt;: Best for precise, recurring schedules (e.g., daily at 8:00 AM). Requires Termux to stay active.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Termux-Job-Scheduler&lt;/strong&gt;: Better for periodic tasks with Android conditions (e.g., run when charging). Less precise but more battery-friendly. Example:
-  &lt;code&gt;termux-job-scheduler -s $HOME/scripts/backup.sh --period-ms 3600000&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2&gt;Tips&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;Use &lt;a href="https://crontab.guru/"&gt;crontab.guru&lt;/a&gt; to craft cron schedules.&lt;/li&gt;
-&lt;li&gt;Test scripts manually before scheduling: &lt;code&gt;bash $HOME/scripts/backup.sh&lt;/code&gt;.&lt;/li&gt;
-&lt;li&gt;Keep Termux open or use a wake lock for reliable cron execution.&lt;/li&gt;
-&lt;li&gt;For one-time tasks, consider &lt;code&gt;at&lt;/code&gt; (if available) or &lt;code&gt;termux-job-scheduler&lt;/code&gt; with a script to check the date.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;em&gt;Automate your tasks with cronie and take control of your Termux workflow!&lt;/em&gt;&lt;a href="https://www.reddit.com/r/termux/comments/i27szk/how_do_i_crontab_on_termux/"&gt;&lt;/a&gt;&lt;a href="https://teddit.net/r/termux/comments/i27szk/"&gt;&lt;/a&gt;&lt;a href="https://lotositsh.github.io/it/cron-termux.html"&gt;&lt;/a&gt;&lt;/p&gt;</content><category term="misc"/><category term="termux"/><category term="technology"/></entry></feed>
+&lt;p&gt;&lt;em&gt;Another week of growth, inspiration, and stories that spark the mind. Ready for what's next!&lt;/em&gt;&lt;/p&gt;</content><category term="misc"/><category term="weeknotes"/></entry></feed>
