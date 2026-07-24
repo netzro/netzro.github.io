@@ -1,5 +1,5 @@
 Title: Python Functions in Functional Programming, Part 1: The Basics
-Date: 2026-07-09
+Date: 2026-07-24
 Time: 09:30
 Author: Gifted
 Tags: python, functional-programming, programming, tutorial
