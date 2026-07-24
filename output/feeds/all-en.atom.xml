@@ -49,7 +49,105 @@
 &lt;p&gt;There is a quieter benefit too. Constraints force simplicity. When every megabyte and every background process is visible, you stop building sprawling, fragile setups. You build tight ones.&lt;/p&gt;
 &lt;h2&gt;Getting started&lt;/h2&gt;
 &lt;p&gt;If you want to try this, the path is short. Install Termux, learn a handful of shell commands, then add a Linux environment once you outgrow the sandbox. Pick one real task, a script, a bot, a static site, and run it end to end from the phone. The abstraction collapses the moment you do it once.&lt;/p&gt;
-&lt;p&gt;The laptop is not dead. It is just no longer the default. For most of what I do, the small machine in my pocket already won.&lt;/p&gt;</content><category term="misc"/><category term="android"/><category term="termux"/><category term="productivity"/><category term="mobile"/><category term="linux"/></entry><entry><title>How the 52-Card Deck Maps to Almost Everything in Nature</title><link href="https://netzro.github.io/posts/2026/Jul/05/how-the-52-card-deck-maps-to-nature/" rel="alternate"/><published>2026-07-05T00:00:00+01:00</published><updated>2026-07-05T00:00:00+01:00</updated><author><name>Gifted</name></author><id>tag:netzro.github.io,2026-07-05:/posts/2026/Jul/05/how-the-52-card-deck-maps-to-nature/</id><summary type="html">&lt;p&gt;The humble 52-card deck turns out to be a calendar, a body, and a seasonal compass disguised as entertainment.&lt;/p&gt;</summary><content type="html">&lt;p&gt;Something sits on the shelf in almost every home and never gets accused of being deep. A fifty-two-card deck. Four suits. Thirteen ranks. You shuffle it, deal it, and forget it. But the numbers inside are stubborn. They keep showing up in places the rules of hearts and spades never intended — like the calendar, like the body, like the turning world outside.&lt;/p&gt;
+&lt;p&gt;The laptop is not dead. It is just no longer the default. For most of what I do, the small machine in my pocket already won.&lt;/p&gt;</content><category term="misc"/><category term="android"/><category term="termux"/><category term="productivity"/><category term="mobile"/><category term="linux"/></entry><entry><title>Python Functions in Functional Programming, Part 1: The Basics</title><link href="https://netzro.github.io/posts/2026/Jul/09/python-functions-functional-beginner/" rel="alternate"/><published>2026-07-09T00:00:00+01:00</published><updated>2026-07-09T00:00:00+01:00</updated><author><name>Gifted</name></author><id>tag:netzro.github.io,2026-07-09:/posts/2026/Jul/09/python-functions-functional-beginner/</id><summary type="html">&lt;p&gt;A beginner-friendly look at how functions work in Python when you treat them the functional-programming way — first-class objects, pure functions, and the map/filter/reduce trio.&lt;/p&gt;</summary><content type="html">&lt;h2&gt;What "functional" even means in Python&lt;/h2&gt;
+&lt;p&gt;Python isn't a pure functional language like Haskell. You can mutate state, use classes, loop with &lt;code&gt;for&lt;/code&gt;. But Python &lt;em&gt;borrows&lt;/em&gt; a lot from functional programming, and the result is a style that's often cleaner and easier to reason about than the imperative alternative.&lt;/p&gt;
+&lt;p&gt;Functional programming comes down to three ideas:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Functions are &lt;strong&gt;values&lt;/strong&gt; you can pass around.&lt;/li&gt;
+&lt;li&gt;Functions should avoid &lt;strong&gt;side effects&lt;/strong&gt; when possible.&lt;/li&gt;
+&lt;li&gt;You build behavior by &lt;strong&gt;composing&lt;/strong&gt; small functions.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;That's it. No monads required for the basics. Let's see what each looks like in Python.&lt;/p&gt;
+&lt;h2&gt;Functions are first-class objects&lt;/h2&gt;
+&lt;p&gt;In Python, a function is just another object. You can assign it to a variable, store it in a list, return it from another function, and pass it as an argument.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;def&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nf"&gt;greet&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="sa"&gt;f&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Hello, &lt;/span&gt;&lt;span class="si"&gt;{&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;!&amp;quot;&lt;/span&gt;
+
+&lt;span class="n"&gt;say&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;greet&lt;/span&gt;          &lt;span class="c1"&gt;# no parentheses — we&amp;#39;re passing the function, not calling it&lt;/span&gt;
+&lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;say&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Ada&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;    &lt;span class="c1"&gt;# Hello, Ada!&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;This is the foundation of everything functional in Python. Because functions are values, you can write functions that &lt;em&gt;take other functions&lt;/em&gt; as input.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;def&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nf"&gt;apply_twice&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;func&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;value&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;func&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;func&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;value&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+
+&lt;span class="k"&gt;def&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nf"&gt;add_five&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="mi"&gt;5&lt;/span&gt;
+
+&lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;apply_twice&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;add_five&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;   &lt;span class="c1"&gt;# 20&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;A function that takes or returns another function is called a &lt;strong&gt;higher-order function&lt;/strong&gt;. You'll meet these constantly.&lt;/p&gt;
+&lt;h2&gt;Pure functions and why they matter&lt;/h2&gt;
+&lt;p&gt;A &lt;em&gt;pure&lt;/em&gt; function has two properties:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;It always returns the same output for the same input.&lt;/li&gt;
+&lt;li&gt;It doesn't change anything outside itself (no global state, no file writes, no &lt;code&gt;print&lt;/code&gt; side effects).&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="c1"&gt;# Pure&lt;/span&gt;
+&lt;span class="k"&gt;def&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nf"&gt;square&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt;
+
+&lt;span class="c1"&gt;# Impure — depends on outside state and mutates it&lt;/span&gt;
+&lt;span class="n"&gt;total&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;
+&lt;span class="k"&gt;def&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nf"&gt;add_to_total&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="k"&gt;global&lt;/span&gt; &lt;span class="n"&gt;total&lt;/span&gt;
+    &lt;span class="n"&gt;total&lt;/span&gt; &lt;span class="o"&gt;+=&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;total&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Why care? Pure functions are predictable. You can test them without setup, run them in any order, and cache their results. When a bug appears, a pure function has far fewer places to hide it.&lt;/p&gt;
+&lt;p&gt;That doesn't mean you never write impure code — printing to a screen or saving a file has to happen somewhere. The functional style is about &lt;em&gt;pushing&lt;/em&gt; side effects to the edges of your program and keeping the core logic pure.&lt;/p&gt;
+&lt;h2&gt;The map / filter / reduce trio&lt;/h2&gt;
+&lt;p&gt;These three are the workhorses of functional Python.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;map&lt;/strong&gt; applies a function to every item in an iterable:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;numbers&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;span class="n"&gt;squared&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;list&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;map&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;square&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;numbers&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+&lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;squared&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;   &lt;span class="c1"&gt;# [1, 4, 9, 16]&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;filter&lt;/strong&gt; keeps only the items that pass a test:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;evens&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;list&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;filter&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;lambda&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="o"&gt;%&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;numbers&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+&lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;evens&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;     &lt;span class="c1"&gt;# [2, 4]&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;reduce&lt;/strong&gt; collapses an iterable into a single value:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;from&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nn"&gt;functools&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;reduce&lt;/span&gt;
+
+&lt;span class="n"&gt;product&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;reduce&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;lambda&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;b&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="n"&gt;b&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;numbers&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;product&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;   &lt;span class="c1"&gt;# 24&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Notice the &lt;code&gt;lambda&lt;/code&gt; in &lt;code&gt;filter&lt;/code&gt; and &lt;code&gt;reduce&lt;/code&gt;. A lambda is just a tiny anonymous function — useful when you don't need a full &lt;code&gt;def&lt;/code&gt;.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="c1"&gt;# These are the same&lt;/span&gt;
+&lt;span class="k"&gt;def&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nf"&gt;is_even&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="o"&gt;%&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;
+
+&lt;span class="n"&gt;is_even&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;lambda&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="o"&gt;%&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h2&gt;A note on list comprehensions&lt;/h2&gt;
+&lt;p&gt;Python gives you list comprehensions, which often read better than &lt;code&gt;map&lt;/code&gt; and &lt;code&gt;filter&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;squared&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;numbers&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;span class="n"&gt;evens&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;numbers&lt;/span&gt; &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="o"&gt;%&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Functional purists sometimes prefer &lt;code&gt;map&lt;/code&gt;/&lt;code&gt;filter&lt;/code&gt;, but in real Python code, comprehensions are idiomatic and fast. The functional &lt;em&gt;mindset&lt;/em&gt; — transforming data without mutating it — matters more than which syntax you pick.&lt;/p&gt;
+&lt;h2&gt;Immutability: a gentle start&lt;/h2&gt;
+&lt;p&gt;Functional programming favors data you don't change. Instead of editing a list, you make a new one.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;original&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;span class="n"&gt;updated&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;original&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;     &lt;span class="c1"&gt;# new list, original untouched&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Tuples are immutable by default, which makes them a safe choice for data that shouldn't change:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;point&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;    &lt;span class="c1"&gt;# can&amp;#39;t be reassigned element-wise&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h2&gt;Where this leaves you&lt;/h2&gt;
+&lt;p&gt;If you take nothing else: treat functions as ordinary values, keep the core of your logic pure, and transform data by producing new data rather than mutating old data. Those habits alone will make your Python clearer.&lt;/p&gt;
+&lt;p&gt;In &lt;strong&gt;Part 2&lt;/strong&gt;, we'll go further — &lt;code&gt;functools&lt;/code&gt; (&lt;code&gt;partial&lt;/code&gt;, &lt;code&gt;lru_cache&lt;/code&gt;), closures, recursion, and how to refactor messy imperative code into a functional shape.&lt;/p&gt;
+&lt;h2&gt;Try it yourself&lt;/h2&gt;
+&lt;p&gt;Open a Python REPL and rewrite a small &lt;code&gt;for&lt;/code&gt; loop you've written recently using &lt;code&gt;map&lt;/code&gt; or a comprehension. Feel how the code shrinks. That's the functional style clicking into place.&lt;/p&gt;</content><category term="misc"/><category term="python"/><category term="functional-programming"/><category term="programming"/><category term="tutorial"/></entry><entry><title>How the 52-Card Deck Maps to Almost Everything in Nature</title><link href="https://netzro.github.io/posts/2026/Jul/05/how-the-52-card-deck-maps-to-nature/" rel="alternate"/><published>2026-07-05T00:00:00+01:00</published><updated>2026-07-05T00:00:00+01:00</updated><author><name>Gifted</name></author><id>tag:netzro.github.io,2026-07-05:/posts/2026/Jul/05/how-the-52-card-deck-maps-to-nature/</id><summary type="html">&lt;p&gt;The humble 52-card deck turns out to be a calendar, a body, and a seasonal compass disguised as entertainment.&lt;/p&gt;</summary><content type="html">&lt;p&gt;Something sits on the shelf in almost every home and never gets accused of being deep. A fifty-two-card deck. Four suits. Thirteen ranks. You shuffle it, deal it, and forget it. But the numbers inside are stubborn. They keep showing up in places the rules of hearts and spades never intended — like the calendar, like the body, like the turning world outside.&lt;/p&gt;
 &lt;h2&gt;The Calendar in Your Hand&lt;/h2&gt;
 &lt;p&gt;The oldest trick is also the cleanest: fifty-two cards, fifty-two weeks in a year. Hold a deck and you are holding a year. Not a metaphor for a year — a literal one-to-one match.&lt;/p&gt;
 &lt;p&gt;Four suits for four seasons. It is not creative interpretation. Clubs, spring, growth, things pushing through dirt. Diamonds, summer, openness, everything exposed. Hearts, autumn, ripening. Spades, winter, what remains hidden. Each suit carries thirteen ranks, Ace through King. There are thirteen weeks in every season. The math closes on itself cleanly.&lt;/p&gt;
@@ -627,10 +725,4 @@ I love you.&lt;/p&gt;</content><category term="misc"/><category term="nts"/><cat
 &lt;p&gt;I find that compelling. Not because I believe in Ammit or fire-breathing serpents, but because the underlying instinct feels right. The things that matter — really matter — require preparation. Courage. A willingness to walk through the dark even when you can't see the other side.&lt;/p&gt;
 &lt;p&gt;The Egyptians built their entire civilization around death as passage. Tombs filled with spells. Guides inscribed on walls. Generations of priests maintaining the knowledge the dead would need. All of it for a journey that might not even be real.&lt;/p&gt;
 &lt;p&gt;But maybe that's not the point. Maybe the preparation &lt;em&gt;was&lt;/em&gt; the point. Maybe you live differently when you believe what comes next depends on what you know and who you've become.&lt;/p&gt;
-&lt;p&gt;Every journey worth taking has thresholds. The Duat just made that literal. Twelve of them, guarded by gods and fire, and the only way through was forward.&lt;/p&gt;</content><category term="Mythology"/><category term="egyptian mythology"/><category term="duat"/><category term="afterlife"/><category term="ancient egypt"/><category term="mythology"/></entry><entry><title>The Life You Want</title><link href="https://netzro.github.io/posts/2026/Jun/21/the-life-you-want/" rel="alternate"/><published>2026-06-21T00:00:00+01:00</published><updated>2026-06-21T00:00:00+01:00</updated><author><name>Gifted</name></author><id>tag:netzro.github.io,2026-06-21:/posts/2026/Jun/21/the-life-you-want/</id><summary type="html">&lt;h3&gt;note-to-self:26-08&lt;/h3&gt;
-&lt;p&gt;The life you want is on the other side of the thing you're …&lt;/p&gt;</summary><content type="html">&lt;h3&gt;note-to-self:26-08&lt;/h3&gt;
-&lt;p&gt;The life you want is on the other side of the thing you're avoiding.&lt;/p&gt;
-&lt;p&gt;You already know what it is. You don't need another book, another video, another plan. You need to close the app, sit in the discomfort, and start — not tomorrow, not when you feel ready.&lt;/p&gt;
-&lt;p&gt;Right now.&lt;/p&gt;
-&lt;p&gt;Discipline isn't dramatic. It's just doing the thing you already know you should do, at the moment you least want to do it. Again and again, until the life you want stops being a fantasy and starts being a Tuesday.&lt;/p&gt;
-&lt;p&gt;Stop waiting. Start. 🗣️🔉🔊&lt;/p&gt;</content><category term="misc"/><category term="nts"/><category term="Discipline"/></entry></feed>
+&lt;p&gt;Every journey worth taking has thresholds. The Duat just made that literal. Twelve of them, guarded by gods and fire, and the only way through was forward.&lt;/p&gt;</content><category term="Mythology"/><category term="egyptian mythology"/><category term="duat"/><category term="afterlife"/><category term="ancient egypt"/><category term="mythology"/></entry></feed>
