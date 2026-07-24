@@ -112,8 +112,8 @@ _Title_ - **Predator: Killer of Killers (2025)**
 _My rating_ - ⭐⭐⭐  
 _Watched on_ - 15th June 2025
 
-_Title_ - **Sinners (2025)**    
-_My rating__ - ⭐⭐⭐  
+_Title_ - **Sinners (2025)**  
+_My rating_ - ⭐⭐⭐  
 _Watched on_ - 15th June 2025
 
 _Title_ - **The Amateur (2025)**    

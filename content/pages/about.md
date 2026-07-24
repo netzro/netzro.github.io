@@ -7,7 +7,7 @@ Date: 2024-08-06
 
 Hi, I am Gift Owho, a self-taught developer from Delta State, Nigeria. I build personal AI infrastructure — agents, portfolio trackers, automation pipelines — all running from a Termux session on Android.
 
-I run Hermes (my personal AI agent), OmniRoute (LLM routing through free API tiers), and ngx-portfolio (a CLI and MCP server for tracking my NGX stock holdings). Everything is built with Python, managed through uv, and deployed from the phone in my pocket.
+I run ngx-portfolio (a CLI and MCP server for tracking my NGX stock holdings). Everything is built with Python, managed through uv, and deployed from the phone in my pocket.
 
 I also write about the intersection of technology, philosophy, and sovereignty. This blog is where I record my doings, thoughts, and writing.
 
