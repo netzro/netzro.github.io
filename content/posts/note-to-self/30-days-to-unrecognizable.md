@@ -1,7 +1,7 @@
 ---
 Title: 30 Days to Unrecognizable
 Date: 2025-05-25
-Tags: nts, Transformation
+Tags: nts, transformation
 Slug: 30-days-to-unrecognizable
 ---
 

@@ -1,6 +1,6 @@
 Title: Watching Marvel Movies in Order
 Date: 2024-09-19
-Tags: 100DaysToOffload, movies
+Tags: 100daystooffload, movies
 Slug: mcu-movies
 Summary: A plan to watch Marvel Cinematic Universe (MCU) movies in release order, with a complete list of films by phase.
 

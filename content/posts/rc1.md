@@ -1,6 +1,6 @@
 Title: My Rubik's Cube (Part 1)
 Date: 2024-08-29
-Tags: 100DaysToOffload, misc
+Tags: 100daystooffload, misc
 
 ## The Cube
 

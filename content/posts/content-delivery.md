@@ -1,9 +1,9 @@
 Title: Content Delivery
 Date: 2024-08-10T19:59:00Z
-Tags: misc, 100DaysToOffload
-Summary: Introducing my Weeknotes and Note to Self (NTS) series for the #100DaysToOffload challenge.
+Tags: misc, 100daystooffload
+Summary: Introducing my Weeknotes and Note to Self (NTS) series for the #100daystooffload challenge.
 
-I’m launching two series for my blog as part of the #100DaysToOffload challenge.
+I’m launching two series for my blog as part of the #100daystooffload challenge.
 
 The first series, **Weeknotes**, will summarize my weekly activities, with subheadings covering:
 - Articles I read from blogs and websites

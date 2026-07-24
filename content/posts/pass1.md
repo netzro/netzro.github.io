@@ -1,6 +1,6 @@
 Title: Setting Up Pass as My Password Manager
 Date: 2024-08-15
-Tags: 100DaysToOffload, linux
+Tags: 100daystooffload, linux
 Summary: A guide to setting up Pass, a lightweight Unix password manager, on a Linux environment (Termux) and syncing with GitHub.
 
 Managing passwords without a dedicated password manager is challenging. Having been online for decades, I’ve used countless websites and services—email, banking, forums, and chat platforms—all requiring unique credentials.

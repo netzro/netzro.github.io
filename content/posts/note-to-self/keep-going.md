@@ -1,7 +1,7 @@
 ---
 Title: Keep Going
 Date: 2025-05-27
-Tags: nts, Motivation
+Tags: nts, motivation
 Slug: keep-going
 ---
 

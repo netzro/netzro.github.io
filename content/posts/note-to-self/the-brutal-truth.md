@@ -1,7 +1,7 @@
 ---
 Title: The Brutal Truth
 Date: 2025-06-02
-Tags: nts, Transformation
+Tags: nts, transformation
 Slug: the-brutal-truth
 ---
 

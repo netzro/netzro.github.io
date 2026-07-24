@@ -1,7 +1,7 @@
 ---
 Title: Build Your Beautiful Life
 Date: 2025-05-23
-Tags: nts, Motivation
+Tags: nts, motivation
 Slug: build-your-beautiful-life
 ---
 
