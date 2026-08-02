@@ -24,61 +24,63 @@ _Watched on_ - 2nd August 2026
 
 <details markdown='1'><summary>July 2026</summary>
 
-_Title_ - **Fractured (2019)**  
+![](images/posters/fractured.jpg) _Title_ - **Fractured (2019)**  
 _Watched on_ - 24th July 2026
 
-_Title_ - **1408 (2007)**  
+![](images/posters/1408.jpg) _Title_ - **1408 (2007)**  
 _Watched on_ - 16th July 2026
 
-_Title_ - **Identity (2003)**  
+![](images/posters/identity.jpg) _Title_ - **Identity (2003)**  
 _Watched on_ - 16th July 2026
 
-_Title_ - **Caveat (2020)**  
+![](images/posters/caveat.jpg) _Title_ - **Caveat (2020)**  
 _Watched on_ - 15th July 2026
 
-_Title_ - **The Well (2023)**  
+![](images/posters/the-well.jpg) _Title_ - **The Well (2023)**  
 _Watched on_ - 13th July 2026
 
-_Title_ - **Shell (2024)**  
+![](images/posters/shell.jpg) _Title_ - **Shell (2024)**  
 _Watched on_ - 13th July 2026
 
-_Title_ - **Open 24 Hours (2018)**  
+![](images/posters/open-24-hours.jpg) _Title_ - **Open 24 Hours (2018)**  
 _Watched on_ - 13th July 2026
 
-_Title_ - **Black Box (2026)**  
+![](images/posters/black-box.jpg) _Title_ - **Black Box (2026)**  
 _Watched on_ - 09th July 2026
 
-_Title_ - **Man of War (2026)**  
+![](images/posters/man-of-war.jpg) _Title_ - **Man of War (2026)**  
 _Watched on_ - 09th July 2026
 
-_Title_ - **House of the Dragon S03E03 (2026)**  
+![](images/posters/house-of-the-dragon.jpg) _Title_ - **House of the Dragon S03E03 (2026)**  
 _Watched on_ - 09th July 2026
 
-_Title_ - **You Are Not My Mother (2021)**  
+![](images/posters/you-are-not-my-mother.jpg) _Title_ - **You Are Not My Mother (2021)**  
 _Watched on_ - 07th July 2026
 
-_Title_ - **Return to Silent Hill (2024)**  
+![](images/posters/return-to-silent-hill.jpg) _Title_ - **Return to Silent Hill (2024)**  
 _Watched on_ - 07th July 2026
 
-_Title_ - **Childhood's End (2015)**  
+![](images/posters/childhoods-end.jpg) _Title_ - **Childhood's End (2015)**  
 _Watched on_ - 07th July 2026
 
-_Title_ - **The Blackout (2019)**  
+![](images/posters/the-blackout.jpg) _Title_ - **The Blackout (2019)**  
 _Watched on_ - 07th July 2026
 
-_Title_ - **Enola Holmes 3 (2026)**  
+![](images/posters/enola-holmes-3.jpg) _Title_ - **Enola Holmes 3 (2026)**  
 _Watched on_ - 05th July 2026
 
-_Title_ - **House of the Dragon S03E01 (2026)**  
+![](images/posters/house-of-the-dragon.jpg) _Title_ - **House of the Dragon S03E01 (2026)**  
 _Watched on_ - 05th July 2026
 
-_Title_ - **House of the Dragon S03E02 (2026)**  
+![](images/posters/house-of-the-dragon.jpg) _Title_ - **House of the Dragon S03E02 (2026)**  
 _Watched on_ - 05th July 2026
 
-_Title_ - **The Awakening (2011)**  
+![](images/posters/the-awakening.jpg) _Title_ - **The Awakening (2011)**  
 _Watched on_ - 02nd July 2026
 
 </details>
+
+
 
 <details markdown='1'><summary>June 2026</summary>
 
