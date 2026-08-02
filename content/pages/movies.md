@@ -9,7 +9,7 @@ _Updated as I watch. Last update: 24th July 2026._
 
 ### Watchlist
 
-<details markdown='1'><summary>July 2026</summary>
+<details markdown='1'><summary>August 2026</summary>
 
 _Title_ - **72 Hours (2026)**  
 _Watched on_ - 2nd August 2026
@@ -19,6 +19,10 @@ _Watched on_ - 2nd August 2026
 
 _Title_ - **House of the Dragon S1E6**  
 _Watched on_ - 2nd August 2026
+
+</details>
+
+<details markdown='1'><summary>July 2026</summary>
 
 _Title_ - **Fractured (2019)**  
 _Watched on_ - 24th July 2026
