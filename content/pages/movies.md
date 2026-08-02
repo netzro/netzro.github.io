@@ -12,13 +12,13 @@ _Updated as I watch. Last update: 24th July 2026._
 <details markdown='1'><summary>July 2026</summary>
 
 _Title_ - **72 Hours (2026)**  
-_Watched on_ - 24th July 2026
+_Watched on_ - 2nd August 2026
 
 _Title_ - **The Devils Mouth (2026)**  
-_Watched on_ - 24th July 2026
+_Watched on_ - 2nd August 2026
 
 _Title_ - **House of the Dragon S1E6**  
-_Watched on_ - 24th July 2026
+_Watched on_ - 2nd August 2026
 
 _Title_ - **Fractured (2019)**  
 _Watched on_ - 24th July 2026
