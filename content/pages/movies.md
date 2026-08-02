@@ -11,13 +11,13 @@ _Updated as I watch. Last update: 24th July 2026._
 
 <details markdown='1'><summary>August 2026</summary>
 
-_Title_ - **72 Hours (2026)**  
+![](images/posters/72-hours.jpg) **72 Hours (2026)**  
 _Watched on_ - 2nd August 2026
 
-_Title_ - **The Devils Mouth (2026)**  
+![](images/posters/the-devils-mouth.jpg) **The Devils Mouth (2026)**  
 _Watched on_ - 2nd August 2026
 
-_Title_ - **House of the Dragon S1E6**  
+![](images/posters/house-of-the-dragon.jpg) **House of the Dragon S1E6**  
 _Watched on_ - 2nd August 2026
 
 </details>
