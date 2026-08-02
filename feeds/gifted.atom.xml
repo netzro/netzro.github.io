@@ -1,5 +1,125 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Gifted Space - Gifted</title><link href="https://netzro.github.io/" rel="alternate"/><link href="https://netzro.github.io/feeds/gifted.atom.xml" rel="self"/><id>https://netzro.github.io/</id><updated>2026-07-25T00:00:00+01:00</updated><entry><title>Python Functions in Functional Programming, Part 2: Intermediate Techniques</title><link href="https://netzro.github.io/posts/2026/Jul/25/python-functions-functional-intermediate/" rel="alternate"/><published>2026-07-25T00:00:00+01:00</published><updated>2026-07-25T00:00:00+01:00</updated><author><name>Gifted</name></author><id>tag:netzro.github.io,2026-07-25:/posts/2026/Jul/25/python-functions-functional-intermediate/</id><summary type="html">&lt;p&gt;Going past the basics: functools.partial and lru_cache, closures, recursion, and a real refactor of imperative code into a functional shape.&lt;/p&gt;</summary><content type="html">&lt;h2&gt;Where Part 1 left us&lt;/h2&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Gifted Space - Gifted</title><link href="https://netzro.github.io/" rel="alternate"/><link href="https://netzro.github.io/feeds/gifted.atom.xml" rel="self"/><id>https://netzro.github.io/</id><updated>2026-08-02T00:00:00+01:00</updated><entry><title>Globbing in Python, Part 1</title><link href="https://netzro.github.io/posts/2026/Aug/02/globbing-in-python/" rel="alternate"/><published>2026-08-02T00:00:00+01:00</published><updated>2026-08-02T00:00:00+01:00</updated><author><name>Gifted</name></author><id>tag:netzro.github.io,2026-08-02:/posts/2026/Aug/02/globbing-in-python/</id><summary type="html">&lt;p&gt;A beginner-friendly look at how glob patterns work in Python — &lt;code&gt;*&lt;/code&gt;, &lt;code&gt;?&lt;/code&gt;, &lt;code&gt;[...]&lt;/code&gt;, and the &lt;code&gt;glob&lt;/code&gt; module.&lt;/p&gt;</summary><content type="html">&lt;h2&gt;What globbing is&lt;/h2&gt;
+&lt;p&gt;Globbing is pattern matching for file paths. Instead of listing every file by name, you describe a shape and the system finds the matches.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;py&lt;/span&gt;&lt;span class="w"&gt;        &lt;/span&gt;&lt;span class="err"&gt;→&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ow"&gt;all&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;Python&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;files&lt;/span&gt;
+&lt;span class="n"&gt;data_&lt;/span&gt;&lt;span class="vm"&gt;?&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;csv&lt;/span&gt;&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="err"&gt;→&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;data_1&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;csv&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;data_A&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;csv&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;but&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ow"&gt;not&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;data_10&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;csv&lt;/span&gt;
+&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="n"&gt;abc&lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;txt&lt;/span&gt;&lt;span class="w"&gt;   &lt;/span&gt;&lt;span class="err"&gt;→&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;txt&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;b&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;txt&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ow"&gt;or&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;c&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;txt&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Python has a built-in &lt;code&gt;glob&lt;/code&gt; module that does exactly this. No pip install needed.&lt;/p&gt;
+&lt;h2&gt;The basics: &lt;code&gt;*&lt;/code&gt; and &lt;code&gt;?&lt;/code&gt;&lt;/h2&gt;
+&lt;p&gt;The two most common patterns:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;*&lt;/code&gt; matches any number of characters (including zero)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;?&lt;/code&gt; matches exactly one character&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;import&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nn"&gt;glob&lt;/span&gt;
+
+&lt;span class="c1"&gt;# All Python files in the current directory&lt;/span&gt;
+&lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;f&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;glob&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;glob&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;*.py&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="c1"&gt;# Files like data_1.csv, data_X.csv — but not data_10.csv&lt;/span&gt;
+&lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;f&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;glob&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;glob&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;data_?.csv&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;code&gt;*&lt;/code&gt; is greedy. &lt;code&gt;*.py&lt;/code&gt; matches &lt;code&gt;setup.py&lt;/code&gt;, &lt;code&gt;my_script.py&lt;/code&gt;, even &lt;code&gt;.py&lt;/code&gt; (an empty name with an extension). If you want non-hidden files only, combine it:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="c1"&gt;# Hidden files (starting with .) are NOT matched by *&lt;/span&gt;
+&lt;span class="n"&gt;glob&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;glob&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;*.py&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;    &lt;span class="c1"&gt;# finds app.py, not .hidden.py&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h2&gt;Character classes: &lt;code&gt;[...]&lt;/code&gt;&lt;/h2&gt;
+&lt;p&gt;Square brackets match one character from a set:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="c1"&gt;# Exactly one character from the set a, b, or c&lt;/span&gt;
+&lt;span class="n"&gt;glob&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;glob&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;[abc].txt&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;   &lt;span class="c1"&gt;# a.txt, b.txt, c.txt — not ab.txt&lt;/span&gt;
+
+&lt;span class="c1"&gt;# Ranges work too&lt;/span&gt;
+&lt;span class="n"&gt;glob&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;glob&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;file[0-9].log&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;  &lt;span class="c1"&gt;# file0.log, file1.log, ... file9.log&lt;/span&gt;
+
+&lt;span class="c1"&gt;# Negation with ^ or !&lt;/span&gt;
+&lt;span class="n"&gt;glob&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;glob&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;file[^0-9].log&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;  &lt;span class="c1"&gt;# fileX.log, fileA.log — not file1.log&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h2&gt;Recursive glob with &lt;code&gt;**&lt;/code&gt;&lt;/h2&gt;
+&lt;p&gt;Python 3.5+ supports recursive globbing with &lt;code&gt;**&lt;/code&gt;. This is the most useful pattern for real work:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;import&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nn"&gt;glob&lt;/span&gt;
+
+&lt;span class="c1"&gt;# All Python files in current dir and every subdirectory&lt;/span&gt;
+&lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;f&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;glob&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;glob&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;**/*.py&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;recursive&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kc"&gt;True&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="c1"&gt;# All markdown files anywhere under content/&lt;/span&gt;
+&lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;f&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;glob&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;glob&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;content/**/*.md&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;recursive&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kc"&gt;True&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Without &lt;code&gt;recursive=True&lt;/code&gt;, &lt;code&gt;**&lt;/code&gt; is treated like &lt;code&gt;*&lt;/code&gt; — it does NOT descend into subdirectories.&lt;/p&gt;
+&lt;h2&gt;&lt;code&gt;glob&lt;/code&gt; vs &lt;code&gt;os.scandir&lt;/code&gt; vs &lt;code&gt;pathlib.Path.glob&lt;/code&gt;&lt;/h2&gt;
+&lt;p&gt;Python gives you three ways to glob. Use each when:&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Method&lt;/th&gt;
+&lt;th&gt;Best for&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;glob.glob()&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Quick one-liners, shell-like patterns&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;pathlib.Path.glob()&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Object-oriented workflows, chaining with other path ops&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;os.scandir()&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;When you need fine control (filter by stat, avoid recursion)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;from&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nn"&gt;pathlib&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;Path&lt;/span&gt;
+
+&lt;span class="c1"&gt;# Same as glob.glob(&amp;quot;**/*.py&amp;quot;, recursive=True)&lt;/span&gt;
+&lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;f&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;Path&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;.&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;glob&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;**/*.py&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="c1"&gt;# Filter by something else&lt;/span&gt;
+&lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;f&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;Path&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;.&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;glob&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;**/*.py&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;stat&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;st_size&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="mi"&gt;1000&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="sa"&gt;f&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="si"&gt;{&lt;/span&gt;&lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt; (&lt;/span&gt;&lt;span class="si"&gt;{&lt;/span&gt;&lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;stat&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;st_size&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt; bytes)&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;code&gt;pathlib&lt;/code&gt; is the modern choice. It returns &lt;code&gt;Path&lt;/code&gt; objects (not strings), so you can call &lt;code&gt;.read_text()&lt;/code&gt;, &lt;code&gt;.rename()&lt;/code&gt;, &lt;code&gt;.stem&lt;/code&gt;, &lt;code&gt;.suffix&lt;/code&gt; directly.&lt;/p&gt;
+&lt;h2&gt;Common pitfalls&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Hidden files are invisible to &lt;code&gt;*&lt;/code&gt;&lt;/strong&gt; — files starting with &lt;code&gt;.&lt;/code&gt; are skipped by default. If you need them, use &lt;code&gt;glob.glob(".*")&lt;/code&gt; explicitly.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;&lt;code&gt;**&lt;/code&gt; without &lt;code&gt;recursive=True&lt;/code&gt; is a no-op for recursion&lt;/strong&gt; — it acts like &lt;code&gt;*&lt;/code&gt; and only matches the current directory.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Glob returns strings, not sorted&lt;/strong&gt; — the order is filesystem-dependent. If you need sorted results, wrap it: &lt;code&gt;sorted(glob.glob("*.py"))&lt;/code&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;No match returns an empty list, not an error&lt;/strong&gt; — always handle the empty case if the result drives further logic.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;files&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;glob&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;glob&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;nonexistent/*.py&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="ow"&gt;not&lt;/span&gt; &lt;span class="n"&gt;files&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;No matches — check the directory and pattern.&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h2&gt;Try it yourself&lt;/h2&gt;
+&lt;p&gt;Open a Python REPL and try:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;import&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nn"&gt;glob&lt;/span&gt;
+&lt;span class="n"&gt;glob&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;glob&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;**/*.md&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;recursive&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kc"&gt;True&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;See how many markdown files exist under your current directory. Then try &lt;code&gt;glob.glob("content/posts/**/*.md", recursive=True)&lt;/code&gt; to list every blog post.&lt;/p&gt;
+&lt;p&gt;In &lt;strong&gt;Part 2&lt;/strong&gt;, we'll go further — &lt;code&gt;fnmatch&lt;/code&gt; for string-only matching, brace expansion, writing a custom glob engine, and globbing across remote filesystems.&lt;/p&gt;</content><category term="misc"/><category term="python"/><category term="globbing"/><category term="programming"/><category term="tutorial"/></entry><entry><title>Python Functions in Functional Programming, Part 2: Intermediate Techniques</title><link href="https://netzro.github.io/posts/2026/Jul/25/python-functions-functional-intermediate/" rel="alternate"/><published>2026-07-25T00:00:00+01:00</published><updated>2026-07-25T00:00:00+01:00</updated><author><name>Gifted</name></author><id>tag:netzro.github.io,2026-07-25:/posts/2026/Jul/25/python-functions-functional-intermediate/</id><summary type="html">&lt;p&gt;Going past the basics: functools.partial and lru_cache, closures, recursion, and a real refactor of imperative code into a functional shape.&lt;/p&gt;</summary><content type="html">&lt;h2&gt;Where Part 1 left us&lt;/h2&gt;
 &lt;p&gt;In &lt;a href="https://netzro.github.io/posts/2026/Jul/24/python-functions-functional-beginner/"&gt;Part 1&lt;/a&gt; we treated functions as ordinary values, kept the core of our logic pure, and transformed data by producing new data instead of mutating old data. That mindset is most of the battle.&lt;/p&gt;
 &lt;p&gt;Now we go a level deeper. The tools here are &lt;code&gt;functools&lt;/code&gt;, closures, and recursion: the ones I reach for when a script starts to sprawl. None of them are exotic. They're just ways to make small functions do more without getting noisy.&lt;/p&gt;
 &lt;h2&gt;functools.partial: freezing arguments&lt;/h2&gt;
@@ -475,105 +595,4 @@ I will protect you until you can protect yourself.
 I give you permission to be like me, to be more than me or to be less than me, just as your vision demands.
 In being just the way you are you ceaselessly bless my life.
 I am so proud of you.
-I love you.&lt;/p&gt;</content><category term="misc"/><category term="nts"/><category term="blessing"/><category term="parenting"/><category term="love"/></entry><entry><title>Practical Feng Shui: Arranging Your Space to Actually Change Your Life</title><link href="https://netzro.github.io/posts/2026/Jun/21/practical-feng-shui/" rel="alternate"/><published>2026-06-21T00:00:00+01:00</published><updated>2026-06-21T00:00:00+01:00</updated><author><name>Gifted</name></author><id>tag:netzro.github.io,2026-06-21:/posts/2026/Jun/21/practical-feng-shui/</id><summary type="html">&lt;p&gt;Forget the mysticism — practical feng shui is about designing spaces that reduce friction, increase clarity, and quietly support the life you're building.&lt;/p&gt;</summary><content type="html">&lt;hr&gt;
-&lt;p&gt;I used to roll my eyes at feng shui. Crystals, mirrors facing the door, lucky bamboo — it all felt like aesthetic advice pretending to be something deeper. Then I noticed how my actual environment messed with my focus and mood day to day. The conclusions I reached mapped almost perfectly onto what feng shui practitioners have been saying for centuries. Just without the incense.&lt;/p&gt;
-&lt;p&gt;This isn't about belief. It's about environmental design. Your space is always working on you — the question is whether it's working for you or against you.&lt;/p&gt;
-&lt;h2&gt;The Command Position&lt;/h2&gt;
-&lt;p&gt;The single most impactful feng shui concept is the "command position." The rule: &lt;strong&gt;place your bed, desk, and stove so you can see the door while using them — without being directly in line with it.&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;Here's why it works: when you can see the entrance, your nervous system settles. You're not unconsciously startled by someone walking in. When your back faces a door, part of your brain stays on guard. Over hours and years, that low-grade vigilance drains energy you could spend on better things.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;The fix:&lt;/strong&gt;
-- Angle your desk so you see your room or office entrance. Can't? A small mirror reflecting the doorway does the trick.
-- In the bedroom, position the bed diagonally from the door — you should see it from where you lie, but not be directly in line with it.
-- Wherever you prepare food, make sure you're not facing a wall with your back exposed.&lt;/p&gt;
-&lt;p&gt;I repositioned my desk three months ago. First thing I noticed: stopped getting startled by people walking into my home office. Small thing, but it changed the whole feel of working there.&lt;/p&gt;
-&lt;h2&gt;Clear the Pathways&lt;/h2&gt;
-&lt;p&gt;Feng shui talks about energy flow. In plain terms: &lt;strong&gt;obstructed pathways create obstructed thinking.&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;Hallways stuffed with clutter, doors that don't open fully, having to squeeze between objects — your brain registers constant micro-friction. You might not consciously notice it, but it's there. A background process eating attention.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;The fix:&lt;/strong&gt;
-- Every door should open fully without hitting anything.
-- Walk your home's natural paths (entrance → living area → bedroom → bathroom). Remove what forces you to step over, squeeze past, or navigate around obstacles.
-- If a room feels "heavy," check what's blocking movement. Usually it's one large item in the wrong spot.&lt;/p&gt;
-&lt;h2&gt;The Five Elements as Design Constraints&lt;/h2&gt;
-&lt;p&gt;Feng shui's five elements — wood, fire, earth, metal, water — aren't mystical forces. They're a &lt;strong&gt;framework for visual variety&lt;/strong&gt;.&lt;/p&gt;
-&lt;p&gt;A room that's all metal and glass feels cold. All wood and fabric feels heavy. No contrast feels flat. The elements are a reminder to mix textures and materials:&lt;/p&gt;
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;Element&lt;/th&gt;
-&lt;th&gt;Represents&lt;/th&gt;
-&lt;th&gt;Design Expression&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;Wood&lt;/td&gt;
-&lt;td&gt;Growth, vitality&lt;/td&gt;
-&lt;td&gt;Plants, vertical lines, natural wood&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;Fire&lt;/td&gt;
-&lt;td&gt;Energy, passion&lt;/td&gt;
-&lt;td&gt;Lighting, candles, warm colors&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;Earth&lt;/td&gt;
-&lt;td&gt;Stability, grounding&lt;/td&gt;
-&lt;td&gt;Ceramics, earth tones, low furniture&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;Metal&lt;/td&gt;
-&lt;td&gt;Precision, clarity&lt;/td&gt;
-&lt;td&gt;Metallic finishes, round shapes, white/gray&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;Water&lt;/td&gt;
-&lt;td&gt;Flow, calm&lt;/td&gt;
-&lt;td&gt;Mirrors, glass, dark colors, asymmetry&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;p&gt;&lt;strong&gt;The fix:&lt;/strong&gt; Walk through your main living space. If one element dominates, add a touch of another. A sterile metal desk gets a small plant. A heavy wooden room gets a mirror or white ceramic. The goal isn't perfect balance — it's variety.&lt;/p&gt;
-&lt;h2&gt;Kill the Dead Space&lt;/h2&gt;
-&lt;p&gt;Every home has corners where things go to die. Closets that haven't been opened in years. Surfaces covered in "I'll deal with this later."&lt;/p&gt;
-&lt;p&gt;Stagnant clutter blocks flow. In practical terms: &lt;strong&gt;visual clutter competes for your attention.&lt;/strong&gt; Every object in your field of vision is something your brain has to process, categorize, and decide to ignore. That's cognitive load you don't need.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;The fix:&lt;/strong&gt;
-- Haven't used it in 12 months and it's not seasonal? Candidate for removal.
-- Flat surfaces (tables, counters, desks) should be mostly clear. The empty space isn't wasted — it's breathing room.
-- The area directly inside your front door matters more than you'd think. It's the first thing you see when you come home. Keep it clean, well-lit, intentional.&lt;/p&gt;
-&lt;h2&gt;Light and Air Are Not Optional&lt;/h2&gt;
-&lt;p&gt;The most underrated part of environmental design: &lt;strong&gt;lighting and air quality directly affect cognitive performance and mood.&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;Feng shui calls it "bright energy." Science calls it circadian regulation and CO₂ levels. Same thing, different vocabulary.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;The fix:&lt;/strong&gt;
-- Maximize natural light. Ditch heavy curtains if you can. Clean your windows — dirty ones filter out more light than you'd expect.
-- Warm light (2700–3000K) in bedrooms and living areas. Save cool/blue light for task lighting.
-- Open your windows at least 10 minutes daily. Stale air makes stale thinking.
-- Room feels oppressive? Check the lighting first. Often the room isn't the problem — the bulbs are.&lt;/p&gt;
-&lt;h2&gt;The Entryway Is Everything&lt;/h2&gt;
-&lt;p&gt;Your front door is where energy enters. Practically: &lt;strong&gt;it's the transition point between the outside world and your inner sanctuary.&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;Walk into darkness, clutter, or a wall of stuff, and your brain never gets the signal that you've "arrived home." You carry the outside world's energy with you.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;The fix:&lt;/strong&gt;
-- Entrance should be well-lit. No natural light? Add a warm lamp.
-- Get shoes, coats, and bags out of the immediate entry area. Give them designated storage just inside.
-- Add one thing that signals "this is my space" — a plant, art, a scent. Something sensory that marks the transition.&lt;/p&gt;
-&lt;h2&gt;What This Isn't&lt;/h2&gt;
-&lt;p&gt;Let me be straight about what practical feng shui is &lt;em&gt;not&lt;/em&gt;:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Not about buying specific objects for specific areas of your home.&lt;/li&gt;
-&lt;li&gt;Not about compass directions or auspicious dates.&lt;/li&gt;
-&lt;li&gt;Not about believing in energy you can't measure.&lt;/li&gt;
-&lt;li&gt;Not a substitute for fixing real problems — leaks, pests, broken furniture, poor ventilation.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;It &lt;em&gt;is&lt;/em&gt; about &lt;strong&gt;treating your environment as a tool&lt;/strong&gt; — one that either supports or undermines your focus, rest, and clarity every single day.&lt;/p&gt;
-&lt;h2&gt;Start With One Room&lt;/h2&gt;
-&lt;p&gt;Don't try to feng-shui your entire home in a weekend. You'll burn out and revert.&lt;/p&gt;
-&lt;p&gt;Start with the room where you spend the most waking hours. Apply these:&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;Put your primary furniture in command position.&lt;/li&gt;
-&lt;li&gt;Clear all pathways.&lt;/li&gt;
-&lt;li&gt;Remove everything from flat surfaces that doesn't serve a purpose.&lt;/li&gt;
-&lt;li&gt;Add or improve lighting.&lt;/li&gt;
-&lt;li&gt;Introduce one element that's missing.&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;Live with it for a week. Notice what changes. Then move to the next room.&lt;/p&gt;
-&lt;p&gt;Your space is the stage on which your life happens. Most people never think about the stage — they just keep performing on it and wondering why everything feels harder than it should.&lt;/p&gt;
-&lt;p&gt;Rearrange the stage. The performance follows.&lt;/p&gt;</content><category term="misc"/><category term="feng shui"/><category term="home"/><category term="productivity"/><category term="mindfulness"/><category term="environment"/></entry></feed>
+I love you.&lt;/p&gt;</content><category term="misc"/><category term="nts"/><category term="blessing"/><category term="parenting"/><category term="love"/></entry></feed>
