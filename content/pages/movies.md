@@ -5,11 +5,17 @@ Status: hidden
 ---
 
 # Movies
-_Updated as I watch. Last update: 24th July 2026._
+_Updated as I watch. Last update: 10th August 2026._
 
 ### Watchlist
 
 <details markdown='1'><summary>August 2026</summary>
+
+_Title_ - **The Last House (2026)**  
+_Watched on_ - 10th August 2026
+
+_Title_ - **Spider-Man: Brand New Day (2026)**  
+_Watched on_ - 10th August 2026
 
 ![](https://netzro.github.io/images/posters/72-hours.jpg) **72 Hours (2026)**  
 _Watched on_ - 2nd August 2026
