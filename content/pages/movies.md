@@ -11,10 +11,10 @@ _Updated as I watch. Last update: 10th August 2026._
 
 <details markdown='1'><summary>August 2026</summary>
 
-_Title_ - **The Last House (2026)**  
+![](https://netzro.github.io/images/posters/the-last-house.jpg) **The Last House (2026)**  
 _Watched on_ - 10th August 2026
 
-_Title_ - **Spider-Man: Brand New Day (2026)**  
+![](https://netzro.github.io/images/posters/spider-man-brand-new-day.jpg) **Spider-Man: Brand New Day (2026)**  
 _Watched on_ - 10th August 2026
 
 ![](https://netzro.github.io/images/posters/72-hours.jpg) **72 Hours (2026)**  
