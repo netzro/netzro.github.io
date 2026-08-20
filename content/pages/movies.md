@@ -12,7 +12,8 @@ _Updated as I watch. Last update: 20th August 2026._
 <details markdown='1'><summary>August 2026</summary>
 
 ![](https://netzro.github.io/images/posters/magpie.jpg) **Magpie (2024)**  
-_Watched on_ - 20th August 2026
+_Watched on_ - 20th August 2026  
+_My rating_ - ⭐⭐
 
 ![](https://netzro.github.io/images/posters/the-last-house.jpg) **The Last House (2026)**  
 _Watched on_ - 10th August 2026
