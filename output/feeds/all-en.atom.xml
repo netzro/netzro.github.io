@@ -1,5 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Gifted Space</title><link href="https://netzro.github.io/" rel="alternate"/><link href="https://netzro.github.io/feeds/all-en.atom.xml" rel="self"/><id>https://netzro.github.io/</id><updated>2026-08-02T00:00:00+01:00</updated><entry><title>Globbing in Python, Part 1</title><link href="https://netzro.github.io/posts/2026/Aug/02/globbing-in-python/" rel="alternate"/><published>2026-08-02T00:00:00+01:00</published><updated>2026-08-02T00:00:00+01:00</updated><author><name>Gifted</name></author><id>tag:netzro.github.io,2026-08-02:/posts/2026/Aug/02/globbing-in-python/</id><summary type="html">&lt;p&gt;A beginner-friendly look at how glob patterns work in Python — &lt;code&gt;*&lt;/code&gt;, &lt;code&gt;?&lt;/code&gt;, &lt;code&gt;[...]&lt;/code&gt;, and the &lt;code&gt;glob&lt;/code&gt; module.&lt;/p&gt;</summary><content type="html">&lt;h2&gt;What globbing is&lt;/h2&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Gifted Space</title><link href="https://netzro.github.io/" rel="alternate"/><link href="https://netzro.github.io/feeds/all-en.atom.xml" rel="self"/><id>https://netzro.github.io/</id><updated>2026-08-20T00:00:00+01:00</updated><entry><title>A Gentle Introduction to RDBMS</title><link href="https://netzro.github.io/posts/2026/Aug/20/gentle-intro-to-rdbms/" rel="alternate"/><published>2026-08-20T00:00:00+01:00</published><updated>2026-08-20T00:00:00+01:00</updated><author><name>Gifted</name></author><id>tag:netzro.github.io,2026-08-20:/posts/2026/Aug/20/gentle-intro-to-rdbms/</id><summary type="html">&lt;p&gt;A beginner-friendly walkthrough of Relational Database Management Systems: what they are, how they organize data, and core concepts to get started.&lt;/p&gt;</summary><content type="html">&lt;h2&gt;A Gentle Introduction to RDBMS&lt;/h2&gt;
+&lt;p&gt;If you've ever wondered how apps like Twitter, your banking portal, or even this blog store and retrieve data efficiently, chances are they're using a &lt;strong&gt;Relational Database Management System (RDBMS)&lt;/strong&gt;.&lt;/p&gt;
+&lt;h3&gt;So, What Is an RDBMS?&lt;/h3&gt;
+&lt;p&gt;At its core, an RDBMS is software that lets you create, manage, and interact with databases in a structured way. Think of it as a highly organized digital filing cabinet. Instead of tossing everything into one big drawer, an RDBMS keeps data in neat, labeled folders — called &lt;strong&gt;tables&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;Each table holds rows (also called &lt;strong&gt;records&lt;/strong&gt;) and columns (called &lt;strong&gt;fields&lt;/strong&gt;). For example, a &lt;code&gt;users&lt;/code&gt; table might look like this:&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;id&lt;/th&gt;
+&lt;th&gt;name&lt;/th&gt;
+&lt;th&gt;email&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;1&lt;/td&gt;
+&lt;td&gt;Alice&lt;/td&gt;
+&lt;td&gt;alice@example.com&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;2&lt;/td&gt;
+&lt;td&gt;Bob&lt;/td&gt;
+&lt;td&gt;bob@example.com&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;This structure makes it easy to find, update, and relate data.&lt;/p&gt;
+&lt;h3&gt;Why "Relational"?&lt;/h3&gt;
+&lt;p&gt;The "relational" part means that tables can be linked — or related — to one another. This is done through &lt;strong&gt;keys&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;A &lt;strong&gt;primary key&lt;/strong&gt; uniquely identifies each row in a table (like &lt;code&gt;id&lt;/code&gt; above).&lt;/li&gt;
+&lt;li&gt;A &lt;strong&gt;foreign key&lt;/strong&gt; is a column that links to a primary key in another table.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;For instance, if you have a &lt;code&gt;posts&lt;/code&gt; table, you could link each post back to its author using the &lt;code&gt;user_id&lt;/code&gt; column, which references the &lt;code&gt;id&lt;/code&gt; column in the &lt;code&gt;users&lt;/code&gt; table. This relationship lets you ask questions like "Show me all posts by Alice" without duplicating her name in every row.&lt;/p&gt;
+&lt;h3&gt;Common RDBMS Tools&lt;/h3&gt;
+&lt;p&gt;Some of the most popular RDBMS options include:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;PostgreSQL&lt;/strong&gt; — powerful, open-source, and feature-rich&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;MySQL&lt;/strong&gt; — widely used, especially in web applications&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;SQLite&lt;/strong&gt; — lightweight, file-based, great for mobile apps and small projects&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;MariaDB&lt;/strong&gt; — a community-driven fork of MySQL&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Each has its own strengths, but they all speak &lt;strong&gt;SQL&lt;/strong&gt; (Structured Query Language) — the standard way to talk to relational databases.&lt;/p&gt;
+&lt;h3&gt;Basic SQL: A Few Friendly Commands&lt;/h3&gt;
+&lt;p&gt;Here are the four essential SQL operations, often called &lt;strong&gt;CRUD&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Create&lt;/strong&gt;: &lt;code&gt;INSERT INTO users (name, email) VALUES ('Charlie', 'charlie@example.com');&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Read&lt;/strong&gt;: &lt;code&gt;SELECT name FROM users WHERE id = 1;&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Update&lt;/strong&gt;: &lt;code&gt;UPDATE users SET email = 'new@example.com' WHERE id = 1;&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Delete&lt;/strong&gt;: &lt;code&gt;DELETE FROM users WHERE id = 1;&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;These simple commands let you build powerful data workflows.&lt;/p&gt;
+&lt;h3&gt;A Note on ACID&lt;/h3&gt;
+&lt;p&gt;Good RDBMS tools follow &lt;strong&gt;ACID&lt;/strong&gt; properties, which ensure your data stays reliable:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Atomicity&lt;/strong&gt; — transactions succeed completely or not at all&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Consistency&lt;/strong&gt; — data remains valid after every operation&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Isolation&lt;/strong&gt; — concurrent operations don't interfere&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Durability&lt;/strong&gt; — once saved, data stays saved&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;Getting Started&lt;/h3&gt;
+&lt;p&gt;Pick an RDBMS (PostgreSQL is a great choice for learning), install it, and try running a few commands. Many come with free GUI tools like DBeaver or pgAdmin that make exploring tables a breeze.&lt;/p&gt;
+&lt;p&gt;The world of databases can feel vast, but it all starts with a single table. Take your time, ask questions, and soon enough, you'll be designing schemas and joining tables like a pro.&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;em&gt;Have you worked with an RDBMS before? Share your favorite tool or a tip for beginners in the comments.&lt;/em&gt;&lt;/p&gt;</content><category term="misc"/><category term="rdbms"/><category term="databases"/><category term="sql"/><category term="beginner"/></entry><entry><title>Globbing in Python, Part 1</title><link href="https://netzro.github.io/posts/2026/Aug/02/globbing-in-python/" rel="alternate"/><published>2026-08-02T00:00:00+01:00</published><updated>2026-08-02T00:00:00+01:00</updated><author><name>Gifted</name></author><id>tag:netzro.github.io,2026-08-02:/posts/2026/Aug/02/globbing-in-python/</id><summary type="html">&lt;p&gt;A beginner-friendly look at how glob patterns work in Python — &lt;code&gt;*&lt;/code&gt;, &lt;code&gt;?&lt;/code&gt;, &lt;code&gt;[...]&lt;/code&gt;, and the &lt;code&gt;glob&lt;/code&gt; module.&lt;/p&gt;</summary><content type="html">&lt;h2&gt;What globbing is&lt;/h2&gt;
 &lt;p&gt;Globbing is pattern matching for file paths. Instead of listing every file by name, you describe a shape and the system finds the matches.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;py&lt;/span&gt;&lt;span class="w"&gt;        &lt;/span&gt;&lt;span class="err"&gt;→&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ow"&gt;all&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;Python&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;files&lt;/span&gt;
 &lt;span class="n"&gt;data_&lt;/span&gt;&lt;span class="vm"&gt;?&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;csv&lt;/span&gt;&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="err"&gt;→&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;data_1&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;csv&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;data_A&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;csv&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;but&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ow"&gt;not&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;data_10&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;csv&lt;/span&gt;
@@ -584,15 +648,4 @@
 &lt;p&gt;&lt;strong&gt;“Build on the four corners, and the heavens will rise from your foundation.”&lt;/strong&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;hr&gt;
-&lt;p&gt;&lt;em&gt;Feel free to adapt the four‑point ritual or the four‑word mantra to your own tradition. May the steadfast energy of the number 4 guide you toward balanced transformation.&lt;/em&gt;&lt;/p&gt;</content><category term="misc"/><category term="number symbolism"/><category term="mysticism"/><category term="culture"/></entry><entry><title>A Parent's Blessing</title><link href="https://netzro.github.io/posts/2026/Jun/21/a-parents-blessing/" rel="alternate"/><published>2026-06-21T00:00:00+01:00</published><updated>2026-06-21T00:00:00+01:00</updated><author><name>Gifted</name></author><id>tag:netzro.github.io,2026-06-21:/posts/2026/Jun/21/a-parents-blessing/</id><summary type="html">&lt;h3&gt;note-to-self:26-09&lt;/h3&gt;
-&lt;p&gt;You have my blessing now and at any time in your life.
-I …&lt;/p&gt;</summary><content type="html">&lt;h3&gt;note-to-self:26-09&lt;/h3&gt;
-&lt;p&gt;You have my blessing now and at any time in your life.
-I trust you and I know that you are on the right path.
-At times I will set clear boundaries and abide by them.
-When you fall, I will help you up.
-I will protect you until you can protect yourself.
-I give you permission to be like me, to be more than me or to be less than me, just as your vision demands.
-In being just the way you are you ceaselessly bless my life.
-I am so proud of you.
-I love you.&lt;/p&gt;</content><category term="misc"/><category term="nts"/><category term="blessing"/><category term="parenting"/><category term="love"/></entry></feed>
+&lt;p&gt;&lt;em&gt;Feel free to adapt the four‑point ritual or the four‑word mantra to your own tradition. May the steadfast energy of the number 4 guide you toward balanced transformation.&lt;/em&gt;&lt;/p&gt;</content><category term="misc"/><category term="number symbolism"/><category term="mysticism"/><category term="culture"/></entry></feed>
