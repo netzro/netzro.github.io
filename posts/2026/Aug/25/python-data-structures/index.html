@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content="Pelican" />
+    <title>Python Data Structures: Choosing the Right Tool for the Job</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Slab|Ruda" />
+    <link rel="stylesheet" type="text/css" href="https://netzro.github.io/theme/css/main.css" />
+    <link rel="stylesheet" href="https://netzro.github.io/theme/css/stork.css">
+    <link rel="stylesheet" media="screen and (prefers-color-scheme: dark)" href="https://netzro.github.io/theme/css/stork-dark.css">
+    <link rel="icon" href="https://netzro.github.io/images/favicon.ico" type="image/x-icon" /> <!-- Add this line -->
+
+    <link
+        href="https://netzro.github.io/feeds/all.atom.xml"
+        type="application/atom+xml" rel="alternate" title="Gifted Space Atom Feed" />
+<meta name="description" content="A practical guide to Python's built-in data structures — lists, tuples, sets, and dictionaries — when to use each, their time-complexity..." />
+    <script>
+        if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia(
+                '(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark')
+        }
+    </script>
+</head>
+
+<body class="min-h-screen flex flex-col max-w-7xl lg:max-w-none text-zinc-800 bg-neutral-100 
+    dark:bg-neutral-900 dark:text-zinc-300 container mx-auto justify-center md:px-3 ">
+    <nav class="sm:flex sm:justify-between xl:ml-32 pl-4 items-center">
+        <div class="flex pt-4">
+            <h1 class="font-semibold text-2xl"><a href="https://netzro.github.io/">Gifted Space</a></h1>
+            <button id="theme-toggle" type="button"
+                class="text-zinc-700 dark:text-zinc-400 rounded-full focus:outline-none text-sm ml-2 p-1">
+                <svg id="theme-toggle-dark-icon" class="w-5 h-5 hidden" fill="currentColor" viewBox="0 0 20 20"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+                </svg>
+                <svg id="theme-toggle-light-icon" class="w-5 h-5 hidden" fill="currentColor" viewBox="0 0 20 20"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z"
+                        fill-rule="evenodd" clip-rule="evenodd"></path>
+                </svg>
+            </button>
+        </div>
+        <ul class="flex flex-wrap lg:mr-24 md:pt-0">
+            <li class="mr-4 pt-6"><a  href="https://netzro.github.io/pages/about/">About</a></li>
+            <li class="mr-4 pt-6"><a  href="https://netzro.github.io/pages/more/">More/</a></li>
+            <li class="mr-4 pt-6"><a  href="https://netzro.github.io/archives.html">Archive</a></li>
+            <li class="mr-4 pt-6"><a  href="https://netzro.github.io/tags.html">Tags</a></li>
+        </ul>
+    </nav>
+    <div class="flex-grow md:max-w-screen-md md:mx-auto md:w-3/4 px-4">
+        <nav class="text-zinc-800 dark:text-zinc-300 mt-12 pb-2 md:mt-16" aria-label="Breadcrumb">
+            <ul class="p-0 inline-flex items-center">
+                <li class="flex items-center">
+                    <a href="https://netzro.github.io/" class="text-zinc-800 dark:text-zinc-300 inline-flex items-center">
+                        <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z">
+                            </path>
+                        </svg>
+                        Home
+                    </a>
+                    <svg class="fill-current w-3 h-3 mr-2 ml-1" xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 320 512">
+                        <path
+                            d="M285.476 272.971L91.132 467.314c-9.373 9.373-24.569 9.373-33.941 0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941 0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z" />
+                    </svg>
+                </li>
+                <li class="flex items-center">
+                    <a href="https://netzro.github.io/categories.html">Categories</a>
+                    <svg class="fill-current w-3 h-3 mr-2 ml-1" xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 320 512">
+                        <path
+                            d="M285.476 272.971L91.132 467.314c-9.373 9.373-24.569 9.373-33.941 0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941 0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z" />
+                    </svg>
+                </li>
+                <li class="flex items-center">
+                    <a href="https://netzro.github.io/category/misc.html">misc</a>
+                </li>
+                <svg class="fill-current w-3 h-3 mr-2 ml-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+                    <path
+                        d="M285.476 272.971L91.132 467.314c-9.373 9.373-24.569 9.373-33.941 0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941 0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z" />
+                </svg>
+            </ul>
+        </nav>
+
+<main>
+  <header>
+    <h1 class="font-semibold text-3xl my-2">Python Data Structures: Choosing the Right Tool for the Job</h1>
+    <footer class="flex text-sm text-zinc-800 dark:text-zinc-400">
+      <div class="flex text-xs text-zinc-800 dark:text-zinc-400">
+        <time>August 25, 2026</time>
+        <div>
+        </div>
+        <div>
+          <span>&nbsp;·&nbsp;Gifted</span>
+        </div>
+      </div>
+    </footer>
+  </header>
+  <div class="max-w-7xl container mx-auto my-8 text-zinc-800 dark:text-zinc-300  
+              prose lg:max-w-none prose-headings:text-zinc-800 prose-headings:dark:text-zinc-300 
+              prose-h1:text-3xl lg:prose-h1:text-3xl prose-headings:font-semibold 
+              prose-pre:bg-zinc-200 prose-pre:text-zinc-800
+              dark:prose-pre:bg-zinc-800 dark:prose-pre:text-zinc-200
+              prose-blockquote:text-zinc-800
+              dark:prose-blockquote:text-zinc-200
+              prose-a:text-gray-500
+              dark:prose-a:text-gray-400
+              dark:prose-strong:text-zinc-200 
+              dark:prose-code:text-zinc-200
+              dark:prose-code:bg-zinc-800
+              prose-code:bg-zinc-200
+              prose-code:font-light
+              prose-img:rounded-md
+              ">
+    <h2>Built-In Data Structures in Python</h2>
+<p>Every Python program leans on a handful of built-in data structures. They are the vocabulary of everyday code, so knowing their strengths — and their costs — pays off almost immediately. Python gives you four core built-in types: <strong>lists</strong>, <strong>tuples</strong>, <strong>sets</strong>, and <strong>dictionaries</strong>. Each is optimized for a different job.</p>
+<p>The question to ask yourself is not "which one can hold my data" (they all can) but <strong>"how will I access it, and what operations matter most?"</strong> The wrong choice turns a fast program into a slow one, and a readable program into a confusing one.</p>
+<h2>Lists: The Ordered, Mutable Sequence</h2>
+<p>A list is an ordered, mutable, heterogeneous sequence. Lists are what you reach for by default when you have a collection of items and the order matters:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># collecting things in order</span>
+<span class="n">primes</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">11</span><span class="p">]</span>
+<span class="n">mixed</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;title&quot;</span><span class="p">,</span> <span class="mi">42</span><span class="p">,</span> <span class="mf">3.14</span><span class="p">,</span> <span class="kc">True</span><span class="p">]</span>
+
+<span class="c1"># append adds to the end</span>
+<span class="n">primes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">13</span><span class="p">)</span>
+<span class="c1"># extend merges another iterable</span>
+<span class="n">primes</span><span class="o">.</span><span class="n">extend</span><span class="p">([</span><span class="mi">17</span><span class="p">,</span> <span class="mi">19</span><span class="p">])</span>
+</code></pre></div>
+
+<h3>How lists actually work</h3>
+<p>Under the hood a Python list is a <strong>dynamic array</strong>, not a linked list. The list object holds a pointer to an array of references, plus a length and a reserved capacity. When the array fills up, Python allocates a new, larger block and copies everything over. The growth factor smooths this out, so although a single <code>append</code> can trigger a copy, the <strong>amortized</strong> cost across many appends is O(1).</p>
+<p>That has consequences for the time complexity of the operations you actually call:</p>
+<table>
+<thead>
+<tr>
+<th>Operation</th>
+<th>Average</th>
+<th>Worst-case</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>list[i]</code></td>
+<td>O(1)</td>
+<td>O(1)</td>
+<td>random access by index</td>
+</tr>
+<tr>
+<td><code>list.append(x)</code></td>
+<td>O(1) amortized</td>
+<td>O(n)</td>
+<td>occasional resize/copy</td>
+</tr>
+<tr>
+<td><code>list.insert(0, x)</code></td>
+<td>O(n)</td>
+<td>O(n)</td>
+<td>every element must shift</td>
+</tr>
+<tr>
+<td><code>x in list</code></td>
+<td>O(n)</td>
+<td>O(n)</td>
+<td>linear scan</td>
+</tr>
+<tr>
+<td><code>list.pop()</code></td>
+<td>O(1) amortized</td>
+<td>O(1)</td>
+<td>pops the end</td>
+</tr>
+<tr>
+<td><code>list.pop(0)</code></td>
+<td>O(n)</td>
+<td>O(n)</td>
+<td>shifts every element</td>
+</tr>
+</tbody>
+</table>
+<h3>When to use a list</h3>
+<p>Use a list when:</p>
+<ul>
+<li>Order matters and you iterate or index by position.</li>
+<li>You append mostly at the end (the common case).</li>
+<li>Items may be heterogeneous or mixed types.</li>
+<li>You need slicing (<code>list[2:5]</code>).</li>
+</ul>
+<p>Do <strong>not</strong> use a list when:</p>
+<ul>
+<li>You need fast membership tests (<code>x in list</code> is O(n)). Use a set.</li>
+<li>You need to pop from the front repeatedly. Use a <code>deque</code> from the <code>collections</code> module.</li>
+<li>You mostly need key/value lookup. Use a dict.</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="c1"># Good: sequential append + indexed access</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">running_totals</span><span class="p">(</span><span class="n">values</span><span class="p">):</span>
+    <span class="n">totals</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">running</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">values</span><span class="p">:</span>
+        <span class="n">running</span> <span class="o">+=</span> <span class="n">v</span>
+        <span class="n">totals</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">running</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">totals</span>
+
+<span class="c1"># Bad: membership test on a list — becomes slow as it grows</span>
+<span class="n">banned</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;spam&quot;</span><span class="p">,</span> <span class="s2">&quot;eggs&quot;</span><span class="p">,</span> <span class="s2">&quot;ham&quot;</span><span class="p">,</span> <span class="s2">&quot;sausage&quot;</span><span class="p">]</span>
+<span class="c1"># ... thousands of entries later ...</span>
+<span class="k">if</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">banned</span><span class="p">:</span>  <span class="c1"># O(n) per check</span>
+    <span class="k">pass</span>
+</code></pre></div>
+
+<h2>Tuples: The Immutable Sequence</h2>
+<p>A tuple is an ordered, <strong>immutable</strong>, heterogeneous sequence. The defining feature is immutability — you cannot add, remove, or reassign elements after creation:</p>
+<div class="highlight"><pre><span></span><code><span class="n">point</span> <span class="o">=</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="c1"># point[0] = 5  # TypeError: &#39;tuple&#39; object does not support item assignment</span>
+
+<span class="c1"># a tuple of one element needs a trailing comma</span>
+<span class="n">single</span> <span class="o">=</span> <span class="p">(</span><span class="mi">42</span><span class="p">,)</span>
+</code></pre></div>
+
+<p>Because tuples are immutable and do not over-allocate capacity like lists, they are slightly more memory-efficient and can be faster to iterate. More importantly, <strong>only immutable types can be hashable</strong>, and tuples inherit hashability from their elements — so a tuple is a valid dict key or set member, while a list is not:</p>
+<div class="highlight"><pre><span></span><code><span class="n">cache</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="n">cache</span><span class="p">[(</span><span class="mi">2026</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)]</span> <span class="o">=</span> <span class="s2">&quot;cache miss&quot;</span>  <span class="c1"># tuple keys are fine</span>
+
+<span class="c1"># cache[[2026, &quot;en&quot;]] = &quot;...&quot;  # TypeError: unhashable type: &#39;list&#39;</span>
+</code></pre></div>
+
+<h3>When to use a tuple</h3>
+<p>Use a tuple when:</p>
+<ul>
+<li>The sequence represents a fixed record or coordinate: <code>("Alice", 30, "engineer")</code>.</li>
+<li>You want the data to be immutable by contract — it signals "this collection should not change."</li>
+<li>You need a hashable container, such as a dict key or set member.</li>
+<li>You want named fields (use a named-tuple or dataclass instead of raw indexing).</li>
+</ul>
+<p>Avoid tuples when you need to grow or shrink the collection — use a list.</p>
+<h2>Sets: The Unordered, Unique Collection</h2>
+<p>A set is an unordered collection of <strong>unique</strong> hashable elements. Sets are built on hash tables (the same data structure backing dicts), which gives them their signature property: <strong>membership testing in O(1) average time</strong>.</p>
+<div class="highlight"><pre><span></span><code><span class="n">primes</span> <span class="o">=</span> <span class="p">{</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">11</span><span class="p">}</span>
+<span class="n">primes</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="mi">13</span><span class="p">)</span>
+<span class="n">primes</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>  <span class="c1"># duplicates are ignored</span>
+
+<span class="c1"># set comprehension</span>
+<span class="n">evens</span> <span class="o">=</span> <span class="p">{</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span> <span class="k">if</span> <span class="n">x</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">}</span>
+</code></pre></div>
+
+<h3>How sets work: hash tables</h3>
+<p>When you ask <code>x in some_set</code>, Python hashes <code>x</code>, uses that hash to jump straight to a bucket, and checks only the few items in that bucket. That is why <code>x in set</code> is O(1) on average and <code>x in list</code> is O(n) — the list has no index at all and must scan every element.</p>
+<table>
+<thead>
+<tr>
+<th>Operation</th>
+<th>Average</th>
+<th>Worst-case</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>x in set</code></td>
+<td>O(1)</td>
+<td>O(n)</td>
+</tr>
+<tr>
+<td><code>set.add(x)</code></td>
+<td>O(1)</td>
+<td>O(n)</td>
+</tr>
+<tr>
+<td><code>set.discard(x)</code></td>
+<td>O(1)</td>
+<td>O(n)</td>
+</tr>
+<tr>
+<td><code>set.pop()</code></td>
+<td>O(1)</td>
+<td>O(1)</td>
+</tr>
+<tr>
+<td><code>set | other</code> (union)</td>
+<td>O(len(set))</td>
+<td>O(len(set))</td>
+</tr>
+<tr>
+<td><code>set &amp; other</code> (intersection)</td>
+<td>O(min(len(set), len(other)))</td>
+<td>O(min(len(set), len(other)))</td>
+</tr>
+</tbody>
+</table>
+<p>The worst case is O(n) when many elements hash to the same bucket — but this is rare in practice unless you feed Python a pathological input.</p>
+<h3>When to use a set</h3>
+<p>Use a set when:</p>
+<ul>
+<li>You need <strong>fast membership tests</strong> (<code>item in collection</code> happens a lot).</li>
+<li>You need to <strong>deduplicate</strong> a sequence.</li>
+<li>You need <strong>set math</strong>: unions, intersections, differences.</li>
+<li>You do not care about order.</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="c1"># Deduplicating while preserving nothing about order</span>
+<span class="n">emails</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;a@example.com&quot;</span><span class="p">,</span> <span class="s2">&quot;b@example.com&quot;</span><span class="p">,</span> <span class="s2">&quot;a@example.com&quot;</span><span class="p">]</span>
+<span class="n">unique_emails</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">emails</span><span class="p">)</span>
+
+<span class="c1"># Fast membership test instead of scanning a list</span>
+<span class="n">stop_words</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;the&quot;</span><span class="p">,</span> <span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;an&quot;</span><span class="p">,</span> <span class="s2">&quot;in&quot;</span><span class="p">,</span> <span class="s2">&quot;on&quot;</span><span class="p">,</span> <span class="s2">&quot;at&quot;</span><span class="p">}</span>
+<span class="n">tokens</span> <span class="o">=</span> <span class="n">text</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+<span class="n">filtered</span> <span class="o">=</span> <span class="p">[</span><span class="n">t</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">tokens</span> <span class="k">if</span> <span class="n">t</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">stop_words</span><span class="p">]</span>  <span class="c1"># O(1) per check</span>
+</code></pre></div>
+
+<p>Avoid sets when:</p>
+<ul>
+<li>You need to preserve insertion order or access by index. Use a list.</li>
+<li>Your elements are unhashable (lists, dicts). Convert them to tuples first, or use a different structure.</li>
+</ul>
+<h2>Dictionaries: The Key-to-Value Map</h2>
+<p>A dictionary maps <strong>keys</strong> to <strong>values</strong>. In modern Python (3.7+) dicts also preserve <strong>insertion order</strong>, which makes them more useful than they used to be. Like sets, dicts are backed by hash tables, so lookup is O(1) on average:</p>
+<div class="highlight"><pre><span></span><code><span class="n">config</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;localhost&quot;</span><span class="p">,</span> <span class="s2">&quot;port&quot;</span><span class="p">:</span> <span class="mi">8080</span><span class="p">,</span> <span class="s2">&quot;debug&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">}</span>
+<span class="n">config</span><span class="p">[</span><span class="s2">&quot;port&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">9090</span>
+<span class="c1"># .get() avoids KeyError</span>
+<span class="n">timeout</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;timeout&quot;</span><span class="p">,</span> <span class="mi">30</span><span class="p">)</span>
+</code></pre></div>
+
+<h3>Time complexity</h3>
+<table>
+<thead>
+<tr>
+<th>Operation</th>
+<th>Average</th>
+<th>Worst-case</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>d[key]</code></td>
+<td>O(1)</td>
+<td>O(n)</td>
+</tr>
+<tr>
+<td><code>d.get(key)</code></td>
+<td>O(1)</td>
+<td>O(n)</td>
+</tr>
+<tr>
+<td><code>key in d</code></td>
+<td>O(1)</td>
+<td>O(n)</td>
+</tr>
+<tr>
+<td><code>d[key] = value</code></td>
+<td>O(1) amortized</td>
+<td>O(n)</td>
+</tr>
+<tr>
+<td><code>del d[key]</code></td>
+<td>O(1) amortized</td>
+<td>O(n)</td>
+</tr>
+</tbody>
+</table>
+<h3>When to use a dict</h3>
+<p>Use a dict when:</p>
+<ul>
+<li>You need to <strong>look up</strong> a value by a key.</li>
+<li>You need <strong>counting</strong> or grouping by category.</li>
+<li>You want to map one set of values to another (translation tables, configs, objects).</li>
+<li>You are counting frequencies, caching results, or attaching metadata to records.</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="c1"># Counting word frequency — the classic dict pattern</span>
+<span class="n">counts</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">text</span><span class="o">.</span><span class="n">split</span><span class="p">():</span>
+    <span class="n">counts</span><span class="p">[</span><span class="n">word</span><span class="p">]</span> <span class="o">=</span> <span class="n">counts</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">word</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
+
+<span class="c1"># Or, more cleanly, with defaultdict or Counter (below)</span>
+</code></pre></div>
+
+<p>Avoid dicts when you need order-only operations without keys (use a list), when you need uniqueness without values (use a set), or when your keys are unhashable.</p>
+<h2>Choosing at a Glance</h2>
+<p>The decision mostly comes down to three questions:</p>
+<table>
+<thead>
+<tr>
+<th>Decision tree</th>
+<th>Result</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Do I need <strong>unique</strong> elements and fast membership?</td>
+<td><strong>set</strong></td>
+</tr>
+<tr>
+<td>Do I need to look up values by <strong>key</strong>?</td>
+<td><strong>dict</strong></td>
+</tr>
+<tr>
+<td>Do I need to <strong>modify</strong> the collection?</td>
+<td><strong>list</strong> (mutable)</td>
+</tr>
+<tr>
+<td>Is the collection fixed and small, used as a record or key?</td>
+<td><strong>tuple</strong> (immutable)</td>
+</tr>
+</tbody>
+</table>
+<p>A quick reference for the most common patterns:</p>
+<ul>
+<li><strong>Stack</strong>: <code>list.append</code> / <code>list.pop</code> — O(1), built-in.</li>
+<li><strong>Queue</strong>: <code>collections.deque</code> with <code>append</code> / <code>popleft</code> — O(1). A list's <code>pop(0)</code> is O(n).</li>
+<li><strong>Ordered unique collection</strong>: a <code>dict</code> (as an ordered set): <code>dict.fromkeys(items)</code>.</li>
+<li><strong>Fast "have I seen this?"</strong>: <code>set</code>.</li>
+<li><strong>Counts or tallies</strong>: <code>collections.Counter</code>.</li>
+</ul>
+<h2>The <code>collections</code> Module: Specialized Tools</h2>
+<p>The <code>collections</code> module ships with Python and provides tuned replacements for the built-ins when you need something more specific.</p>
+<h3><code>deque</code>: Fast appends and pops from both ends</h3>
+<p>A <code>deque</code> (double-ended queue) is a doubly-linked list of blocks. Appending and popping from <strong>either end</strong> is O(1):</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">deque</span>
+
+<span class="n">q</span> <span class="o">=</span> <span class="n">deque</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
+<span class="n">q</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>      <span class="c1"># [1, 2, 3, 4]</span>
+<span class="n">q</span><span class="o">.</span><span class="n">popleft</span><span class="p">()</span>      <span class="c1"># 1, q is now [2, 3, 4]</span>
+
+<span class="c1"># A deque is also bounded — great for a sliding-window buffer</span>
+<span class="n">window</span> <span class="o">=</span> <span class="n">deque</span><span class="p">(</span><span class="n">maxlen</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+    <span class="n">window</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">window</span><span class="p">)</span>  <span class="c1"># only the last 3 values are kept</span>
+</code></pre></div>
+
+<p>Use a <code>deque</code> when you need a queue (FIFO) or a sliding window. For pure end-of-list stacks, a plain <code>list</code> is fine and simpler.</p>
+<h3><code>Counter</code>: A dict built for counting</h3>
+<p><code>Counter</code> is a <code>dict</code> subclass where missing keys default to <code>0</code>. Perfect for tallying:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">Counter</span>
+
+<span class="n">words</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;apple&quot;</span><span class="p">,</span> <span class="s2">&quot;banana&quot;</span><span class="p">,</span> <span class="s2">&quot;apple&quot;</span><span class="p">,</span> <span class="s2">&quot;orange&quot;</span><span class="p">,</span> <span class="s2">&quot;banana&quot;</span><span class="p">,</span> <span class="s2">&quot;apple&quot;</span><span class="p">]</span>
+<span class="n">counts</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">(</span><span class="n">words</span><span class="p">)</span>
+<span class="c1"># Counter({&#39;apple&#39;: 3, &#39;banana&#39;: 2, &#39;orange&#39;: 1})</span>
+
+<span class="c1"># most_common returns the top N</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">counts</span><span class="o">.</span><span class="n">most_common</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>  <span class="c1"># [(&#39;apple&#39;, 3), (&#39;banana&#39;, 2)]</span>
+
+<span class="c1"># Counter supports arithmetic: combining two tallies</span>
+<span class="n">extra</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">([</span><span class="s2">&quot;apple&quot;</span><span class="p">,</span> <span class="s2">&quot;kiwi&quot;</span><span class="p">])</span>
+<span class="n">total</span> <span class="o">=</span> <span class="n">counts</span> <span class="o">+</span> <span class="n">extra</span>
+</code></pre></div>
+
+<p>Use a <code>Counter</code> whenever you are counting occurrences of hashable items. Replacing the manual <code>d[key] = d.get(key, 0) + 1</code> loop with a <code>Counter</code> is one of the cleanest wins in Python.</p>
+<h3><code>defaultdict</code>: A dict that never says KeyError</h3>
+<p>A <code>defaultdict</code> auto-creates missing entries using a factory you specify:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">defaultdict</span>
+
+<span class="c1"># group items by a key without checking membership each time</span>
+<span class="n">groups</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">records</span><span class="p">:</span>
+    <span class="n">groups</span><span class="p">[</span><span class="n">item</span><span class="o">.</span><span class="n">category</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+
+<span class="c1"># default_factory can be any zero-argument callable</span>
+<span class="n">counts</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+<span class="n">counts</span><span class="p">[</span><span class="s2">&quot;hits&quot;</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>  <span class="c1"># starts at 0 automatically</span>
+</code></pre></div>
+
+<p>Use a <code>defaultdict</code> when you are accumulating into a collection (list, set, int) and the repeated <code>if key not in d</code> boilerplate clutters your code. It is a readability win over plain dicts for grouping and tallying. If you also need counts and ordering, <code>Counter</code> is usually the better fit.</p>
+<h3><code>OrderedDict</code>: When order matters and you want explicit control</h3>
+<p>Before Python 3.7, dicts did not guarantee insertion order, so <code>OrderedDict</code> existed to fill that gap. Since 3.7, regular dicts preserve order, so for most use cases a plain dict is enough. <code>OrderedDict</code> still has one edge: its <code>==</code> comparison is <strong>order-sensitive</strong> (unlike dict), and it provides <code>move_to_end()</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">OrderedDict</span>
+
+<span class="n">cache</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">()</span>
+<span class="n">cache</span><span class="p">[</span><span class="s2">&quot;a&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">cache</span><span class="p">[</span><span class="s2">&quot;b&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">cache</span><span class="o">.</span><span class="n">move_to_end</span><span class="p">(</span><span class="s2">&quot;a&quot;</span><span class="p">)</span>  <span class="c1"># &quot;a&quot; is now the most recently used</span>
+</code></pre></div>
+
+<p>Use <code>OrderedDict</code> when you need order-sensitive equality, LRU-style reordering, or you support Python 3.6 and earlier. Otherwise, stick with plain <code>dict</code>.</p>
+<h2>A Worked Example: Log Analysis</h2>
+<p>Here is a small program that puts several of these structures together. It reads a log file, finds the top request paths, keeps a sliding window of recent status codes, and groups errors by path:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">Counter</span><span class="p">,</span> <span class="n">defaultdict</span><span class="p">,</span> <span class="n">deque</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">analyze_log</span><span class="p">(</span><span class="n">lines</span><span class="p">):</span>
+    <span class="c1"># Count how often each path appears</span>
+    <span class="n">path_counts</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">()</span>
+
+    <span class="c1"># Keep only the last 100 status codes seen (sliding window)</span>
+    <span class="n">recent_statuses</span> <span class="o">=</span> <span class="n">deque</span><span class="p">(</span><span class="n">maxlen</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+
+    <span class="c1"># Group error messages by path</span>
+    <span class="n">errors_by_path</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">lines</span><span class="p">:</span>
+        <span class="n">parts</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">parts</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">9</span><span class="p">:</span>
+            <span class="k">continue</span>
+        <span class="n">path</span> <span class="o">=</span> <span class="n">parts</span><span class="p">[</span><span class="mi">6</span><span class="p">]</span>
+        <span class="n">status</span> <span class="o">=</span> <span class="n">parts</span><span class="p">[</span><span class="mi">8</span><span class="p">]</span>
+
+        <span class="n">path_counts</span><span class="p">[</span><span class="n">path</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="n">recent_statuses</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">status</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">status</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;5&quot;</span><span class="p">):</span>  <span class="c1"># server error</span>
+            <span class="n">errors_by_path</span><span class="p">[</span><span class="n">path</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>
+
+    <span class="c1"># Top 5 most-requested paths</span>
+    <span class="n">top_paths</span> <span class="o">=</span> <span class="n">path_counts</span><span class="o">.</span><span class="n">most_common</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+
+    <span class="c1"># 404 paths: those in the log but not in the top list</span>
+    <span class="n">top_set</span> <span class="o">=</span> <span class="p">{</span><span class="n">p</span> <span class="k">for</span> <span class="n">p</span><span class="p">,</span> <span class="n">_</span> <span class="ow">in</span> <span class="n">top_paths</span><span class="p">}</span>
+    <span class="n">low_traffic</span> <span class="o">=</span> <span class="p">{</span><span class="n">p</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">path_counts</span> <span class="k">if</span> <span class="n">p</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">top_set</span><span class="p">}</span>
+
+    <span class="k">return</span> <span class="n">top_paths</span><span class="p">,</span> <span class="nb">dict</span><span class="p">(</span><span class="n">recent_statuses</span><span class="p">),</span> <span class="n">errors_by_path</span><span class="p">,</span> <span class="n">low_traffic</span>
+
+<span class="c1"># Simulated log lines</span>
+<span class="n">sample</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s1">&#39;127.0.0.1 - - [01/Jan/2026:12:00:00] &quot;GET /index.html&quot; 200 1024&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;127.0.0.1 - - [01/Jan/2026:12:00:01] &quot;GET /about&quot; 200 512&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;127.0.0.1 - - [01/Jan/2026:12:00:02] &quot;GET /index.html&quot; 200 1024&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;127.0.0.1 - - [01/Jan/2026:12:00:03] &quot;GET /missing&quot; 404 128&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;127.0.0.1 - - [01/Jan/2026:12:00:04] &quot;GET /index.html&quot; 500 0&#39;</span><span class="p">,</span>
+<span class="p">]</span>
+
+<span class="n">top</span><span class="p">,</span> <span class="n">statuses</span><span class="p">,</span> <span class="n">errors</span><span class="p">,</span> <span class="n">low</span> <span class="o">=</span> <span class="n">analyze_log</span><span class="p">(</span><span class="n">sample</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Top paths:&quot;</span><span class="p">,</span> <span class="n">top</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Recent statuses:&quot;</span><span class="p">,</span> <span class="n">statuses</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Errors by path:&quot;</span><span class="p">,</span> <span class="n">errors</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Low-traffic paths:&quot;</span><span class="p">,</span> <span class="n">low</span><span class="p">)</span>
+</code></pre></div>
+
+<p>This shows the structures cooperating rather than competing: <code>Counter</code> for tallying, <code>deque</code> for the bounded window, <code>defaultdict</code> for grouping, and <code>set</code> comprehensions for the membership math.</p>
+<h2>Bottom Line</h2>
+<p>Start with the built-in that matches your access pattern:</p>
+<ul>
+<li><strong>Membership testing</strong> → <code>set</code></li>
+<li><strong>Key/value lookup</strong> → <code>dict</code></li>
+<li><strong>Ordered, mutable collection</strong> → <code>list</code></li>
+<li><strong>Ordered, immutable record or key</strong> → <code>tuple</code></li>
+</ul>
+<p>When the built-in falls short on complexity or ergonomics, the <code>collections</code> module usually has a tuned specialist: <code>deque</code> for queues, <code>Counter</code> for tallies, <code>defaultdict</code> for grouping. Reach for them when they remove real boilerplate — not because they are "more advanced." The best data structure is the one whose complexity you do not pay for, and whose clarity saves more time than you spend learning it.</p>
+    <!-- <div class="aspect-w-16 aspect-h-9 mx-auto"></div> CSS placeholder -->
+  </div>
+  <footer class="flex flex-col mt-10 ">
+    <ul class="flex flex-wrap">
+      <a href="https://netzro.github.io/tag/data-structures.html">
+        <li
+          class="bg-zinc-200 hover:bg-zinc-300 dark:hover:bg-zinc-800 dark:bg-zinc-700 text-zinc-500 dark:text-neutral-400 mb-2 mr-2 px-3 py-1.5 rounded-md transition ease-in active:-translate-y-1 active:scale-110 duration-75">
+          data structures
+        </li>
+      </a>
+      <a href="https://netzro.github.io/tag/programming.html">
+        <li
+          class="bg-zinc-200 hover:bg-zinc-300 dark:hover:bg-zinc-800 dark:bg-zinc-700 text-zinc-500 dark:text-neutral-400 mb-2 mr-2 px-3 py-1.5 rounded-md transition ease-in active:-translate-y-1 active:scale-110 duration-75">
+          programming
+        </li>
+      </a>
+      <a href="https://netzro.github.io/tag/python.html">
+        <li
+          class="bg-zinc-200 hover:bg-zinc-300 dark:hover:bg-zinc-800 dark:bg-zinc-700 text-zinc-500 dark:text-neutral-400 mb-2 mr-2 px-3 py-1.5 rounded-md transition ease-in active:-translate-y-1 active:scale-110 duration-75">
+          python
+        </li>
+      </a>
+    </ul>
+    <div class="flex w-full my-2 bg-zinc-200 dark:bg-zinc-700 rounded-lg">
+      <div class="w-1/2 rounded-l-lg"></div>
+    </div>
+    <div class="flex bg-zinc-200 dark:bg-zinc-700 py-2 rounded-lg justify-center space-x-2 text-xs">
+      <ul>
+        <a target="_blank" rel="noopener noreferrer" title="twitter" aria-label="share Features on twitter"
+          href="https://twitter.com/intent/tweet/?text=Features&amp;url=https://netzro.github.io/posts/2026/Aug/25/python-data-structures/">
+          <li class="bg-gray-900 p-1 text-white rounded-md">
+            <i class="fab fa-twitter fa-2x" aria-hidden="true"></i>
+          </li>
+        </a>
+      </ul>
+      <ul>
+        <a target="_blank" rel="noopener noreferrer" title="linkedin" aria-label="share Features on linkedin"
+          href="https://www.linkedin.com/sharing/share-offsite/?url=https://netzro.github.io/posts/2026/Aug/25/python-data-structures/">
+          <li class="bg-gray-900 p-1 text-white rounded-md">
+            <i class="fab fa-linkedin fa-2x" aria-hidden="true"></i>
+          </li>
+        </a>
+      </ul>
+      <ul>
+        <a target="_blank" rel="noopener noreferrer" title="reddit" aria-label="share Features on reddit"
+          href="https://reddit.com/submit?url=https://netzro.github.io/posts/2026/Aug/25/python-data-structures/">
+          <li class="bg-gray-900 p-1 text-white rounded-md">
+            <i class="fab fa-reddit fa-2x" aria-hidden="true"></i>
+          </li>
+        </a>
+      </ul>
+      <ul>
+        <a target="_blank" rel="noopener noreferrer" title="facebook" aria-label="share Features on facebook"
+          href="https://facebook.com/sharer/sharer.php?u=https://netzro.github.io/posts/2026/Aug/25/python-data-structures/">
+          <li class="bg-gray-900 p-1 text-white rounded-md">
+            <i class="fab fa-facebook fa-2x" aria-hidden="true"></i>
+          </li>
+        </a>
+      </ul>
+      <ul>
+        <a target="_blank" rel="noopener noreferrer" title="whatsapp" aria-label="share Features on whatsapp"
+          href="https://api.whatsapp.com/send?text=Features - https://netzro.github.io/posts/2026/Aug/25/python-data-structures/">
+          <li class="bg-gray-900 p-1 text-white rounded-md">
+            <i class="fab fa-whatsapp fa-2x" aria-hidden="true"></i>
+          </li>
+        </a>
+      </ul>
+      <ul>
+        <a target="_blank" rel="noopener noreferrer" title="telegram" aria-label="share Features on telegram"
+          href="https://telegram.me/share/url?text=Features&amp;url=https://netzro.github.io/posts/2026/Aug/25/python-data-structures/">
+          <li class="bg-gray-900 p-1 text-white rounded-md">
+            <i class="fab fa-telegram fa-2x" aria-hidden="true"></i>
+          </li>
+        </a>
+      </ul>
+    </div>
+  </footer>
+  <div>
+  </div>
+</main>
+
+    </div>
+    
+    <footer class="flex w-full text-xs justify-center mt-10 mb-6 text-zinc-500 dark:text-zinc-400">
+    <div class="px-4">
+        <span>©2026 - Gifted&nbsp;&#8226;&nbsp;</span>
+        Powered by
+        <a class="underline" href="https://getpelican.com/">Pelican</a>&nbsp;and&nbsp;
+        <a class="underline" href="https://github.com/aleylara/Papyrus">Papyrus</a>
+        
+        <span></span>
+    
+    </div>
+</footer>
+
+
+
+
+
+    <script>
+        let themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
+        let themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
+        if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia(
+                '(prefers-color-scheme: dark)').matches)) {
+            themeToggleLightIcon.classList.remove('hidden');
+        } else {
+            themeToggleDarkIcon.classList.remove('hidden');
+        }
+        let themeToggleBtn = document.getElementById('theme-toggle');
+        themeToggleBtn.addEventListener('click', function () {
+            themeToggleDarkIcon.classList.toggle('hidden');
+            themeToggleLightIcon.classList.toggle('hidden');
+            if (localStorage.getItem('color-theme')) {
+                if (localStorage.getItem('color-theme') === 'light') {
+                    document.documentElement.classList.add('dark');
+                    localStorage.setItem('color-theme', 'dark');
+                } else {
+                    document.documentElement.classList.remove('dark');
+                    localStorage.setItem('color-theme', 'light');
+                }
+            } else {
+                if (document.documentElement.classList.contains('dark')) {
+                    document.documentElement.classList.remove('dark');
+                    localStorage.setItem('color-theme', 'light');
+                } else {
+                    document.documentElement.classList.add('dark');
+                    localStorage.setItem('color-theme', 'dark');
+                }
+            }
+        });
+    </script>
+    <script src="https://files.stork-search.net/releases/v1.4.0/stork.js"></script>
+    <script>
+        stork.register("sitesearch", "https://netzro.github.io/search-index.st")
+    </script>
+
+</body>
+
+
+</html>
