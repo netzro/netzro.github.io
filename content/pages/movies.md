@@ -5,11 +5,26 @@ Status: hidden
 ---
 
 # Movies
-_Updated as I watch. Last update: 20th August 2026._
+_Updated as I watch. Last update: 25th August 2026._
 
 ### Watchlist
 
 <details markdown='1'><summary>August 2026</summary>
+
+![](https://netzro.github.io/images/posters/mutiny.jpg) **Mutiny (2026)**  
+_Watched on_ - 25th August 2026
+
+![](https://netzro.github.io/images/posters/the-bay.jpg) **The Bay (2026)**  
+_Watched on_ - 25th August 2026
+
+![](https://netzro.github.io/images/posters/the-clovenhitch-killer.jpg) **The Clovehitch Killer (2018)**  
+_Watched on_ - 25th August 2026
+
+![](https://netzro.github.io/images/posters/watcher.jpg) **Watcher (2022)**  
+_Watched on_ - 25th August 2026
+
+![](https://netzro.github.io/images/posters/books-of-blood.jpg) **Books of Blood (2020)**  
+_Watched on_ - 25th August 2026
 
 ![](https://netzro.github.io/images/posters/magpie.jpg) **Magpie (2024)**  
 _Watched on_ - 20th August 2026  
