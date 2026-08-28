@@ -11,7 +11,7 @@ _Updated as I watch. Last update: 28th August 2026._
 
 <details markdown='1'><summary>August 2026</summary>
 
-![](images/posters/faces-of-death-2026.jpg) **Faces of Death (2026)**
+![](https://netzro.github.io/images/posters/faces-of-death-2026.jpg) **Faces of Death (2026)**
 _Watched on_ - 28th August 2026
 
 ![](https://netzro.github.io/images/posters/mutiny.jpg) **Mutiny (2026)**  
