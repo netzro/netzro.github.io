@@ -5,11 +5,14 @@ Status: hidden
 ---
 
 # Movies
-_Updated as I watch. Last update: 25th August 2026._
+_Updated as I watch. Last update: 28th August 2026._
 
 ### Watchlist
 
 <details markdown='1'><summary>August 2026</summary>
+
+![](images/posters/faces-of-death-2026.jpg) **Faces of Death (2026)**
+_Watched on_ - 28th August 2026
 
 ![](https://netzro.github.io/images/posters/mutiny.jpg) **Mutiny (2026)**  
 _Watched on_ - 25th August 2026
