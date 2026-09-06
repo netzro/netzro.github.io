@@ -7,7 +7,7 @@ Status: hidden
 # Movies
 _Updated as I watch. Last update: 06th September 2026._
 
-### September 2026
+<details markdown='1'><summary>September 2026</summary>
 
 ![](https://netzro.github.io/images/posters/the-exorcism-of-molly-hartley.jpg) **The Exorcism of Molly Hartley (2015)**
 _Watched on_ - 06th September 2026
@@ -23,6 +23,8 @@ _Watched on_ - 06th September 2026
 
 ![](https://netzro.github.io/images/posters/the-home.jpg) **The Home (2025)**
 _Watched on_ - 06th September 2026
+
+</details>
 
 ### Watchlist
 
