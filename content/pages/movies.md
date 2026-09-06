@@ -5,7 +5,24 @@ Status: hidden
 ---
 
 # Movies
-_Updated as I watch. Last update: 28th August 2026._
+_Updated as I watch. Last update: 06th September 2026._
+
+### September 2026
+
+![](https://netzro.github.io/images/posters/the-exorcism-of-molly-hartley.jpg) **The Exorcism of Molly Hartley (2015)**
+_Watched on_ - 06th September 2026
+
+![](https://netzro.github.io/images/posters/the-uninvited.jpg) **The Uninvited (2009)**
+_Watched on_ - 06th September 2026
+
+![](https://netzro.github.io/images/posters/greenland-2.jpg) **Greenland 2: Migration (2026)**
+_Watched on_ - 06th September 2026
+
+![](https://netzro.github.io/images/posters/affection.jpg) **Affection (2025)**
+_Watched on_ - 06th September 2026
+
+![](https://netzro.github.io/images/posters/the-home.jpg) **The Home (2025)**
+_Watched on_ - 06th September 2026
 
 ### Watchlist
 
