@@ -7,6 +7,8 @@ Status: hidden
 # Movies
 _Updated as I watch. Last update: 06th September 2026._
 
+### Watchlist
+
 <details markdown='1'><summary>September 2026</summary>
 
 ![](https://netzro.github.io/images/posters/the-exorcism-of-molly-hartley.jpg) **The Exorcism of Molly Hartley (2015)**
@@ -25,8 +27,6 @@ _Watched on_ - 06th September 2026
 _Watched on_ - 06th September 2026
 
 </details>
-
-### Watchlist
 
 <details markdown='1'><summary>August 2026</summary>
 
