@@ -5,6 +5,6 @@ Tags: nts
 Slug: grace-has-limits
 ---
 
-### note-to-self:26-07
+### note-to-self:26-01
 
 I believe in grace. We all fail and deserve a second chance to make things right. But a third? That is no longer a mistake; it is a pattern. Protect your peace and set boundaries. Fool me once, shame on you; fool me twice, shame on me.

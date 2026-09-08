@@ -5,7 +5,7 @@ Tags: nts, Discipline
 Slug: the-life-you-want
 ---
 
-### note-to-self:26-08
+### note-to-self:26-02
 
 The life you want is on the other side of the thing you're avoiding.
 

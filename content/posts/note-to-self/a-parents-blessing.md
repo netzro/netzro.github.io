@@ -3,7 +3,7 @@ Date: 2026-06-21
 Tags: nts, blessing, parenting, love
 Slug: a-parents-blessing
 
-### note-to-self:26-09
+### note-to-self:26-03
 
 You have my blessing now and at any time in your life.
 I trust you and I know that you are on the right path.

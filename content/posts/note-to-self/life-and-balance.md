@@ -3,7 +3,7 @@ Date: 2026-07-24
 Tags: nts, balance, life-lessons
 Slug: life-and-balance
 
-### note-to-self:26-10
+### note-to-self:26-04
 
 > The chase for more — more code, more projects, more output — is easy to mistake for progress. But a life spent only building is a life half-lived.
 

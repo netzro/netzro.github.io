@@ -5,7 +5,7 @@ Tags: nts, instinct, intuition
 Slug: follow-your-spirit
 ---
 
-### note-to-self:26-11
+### note-to-self:26-05
 
 That very first feeling. That quiet, instant pulse before the mind starts negotiating — *that's your spirit talking.*
 
