@@ -136,3 +136,7 @@ When you refactor imperative code this way, look for three smells: a list you ap
 The through-line of both parts is simple: small pure functions, composed into bigger behavior, with side effects pushed to the edges. `partial` and `lru_cache` make those functions cheaper to build and run. Closures and decorators let them carry context. Recursion handles the problems that are recursive at heart.
 
 If Part 1 was "functions are values," Part 2 is "and here's what you can build once you really believe it." Open a recent script and find one `for` loop that appends to a list, then rewrite it as a comprehension, then as a `map`. The code gets shorter, and the intent gets clearer. That's the whole point.
+
+---
+
+*Go back to [Part 1](https://netzro.github.io/posts/2026/Jul/24/python-functions-functional-beginner/) if you need to revisit the foundations.*

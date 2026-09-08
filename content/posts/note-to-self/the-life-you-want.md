@@ -16,3 +16,7 @@ Right now.
 Discipline isn't dramatic. It's just doing the thing you already know you should do, at the moment you least want to do it. Again and again, until the life you want stops being a fantasy and starts being a Tuesday.
 
 Stop waiting. Start. 🗣️🔉🔊
+
+---
+
+*Previously: [Grace Has Limits](https://netzro.github.io/posts/2026/Jun/18/grace-has-limits/), [The Brutal Truth](https://netzro.github.io/posts/2025/Jun/02/the-brutal-truth/)*

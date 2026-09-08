@@ -15,3 +15,7 @@ Slug: the-divine-in-nature
 
 **Peace, Love, Balance.**
 ☮️ 💚 ☯️
+
+---
+
+*Previously: [The Art of Detachment](https://netzro.github.io/posts/2024/Aug/10/the-art-of-detachment/), [Things Money Can't Buy](https://netzro.github.io/posts/2024/Aug/09/things-money-cant-buy/)*

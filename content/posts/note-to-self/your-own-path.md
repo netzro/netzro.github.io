@@ -16,3 +16,7 @@ No one can precisely know what experiences another soul requires for its awakeni
 
 **Peace, Love, Balance.**
 ☮️ 💚 ☯️
+
+---
+
+*Previously: [The Four Candles](https://netzro.github.io/posts/2024/Aug/20/the-four-candles/), [Make Your Own Bible](https://netzro.github.io/posts/2024/Aug/18/make-your-own-bible/)*

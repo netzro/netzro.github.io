@@ -18,4 +18,8 @@ Let your determination outwalk your doubts. Let your hope outshine your fears.
 Every small effort is a declaration:
 *"I believe in the beauty of what's ahead."*
 
-Keep going. Beautiful days are not lost — they're waiting for you to arrive.
+*Keep going. Beautiful days are not lost — they're waiting for you to arrive.*
+
+---
+
+*Previously: [Shine Unapologetically](https://netzro.github.io/posts/2025/May/22/shine-unapologetically/), [The Light Within](https://netzro.github.io/posts/2025/May/21/the-light-within/)*

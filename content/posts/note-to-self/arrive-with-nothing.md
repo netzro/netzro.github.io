@@ -15,3 +15,7 @@ Here's to a glorious and fulfilling existence for all, and profound peace to the
 
 **Peace, Love, Balance.**
 ☮️ 💚 ☯️
+
+---
+
+*Previously: [Stop Seeking Validation](https://netzro.github.io/posts/2024/Sep/21/stop-seeking-validation/), [Your Own Path](https://netzro.github.io/posts/2024/Aug/22/your-own-path/)*

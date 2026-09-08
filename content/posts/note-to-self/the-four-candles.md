@@ -21,3 +21,7 @@ The fourth candle spoke softly, "Don't be afraid, and don't cry. As long as I bu
 
 **Peace, Love, Balance.**
 ☮️ 💚 ☯️
+
+---
+
+*Previously: [Make Your Own Bible](https://netzro.github.io/posts/2024/Aug/18/make-your-own-bible/), [The Divine in Nature](https://netzro.github.io/posts/2024/Aug/11/the-divine-in-nature/)*

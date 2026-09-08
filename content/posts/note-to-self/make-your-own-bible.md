@@ -16,3 +16,7 @@ What words or phrases have struck you like a trumpet's blast? Which passages hav
 
 **Peace, Love, Balance.**
 ☮️ 💚 ☯️
+
+---
+
+*Previously: [The Divine in Nature](https://netzro.github.io/posts/2024/Aug/11/the-divine-in-nature/), [The Art of Detachment](https://netzro.github.io/posts/2024/Aug/10/the-art-of-detachment/)*

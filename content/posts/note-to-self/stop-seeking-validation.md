@@ -11,3 +11,7 @@ Seeking validation from the outside world is one of the greatest pitfalls for an
 
 **Peace, Love, Balance.**
 ☮️ 💚 ☯️
+
+---
+
+*Previously: [Your Own Path](https://netzro.github.io/posts/2024/Aug/22/your-own-path/), [The Four Candles](https://netzro.github.io/posts/2024/Aug/20/the-four-candles/)*

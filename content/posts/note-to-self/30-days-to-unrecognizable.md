@@ -27,4 +27,8 @@ June isn't just another month. It's your line in the sand. Your rebirth. Your re
 
 This isn't a challenge — it's a transformation. It starts when you say *enough*.
 
-Ready to bury the old you? I'll see you in June. 🗣️🔉🔊
+*Ready to bury the old you? I'll see you in June. 🗣️🔉🔊*
+
+---
+
+*Previously: [Build Your Beautiful Life](https://netzro.github.io/posts/2025/May/23/build-your-beautiful-life/), [Shine Unapologetically](https://netzro.github.io/posts/2025/May/22/shine-unapologetically/)*

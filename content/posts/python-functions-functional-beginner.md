@@ -136,7 +136,7 @@ point = (3, 4)    # can't be reassigned element-wise
 
 If you take nothing else: treat functions as ordinary values, keep the core of your logic pure, and transform data by producing new data rather than mutating old data. Those habits alone will make your Python clearer.
 
-In **Part 2**, we'll go further — `functools` (`partial`, `lru_cache`), closures, recursion, and how to refactor messy imperative code into a functional shape.
+In [**Part 2**](https://netzro.github.io/posts/2026/Jul/25/python-functions-functional-intermediate/), we'll go further — `functools` (`partial`, `lru_cache`), closures, recursion, and how to refactor messy imperative code into a functional shape.
 
 ## Try it yourself
 

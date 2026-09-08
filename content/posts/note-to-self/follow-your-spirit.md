@@ -26,3 +26,7 @@ So listen to it. Follow it. Stop consulting committees for answers your soul alr
 The first feeling is the truth. The second is doubt wearing a reasonable mask.
 
 Choose the truth. Every. Single. Time.
+
+---
+
+*Previously: [A Parent's Blessing](https://netzro.github.io/posts/2026/Jun/21/a-parents-blessing/), [Life and Balance](https://netzro.github.io/posts/2026/Jul/24/life-and-balance/)*

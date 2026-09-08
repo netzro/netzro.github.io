@@ -14,3 +14,7 @@ I give you permission to be like me, to be more than me or to be less than me, j
 In being just the way you are you ceaselessly bless my life.
 I am so proud of you.
 I love you.
+
+---
+
+*Previously: [Life and Balance](https://netzro.github.io/posts/2026/Jul/24/life-and-balance/), [The Life You Want](https://netzro.github.io/posts/2026/Jun/21/the-life-you-want/)*

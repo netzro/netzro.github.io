@@ -25,4 +25,8 @@ Or...
 
 *Buy the damn Book. Start the Challenge. Do the Work. LEVEL UP.*
 
-Become the *Unstoppable* force you were born to be. The difference between your dream life and your trap is the decision you make *right now*.
+Become the *Unstoppable* force you were born to be. The difference between your dream life and your trap is the decision you make *right now.*
+
+---
+
+*Previously: [Keep Going](https://netzro.github.io/posts/2025/May/27/keep-going/), [30 Days to Unrecognizable](https://netzro.github.io/posts/2025/May/25/30-days-to-unrecognizable/)*

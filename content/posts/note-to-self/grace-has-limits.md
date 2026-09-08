@@ -8,3 +8,7 @@ Slug: grace-has-limits
 ### note-to-self:26-01
 
 I believe in grace. We all fail and deserve a second chance to make things right. But a third? That is no longer a mistake; it is a pattern. Protect your peace and set boundaries. Fool me once, shame on you; fool me twice, shame on me.
+
+---
+
+*Previously: [The Brutal Truth](https://netzro.github.io/posts/2025/Jun/02/the-brutal-truth/), [Keep Going](https://netzro.github.io/posts/2025/May/27/keep-going/)*

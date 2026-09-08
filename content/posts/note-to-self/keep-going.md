@@ -18,3 +18,7 @@ But every step, every breath, every quiet act of showing up — is a silent roar
 Your pace doesn't define your power.
 
 *Keep going. Your win is warming up.* 🗣️🔉🔊
+
+---
+
+*Previously: [30 Days to Unrecognizable](https://netzro.github.io/posts/2025/May/25/30-days-to-unrecognizable/), [Build Your Beautiful Life](https://netzro.github.io/posts/2025/May/23/build-your-beautiful-life/)*
