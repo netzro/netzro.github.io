@@ -25,6 +25,7 @@
         type="application/rss+xml" rel="alternate" title="{{ SITENAME }} RSS Feed" />
     {% endif %}
     {% block extra_head %}{% endblock extra_head %}
+    {% include 'analytics.html' %}
     {% endblock head %}
     <script>
         if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia(
@@ -210,7 +211,6 @@
 
 
 
-    {% include 'analytics.html' %}
     {% include 'disqus_script.html' %}
 
     <script>
