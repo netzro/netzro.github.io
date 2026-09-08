@@ -32,6 +32,10 @@ DISPLAY_PAGES_ON_MENU = False
 DIRECT_TEMPLATES = (('index', 'tags', 'archives',))
 PAGINATED_TEMPLATES = {'index': None, 'tag': None, 'category': None, 'author': None, 'archives': 24,}
 
+# Plugins
+PLUGIN_PATHS = ['pelican-plugins']
+PLUGINS = ['sitemap']
+
 # Feed generation is usually not desired when developing
 FEED_ALL_ATOM = 'feeds/all.atom.xml'
 
