@@ -5,7 +5,17 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="generator" content="Pelican" />
-    <title>{% block title %} {{ SITENAME }} {% endblock %}</title>
+    <link rel="canonical" href="{% block canonical %}{{ SITEURL }}/{{ output_path }}{% endblock %}" />
+    <title>{% block title %}{{ SITENAME }} — {{ SUBTITLE }}{% endblock %}</title>
+    <meta name="description" content="{% block meta_description %}{{ SUBTEXT | striptags }}{% endblock %}" />
+    <!-- Open Graph -->
+    <meta property="og:type" content="{% block og_type %}website{% endblock %}" />
+    <meta property="og:site_name" content="{{ SITENAME }}" />
+    <meta property="og:title" content="{% block og_title %}{{ self.title() }}{% endblock %}" />
+    <meta property="og:description" content="{% block og_description %}{{ self.meta_description() }}{% endblock %}" />
+    <meta property="og:url" content="{% block og_url %}{{ SITEURL }}/{{ output_path }}{% endblock %}" />
+    {% block og_image %}{% endblock %}
+    {% block head_meta %}{% endblock %}
     <link rel="stylesheet" type="text/css" href="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/css/mac-classic.css" />
     <link rel="icon" href="{{ SITEURL }}/images/favicon.ico" type="image/x-icon" />
     {% if FEED_ALL_ATOM %}
