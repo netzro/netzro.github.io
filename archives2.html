@@ -1,21 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="generator" content="Pelican" />
     <title>Archive | Gifted Space</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Slab|Ruda" />
-    <link rel="stylesheet" type="text/css" href="https://netzro.github.io/theme/css/main.css" />
-    <link rel="stylesheet" href="https://netzro.github.io/theme/css/stork.css">
-    <link rel="stylesheet" media="screen and (prefers-color-scheme: dark)" href="https://netzro.github.io/theme/css/stork-dark.css">
-    <link rel="icon" href="https://netzro.github.io/images/favicon.ico" type="image/x-icon" /> <!-- Add this line -->
-
-    <link
-        href="https://netzro.github.io/feeds/all.atom.xml"
-        type="application/atom+xml" rel="alternate" title="Gifted Space Atom Feed" />
+    <link rel="stylesheet" type="text/css" href="https://netzro.github.io/theme/css/mac-classic.css" />
+    <link rel="icon" href="https://netzro.github.io/images/favicon.ico" type="image/x-icon" />
+    <link href="https://netzro.github.io/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Gifted Space Atom Feed" />
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-VJD75C7TTC"></script>
 <script>
@@ -25,440 +17,299 @@
   gtag('config', 'G-VJD75C7TTC');
 </script>
     <script>
-        if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia(
-                '(prefers-color-scheme: dark)').matches)) {
+        if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
             document.documentElement.classList.add('dark');
         } else {
             document.documentElement.classList.remove('dark')
         }
     </script>
 </head>
+<body>
+    <div class="mac-window">
+        <div class="mac-window__outer">
+            <div class="mac-window__inner">
+                <!-- Title Bar -->
+                <div class="mac-title-bar">
+                    <div class="mac-title-bar__grill">
+                        <div class="mac-title-bar__grill-line"></div>
+                        <div class="mac-title-bar__grill-line"></div>
+                        <div class="mac-title-bar__grill-line"></div>
+                        <div class="mac-title-bar__grill-line"></div>
+                        <div class="mac-title-bar__grill-line"></div>
+                        <div class="mac-title-bar__grill-line"></div>
+                    </div>
+                    <div class="mac-title-bar__title">Gifted Space</div>
+                </div>
 
-<body class="min-h-screen flex flex-col max-w-7xl lg:max-w-none text-zinc-800 bg-neutral-100 
-    dark:bg-neutral-900 dark:text-zinc-300 container mx-auto justify-center md:px-3 ">
-    <nav class="sm:flex sm:justify-between xl:ml-32 pl-4 items-center">
-        <div class="flex pt-4">
-            <h1 class="font-semibold text-2xl"><a href="https://netzro.github.io/">Gifted Space</a></h1>
-            <button id="theme-toggle" type="button"
-                class="text-zinc-700 dark:text-zinc-400 rounded-full focus:outline-none text-sm ml-2 p-1">
-                <svg id="theme-toggle-dark-icon" class="w-5 h-5 hidden" fill="currentColor" viewBox="0 0 20 20"
-                    xmlns="http://www.w3.org/2000/svg">
-                    <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
-                </svg>
-                <svg id="theme-toggle-light-icon" class="w-5 h-5 hidden" fill="currentColor" viewBox="0 0 20 20"
-                    xmlns="http://www.w3.org/2000/svg">
-                    <path
-                        d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z"
-                        fill-rule="evenodd" clip-rule="evenodd"></path>
-                </svg>
-            </button>
-        </div>
-        <ul class="flex flex-wrap lg:mr-24 md:pt-0">
-            <li class="mr-4 pt-6"><a  href="https://netzro.github.io/pages/about/">About</a></li>
-            <li class="mr-4 pt-6"><a  href="https://netzro.github.io/pages/more/">More/</a></li>
-            <li class="mr-4 pt-6"><a  class="border-b-2 border-zinc-800 dark:border-zinc-300"
- href="https://netzro.github.io/archives.html">Archive</a></li>
-            <li class="mr-4 pt-6"><a  href="https://netzro.github.io/tags.html">Tags</a></li>
-        </ul>
-    </nav>
-    <div class="flex-grow md:max-w-screen-md md:mx-auto md:w-3/4 px-4">
+                <!-- Content -->
+                <div class="mac-content">
+                    <!-- Navigation -->
+                    <nav class="mac-nav">
+                        <ul class="mac-nav__list">
+                            <li class="mac-nav__item mac-nav__item--active">
+                                <a class="mac-nav__link" href="https://netzro.github.io/">Home</a>
+                            </li>
+                            <li class="mac-nav__item ">
+                                <a class="mac-nav__link" href="https://netzro.github.io/pages/about/">About</a>
+                            </li>
+                            <li class="mac-nav__item ">
+                                <a class="mac-nav__link" href="https://netzro.github.io/pages/more/">More/</a>
+                            </li>
+                            <li class="mac-nav__item mac-nav__item--active">
+                                <a class="mac-nav__link" href="https://netzro.github.io/archives.html">Archive</a>
+                            </li>
+                            <li class="mac-nav__item ">
+                                <a class="mac-nav__link" href="https://netzro.github.io/tags.html">Tags</a>
+                            </li>
+                        </ul>
+                    </nav>
 
-<div class="md:mt-14 text-zinc-800 dark:text-zinc-300 pb-6">
-    <h1 class="font-bold text-4xl my-10">Archive</h1>
-    <ul class=" flex-col">
-        <h3 class="text-2xl font-semibold my-8">2026
-            <sup class="text-sm text-zinc-800 dark:text-zinc-400">
-                    33
-
-            </sup>
-        </h3>
-        <div class="md:flex my-1">
-            <time class="text-xl font-semibold flex mt-6 md:mt-2 md:w-40">June
-                <sup class="text-sm m-1 text-zinc-800 dark:text-zinc-400">
-                        16
-
-                </sup>
-            </time>
-            <a href="https://netzro.github.io/posts/2026/Jun/12/how-llms-are-built-inside-the-architecture/">
-                <li class="flex-1 md:mt-2"><span class="text-lg">How LLMs Are Built — Inside The Architecture</span><br>
-                    <div class="flex text-xs text-zinc-800 dark:text-zinc-400">
-                        <time>June 12, 2026</time>
-                        <div>
-                        </div>
-                        <div>
-                            <span>&nbsp;·&nbsp;Gifted</span>
-                        </div>
-                    </div>
-                </li>
-            </a>
-        </div>
-        <div class="md:flex">
-            <time class="flex md:w-40"></time>
-            <a href="https://netzro.github.io/posts/2026/Jun/12/termux-the-phone-is-the-computer/">
-                <li class="flex-1 md:mt-2 mt-1"><span class="text-lg">Termux — The Phone Is The Computer</span><br>
-                    <div class="flex text-xs text-zinc-800 dark:text-zinc-400">
-                        <time>June 12, 2026</time>
-                        <div>
-                        </div>
-                        <div>
-                            <span>&nbsp;·&nbsp;Gifted</span>
-                        </div>
-                    </div>
-                </li>
-            </a>
-        </div>
-        <div class="md:flex">
-            <time class="flex md:w-40"></time>
-            <a href="https://netzro.github.io/posts/2026/Jun/11/digital-minimalism-data-sovereignty/">
-                <li class="flex-1 md:mt-2 mt-1"><span class="text-lg">Digital Minimalism: Reclaiming Your Data Sovereignty</span><br>
-                    <div class="flex text-xs text-zinc-800 dark:text-zinc-400">
-                        <time>June 11, 2026</time>
-                        <div>
-                        </div>
-                        <div>
-                            <span>&nbsp;·&nbsp;Gifted</span>
-                        </div>
-                    </div>
-                </li>
-            </a>
-        </div>
-        <div class="md:flex">
-            <time class="flex md:w-40"></time>
-            <a href="https://netzro.github.io/posts/2026/Jun/11/functional-programming-in-python/">
-                <li class="flex-1 md:mt-2 mt-1"><span class="text-lg">Functional Programming in Python</span><br>
-                    <div class="flex text-xs text-zinc-800 dark:text-zinc-400">
-                        <time>June 11, 2026</time>
-                        <div>
-                        </div>
-                        <div>
-                            <span>&nbsp;·&nbsp;Gifted</span>
-                        </div>
-                    </div>
-                </li>
-            </a>
-        </div>
-        <div class="md:flex">
-            <time class="flex md:w-40"></time>
-            <a href="https://netzro.github.io/posts/2026/Jun/11/reflection-on-the-seven-hermetic-principles/">
-                <li class="flex-1 md:mt-2 mt-1"><span class="text-lg">Reflection on the Seven Hermetic Principles</span><br>
-                    <div class="flex text-xs text-zinc-800 dark:text-zinc-400">
-                        <time>June 11, 2026</time>
-                        <div>
-                        </div>
-                        <div>
-                            <span>&nbsp;·&nbsp;Gifted</span>
-                        </div>
-                    </div>
-                </li>
-            </a>
-        </div>
-        <div class="md:flex">
-            <time class="flex md:w-40"></time>
-            <a href="https://netzro.github.io/posts/2026/Jun/10/automating-hermes-config-backups-to-github/">
-                <li class="flex-1 md:mt-2 mt-1"><span class="text-lg">Automating Hermes Agent Configuration Backups to GitHub</span><br>
-                    <div class="flex text-xs text-zinc-800 dark:text-zinc-400">
-                        <time>June 10, 2026</time>
-                        <div>
-                        </div>
-                        <div>
-                            <span>&nbsp;·&nbsp;Gifted</span>
-                        </div>
-                    </div>
-                </li>
-            </a>
-        </div>
-        <div class="md:flex">
-            <time class="flex md:w-40"></time>
-            <a href="https://netzro.github.io/posts/2026/Jun/03/why-python-is-best-for-beginners/">
-                <li class="flex-1 md:mt-2 mt-1"><span class="text-lg">Why Python is the Best Language for Beginners</span><br>
-                    <div class="flex text-xs text-zinc-800 dark:text-zinc-400">
-                        <time>June 03, 2026</time>
-                        <div>
-                        </div>
-                        <div>
-                            <span>&nbsp;·&nbsp;Gifted</span>
-                        </div>
-                    </div>
-                </li>
-            </a>
-        </div>
-        <div class="md:flex mt-3">
-            <time class="text-xl font-semibold flex mt-6 md:mt-2 md:w-40">May
-                <sup class="text-sm m-1 text-zinc-800 dark:text-zinc-400">
-                        2
-
-                </sup>
-            </time>
-            <a href="https://netzro.github.io/posts/2026/May/19/mcp-servers-the-missing-piece/">
-                <li class="flex-1 md:mt-2"><span class="text-lg">MCP Servers: The Missing Piece in AI Agent Development</span><br>
-                    <div class="flex text-xs text-zinc-800 dark:text-zinc-400">
-                        <time>May 19, 2026</time>
-                        <div>
-                        </div>
-                        <div>
-                            <span>&nbsp;·&nbsp;Gifted</span>
-                        </div>
-                    </div>
-                </li>
-            </a>
-        </div>
-        <div class="md:flex">
-            <time class="flex md:w-40"></time>
-            <a href="https://netzro.github.io/posts/2026/May/19/setting-up-rustledger-android/">
-                <li class="flex-1 md:mt-2 mt-1"><span class="text-lg">Setting Up Rustledger for Personal Accounting on Android</span><br>
-                    <div class="flex text-xs text-zinc-800 dark:text-zinc-400">
-                        <time>May 19, 2026</time>
-                        <div>
-                        </div>
-                        <div>
-                            <span>&nbsp;·&nbsp;Gifted</span>
-                        </div>
-                    </div>
-                </li>
-            </a>
-        </div>
-        <h3 class="text-2xl font-semibold my-8">2025
-            <sup class="text-sm text-zinc-800 dark:text-zinc-400">
-                    22
-
-            </sup>
-        </h3>
-        <div class="md:flex my-1">
-            <time class="text-xl font-semibold flex mt-6 md:mt-2 md:w-40">June
-                <sup class="text-sm m-1 text-zinc-800 dark:text-zinc-400">
-                        5
-
-                </sup>
-            </time>
-            <a href="https://netzro.github.io/posts/2025/Jun/15/wn2025-24/">
-                <li class="flex-1 md:mt-2"><span class="text-lg">Weeknote 2025:24</span><br>
-                    <div class="flex text-xs text-zinc-800 dark:text-zinc-400">
-                        <time>June 15, 2025</time>
-                        <div>
-                        </div>
-                        <div>
-                            <span>&nbsp;·&nbsp;Gifted</span>
-                        </div>
-                    </div>
-                </li>
-            </a>
-        </div>
-        <div class="md:flex">
-            <time class="flex md:w-40"></time>
-            <a href="https://netzro.github.io/posts/2025/Jun/08/setting-up-cronie-and-scheduling-scripts-in-termux/">
-                <li class="flex-1 md:mt-2 mt-1"><span class="text-lg">Setting Up Cronie and Scheduling Scripts in Termux</span><br>
-                    <div class="flex text-xs text-zinc-800 dark:text-zinc-400">
-                        <time>June 08, 2025</time>
-                        <div>
-                        </div>
-                        <div>
-                            <span>&nbsp;·&nbsp;Gifted</span>
-                        </div>
-                    </div>
-                </li>
-            </a>
-        </div>
-        <div class="md:flex">
-            <time class="flex md:w-40"></time>
-            <a href="https://netzro.github.io/posts/2025/Jun/07/love-death-robots-a-stunning-anthology/">
-                <li class="flex-1 md:mt-2 mt-1"><span class="text-lg">Love, Death & Robots - A Stunning Anthology</span><br>
-                    <div class="flex text-xs text-zinc-800 dark:text-zinc-400">
-                        <time>June 07, 2025</time>
-                        <div>
-                        </div>
-                        <div>
-                            <span>&nbsp;·&nbsp;Gifted</span>
-                        </div>
-                    </div>
-                </li>
-            </a>
-        </div>
-        <div class="md:flex">
-            <time class="flex md:w-40"></time>
-            <a href="https://netzro.github.io/posts/2025/Jun/02/normalize-silence-finding-greatness-in-stillness/">
-                <li class="flex-1 md:mt-2 mt-1"><span class="text-lg">Normalize Silence: Finding Greatness in Stillness</span><br>
-                    <div class="flex text-xs text-zinc-800 dark:text-zinc-400">
-                        <time>June 02, 2025</time>
-                        <div>
-                        </div>
-                        <div>
-                            <span>&nbsp;·&nbsp;Gifted</span>
-                        </div>
-                    </div>
-                </li>
-            </a>
-        </div>
-        <div class="md:flex">
-            <time class="flex md:w-40"></time>
-            <a href="https://netzro.github.io/posts/2025/Jun/02/the-brutal-truth/">
-                <li class="flex-1 md:mt-2 mt-1"><span class="text-lg">The Brutal Truth</span><br>
-                    <div class="flex text-xs text-zinc-800 dark:text-zinc-400">
-                        <time>June 02, 2025</time>
-                        <div>
-                        </div>
-                        <div>
-                            <span>&nbsp;·&nbsp;Gifted</span>
-                        </div>
-                    </div>
-                </li>
-            </a>
-        </div>
-        <div class="md:flex mt-3">
-            <time class="text-xl font-semibold flex mt-6 md:mt-2 md:w-40">May
-                <sup class="text-sm m-1 text-zinc-800 dark:text-zinc-400">
-                        17
-
-                </sup>
-            </time>
-            <a href="https://netzro.github.io/posts/2025/May/27/keep-going/">
-                <li class="flex-1 md:mt-2"><span class="text-lg">Keep Going</span><br>
-                    <div class="flex text-xs text-zinc-800 dark:text-zinc-400">
-                        <time>May 27, 2025</time>
-                        <div>
-                        </div>
-                        <div>
-                            <span>&nbsp;·&nbsp;Gifted</span>
-                        </div>
-                    </div>
-                </li>
-            </a>
-        </div>
-        <div class="md:flex">
-            <time class="flex md:w-40"></time>
-            <a href="https://netzro.github.io/posts/2025/May/25/30-days-to-unrecognizable/">
-                <li class="flex-1 md:mt-2 mt-1"><span class="text-lg">30 Days to Unrecognizable</span><br>
-                    <div class="flex text-xs text-zinc-800 dark:text-zinc-400">
-                        <time>May 25, 2025</time>
-                        <div>
-                        </div>
-                        <div>
-                            <span>&nbsp;·&nbsp;Gifted</span>
-                        </div>
-                    </div>
-                </li>
-            </a>
-        </div>
-        <div class="md:flex">
-            <time class="flex md:w-40"></time>
-            <a href="https://netzro.github.io/posts/2025/May/25/forex-trading-notes-mastering-pips-leverage-and-risk/">
-                <li class="flex-1 md:mt-2 mt-1"><span class="text-lg">Forex Trading Notes: Mastering Pips, Leverage, and Risk</span><br>
-                    <div class="flex text-xs text-zinc-800 dark:text-zinc-400">
-                        <time>May 25, 2025</time>
-                        <div>
-                        </div>
-                        <div>
-                            <span>&nbsp;·&nbsp;Gifted</span>
-                        </div>
-                    </div>
-                </li>
-            </a>
-        </div>
-        <div class="md:flex">
-            <time class="flex md:w-40"></time>
-            <a href="https://netzro.github.io/posts/2025/May/25/the-kybalion-unlocking-the-seven-hermetic-principles/">
-                <li class="flex-1 md:mt-2 mt-1"><span class="text-lg">The Kybalion: Unlocking the Seven Hermetic Principles</span><br>
-                    <div class="flex text-xs text-zinc-800 dark:text-zinc-400">
-                        <time>May 25, 2025</time>
-                        <div>
-                        </div>
-                        <div>
-                            <span>&nbsp;·&nbsp;Gifted</span>
-                        </div>
-                    </div>
-                </li>
-            </a>
-        </div>
-        <div class="md:flex">
-            <time class="flex md:w-40"></time>
-            <a href="https://netzro.github.io/posts/2025/May/25/wn2025-21/">
-                <li class="flex-1 md:mt-2 mt-1"><span class="text-lg">Weeknote 2025:21</span><br>
-                    <div class="flex text-xs text-zinc-800 dark:text-zinc-400">
-                        <time>May 25, 2025</time>
-                        <div>
-                        </div>
-                        <div>
-                            <span>&nbsp;·&nbsp;Gifted</span>
-                        </div>
-                    </div>
-                </li>
-            </a>
-        </div>
-        <div class="md:flex">
-            <time class="flex md:w-40"></time>
-            <a href="https://netzro.github.io/posts/2025/May/24/the-guardian-scroll-psalm-121-decrypted/">
-                <li class="flex-1 md:mt-2 mt-1"><span class="text-lg">The Guardian Scroll: Psalm 121 Decrypted</span><br>
-                    <div class="flex text-xs text-zinc-800 dark:text-zinc-400">
-                        <time>May 24, 2025</time>
-                        <div>
-                        </div>
-                        <div>
-                            <span>&nbsp;·&nbsp;Gifted</span>
-                        </div>
-                    </div>
-                </li>
-            </a>
-        </div>
-        <div class="md:flex">
-            <time class="flex md:w-40"></time>
-            <a href="https://netzro.github.io/posts/2025/May/23/all-is-mental/">
-                <li class="flex-1 md:mt-2 mt-1"><span class="text-lg">All is Mental: The Hermetic Principle of Consciousness</span><br>
-                    <div class="flex text-xs text-zinc-800 dark:text-zinc-400">
-                        <time>May 23, 2025</time>
-                        <div>
-                        </div>
-                        <div>
-                            <span>&nbsp;·&nbsp;Gifted</span>
-                        </div>
-                    </div>
-                </li>
-            </a>
-        </div>
-        <div class="md:flex">
-            <time class="flex md:w-40"></time>
-            <a href="https://netzro.github.io/posts/2025/May/23/build-your-beautiful-life/">
-                <li class="flex-1 md:mt-2 mt-1"><span class="text-lg">Build Your Beautiful Life</span><br>
-                    <div class="flex text-xs text-zinc-800 dark:text-zinc-400">
-                        <time>May 23, 2025</time>
-                        <div>
-                        </div>
-                        <div>
-                            <span>&nbsp;·&nbsp;Gifted</span>
-                        </div>
-                    </div>
-                </li>
-            </a>
-        </div>
-        <div class="md:flex">
-            <time class="flex md:w-40"></time>
-            <a href="https://netzro.github.io/posts/2025/May/22/shine-unapologetically/">
-                <li class="flex-1 md:mt-2 mt-1"><span class="text-lg">Shine Unapologetically</span><br>
-                    <div class="flex text-xs text-zinc-800 dark:text-zinc-400">
-                        <time>May 22, 2025</time>
-                        <div>
-                        </div>
-                        <div>
-                            <span>&nbsp;·&nbsp;Gifted</span>
-                        </div>
-                    </div>
-                </li>
-            </a>
-        </div>
-        <div class="md:flex">
-            <time class="flex md:w-40"></time>
-            <a href="https://netzro.github.io/posts/2025/May/21/millionaire-steps/">
-                <li class="flex-1 md:mt-2 mt-1"><span class="text-lg">5 Steps to Become a Millionaire in 10 Years</span><br>
-                    <div class="flex text-xs text-zinc-800 dark:text-zinc-400">
-                        <time>May 21, 2025</time>
-                        <div>
-                        </div>
-                        <div>
-                            <span>&nbsp;·&nbsp;Gifted</span>
-                        </div>
-                    </div>
-                </li>
-            </a>
-        </div>
-    </ul>
+                    <!-- Main Content -->
+                    <div style="padding: 25px;">
+<div style="margin-bottom: 2em;">
+    <h1 style="font-size: 1.75rem; margin: 0 0 0.5em 0;">Archive</h1>
+    <h2 style="font-size: 1.4rem; margin: 1.5em 0 0.25em 0; padding-bottom: 0.25em; border-bottom: 1px solid #eee;">
+        2026
+        <sup style="font-size: 0.75rem; color: var(--mac-text-muted);">    33
+</sup>
+    </h2>
+    <div style="display: flex; margin-top: 0.5em;">
+        <time style="font-size: 0.9rem; font-weight: 700; min-width: 120px; margin-top: 2px;">
+            June
+            <sup style="font-size: 0.7rem; color: var(--mac-text-muted);">    16
+</sup>
+        </time>
+        <a href="https://netzro.github.io/posts/2026/Jun/12/how-llms-are-built-inside-the-architecture/" style="flex: 1;">
+            <span style="font-size: 0.95rem; font-weight: 600;">How LLMs Are Built — Inside The Architecture</span>
+            <div style="font-size: 11px; color: var(--mac-text-muted); margin-top: 2px;">
+                <time>June 12, 2026</time>
+&nbsp;&middot;&nbsp;Gifted            </div>
+        </a>
+    </div>
+    <div style="display: flex;">
+        <time style="min-width: 120px;"></time>
+        <a href="https://netzro.github.io/posts/2026/Jun/12/termux-the-phone-is-the-computer/" style="flex: 1;">
+            <span style="font-size: 0.95rem; font-weight: 600;">Termux — The Phone Is The Computer</span>
+            <div style="font-size: 11px; color: var(--mac-text-muted); margin-top: 2px;">
+                <time>June 12, 2026</time>
+&nbsp;&middot;&nbsp;Gifted            </div>
+        </a>
+    </div>
+    <div style="display: flex;">
+        <time style="min-width: 120px;"></time>
+        <a href="https://netzro.github.io/posts/2026/Jun/11/digital-minimalism-data-sovereignty/" style="flex: 1;">
+            <span style="font-size: 0.95rem; font-weight: 600;">Digital Minimalism: Reclaiming Your Data Sovereignty</span>
+            <div style="font-size: 11px; color: var(--mac-text-muted); margin-top: 2px;">
+                <time>June 11, 2026</time>
+&nbsp;&middot;&nbsp;Gifted            </div>
+        </a>
+    </div>
+    <div style="display: flex;">
+        <time style="min-width: 120px;"></time>
+        <a href="https://netzro.github.io/posts/2026/Jun/11/functional-programming-in-python/" style="flex: 1;">
+            <span style="font-size: 0.95rem; font-weight: 600;">Functional Programming in Python</span>
+            <div style="font-size: 11px; color: var(--mac-text-muted); margin-top: 2px;">
+                <time>June 11, 2026</time>
+&nbsp;&middot;&nbsp;Gifted            </div>
+        </a>
+    </div>
+    <div style="display: flex;">
+        <time style="min-width: 120px;"></time>
+        <a href="https://netzro.github.io/posts/2026/Jun/11/reflection-on-the-seven-hermetic-principles/" style="flex: 1;">
+            <span style="font-size: 0.95rem; font-weight: 600;">Reflection on the Seven Hermetic Principles</span>
+            <div style="font-size: 11px; color: var(--mac-text-muted); margin-top: 2px;">
+                <time>June 11, 2026</time>
+&nbsp;&middot;&nbsp;Gifted            </div>
+        </a>
+    </div>
+    <div style="display: flex;">
+        <time style="min-width: 120px;"></time>
+        <a href="https://netzro.github.io/posts/2026/Jun/10/automating-hermes-config-backups-to-github/" style="flex: 1;">
+            <span style="font-size: 0.95rem; font-weight: 600;">Automating Hermes Agent Configuration Backups to GitHub</span>
+            <div style="font-size: 11px; color: var(--mac-text-muted); margin-top: 2px;">
+                <time>June 10, 2026</time>
+&nbsp;&middot;&nbsp;Gifted            </div>
+        </a>
+    </div>
+    <div style="display: flex;">
+        <time style="min-width: 120px;"></time>
+        <a href="https://netzro.github.io/posts/2026/Jun/03/why-python-is-best-for-beginners/" style="flex: 1;">
+            <span style="font-size: 0.95rem; font-weight: 600;">Why Python is the Best Language for Beginners</span>
+            <div style="font-size: 11px; color: var(--mac-text-muted); margin-top: 2px;">
+                <time>June 03, 2026</time>
+&nbsp;&middot;&nbsp;Gifted            </div>
+        </a>
+    </div>
+    <div style="display: flex; margin-top: 0.75em;">
+        <time style="font-size: 0.9rem; font-weight: 700; min-width: 120px; margin-top: 2px;">
+            May
+            <sup style="font-size: 0.7rem; color: var(--mac-text-muted);">    2
+</sup>
+        </time>
+        <a href="https://netzro.github.io/posts/2026/May/19/mcp-servers-the-missing-piece/" style="flex: 1;">
+            <span style="font-size: 0.95rem; font-weight: 600;">MCP Servers: The Missing Piece in AI Agent Development</span>
+            <div style="font-size: 11px; color: var(--mac-text-muted); margin-top: 2px;">
+                <time>May 19, 2026</time>
+&nbsp;&middot;&nbsp;Gifted            </div>
+        </a>
+    </div>
+    <div style="display: flex;">
+        <time style="min-width: 120px;"></time>
+        <a href="https://netzro.github.io/posts/2026/May/19/setting-up-rustledger-android/" style="flex: 1;">
+            <span style="font-size: 0.95rem; font-weight: 600;">Setting Up Rustledger for Personal Accounting on Android</span>
+            <div style="font-size: 11px; color: var(--mac-text-muted); margin-top: 2px;">
+                <time>May 19, 2026</time>
+&nbsp;&middot;&nbsp;Gifted            </div>
+        </a>
+    </div>
+    <h2 style="font-size: 1.4rem; margin: 1.5em 0 0.25em 0; padding-bottom: 0.25em; border-bottom: 1px solid #eee;">
+        2025
+        <sup style="font-size: 0.75rem; color: var(--mac-text-muted);">    22
+</sup>
+    </h2>
+    <div style="display: flex; margin-top: 0.5em;">
+        <time style="font-size: 0.9rem; font-weight: 700; min-width: 120px; margin-top: 2px;">
+            June
+            <sup style="font-size: 0.7rem; color: var(--mac-text-muted);">    5
+</sup>
+        </time>
+        <a href="https://netzro.github.io/posts/2025/Jun/15/wn2025-24/" style="flex: 1;">
+            <span style="font-size: 0.95rem; font-weight: 600;">Weeknote 2025:24</span>
+            <div style="font-size: 11px; color: var(--mac-text-muted); margin-top: 2px;">
+                <time>June 15, 2025</time>
+&nbsp;&middot;&nbsp;Gifted            </div>
+        </a>
+    </div>
+    <div style="display: flex;">
+        <time style="min-width: 120px;"></time>
+        <a href="https://netzro.github.io/posts/2025/Jun/08/setting-up-cronie-and-scheduling-scripts-in-termux/" style="flex: 1;">
+            <span style="font-size: 0.95rem; font-weight: 600;">Setting Up Cronie and Scheduling Scripts in Termux</span>
+            <div style="font-size: 11px; color: var(--mac-text-muted); margin-top: 2px;">
+                <time>June 08, 2025</time>
+&nbsp;&middot;&nbsp;Gifted            </div>
+        </a>
+    </div>
+    <div style="display: flex;">
+        <time style="min-width: 120px;"></time>
+        <a href="https://netzro.github.io/posts/2025/Jun/07/love-death-robots-a-stunning-anthology/" style="flex: 1;">
+            <span style="font-size: 0.95rem; font-weight: 600;">Love, Death & Robots - A Stunning Anthology</span>
+            <div style="font-size: 11px; color: var(--mac-text-muted); margin-top: 2px;">
+                <time>June 07, 2025</time>
+&nbsp;&middot;&nbsp;Gifted            </div>
+        </a>
+    </div>
+    <div style="display: flex;">
+        <time style="min-width: 120px;"></time>
+        <a href="https://netzro.github.io/posts/2025/Jun/02/normalize-silence-finding-greatness-in-stillness/" style="flex: 1;">
+            <span style="font-size: 0.95rem; font-weight: 600;">Normalize Silence: Finding Greatness in Stillness</span>
+            <div style="font-size: 11px; color: var(--mac-text-muted); margin-top: 2px;">
+                <time>June 02, 2025</time>
+&nbsp;&middot;&nbsp;Gifted            </div>
+        </a>
+    </div>
+    <div style="display: flex;">
+        <time style="min-width: 120px;"></time>
+        <a href="https://netzro.github.io/posts/2025/Jun/02/the-brutal-truth/" style="flex: 1;">
+            <span style="font-size: 0.95rem; font-weight: 600;">The Brutal Truth</span>
+            <div style="font-size: 11px; color: var(--mac-text-muted); margin-top: 2px;">
+                <time>June 02, 2025</time>
+&nbsp;&middot;&nbsp;Gifted            </div>
+        </a>
+    </div>
+    <div style="display: flex; margin-top: 0.75em;">
+        <time style="font-size: 0.9rem; font-weight: 700; min-width: 120px; margin-top: 2px;">
+            May
+            <sup style="font-size: 0.7rem; color: var(--mac-text-muted);">    17
+</sup>
+        </time>
+        <a href="https://netzro.github.io/posts/2025/May/27/keep-going/" style="flex: 1;">
+            <span style="font-size: 0.95rem; font-weight: 600;">Keep Going</span>
+            <div style="font-size: 11px; color: var(--mac-text-muted); margin-top: 2px;">
+                <time>May 27, 2025</time>
+&nbsp;&middot;&nbsp;Gifted            </div>
+        </a>
+    </div>
+    <div style="display: flex;">
+        <time style="min-width: 120px;"></time>
+        <a href="https://netzro.github.io/posts/2025/May/25/30-days-to-unrecognizable/" style="flex: 1;">
+            <span style="font-size: 0.95rem; font-weight: 600;">30 Days to Unrecognizable</span>
+            <div style="font-size: 11px; color: var(--mac-text-muted); margin-top: 2px;">
+                <time>May 25, 2025</time>
+&nbsp;&middot;&nbsp;Gifted            </div>
+        </a>
+    </div>
+    <div style="display: flex;">
+        <time style="min-width: 120px;"></time>
+        <a href="https://netzro.github.io/posts/2025/May/25/forex-trading-notes-mastering-pips-leverage-and-risk/" style="flex: 1;">
+            <span style="font-size: 0.95rem; font-weight: 600;">Forex Trading Notes: Mastering Pips, Leverage, and Risk</span>
+            <div style="font-size: 11px; color: var(--mac-text-muted); margin-top: 2px;">
+                <time>May 25, 2025</time>
+&nbsp;&middot;&nbsp;Gifted            </div>
+        </a>
+    </div>
+    <div style="display: flex;">
+        <time style="min-width: 120px;"></time>
+        <a href="https://netzro.github.io/posts/2025/May/25/the-kybalion-unlocking-the-seven-hermetic-principles/" style="flex: 1;">
+            <span style="font-size: 0.95rem; font-weight: 600;">The Kybalion: Unlocking the Seven Hermetic Principles</span>
+            <div style="font-size: 11px; color: var(--mac-text-muted); margin-top: 2px;">
+                <time>May 25, 2025</time>
+&nbsp;&middot;&nbsp;Gifted            </div>
+        </a>
+    </div>
+    <div style="display: flex;">
+        <time style="min-width: 120px;"></time>
+        <a href="https://netzro.github.io/posts/2025/May/25/wn2025-21/" style="flex: 1;">
+            <span style="font-size: 0.95rem; font-weight: 600;">Weeknote 2025:21</span>
+            <div style="font-size: 11px; color: var(--mac-text-muted); margin-top: 2px;">
+                <time>May 25, 2025</time>
+&nbsp;&middot;&nbsp;Gifted            </div>
+        </a>
+    </div>
+    <div style="display: flex;">
+        <time style="min-width: 120px;"></time>
+        <a href="https://netzro.github.io/posts/2025/May/24/the-guardian-scroll-psalm-121-decrypted/" style="flex: 1;">
+            <span style="font-size: 0.95rem; font-weight: 600;">The Guardian Scroll: Psalm 121 Decrypted</span>
+            <div style="font-size: 11px; color: var(--mac-text-muted); margin-top: 2px;">
+                <time>May 24, 2025</time>
+&nbsp;&middot;&nbsp;Gifted            </div>
+        </a>
+    </div>
+    <div style="display: flex;">
+        <time style="min-width: 120px;"></time>
+        <a href="https://netzro.github.io/posts/2025/May/23/all-is-mental/" style="flex: 1;">
+            <span style="font-size: 0.95rem; font-weight: 600;">All is Mental: The Hermetic Principle of Consciousness</span>
+            <div style="font-size: 11px; color: var(--mac-text-muted); margin-top: 2px;">
+                <time>May 23, 2025</time>
+&nbsp;&middot;&nbsp;Gifted            </div>
+        </a>
+    </div>
+    <div style="display: flex;">
+        <time style="min-width: 120px;"></time>
+        <a href="https://netzro.github.io/posts/2025/May/23/build-your-beautiful-life/" style="flex: 1;">
+            <span style="font-size: 0.95rem; font-weight: 600;">Build Your Beautiful Life</span>
+            <div style="font-size: 11px; color: var(--mac-text-muted); margin-top: 2px;">
+                <time>May 23, 2025</time>
+&nbsp;&middot;&nbsp;Gifted            </div>
+        </a>
+    </div>
+    <div style="display: flex;">
+        <time style="min-width: 120px;"></time>
+        <a href="https://netzro.github.io/posts/2025/May/22/shine-unapologetically/" style="flex: 1;">
+            <span style="font-size: 0.95rem; font-weight: 600;">Shine Unapologetically</span>
+            <div style="font-size: 11px; color: var(--mac-text-muted); margin-top: 2px;">
+                <time>May 22, 2025</time>
+&nbsp;&middot;&nbsp;Gifted            </div>
+        </a>
+    </div>
+    <div style="display: flex;">
+        <time style="min-width: 120px;"></time>
+        <a href="https://netzro.github.io/posts/2025/May/21/millionaire-steps/" style="flex: 1;">
+            <span style="font-size: 0.95rem; font-weight: 600;">5 Steps to Become a Millionaire in 10 Years</span>
+            <div style="font-size: 11px; color: var(--mac-text-muted); margin-top: 2px;">
+                <time>May 21, 2025</time>
+&nbsp;&middot;&nbsp;Gifted            </div>
+        </a>
+    </div>
 </div>
 <div class="relative h-12 mt-3">
     <a href="https://netzro.github.io/archives.html">
@@ -472,63 +323,63 @@
             Next Page &raquo;
         </button></a>
 </div>
-
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-    
-    <footer class="flex w-full text-xs justify-center mt-10 mb-6 text-zinc-500 dark:text-zinc-400">
-    <div class="px-4">
-        <span>©2026 - Gifted&nbsp;&#8226;&nbsp;</span>
-        Powered by
-        <a class="underline" href="https://getpelican.com/">Pelican</a>&nbsp;and&nbsp;
-        <a class="underline" href="https://github.com/aleylara/Papyrus">Papyrus</a>
-        
-        <span></span>
-    
-    </div>
-</footer>
 
-
-
-
+    <!-- Footer -->
+    <footer class="mac-footer">
+        <div>
+©2026 - Gifted &middot;             Powered by <a href="https://getpelican.com/">Pelican</a> &middot;
+            <a href="https://github.com/netzro">netzro</a>
+        </div>
+        <div style="margin-top: 4px;">
+            <button id="theme-toggle" class="mac-btn" style="padding: 2px 8px; font-size: 10px;">
+                <span id="theme-toggle-light">&#9788; Light</span>
+                <span id="theme-toggle-dark">&#9789; Dark</span>
+            </button>
+        </div>
+    </footer>
 
     <script>
-        let themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
-        let themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
-        if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia(
-                '(prefers-color-scheme: dark)').matches)) {
-            themeToggleLightIcon.classList.remove('hidden');
+        let themeToggleLight = document.getElementById('theme-toggle-light');
+        let themeToggleDark = document.getElementById('theme-toggle-dark');
+        if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            themeToggleLight.style.display = 'inline';
+            themeToggleDark.style.display = 'none';
         } else {
-            themeToggleDarkIcon.classList.remove('hidden');
+            themeToggleLight.style.display = 'none';
+            themeToggleDark.style.display = 'inline';
         }
-        let themeToggleBtn = document.getElementById('theme-toggle');
-        themeToggleBtn.addEventListener('click', function () {
-            themeToggleDarkIcon.classList.toggle('hidden');
-            themeToggleLightIcon.classList.toggle('hidden');
+        document.getElementById('theme-toggle').addEventListener('click', function () {
             if (localStorage.getItem('color-theme')) {
                 if (localStorage.getItem('color-theme') === 'light') {
                     document.documentElement.classList.add('dark');
                     localStorage.setItem('color-theme', 'dark');
+                    themeToggleLight.style.display = 'inline';
+                    themeToggleDark.style.display = 'none';
                 } else {
                     document.documentElement.classList.remove('dark');
                     localStorage.setItem('color-theme', 'light');
+                    themeToggleLight.style.display = 'none';
+                    themeToggleDark.style.display = 'inline';
                 }
             } else {
                 if (document.documentElement.classList.contains('dark')) {
                     document.documentElement.classList.remove('dark');
                     localStorage.setItem('color-theme', 'light');
+                    themeToggleLight.style.display = 'none';
+                    themeToggleDark.style.display = 'inline';
                 } else {
                     document.documentElement.classList.add('dark');
                     localStorage.setItem('color-theme', 'dark');
+                    themeToggleLight.style.display = 'inline';
+                    themeToggleDark.style.display = 'none';
                 }
             }
         });
     </script>
-    <script src="https://files.stork-search.net/releases/v1.4.0/stork.js"></script>
-    <script>
-        stork.register("sitesearch", "https://netzro.github.io/search-index.st")
-    </script>
-
 </body>
-
-
 </html>

@@ -1,21 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="generator" content="Pelican" />
     <title> Gifted Space </title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Slab|Ruda" />
-    <link rel="stylesheet" type="text/css" href="https://netzro.github.io/theme/css/main.css" />
-    <link rel="stylesheet" href="https://netzro.github.io/theme/css/stork.css">
-    <link rel="stylesheet" media="screen and (prefers-color-scheme: dark)" href="https://netzro.github.io/theme/css/stork-dark.css">
-    <link rel="icon" href="https://netzro.github.io/images/favicon.ico" type="image/x-icon" /> <!-- Add this line -->
-
-    <link
-        href="https://netzro.github.io/feeds/all.atom.xml"
-        type="application/atom+xml" rel="alternate" title="Gifted Space Atom Feed" />
+    <link rel="stylesheet" type="text/css" href="https://netzro.github.io/theme/css/mac-classic.css" />
+    <link rel="icon" href="https://netzro.github.io/images/favicon.ico" type="image/x-icon" />
+    <link href="https://netzro.github.io/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Gifted Space Atom Feed" />
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-VJD75C7TTC"></script>
 <script>
@@ -25,456 +17,219 @@
   gtag('config', 'G-VJD75C7TTC');
 </script>
     <script>
-        if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia(
-                '(prefers-color-scheme: dark)').matches)) {
+        if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
             document.documentElement.classList.add('dark');
         } else {
             document.documentElement.classList.remove('dark')
         }
     </script>
 </head>
+<body>
+    <div class="mac-window">
+        <div class="mac-window__outer">
+            <div class="mac-window__inner">
+                <!-- Title Bar -->
+                <div class="mac-title-bar">
+                    <div class="mac-title-bar__grill">
+                        <div class="mac-title-bar__grill-line"></div>
+                        <div class="mac-title-bar__grill-line"></div>
+                        <div class="mac-title-bar__grill-line"></div>
+                        <div class="mac-title-bar__grill-line"></div>
+                        <div class="mac-title-bar__grill-line"></div>
+                        <div class="mac-title-bar__grill-line"></div>
+                    </div>
+                    <div class="mac-title-bar__title">Gifted Space</div>
+                </div>
 
-<body class="min-h-screen flex flex-col max-w-7xl lg:max-w-none text-zinc-800 bg-neutral-100 
-    dark:bg-neutral-900 dark:text-zinc-300 container mx-auto justify-center md:px-3 ">
-    <nav class="sm:flex sm:justify-between xl:ml-32 pl-4 items-center">
-        <div class="flex pt-4">
-            <h1 class="font-semibold text-2xl"><a href="https://netzro.github.io/">Gifted Space</a></h1>
-            <button id="theme-toggle" type="button"
-                class="text-zinc-700 dark:text-zinc-400 rounded-full focus:outline-none text-sm ml-2 p-1">
-                <svg id="theme-toggle-dark-icon" class="w-5 h-5 hidden" fill="currentColor" viewBox="0 0 20 20"
-                    xmlns="http://www.w3.org/2000/svg">
-                    <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
-                </svg>
-                <svg id="theme-toggle-light-icon" class="w-5 h-5 hidden" fill="currentColor" viewBox="0 0 20 20"
-                    xmlns="http://www.w3.org/2000/svg">
-                    <path
-                        d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z"
-                        fill-rule="evenodd" clip-rule="evenodd"></path>
-                </svg>
-            </button>
-        </div>
-        <ul class="flex flex-wrap lg:mr-24 md:pt-0">
-            <li class="mr-4 pt-6"><a  href="https://netzro.github.io/pages/about/">About</a></li>
-            <li class="mr-4 pt-6"><a  href="https://netzro.github.io/pages/more/">More/</a></li>
-            <li class="mr-4 pt-6"><a  href="https://netzro.github.io/archives.html">Archive</a></li>
-            <li class="mr-4 pt-6"><a  href="https://netzro.github.io/tags.html">Tags</a></li>
-        </ul>
-    </nav>
-    <div class="flex-grow md:max-w-screen-md md:mx-auto md:w-3/4 px-4">
+                <!-- Content -->
+                <div class="mac-content">
+                    <!-- Navigation -->
+                    <nav class="mac-nav">
+                        <ul class="mac-nav__list">
+                            <li class="mac-nav__item mac-nav__item--active">
+                                <a class="mac-nav__link" href="https://netzro.github.io/">Home</a>
+                            </li>
+                            <li class="mac-nav__item ">
+                                <a class="mac-nav__link" href="https://netzro.github.io/pages/about/">About</a>
+                            </li>
+                            <li class="mac-nav__item ">
+                                <a class="mac-nav__link" href="https://netzro.github.io/pages/more/">More/</a>
+                            </li>
+                            <li class="mac-nav__item ">
+                                <a class="mac-nav__link" href="https://netzro.github.io/archives.html">Archive</a>
+                            </li>
+                            <li class="mac-nav__item ">
+                                <a class="mac-nav__link" href="https://netzro.github.io/tags.html">Tags</a>
+                            </li>
+                        </ul>
+                    </nav>
 
-<div class="my-12 md:my-24 text-zinc-800 dark:text-zinc-300">
-  <h1 class="mb-6 text-3xl font-bold">Gifted say welcome</h1>
-    <p class="mb-8 text-zinc-500 dark:text-zinc-400"> My allocated space on the internet where
+                    <!-- Main Content -->
+                    <div style="padding: 25px;">
+
+<div style="margin-bottom: 1.5em;">
+  <h1 style="margin-bottom: 0.25em;">Gifted say welcome</h1>
+  <p style="color: var(--mac-text-muted); margin-bottom: 0;">My allocated space on the internet where
 I record my Doings, Thoughts and Writing.
 </p>
-  <ul class="flex px-2 space-x-4 text-lg">
-    <li><a href="https://github.com/netzro"><i class="fab fa-github fa-lg" aria-hidden="true" target="_blank"
-          rel="noopener noreferrer" title="github"></i></a></li>
-    <li><a href="https://twitter.com/gifted_99"><i class="fab fa-twitter fa-lg" aria-hidden="true" target="_blank"
-          rel="noopener noreferrer" title="twitter"></i></a></li>
-    <li><a href="https://netzro.github.io/feeds/all.atom.xml"
-        type="application/atom+xml" title="feeds/all.atom.xml" rel="alternate"><i class="fa fa-rss fa-lg"
-          aria-hidden="true"></i></a>
-    </li>
+  <ul style="list-style: none; padding: 0; display: flex; gap: 1em; margin-top: 0.75em;">
+    <li><a href="https://github.com/netzro" target="_blank" rel="noopener noreferrer" title="github"><i class="fab fa-github" aria-hidden="true"></i></a></li>
+    <li><a href="https://twitter.com/gifted_99" target="_blank" rel="noopener noreferrer" title="twitter"><i class="fab fa-twitter" aria-hidden="true"></i></a></li>
+    <li><a href="https://netzro.github.io/feeds/all.atom.xml" title="Atom Feed"><i class="fa fa-rss" aria-hidden="true"></i></a></li>
   </ul>
 </div>
 
-<!-- Start Here Section -->
-<div class="mb-12">
-  <h2 class="text-xl font-semibold mb-4 text-zinc-800 dark:text-zinc-300">Start Here</h2>
-  <div class="grid gap-3">
-    <a href="https://netzro.github.io/posts/2026/Sep/08/the-indieweb/" class="block p-4 bg-white dark:bg-zinc-800 rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-700 transition">
-      <div class="font-semibold text-zinc-800 dark:text-zinc-200">The IndieWeb — Why Your Own Corner of the Internet Still Matters</div>
-      <div class="text-sm text-zinc-500 dark:text-zinc-400 mt-1">A look at the IndieWeb movement — what it is, why it exists, and how owning your own site can make you less dependent on platforms that treat you as the product.</div>
-    </a>
-    <a href="https://netzro.github.io/posts/2026/Jul/02/different-types-of-llm-access/" class="block p-4 bg-white dark:bg-zinc-800 rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-700 transition">
-      <div class="font-semibold text-zinc-800 dark:text-zinc-200">Different Types of LLM Access</div>
-      <div class="text-sm text-zinc-500 dark:text-zinc-400 mt-1">An overview of the three main ways to access large language models: direct API, inference routing services, and local/self‑hosted deployments.</div>
-    </a>
-    <a href="https://netzro.github.io/posts/2026/Jun/12/how-llms-are-built-inside-the-architecture/" class="block p-4 bg-white dark:bg-zinc-800 rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-700 transition">
-      <div class="font-semibold text-zinc-800 dark:text-zinc-200">How LLMs Are Built — Inside The Architecture</div>
-      <div class="text-sm text-zinc-500 dark:text-zinc-400 mt-1">From tokenization to inference — a plain-language walk through how large language models are structured, trained, and named.</div>
-    </a>
-    <a href="https://netzro.github.io/posts/2026/Jun/14/personal-wiki/" class="block p-4 bg-white dark:bg-zinc-800 rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-700 transition">
-      <div class="font-semibold text-zinc-800 dark:text-zinc-200">I Built a Personal Wiki That Thinks for Me</div>
-      <div class="text-sm text-zinc-500 dark:text-zinc-400 mt-1">A personal wiki with an agent schema that ingests my notes, answers queries, and self-audits — all in plain markdown, all in git.</div>
-    </a>
-    <a href="https://netzro.github.io/posts/2025/May/23/all-is-mental/" class="block p-4 bg-white dark:bg-zinc-800 rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-700 transition">
-      <div class="font-semibold text-zinc-800 dark:text-zinc-200">All is Mental: The Hermetic Principle of Consciousness</div>
-      <div class="text-sm text-zinc-500 dark:text-zinc-400 mt-1">Exploring the Hermetic Principle that the universe is mental, shaping reality through consciousness.</div>
-    </a>
-  </div>
-</div>
-
 <!-- Quick Links -->
-<div class="mb-12">
-  <h2 class="text-xl font-semibold mb-4 text-zinc-800 dark:text-zinc-300">Explore</h2>
-  <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
-    <a href="https://netzro.github.io/pages/about/" class="px-4 py-3 bg-white dark:bg-zinc-800 rounded-lg text-sm font-medium text-zinc-700 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-700 transition text-center">About</a>
-    <a href="https://netzro.github.io/pages/projects/" class="px-4 py-3 bg-white dark:bg-zinc-800 rounded-lg text-sm font-medium text-zinc-700 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-700 transition text-center">Projects</a>
-    <a href="https://netzro.github.io/pages/reading-list/" class="px-4 py-3 bg-white dark:bg-zinc-800 rounded-lg text-sm font-medium text-zinc-700 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-700 transition text-center">Reading List</a>
-    <a href="https://netzro.github.io/pages/uses/" class="px-4 py-3 bg-white dark:bg-zinc-800 rounded-lg text-sm font-medium text-zinc-700 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-700 transition text-center">Uses</a>
-    <a href="https://netzro.github.io/pages/blogroll/" class="px-4 py-3 bg-white dark:bg-zinc-800 rounded-lg text-sm font-medium text-zinc-700 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-700 transition text-center">Blogroll</a>
-    <a href="https://netzro.github.io/pages/movies/" class="px-4 py-3 bg-white dark:bg-zinc-800 rounded-lg text-sm font-medium text-zinc-700 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-700 transition text-center">Movies</a>
-    <a href="https://netzro.github.io/pages/music/" class="px-4 py-3 bg-white dark:bg-zinc-800 rounded-lg text-sm font-medium text-zinc-700 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-700 transition text-center">Music</a>
+<div>
+  <h2 class="mac-section-heading">Explore</h2>
+  <div class="mac-grid">
+    <a href="https://netzro.github.io/pages/about/" class="mac-grid__link">About</a>
+    <a href="https://netzro.github.io/pages/projects/" class="mac-grid__link">Projects</a>
+    <a href="https://netzro.github.io/pages/reading-list/" class="mac-grid__link">Reading List</a>
+    <a href="https://netzro.github.io/pages/uses/" class="mac-grid__link">Uses</a>
+    <a href="https://netzro.github.io/pages/blogroll/" class="mac-grid__link">Blogroll</a>
+    <a href="https://netzro.github.io/pages/movies/" class="mac-grid__link">Movies</a>
+    <a href="https://netzro.github.io/pages/music/" class="mac-grid__link">Music</a>
   </div>
 </div>
 
 <!-- Recent Posts -->
-<div class="mb-8">
-  <h2 class="text-xl font-semibold mb-4 text-zinc-800 dark:text-zinc-300">Recent Posts</h2>
+<div>
+  <h2 class="mac-section-heading">Recent Posts</h2>
 </div>
 
+<ul class="mac-posts">
+  <li class="mac-posts__item">
+    <h3 class="mac-posts__title"><a href="https://netzro.github.io/posts/2025/May/25/forex-trading-notes-mastering-pips-leverage-and-risk/">Forex Trading Notes: Mastering Pips, Leverage, and Risk</a></h3>
+    <div class="mac-posts__meta">
+      <time>May 25, 2025</time>
+&nbsp;&middot;&nbsp;Gifted    </div>
+    <div class="mac-posts__summary">Detailed notes on forex trading essentials, covering pips, leverage, lot sizes, risk management, and market analysis strategies.</div>
+  </li>
+  <li class="mac-posts__item">
+    <h3 class="mac-posts__title"><a href="https://netzro.github.io/posts/2025/May/25/the-kybalion-unlocking-the-seven-hermetic-principles/">The Kybalion: Unlocking the Seven Hermetic Principles</a></h3>
+    <div class="mac-posts__meta">
+      <time>May 25, 2025</time>
+&nbsp;&middot;&nbsp;Gifted    </div>
+    <div class="mac-posts__summary">A dive into the seven Hermetic principles of The Kybalion, revealing the mental nature of the universe.</div>
+  </li>
+  <li class="mac-posts__item">
+    <h3 class="mac-posts__title"><a href="https://netzro.github.io/posts/2025/May/25/wn2025-21/">Weeknote 2025:21</a></h3>
+    <div class="mac-posts__meta">
+      <time>May 25, 2025</time>
+&nbsp;&middot;&nbsp;Gifted    </div>
+    <div class="mac-posts__summary">Articles 5 Steps to Become a Millionaire in 10 Years — A practical guide to transforming …</div>
+  </li>
+  <li class="mac-posts__item">
+    <h3 class="mac-posts__title"><a href="https://netzro.github.io/posts/2025/May/24/the-guardian-scroll-psalm-121-decrypted/">The Guardian Scroll: Psalm 121 Decrypted</a></h3>
+    <div class="mac-posts__meta">
+      <time>May 24, 2025</time>
+&nbsp;&middot;&nbsp;Gifted    </div>
+    <div class="mac-posts__summary">A mystical decryption of Psalm 121 as a divine protection protocol.</div>
+  </li>
+  <li class="mac-posts__item">
+    <h3 class="mac-posts__title"><a href="https://netzro.github.io/posts/2025/May/23/all-is-mental/">All is Mental: The Hermetic Principle of Consciousness</a></h3>
+    <div class="mac-posts__meta">
+      <time>May 23, 2025</time>
+&nbsp;&middot;&nbsp;Gifted    </div>
+    <div class="mac-posts__summary">Exploring the Hermetic Principle that the universe is mental, shaping reality through consciousness.</div>
+  </li>
+  <li class="mac-posts__item">
+    <h3 class="mac-posts__title"><a href="https://netzro.github.io/posts/2025/May/23/build-your-beautiful-life/">Build Your Beautiful Life</a></h3>
+    <div class="mac-posts__meta">
+      <time>May 23, 2025</time>
+&nbsp;&middot;&nbsp;Gifted    </div>
+    <div class="mac-posts__summary">note-to-self:25-03 No one stumbles into a beautiful life. You build it — step by step …</div>
+  </li>
+  <li class="mac-posts__item">
+    <h3 class="mac-posts__title"><a href="https://netzro.github.io/posts/2025/May/22/shine-unapologetically/">Shine Unapologetically</a></h3>
+    <div class="mac-posts__meta">
+      <time>May 22, 2025</time>
+&nbsp;&middot;&nbsp;Gifted    </div>
+    <div class="mac-posts__summary">note-to-self:25-02 The only reason someone resents another's light is because they haven't turned on …</div>
+  </li>
+  <li class="mac-posts__item">
+    <h3 class="mac-posts__title"><a href="https://netzro.github.io/posts/2025/May/21/millionaire-steps/">5 Steps to Become a Millionaire in 10 Years</a></h3>
+    <div class="mac-posts__meta">
+      <time>May 21, 2025</time>
+&nbsp;&middot;&nbsp;Gifted    </div>
+    <div class="mac-posts__summary">Five intentional steps to transform your life and build wealth in a decade.</div>
+  </li>
+</ul>
 
-<div class="py-1">
-  <ul>
-    <a href="https://netzro.github.io/posts/2025/May/25/forex-trading-notes-mastering-pips-leverage-and-risk/" rel="bookmark" title="Permalink to Forex Trading Notes: Mastering Pips, Leverage, and Risk">
-      <li class="transition ease-in active:-translate-y-1 active:scale-110 duration-75">
-        <div class="bg-white dark:bg-zinc-800 p-4 md:p-6 mb-4 rounded-lg">
-          <header class="font-semibold text-2xl mb-2">
-            <h1>Forex Trading Notes: Mastering Pips, Leverage, and Risk</h1>
-          </header>
-          <div class="max-w-7xl container mx-auto my-4 justify-center overflow-hidden mb-2 text-sm text-zinc-800 dark:text-zinc-400
-          prose lg:max-w-none prose-headings:text-zinc-800 prose-headings:dark:text-zinc-300 
-          prose-h1:text-3xl prose-headings:font-semibold 
-          prose-pre:bg-zinc-200 prose-pre:text-zinc-800
-          dark:prose-pre:bg-zinc-800 dark:prose-pre:text-zinc-200
-          prose-blockquote:text-zinc-800
-          dark:prose-blockquote:text-zinc-200
-          prose-a:text-gray-500
-          dark:prose-a:text-gray-400
-          dark:prose-strong:text-zinc-200 
-          dark:prose-code:text-zinc-200
-          dark:prose-code:bg-zinc-800
-          prose-code:bg-zinc-200
-          prose-code:font-light
-          prose-img:rounded-md
-          ">
-            <p>Detailed notes on forex trading essentials, covering pips, leverage, lot sizes, risk management, and market analysis strategies.</p>
-          </div>
-          <div class="flex text-xs text-zinc-800 dark:text-zinc-400">
-            <time>May 25, 2025</time>
-            <div>
-            </div>
-            <div>
-                <span>&nbsp;·&nbsp;Gifted</span>
-            </div>
-          </div>
-      </li>
-    </a>
-    <a href="https://netzro.github.io/posts/2025/May/25/the-kybalion-unlocking-the-seven-hermetic-principles/" rel="bookmark" title="Permalink to The Kybalion: Unlocking the Seven Hermetic Principles">
-      <li class="transition ease-in active:-translate-y-1 active:scale-110 duration-75">
-        <div class="bg-white dark:bg-zinc-800 p-4 md:p-6 mb-4 rounded-lg">
-          <header class="font-semibold text-2xl mb-2">
-            <h1>The Kybalion: Unlocking the Seven Hermetic Principles</h1>
-          </header>
-          <div class="max-w-7xl container mx-auto my-4 justify-center overflow-hidden mb-2 text-sm text-zinc-800 dark:text-zinc-400
-          prose lg:max-w-none prose-headings:text-zinc-800 prose-headings:dark:text-zinc-300 
-          prose-h1:text-3xl prose-headings:font-semibold 
-          prose-pre:bg-zinc-200 prose-pre:text-zinc-800
-          dark:prose-pre:bg-zinc-800 dark:prose-pre:text-zinc-200
-          prose-blockquote:text-zinc-800
-          dark:prose-blockquote:text-zinc-200
-          prose-a:text-gray-500
-          dark:prose-a:text-gray-400
-          dark:prose-strong:text-zinc-200 
-          dark:prose-code:text-zinc-200
-          dark:prose-code:bg-zinc-800
-          prose-code:bg-zinc-200
-          prose-code:font-light
-          prose-img:rounded-md
-          ">
-            <p>A dive into the seven Hermetic principles of The Kybalion, revealing the mental nature of the universe.</p>
-          </div>
-          <div class="flex text-xs text-zinc-800 dark:text-zinc-400">
-            <time>May 25, 2025</time>
-            <div>
-            </div>
-            <div>
-                <span>&nbsp;·&nbsp;Gifted</span>
-            </div>
-          </div>
-      </li>
-    </a>
-    <a href="https://netzro.github.io/posts/2025/May/25/wn2025-21/" rel="bookmark" title="Permalink to Weeknote 2025:21">
-      <li class="transition ease-in active:-translate-y-1 active:scale-110 duration-75">
-        <div class="bg-white dark:bg-zinc-800 p-4 md:p-6 mb-4 rounded-lg">
-          <header class="font-semibold text-2xl mb-2">
-            <h1>Weeknote 2025:21</h1>
-          </header>
-          <div class="max-w-7xl container mx-auto my-4 justify-center overflow-hidden mb-2 text-sm text-zinc-800 dark:text-zinc-400
-          prose lg:max-w-none prose-headings:text-zinc-800 prose-headings:dark:text-zinc-300 
-          prose-h1:text-3xl prose-headings:font-semibold 
-          prose-pre:bg-zinc-200 prose-pre:text-zinc-800
-          dark:prose-pre:bg-zinc-800 dark:prose-pre:text-zinc-200
-          prose-blockquote:text-zinc-800
-          dark:prose-blockquote:text-zinc-200
-          prose-a:text-gray-500
-          dark:prose-a:text-gray-400
-          dark:prose-strong:text-zinc-200 
-          dark:prose-code:text-zinc-200
-          dark:prose-code:bg-zinc-800
-          prose-code:bg-zinc-200
-          prose-code:font-light
-          prose-img:rounded-md
-          ">
-            <h3>Articles</h3>
-<ul>
-<li><a href="https://ascensora.org/2024/12/28/5-steps-to-become-a-millionaire-in-10-years/">5 Steps to Become a Millionaire in 10 Years</a> — A practical guide to transforming …</li></ul>
-          </div>
-          <div class="flex text-xs text-zinc-800 dark:text-zinc-400">
-            <time>May 25, 2025</time>
-            <div>
-            </div>
-            <div>
-                <span>&nbsp;·&nbsp;Gifted</span>
-            </div>
-          </div>
-      </li>
-    </a>
-    <a href="https://netzro.github.io/posts/2025/May/24/the-guardian-scroll-psalm-121-decrypted/" rel="bookmark" title="Permalink to The Guardian Scroll: Psalm 121 Decrypted">
-      <li class="transition ease-in active:-translate-y-1 active:scale-110 duration-75">
-        <div class="bg-white dark:bg-zinc-800 p-4 md:p-6 mb-4 rounded-lg">
-          <header class="font-semibold text-2xl mb-2">
-            <h1>The Guardian Scroll: Psalm 121 Decrypted</h1>
-          </header>
-          <div class="max-w-7xl container mx-auto my-4 justify-center overflow-hidden mb-2 text-sm text-zinc-800 dark:text-zinc-400
-          prose lg:max-w-none prose-headings:text-zinc-800 prose-headings:dark:text-zinc-300 
-          prose-h1:text-3xl prose-headings:font-semibold 
-          prose-pre:bg-zinc-200 prose-pre:text-zinc-800
-          dark:prose-pre:bg-zinc-800 dark:prose-pre:text-zinc-200
-          prose-blockquote:text-zinc-800
-          dark:prose-blockquote:text-zinc-200
-          prose-a:text-gray-500
-          dark:prose-a:text-gray-400
-          dark:prose-strong:text-zinc-200 
-          dark:prose-code:text-zinc-200
-          dark:prose-code:bg-zinc-800
-          prose-code:bg-zinc-200
-          prose-code:font-light
-          prose-img:rounded-md
-          ">
-            <p>A mystical decryption of Psalm 121 as a divine protection protocol.</p>
-          </div>
-          <div class="flex text-xs text-zinc-800 dark:text-zinc-400">
-            <time>May 24, 2025</time>
-            <div>
-            </div>
-            <div>
-                <span>&nbsp;·&nbsp;Gifted</span>
-            </div>
-          </div>
-      </li>
-    </a>
-    <a href="https://netzro.github.io/posts/2025/May/23/all-is-mental/" rel="bookmark" title="Permalink to All is Mental: The Hermetic Principle of Consciousness">
-      <li class="transition ease-in active:-translate-y-1 active:scale-110 duration-75">
-        <div class="bg-white dark:bg-zinc-800 p-4 md:p-6 mb-4 rounded-lg">
-          <header class="font-semibold text-2xl mb-2">
-            <h1>All is Mental: The Hermetic Principle of Consciousness</h1>
-          </header>
-          <div class="max-w-7xl container mx-auto my-4 justify-center overflow-hidden mb-2 text-sm text-zinc-800 dark:text-zinc-400
-          prose lg:max-w-none prose-headings:text-zinc-800 prose-headings:dark:text-zinc-300 
-          prose-h1:text-3xl prose-headings:font-semibold 
-          prose-pre:bg-zinc-200 prose-pre:text-zinc-800
-          dark:prose-pre:bg-zinc-800 dark:prose-pre:text-zinc-200
-          prose-blockquote:text-zinc-800
-          dark:prose-blockquote:text-zinc-200
-          prose-a:text-gray-500
-          dark:prose-a:text-gray-400
-          dark:prose-strong:text-zinc-200 
-          dark:prose-code:text-zinc-200
-          dark:prose-code:bg-zinc-800
-          prose-code:bg-zinc-200
-          prose-code:font-light
-          prose-img:rounded-md
-          ">
-            <p>Exploring the Hermetic Principle that the universe is mental, shaping reality through consciousness.</p>
-          </div>
-          <div class="flex text-xs text-zinc-800 dark:text-zinc-400">
-            <time>May 23, 2025</time>
-            <div>
-            </div>
-            <div>
-                <span>&nbsp;·&nbsp;Gifted</span>
-            </div>
-          </div>
-      </li>
-    </a>
-    <a href="https://netzro.github.io/posts/2025/May/23/build-your-beautiful-life/" rel="bookmark" title="Permalink to Build Your Beautiful Life">
-      <li class="transition ease-in active:-translate-y-1 active:scale-110 duration-75">
-        <div class="bg-white dark:bg-zinc-800 p-4 md:p-6 mb-4 rounded-lg">
-          <header class="font-semibold text-2xl mb-2">
-            <h1>Build Your Beautiful Life</h1>
-          </header>
-          <div class="max-w-7xl container mx-auto my-4 justify-center overflow-hidden mb-2 text-sm text-zinc-800 dark:text-zinc-400
-          prose lg:max-w-none prose-headings:text-zinc-800 prose-headings:dark:text-zinc-300 
-          prose-h1:text-3xl prose-headings:font-semibold 
-          prose-pre:bg-zinc-200 prose-pre:text-zinc-800
-          dark:prose-pre:bg-zinc-800 dark:prose-pre:text-zinc-200
-          prose-blockquote:text-zinc-800
-          dark:prose-blockquote:text-zinc-200
-          prose-a:text-gray-500
-          dark:prose-a:text-gray-400
-          dark:prose-strong:text-zinc-200 
-          dark:prose-code:text-zinc-200
-          dark:prose-code:bg-zinc-800
-          prose-code:bg-zinc-200
-          prose-code:font-light
-          prose-img:rounded-md
-          ">
-            <h3>note-to-self:25-03</h3>
-<p>No one stumbles into a beautiful life. You build it — step by step …</p>
-          </div>
-          <div class="flex text-xs text-zinc-800 dark:text-zinc-400">
-            <time>May 23, 2025</time>
-            <div>
-            </div>
-            <div>
-                <span>&nbsp;·&nbsp;Gifted</span>
-            </div>
-          </div>
-      </li>
-    </a>
-    <a href="https://netzro.github.io/posts/2025/May/22/shine-unapologetically/" rel="bookmark" title="Permalink to Shine Unapologetically">
-      <li class="transition ease-in active:-translate-y-1 active:scale-110 duration-75">
-        <div class="bg-white dark:bg-zinc-800 p-4 md:p-6 mb-4 rounded-lg">
-          <header class="font-semibold text-2xl mb-2">
-            <h1>Shine Unapologetically</h1>
-          </header>
-          <div class="max-w-7xl container mx-auto my-4 justify-center overflow-hidden mb-2 text-sm text-zinc-800 dark:text-zinc-400
-          prose lg:max-w-none prose-headings:text-zinc-800 prose-headings:dark:text-zinc-300 
-          prose-h1:text-3xl prose-headings:font-semibold 
-          prose-pre:bg-zinc-200 prose-pre:text-zinc-800
-          dark:prose-pre:bg-zinc-800 dark:prose-pre:text-zinc-200
-          prose-blockquote:text-zinc-800
-          dark:prose-blockquote:text-zinc-200
-          prose-a:text-gray-500
-          dark:prose-a:text-gray-400
-          dark:prose-strong:text-zinc-200 
-          dark:prose-code:text-zinc-200
-          dark:prose-code:bg-zinc-800
-          prose-code:bg-zinc-200
-          prose-code:font-light
-          prose-img:rounded-md
-          ">
-            <h3>note-to-self:25-02</h3>
-<p>The only reason someone resents another's light is because they haven't turned on …</p>
-          </div>
-          <div class="flex text-xs text-zinc-800 dark:text-zinc-400">
-            <time>May 22, 2025</time>
-            <div>
-            </div>
-            <div>
-                <span>&nbsp;·&nbsp;Gifted</span>
-            </div>
-          </div>
-      </li>
-    </a>
-    <a href="https://netzro.github.io/posts/2025/May/21/millionaire-steps/" rel="bookmark" title="Permalink to 5 Steps to Become a Millionaire in 10 Years">
-      <li class="transition ease-in active:-translate-y-1 active:scale-110 duration-75">
-        <div class="bg-white dark:bg-zinc-800 p-4 md:p-6 mb-4 rounded-lg">
-          <header class="font-semibold text-2xl mb-2">
-            <h1>5 Steps to Become a Millionaire in 10 Years</h1>
-          </header>
-          <div class="max-w-7xl container mx-auto my-4 justify-center overflow-hidden mb-2 text-sm text-zinc-800 dark:text-zinc-400
-          prose lg:max-w-none prose-headings:text-zinc-800 prose-headings:dark:text-zinc-300 
-          prose-h1:text-3xl prose-headings:font-semibold 
-          prose-pre:bg-zinc-200 prose-pre:text-zinc-800
-          dark:prose-pre:bg-zinc-800 dark:prose-pre:text-zinc-200
-          prose-blockquote:text-zinc-800
-          dark:prose-blockquote:text-zinc-200
-          prose-a:text-gray-500
-          dark:prose-a:text-gray-400
-          dark:prose-strong:text-zinc-200 
-          dark:prose-code:text-zinc-200
-          dark:prose-code:bg-zinc-800
-          prose-code:bg-zinc-200
-          prose-code:font-light
-          prose-img:rounded-md
-          ">
-            <p>Five intentional steps to transform your life and build wealth in a decade.</p>
-          </div>
-          <div class="flex text-xs text-zinc-800 dark:text-zinc-400">
-            <time>May 21, 2025</time>
-            <div>
-            </div>
-            <div>
-                <span>&nbsp;·&nbsp;Gifted</span>
-            </div>
-          </div>
-      </li>
-    </a>
-  </ul>
-</div>
-<div class="relative h-12 mt-3">
-    <a href="https://netzro.github.io/index5.html">
-        <button
-            class="bg-zinc-800 dark:bg-zinc-300 rounded-full py-2.5 px-4 text-zinc-100 dark:text-zinc-800  font-medium text-xs absolute left-0">
-            &laquo; Prev Page
-        </button></a>
-    <a href="https://netzro.github.io/index7.html">
-        <button
-            class="bg-zinc-800 dark:bg-zinc-300 rounded-full py-2.5 px-4 text-zinc-100 dark:text-zinc-800 font-medium text-xs absolute right-0">
-            Next Page &raquo;
-        </button></a>
+<div class="mac-pagination">
+  <a class="mac-pagination__link" href="https://netzro.github.io/page/5/">&laquo; Prev</a>
+  <a class="mac-pagination__link" href="https://netzro.github.io/">1</a>
+  <a class="mac-pagination__link" href="https://netzro.github.io/page/2/">2</a>
+  <a class="mac-pagination__link" href="https://netzro.github.io/page/3/">3</a>
+  <a class="mac-pagination__link" href="https://netzro.github.io/page/4/">4</a>
+  <a class="mac-pagination__link" href="https://netzro.github.io/page/5/">5</a>
+  <span class="mac-pagination__link mac-pagination__link--active">6</span>
+  <a class="mac-pagination__link" href="https://netzro.github.io/page/7/">7</a>
+  <a class="mac-pagination__link" href="https://netzro.github.io/page/8/">8</a>
+  <a class="mac-pagination__link" href="https://netzro.github.io/page/9/">9</a>
+  <a class="mac-pagination__link" href="https://netzro.github.io/page/10/">10</a>
+  <a class="mac-pagination__link" href="https://netzro.github.io/page/11/">11</a>
+  <a class="mac-pagination__link" href="https://netzro.github.io/page/7/">Next &raquo;</a>
 </div>
 
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-    
-    <footer class="flex w-full text-xs justify-center mt-10 mb-6 text-zinc-500 dark:text-zinc-400">
-    <div class="px-4">
-        <span>©2026 - Gifted&nbsp;&#8226;&nbsp;</span>
-        Powered by
-        <a class="underline" href="https://getpelican.com/">Pelican</a>&nbsp;and&nbsp;
-        <a class="underline" href="https://github.com/aleylara/Papyrus">Papyrus</a>
-        
-        <span></span>
-    
-    </div>
-</footer>
 
-
-
-
+    <!-- Footer -->
+    <footer class="mac-footer">
+        <div>
+©2026 - Gifted &middot;             Powered by <a href="https://getpelican.com/">Pelican</a> &middot;
+            <a href="https://github.com/netzro">netzro</a>
+        </div>
+        <div style="margin-top: 4px;">
+            <button id="theme-toggle" class="mac-btn" style="padding: 2px 8px; font-size: 10px;">
+                <span id="theme-toggle-light">&#9788; Light</span>
+                <span id="theme-toggle-dark">&#9789; Dark</span>
+            </button>
+        </div>
+    </footer>
 
     <script>
-        let themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
-        let themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
-        if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia(
-                '(prefers-color-scheme: dark)').matches)) {
-            themeToggleLightIcon.classList.remove('hidden');
+        let themeToggleLight = document.getElementById('theme-toggle-light');
+        let themeToggleDark = document.getElementById('theme-toggle-dark');
+        if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            themeToggleLight.style.display = 'inline';
+            themeToggleDark.style.display = 'none';
         } else {
-            themeToggleDarkIcon.classList.remove('hidden');
+            themeToggleLight.style.display = 'none';
+            themeToggleDark.style.display = 'inline';
         }
-        let themeToggleBtn = document.getElementById('theme-toggle');
-        themeToggleBtn.addEventListener('click', function () {
-            themeToggleDarkIcon.classList.toggle('hidden');
-            themeToggleLightIcon.classList.toggle('hidden');
+        document.getElementById('theme-toggle').addEventListener('click', function () {
             if (localStorage.getItem('color-theme')) {
                 if (localStorage.getItem('color-theme') === 'light') {
                     document.documentElement.classList.add('dark');
                     localStorage.setItem('color-theme', 'dark');
+                    themeToggleLight.style.display = 'inline';
+                    themeToggleDark.style.display = 'none';
                 } else {
                     document.documentElement.classList.remove('dark');
                     localStorage.setItem('color-theme', 'light');
+                    themeToggleLight.style.display = 'none';
+                    themeToggleDark.style.display = 'inline';
                 }
             } else {
                 if (document.documentElement.classList.contains('dark')) {
                     document.documentElement.classList.remove('dark');
                     localStorage.setItem('color-theme', 'light');
+                    themeToggleLight.style.display = 'none';
+                    themeToggleDark.style.display = 'inline';
                 } else {
                     document.documentElement.classList.add('dark');
                     localStorage.setItem('color-theme', 'dark');
+                    themeToggleLight.style.display = 'inline';
+                    themeToggleDark.style.display = 'none';
                 }
             }
         });
     </script>
-    <script src="https://files.stork-search.net/releases/v1.4.0/stork.js"></script>
-    <script>
-        stork.register("sitesearch", "https://netzro.github.io/search-index.st")
-    </script>
-
 </body>
-
-
 </html>
