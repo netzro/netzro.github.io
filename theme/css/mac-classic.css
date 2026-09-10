@@ -1,7 +1,7 @@
 /* Mac Classic inspired theme - minimal */
 @layer base {
   :root {
-    --mac-bg: #62629b;
+    --mac-bg: #d4b896;
     --mac-window-bg: #cbcbcb;
     --mac-content-bg: #faf3e7;
     --mac-title-bar: #cbcbcb;
@@ -315,12 +315,15 @@
   }
 
   .mac-posts__item {
-    padding: 12px 0;
-    border-bottom: 1px solid #eee;
+    background-color: #fff8f0;
+    border: 1px solid #e8dcc8;
+    border-radius: 6px;
+    padding: 16px;
+    margin: 1em 0;
   }
 
   .mac-posts__item:last-child {
-    border-bottom: none;
+    border-bottom: 1px solid #e8dcc8;
   }
 
   .mac-posts__title {
@@ -605,7 +608,7 @@
 
   /* Dark mode - keep it subtle */
   .dark body {
-    background-color: #1a1a2e;
+    background-color: #2d1f17;
     color: #d4d4d4;
   }
 
@@ -722,11 +725,16 @@
   }
 
   .dark .mac-posts__item {
-    border-bottom-color: #333;
+    background-color: #3d2e22;
+    border-color: #5a4a3e;
+  }
+
+  .dark .mac-posts__item:last-child {
+    border-bottom-color: #5a4a3e;
   }
 
   .dark .mac-posts__summary {
-    color: #aaa;
+    color: #d4a574;
   }
 
   .dark .mac-article__header {
