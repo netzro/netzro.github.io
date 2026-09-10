@@ -428,6 +428,7 @@
   .mac-pagination {
     display: flex;
     justify-content: center;
+    flex-wrap: wrap;
     gap: 4px;
     margin-top: 2em;
     padding-top: 1em;
@@ -435,7 +436,7 @@
   }
 
   .mac-pagination__link {
-    padding: 4px 10px;
+    padding: 4px 8px;
     border: 1px solid var(--mac-border-black);
     background-color: var(--mac-nav-inactive);
     border-top-color: var(--mac-bevel-light);
@@ -443,8 +444,15 @@
     border-right-color: var(--mac-bevel-dark);
     border-bottom-color: var(--mac-bevel-dark);
     border-radius: 4px;
-    font-size: 12px;
+    font-size: 11px;
     color: var(--mac-text);
+  }
+
+  @media (min-width: 768px) {
+    .mac-pagination__link {
+      padding: 4px 10px;
+      font-size: 12px;
+    }
   }
 
   .mac-pagination__link:hover {
