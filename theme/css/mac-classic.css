@@ -189,32 +189,25 @@
     padding: 25px;
   }
 
-  /* Navigation */
+  /* Navigation - mobile: simple wrapping links */
   .mac-nav {
-    border-top: 1px solid var(--mac-border-black);
     background-color: var(--mac-nav-bg);
     text-align: center;
-    padding: 5px 0 0 0;
+    padding: 8px 4px;
   }
 
   .mac-nav__list {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-    gap: 1px;
+    gap: 6px 4px;
     margin: 0;
-    padding: 0 4px;
+    padding: 0;
     list-style: none;
   }
 
   .mac-nav__item {
     display: inline-block;
-    margin: 2px 1px 0 1px;
-    background-color: var(--mac-nav-inactive);
-    border: 1px solid var(--mac-border-black);
-    border-bottom: none;
-    border-top-left-radius: 8px;
-    border-top-right-radius: 8px;
   }
 
   .mac-nav__item--active {
@@ -224,14 +217,12 @@
   .mac-nav__link {
     display: block;
     padding: 4px 8px;
-    border-top: 1px solid var(--mac-border-light);
-    border-right: 1px solid var(--mac-border-dark);
-    border-left: 1px solid var(--mac-border-light);
-    border-top-left-radius: 7px;
-    border-top-right-radius: 7px;
     font-size: 11px;
     color: var(--mac-text) !important;
     text-decoration: none;
+    border: 1px solid var(--mac-border-black);
+    border-radius: 4px;
+    background-color: var(--mac-nav-inactive);
     white-space: nowrap;
   }
 
@@ -241,17 +232,53 @@
   }
 
   .mac-nav__item--active .mac-nav__link {
-    border-top: 1px solid #eaeaea;
-    border-right: 1px solid #bbbbbb;
-    border-bottom: 1px solid var(--mac-nav-active);
-    border-left: 1px solid #bbbbbb;
     background-color: var(--mac-nav-active);
+    border-color: var(--mac-border-dark);
   }
 
+  /* Desktop: beveled tabs */
   @media (min-width: 768px) {
+    .mac-nav {
+      border-top: 1px solid var(--mac-border-black);
+      padding: 5px 0 0 0;
+    }
+
+    .mac-nav__list {
+      gap: 1px;
+    }
+
+    .mac-nav__item {
+      margin: 2px 1px 0 1px;
+      background-color: var(--mac-nav-inactive);
+      border: 1px solid var(--mac-border-black);
+      border-bottom: none;
+      border-top-left-radius: 8px;
+      border-top-right-radius: 8px;
+    }
+
+    .mac-nav__item--active {
+      background-color: var(--mac-nav-active);
+    }
+
     .mac-nav__link {
       padding: 4px 12px;
       font-size: 12px;
+      border: none;
+      border-top: 1px solid var(--mac-border-light);
+      border-right: 1px solid var(--mac-border-dark);
+      border-left: 1px solid var(--mac-border-light);
+      border-top-left-radius: 7px;
+      border-top-right-radius: 7px;
+      background-color: transparent;
+      border-radius: 0;
+    }
+
+    .mac-nav__item--active .mac-nav__link {
+      border-top: 1px solid #eaeaea;
+      border-right: 1px solid #bbbbbb;
+      border-bottom: 1px solid var(--mac-nav-active);
+      border-left: 1px solid #bbbbbb;
+      background-color: var(--mac-nav-active);
     }
   }
 
@@ -563,35 +590,61 @@
   }
 
   .dark .mac-nav__list {
-    padding: 0 4px;
-  }
-
-  .dark .mac-nav__item {
-    background-color: #3d3d3d;
-    border-color: #000;
-  }
-
-  .dark .mac-nav__item--active {
-    background-color: #1e1e1e;
+    padding: 0;
   }
 
   .dark .mac-nav__link {
-    border-top-color: #555;
-    border-right-color: #222;
-    border-left-color: #555;
+    background-color: #3d3d3d;
+    border-color: #000;
     color: #d4d4d4 !important;
   }
 
   .dark .mac-nav__item--active .mac-nav__link {
-    border-top-color: #444;
-    border-right-color: #333;
-    border-bottom-color: #1e1e1e;
-    border-left-color: #333;
     background-color: #1e1e1e;
+    border-color: #444;
   }
 
   .dark .mac-nav__link:hover {
     color: #9b9bf0 !important;
+  }
+
+  @media (min-width: 768px) {
+    .dark .mac-nav {
+      border-top-color: #000;
+    }
+
+    .dark .mac-nav__list {
+      padding: 0;
+    }
+
+    .dark .mac-nav__item {
+      background-color: #3d3d3d;
+      border-color: #000;
+    }
+
+    .dark .mac-nav__item--active {
+      background-color: #1e1e1e;
+    }
+
+    .dark .mac-nav__link {
+      border-top-color: #555;
+      border-right-color: #222;
+      border-left-color: #555;
+      background-color: transparent;
+      color: #d4d4d4 !important;
+    }
+
+    .dark .mac-nav__item--active .mac-nav__link {
+      border-top-color: #444;
+      border-right-color: #333;
+      border-bottom-color: #1e1e1e;
+      border-left-color: #333;
+      background-color: #1e1e1e;
+    }
+
+    .dark .mac-nav__link:hover {
+      color: #9b9bf0 !important;
+    }
   }
 
   .dark a {
