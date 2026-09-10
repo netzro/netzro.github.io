@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://netzro.github.io/sitemap.xml
