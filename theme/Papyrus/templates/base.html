@@ -53,8 +53,23 @@
                             <li class="mac-nav__item {% if page and page.slug == 'about' %}mac-nav__item--active{% endif %}">
                                 <a class="mac-nav__link" href="{{ SITEURL }}/pages/about/">About</a>
                             </li>
-                            <li class="mac-nav__item {% if page and page.slug == 'more' %}mac-nav__item--active{% endif %}">
-                                <a class="mac-nav__link" href="{{ SITEURL }}/pages/more/">More/</a>
+                            <li class="mac-nav__item {% if page and page.slug == 'projects' %}mac-nav__item--active{% endif %}">
+                                <a class="mac-nav__link" href="{{ SITEURL }}/pages/projects/">Projects</a>
+                            </li>
+                            <li class="mac-nav__item {% if page and page.slug == 'blogroll' %}mac-nav__item--active{% endif %}">
+                                <a class="mac-nav__link" href="{{ SITEURL }}/pages/blogroll/">Blogroll</a>
+                            </li>
+                            <li class="mac-nav__item {% if page and page.slug == 'reading-list' %}mac-nav__item--active{% endif %}">
+                                <a class="mac-nav__link" href="{{ SITEURL }}/pages/reading-list/">Reading</a>
+                            </li>
+                            <li class="mac-nav__item {% if page and page.slug == 'uses' %}mac-nav__item--active{% endif %}">
+                                <a class="mac-nav__link" href="{{ SITEURL }}/pages/uses/">Uses</a>
+                            </li>
+                            <li class="mac-nav__item {% if page and page.slug == 'movies' %}mac-nav__item--active{% endif %}">
+                                <a class="mac-nav__link" href="{{ SITEURL }}/pages/movies/">Movies</a>
+                            </li>
+                            <li class="mac-nav__item {% if page and page.slug == 'music' %}mac-nav__item--active{% endif %}">
+                                <a class="mac-nav__link" href="{{ SITEURL }}/pages/music/">Music</a>
                             </li>
                             <li class="mac-nav__item {% if current == 'archive' %}mac-nav__item--active{% endif %}">
                                 <a class="mac-nav__link" href="{{ SITEURL }}/archives.html">Archive</a>
@@ -66,28 +81,28 @@
                     </nav>
 
                     <!-- Main Content -->
-                    <div style="padding: 25px;">
+                    <div class="mac-content__inner">
                         {% block content %} {% endblock %}
                     </div>
                 </div>
+
+                <!-- Footer inside window -->
+                <footer class="mac-footer">
+                    <div>
+                        {% if COPYRIGHT %}{{ COPYRIGHT }} &middot; {% endif %}
+                        Powered by <a href="https://getpelican.com/">Pelican</a> &middot;
+                        <a href="https://github.com/netzro">netzro</a>
+                    </div>
+                    <div class="mac-footer__theme">
+                        <button id="theme-toggle" class="mac-btn" style="padding: 2px 8px; font-size: 10px;">
+                            <span id="theme-toggle-light">&#9788; Light</span>
+                            <span id="theme-toggle-dark">&#9789; Dark</span>
+                        </button>
+                    </div>
+                </footer>
             </div>
         </div>
     </div>
-
-    <!-- Footer -->
-    <footer class="mac-footer">
-        <div>
-            {% if COPYRIGHT %}{{ COPYRIGHT }} &middot; {% endif %}
-            Powered by <a href="https://getpelican.com/">Pelican</a> &middot;
-            <a href="https://github.com/netzro">netzro</a>
-        </div>
-        <div style="margin-top: 4px;">
-            <button id="theme-toggle" class="mac-btn" style="padding: 2px 8px; font-size: 10px;">
-                <span id="theme-toggle-light">&#9788; Light</span>
-                <span id="theme-toggle-dark">&#9789; Dark</span>
-            </button>
-        </div>
-    </footer>
 
     <script>
         let themeToggleLight = document.getElementById('theme-toggle-light');
