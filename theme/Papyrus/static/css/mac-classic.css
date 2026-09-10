@@ -3,7 +3,7 @@
   :root {
     --mac-bg: #62629b;
     --mac-window-bg: #cbcbcb;
-    --mac-content-bg: #ffffff;
+    --mac-content-bg: #faf3e7;
     --mac-title-bar: #cbcbcb;
     --mac-grill: #777777;
     --mac-border-light: #ffffff;
@@ -377,8 +377,8 @@
 
   /* Project cards */
   .mac-project-card {
-    background-color: #f5f5f5;
-    border: 1px solid #ddd;
+    background-color: #fff8f0;
+    border: 1px solid #e8dcc8;
     border-radius: 6px;
     margin: 1em 0;
     padding: 16px;
@@ -408,12 +408,17 @@
 
   /* Dark mode cards */
   .dark .mac-project-card {
-    background-color: #2d2d2d;
-    border-color: #444;
+    background-color: #3d2e22;
+    border-color: #5a4a3e;
   }
 
   .dark .mac-project-card__desc {
-    color: #aaa;
+    color: #d4a574;
+  }
+
+  /* Dark mode page bg */
+  .dark .mac-content {
+    background-color: #2d1f17;
   }
 
   /* Tags */
