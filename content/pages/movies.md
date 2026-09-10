@@ -5,11 +5,23 @@ Status: hidden
 ---
 
 # Movies
-_Updated as I watch. Last update: 06th September 2026._
+_Updated as I watch. Last update: 10th September 2026._
 
 ### Watchlist
 
 <details markdown='1'><summary>September 2026</summary>
+
+![](https://netzro.github.io/images/posters/the-passenger-2023.jpg) **The Passenger (2023)**
+_Watched on_ - 10th September 2026
+
+![](https://netzro.github.io/images/posters/american-sweatshop-2025.jpg) **American Sweatshop (2025)**
+_Watched on_ - 10th September 2026
+
+![](https://netzro.github.io/images/posters/the-night-house-2020.jpg) **The Night House (2020)**
+_Watched on_ - 10th September 2026
+
+![](https://netzro.github.io/images/posters/stay-alive-2006.jpg) **Stay Alive (2006)**
+_Watched on_ - 10th September 2026
 
 ![](https://netzro.github.io/images/posters/the-exorcism-of-molly-hartley.jpg) **The Exorcism of Molly Hartley (2015)**
 _Watched on_ - 06th September 2026
