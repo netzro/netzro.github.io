@@ -4,131 +4,83 @@
 
 {% block content_title %}
 {% if not category and not tag %}
-<div class="my-12 md:my-24 text-zinc-800 dark:text-zinc-300">
+<div style="margin-bottom: 1.5em;">
   {% if SUBTITLE %}
-  <h1 class="mb-6 text-3xl font-bold">{{ SUBTITLE }}</h1>
-  {%endif%}
-  {%if SUBTEXT %}
-    <p class="mb-8 text-zinc-500 dark:text-zinc-400"> {{ SUBTEXT }}</p>
+  <h1 style="margin-bottom: 0.25em;">{{ SUBTITLE }}</h1>
+  {% endif %}
+  {% if SUBTEXT %}
+  <p style="color: var(--mac-text-muted); margin-bottom: 0;">{{ SUBTEXT }}</p>
   {% endif %}
   {% if SOCIAL or FEED_ALL_ATOM or FEED_ALL_RSS %}
-  <ul class="flex px-2 space-x-4 text-lg">
+  <ul style="list-style: none; padding: 0; display: flex; gap: 1em; margin-top: 0.75em;">
     {% for name, link in SOCIAL %}
-    <li><a href="{{ link }}"><i class="fab fa-{{ name }} fa-lg" aria-hidden="true" target="_blank"
-          rel="noopener noreferrer" title="{{ name }}"></i></a></li>
+    <li><a href="{{ link }}" target="_blank" rel="noopener noreferrer" title="{{ name }}"><i class="fab fa-{{ name }}" aria-hidden="true"></i></a></li>
     {% endfor %}
     {% if FEED_ALL_ATOM %}
-    <li><a href="{{ SITEURL }}/{{ FEED_ALL_ATOM }}"
-        type="application/atom+xml" title="{{ FEED_ALL_ATOM }}" rel="alternate"><i class="fa fa-rss fa-lg"
-          aria-hidden="true"></i></a>
-    </li>
+    <li><a href="{{ SITEURL }}/{{ FEED_ALL_ATOM }}" title="Atom Feed"><i class="fa fa-rss" aria-hidden="true"></i></a></li>
     {% endif %}
     {% if FEED_ALL_RSS %}
-    <li><a href="{{ SITEURL }}/{{ FEED_ALL_RSS }}"
-        type="application/rss+xml" title="{{ FEED_ALL_RSS }}" rel="alternate"><i class="fa fa-rss fa-lg"
-          aria-hidden="true"></i></a>
-    </li>
+    <li><a href="{{ SITEURL }}/{{ FEED_ALL_RSS }}" title="RSS Feed"><i class="fa fa-rss" aria-hidden="true"></i></a></li>
     {% endif %}
   </ul>
   {% endif %}
 </div>
 
-<!-- Start Here Section -->
-<div class="mb-12">
-  <h2 class="text-xl font-semibold mb-4 text-zinc-800 dark:text-zinc-300">Start Here</h2>
-  <div class="grid gap-3">
-    <a href="{{ SITEURL }}/posts/2026/Sep/08/the-indieweb/" class="block p-4 bg-white dark:bg-zinc-800 rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-700 transition">
-      <div class="font-semibold text-zinc-800 dark:text-zinc-200">The IndieWeb — Why Your Own Corner of the Internet Still Matters</div>
-      <div class="text-sm text-zinc-500 dark:text-zinc-400 mt-1">A look at the IndieWeb movement — what it is, why it exists, and how owning your own site can make you less dependent on platforms that treat you as the product.</div>
-    </a>
-    <a href="{{ SITEURL }}/posts/2026/Jul/02/different-types-of-llm-access/" class="block p-4 bg-white dark:bg-zinc-800 rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-700 transition">
-      <div class="font-semibold text-zinc-800 dark:text-zinc-200">Different Types of LLM Access</div>
-      <div class="text-sm text-zinc-500 dark:text-zinc-400 mt-1">An overview of the three main ways to access large language models: direct API, inference routing services, and local/self‑hosted deployments.</div>
-    </a>
-    <a href="{{ SITEURL }}/posts/2026/Jun/12/how-llms-are-built-inside-the-architecture/" class="block p-4 bg-white dark:bg-zinc-800 rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-700 transition">
-      <div class="font-semibold text-zinc-800 dark:text-zinc-200">How LLMs Are Built — Inside The Architecture</div>
-      <div class="text-sm text-zinc-500 dark:text-zinc-400 mt-1">From tokenization to inference — a plain-language walk through how large language models are structured, trained, and named.</div>
-    </a>
-    <a href="{{ SITEURL }}/posts/2026/Jun/14/personal-wiki/" class="block p-4 bg-white dark:bg-zinc-800 rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-700 transition">
-      <div class="font-semibold text-zinc-800 dark:text-zinc-200">I Built a Personal Wiki That Thinks for Me</div>
-      <div class="text-sm text-zinc-500 dark:text-zinc-400 mt-1">A personal wiki with an agent schema that ingests my notes, answers queries, and self-audits — all in plain markdown, all in git.</div>
-    </a>
-    <a href="{{ SITEURL }}/posts/2025/May/23/all-is-mental/" class="block p-4 bg-white dark:bg-zinc-800 rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-700 transition">
-      <div class="font-semibold text-zinc-800 dark:text-zinc-200">All is Mental: The Hermetic Principle of Consciousness</div>
-      <div class="text-sm text-zinc-500 dark:text-zinc-400 mt-1">Exploring the Hermetic Principle that the universe is mental, shaping reality through consciousness.</div>
-    </a>
-  </div>
-</div>
-
 <!-- Quick Links -->
-<div class="mb-12">
-  <h2 class="text-xl font-semibold mb-4 text-zinc-800 dark:text-zinc-300">Explore</h2>
-  <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
-    <a href="{{ SITEURL }}/pages/about/" class="px-4 py-3 bg-white dark:bg-zinc-800 rounded-lg text-sm font-medium text-zinc-700 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-700 transition text-center">About</a>
-    <a href="{{ SITEURL }}/pages/projects/" class="px-4 py-3 bg-white dark:bg-zinc-800 rounded-lg text-sm font-medium text-zinc-700 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-700 transition text-center">Projects</a>
-    <a href="{{ SITEURL }}/pages/reading-list/" class="px-4 py-3 bg-white dark:bg-zinc-800 rounded-lg text-sm font-medium text-zinc-700 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-700 transition text-center">Reading List</a>
-    <a href="{{ SITEURL }}/pages/uses/" class="px-4 py-3 bg-white dark:bg-zinc-800 rounded-lg text-sm font-medium text-zinc-700 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-700 transition text-center">Uses</a>
-    <a href="{{ SITEURL }}/pages/blogroll/" class="px-4 py-3 bg-white dark:bg-zinc-800 rounded-lg text-sm font-medium text-zinc-700 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-700 transition text-center">Blogroll</a>
-    <a href="{{ SITEURL }}/pages/movies/" class="px-4 py-3 bg-white dark:bg-zinc-800 rounded-lg text-sm font-medium text-zinc-700 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-700 transition text-center">Movies</a>
-    <a href="{{ SITEURL }}/pages/music/" class="px-4 py-3 bg-white dark:bg-zinc-800 rounded-lg text-sm font-medium text-zinc-700 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-700 transition text-center">Music</a>
+<div>
+  <h2 class="mac-section-heading">Explore</h2>
+  <div class="mac-grid">
+    <a href="{{ SITEURL }}/pages/about/" class="mac-grid__link">About</a>
+    <a href="{{ SITEURL }}/pages/projects/" class="mac-grid__link">Projects</a>
+    <a href="{{ SITEURL }}/pages/reading-list/" class="mac-grid__link">Reading List</a>
+    <a href="{{ SITEURL }}/pages/uses/" class="mac-grid__link">Uses</a>
+    <a href="{{ SITEURL }}/pages/blogroll/" class="mac-grid__link">Blogroll</a>
+    <a href="{{ SITEURL }}/pages/movies/" class="mac-grid__link">Movies</a>
+    <a href="{{ SITEURL }}/pages/music/" class="mac-grid__link">Music</a>
   </div>
 </div>
 
 <!-- Recent Posts -->
-<div class="mb-8">
-  <h2 class="text-xl font-semibold mb-4 text-zinc-800 dark:text-zinc-300">Recent Posts</h2>
+<div>
+  <h2 class="mac-section-heading">Recent Posts</h2>
 </div>
-
 {% endif %}
 {% endblock %}
 
-<div class="py-1">
-  <ul>
-    {% for article in articles_page.object_list %}
-    <a href="{{ SITEURL }}/{{ article.url }}" rel="bookmark" title="Permalink to {{ article.title|striptags }}">
-      <li class="transition ease-in active:-translate-y-1 active:scale-110 duration-75">
-        <div class="bg-white dark:bg-zinc-800 p-4 md:p-6 mb-4 rounded-lg">
-          <header class="font-semibold text-2xl mb-2">
-            <h1>{{ article.title }}</h1>
-          </header>
-          <div class="max-w-7xl container mx-auto my-4 justify-center overflow-hidden mb-2 text-sm text-zinc-800 dark:text-zinc-400
-          prose lg:max-w-none prose-headings:text-zinc-800 prose-headings:dark:text-zinc-300 
-          prose-h1:text-3xl prose-headings:font-semibold 
-          prose-pre:bg-zinc-200 prose-pre:text-zinc-800
-          dark:prose-pre:bg-zinc-800 dark:prose-pre:text-zinc-200
-          prose-blockquote:text-zinc-800
-          dark:prose-blockquote:text-zinc-200
-          prose-a:text-gray-500
-          dark:prose-a:text-gray-400
-          dark:prose-strong:text-zinc-200 
-          dark:prose-code:text-zinc-200
-          dark:prose-code:bg-zinc-800
-          prose-code:bg-zinc-200
-          prose-code:font-light
-          prose-img:rounded-md
-          ">
-            {{ article.summary }}
-          </div>
-          <div class="flex text-xs text-zinc-800 dark:text-zinc-400">
-            <time>{{ article.date|strftime('%B %d, %Y') }}</time>
-            <div>
-              {% if article.readtime %}
-                <span>&nbsp;·&nbsp;{{ article.readtime }} min read</span>
-              {% endif %}
-            </div>
-            <div>
-              {% if article.author != '' %}
-                <span>&nbsp;·&nbsp;{{ article.author }}</span>
-              {% endif %}
-            </div>
-          </div>
-      </li>
-    </a>
-    {% endfor %}
-  </ul>
-</div>
+<ul class="mac-posts">
+  {% for article in articles_page.object_list %}
+  <li class="mac-posts__item">
+    <h3 class="mac-posts__title"><a href="{{ SITEURL }}/{{ article.url }}">{{ article.title }}</a></h3>
+    <div class="mac-posts__meta">
+      <time>{{ article.date|strftime('%B %d, %Y') }}</time>
+      {% if article.readtime %}&nbsp;&middot;&nbsp;{{ article.readtime }} min read{% endif %}
+      {% if article.author != '' %}&nbsp;&middot;&nbsp;{{ article.author }}{% endif %}
+    </div>
+    {% if article.summary %}
+    <div class="mac-posts__summary">{{ article.summary|striptags|truncate(160) }}</div>
+    {% endif %}
+  </li>
+  {% endfor %}
+</ul>
+
 {% if articles_page.has_other_pages() %}
-  {% include 'pagination.html' %}
+<div class="mac-pagination">
+  {% if articles_page.has_previous() %}
+  <a class="mac-pagination__link" href="{{ SITEURL }}/{{ articles_page.previous_page_number() != 1 and 'page/' ~ articles_page.previous_page_number() ~ '/' or '' }}">&laquo; Prev</a>
+  {% endif %}
+  {% for page_num in articles_page.paginator.page_range %}
+  {% if page_num == articles_page.number %}
+  <span class="mac-pagination__link mac-pagination__link--active">{{ page_num }}</span>
+  {% elif page_num == 1 %}
+  <a class="mac-pagination__link" href="{{ SITEURL }}/">{{ page_num }}</a>
+  {% else %}
+  <a class="mac-pagination__link" href="{{ SITEURL }}/page/{{ page_num }}/">{{ page_num }}</a>
+  {% endif %}
+  {% endfor %}
+  {% if articles_page.has_next() %}
+  <a class="mac-pagination__link" href="{{ SITEURL }}/page/{{ articles_page.next_page_number() }}/">Next &raquo;</a>
+  {% endif %}
+</div>
 {% endif %}
 
 {% endblock content %}
