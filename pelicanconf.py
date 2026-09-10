@@ -32,9 +32,11 @@ STATIC_PATHS = ['images', 'extra']
 # Map robots.txt to site root
 EXTRA_PATHS = [
     'extra/robots.txt',
+    'extra/.nojekyll',
 ]
 EXTRA_PATH_METADATA = {
     'extra/robots.txt': {'path': 'robots.txt'},
+    'extra/.nojekyll': {'path': '.nojekyll'},
 }
 
 DISPLAY_PAGES_ON_MENU = False
