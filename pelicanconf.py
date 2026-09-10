@@ -27,7 +27,7 @@ PAGE_SAVE_AS = 'pages/{slug}/index.html'
 COPYRIGHT = '©2026 - Gifted'
 THEME = 'theme/Papyrus'
 THEME_STATIC_PATHS = ['static']
-STATIC_PATHS = ['images']
+STATIC_PATHS = ['images', 'extra']
 
 # Map robots.txt to site root
 EXTRA_PATHS = [
