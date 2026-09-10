@@ -29,13 +29,19 @@
 
   body {
     margin: 0;
-    padding: 25px;
+    padding: 16px;
     background-color: var(--mac-bg);
     font-family: "Geneva", "Lucida Grande", "Lucida Sans Unicode", "Arial", sans-serif;
     color: var(--mac-text);
     line-height: 1.5;
     -webkit-text-stroke: 0.25px rgba(0,0,0,0.1);
     text-rendering: geometricPrecision;
+  }
+
+  @media (min-width: 768px) {
+    body {
+      padding: 25px;
+    }
   }
 
   a {
@@ -197,7 +203,7 @@
     flex-wrap: wrap;
     gap: 1px;
     margin: 0;
-    padding: 0;
+    padding: 0 4px;
     list-style: none;
   }
 
@@ -217,15 +223,16 @@
 
   .mac-nav__link {
     display: block;
-    padding: 4px 12px;
+    padding: 4px 8px;
     border-top: 1px solid var(--mac-border-light);
     border-right: 1px solid var(--mac-border-dark);
     border-left: 1px solid var(--mac-border-light);
     border-top-left-radius: 7px;
     border-top-right-radius: 7px;
-    font-size: 12px;
+    font-size: 11px;
     color: var(--mac-text) !important;
     text-decoration: none;
+    white-space: nowrap;
   }
 
   .mac-nav__link:hover {
@@ -239,6 +246,13 @@
     border-bottom: 1px solid var(--mac-nav-active);
     border-left: 1px solid #bbbbbb;
     background-color: var(--mac-nav-active);
+  }
+
+  @media (min-width: 768px) {
+    .mac-nav__link {
+      padding: 4px 12px;
+      font-size: 12px;
+    }
   }
 
   /* Beveled button */
@@ -368,10 +382,19 @@
     font-size: 10px;
     text-align: center;
     color: #4b4b4b;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
   }
 
   .mac-footer a {
     color: var(--mac-link);
+  }
+
+  .mac-footer__theme {
+    display: flex;
+    align-items: center;
   }
 
   /* Pagination */
@@ -409,6 +432,34 @@
     border-left-color: var(--mac-bevel-darker);
     border-right-color: var(--mac-bevel-light);
     border-bottom-color: var(--mac-bevel-light);
+  }
+
+  /* Content inner */
+  .mac-content__inner {
+    padding: 16px;
+  }
+
+  @media (min-width: 768px) {
+    .mac-content__inner {
+      padding: 25px;
+    }
+  }
+
+  /* Hero area */
+  .mac-hero {
+    margin-bottom: 1.5em;
+  }
+
+  .mac-hero__social {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    gap: 1em;
+    margin: 0.75em 0 0 0;
+  }
+
+  .mac-hero__social li {
+    margin: 0;
   }
 
   /* Section heading */
@@ -511,6 +562,10 @@
     border-top-color: #000;
   }
 
+  .dark .mac-nav__list {
+    padding: 0 4px;
+  }
+
   .dark .mac-nav__item {
     background-color: #3d3d3d;
     border-color: #000;
@@ -533,6 +588,10 @@
     border-bottom-color: #1e1e1e;
     border-left-color: #333;
     background-color: #1e1e1e;
+  }
+
+  .dark .mac-nav__link:hover {
+    color: #9b9bf0 !important;
   }
 
   .dark a {
@@ -584,6 +643,10 @@
   .dark .mac-footer {
     background-color: #2d2d2d;
     border-top-color: #000;
+    color: #888;
+  }
+
+  .dark .mac-footer__theme {
     color: #888;
   }
 
