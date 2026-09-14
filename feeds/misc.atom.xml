@@ -1,5 +1,106 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Gifted Space - misc</title><link href="https://netzro.github.io/" rel="alternate"/><link href="https://netzro.github.io/feeds/misc.atom.xml" rel="self"/><id>https://netzro.github.io/</id><updated>2026-09-08T00:00:00+01:00</updated><entry><title>Follow Your Spirit — Always the First Thought</title><link href="https://netzro.github.io/posts/2026/Sep/08/follow-your-spirit/" rel="alternate"/><published>2026-09-08T00:00:00+01:00</published><updated>2026-09-08T00:00:00+01:00</updated><author><name>Gifted</name></author><id>tag:netzro.github.io,2026-09-08:/posts/2026/Sep/08/follow-your-spirit/</id><summary type="html">&lt;h3&gt;note-to-self:26-05&lt;/h3&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Gifted Space - misc</title><link href="https://netzro.github.io/" rel="alternate"/><link href="https://netzro.github.io/feeds/misc.atom.xml" rel="self"/><id>https://netzro.github.io/</id><updated>2026-09-14T00:00:00+01:00</updated><entry><title>Introduction to Heredoc</title><link href="https://netzro.github.io/posts/2026/Sep/14/introduction-to-heredoc/" rel="alternate"/><published>2026-09-14T00:00:00+01:00</published><updated>2026-09-14T00:00:00+01:00</updated><author><name>Gifted</name></author><id>tag:netzro.github.io,2026-09-14:/posts/2026/Sep/14/introduction-to-heredoc/</id><summary type="html">&lt;p&gt;Learn the basics of heredoc and nowdoc in Bash and Python — syntax, differences, and common use cases.&lt;/p&gt;</summary><content type="html">&lt;h1&gt;Introduction to Heredoc&lt;/h1&gt;
+&lt;p&gt;Heredoc is a way to pass multi-line input to a command or language without fussing over escaping or newline characters. It's one of those quiet tools that saves you a surprising amount of time once you understand the mechanics.&lt;/p&gt;
+&lt;p&gt;I'll cover the basics of heredoc, the distinction between heredoc and nowdoc, where they shine in practice, and how they work in Bash and Python.&lt;/p&gt;
+&lt;h2&gt;The basic idea&lt;/h2&gt;
+&lt;p&gt;At its core, heredoc lets you embed a block of text directly in your script or command line. You choose a delimiter — any word you like — and everything until that word appears on a line by itself becomes the input.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;cat&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s"&gt;&amp;lt;&amp;lt; EOF&lt;/span&gt;
+&lt;span class="s"&gt;Hello, world!&lt;/span&gt;
+&lt;span class="s"&gt;This is line two.&lt;/span&gt;
+&lt;span class="s"&gt;EOF&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;The shell reads everything between the opening &lt;code&gt;&amp;lt;&amp;lt; EOF&lt;/code&gt; and the closing &lt;code&gt;EOF&lt;/code&gt; as the standard input to &lt;code&gt;cat&lt;/code&gt;. No need to quote, escape, or concatenate strings.&lt;/p&gt;
+&lt;h2&gt;Heredoc vs nowdoc&lt;/h2&gt;
+&lt;p&gt;Not all heredocs are the same. The key distinction is &lt;strong&gt;variable interpolation&lt;/strong&gt; — whether placeholders inside the block get expanded or left as literal text.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Heredoc&lt;/strong&gt; (Bash, PHP, Ruby) expands variables inside the block:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nv"&gt;name&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Gifted&amp;quot;&lt;/span&gt;
+cat&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s"&gt;&amp;lt;&amp;lt; EOF&lt;/span&gt;
+&lt;span class="s"&gt;Hello, $name&lt;/span&gt;
+&lt;span class="s"&gt;Today is $(date +%A)&lt;/span&gt;
+&lt;span class="s"&gt;EOF&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Output:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;Hello, Gifted
+Today is Monday
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;Nowdoc&lt;/strong&gt; (PHP, and conceptually in Python with raw strings) treats the block as literal — no variable expansion happens. In PHP, you quote the delimiter:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="x"&gt;$name = &amp;quot;Gifted&amp;quot;;&lt;/span&gt;
+&lt;span class="x"&gt;echo &amp;lt;&amp;lt;&amp;lt;&amp;#39;EOF&amp;#39;&lt;/span&gt;
+&lt;span class="x"&gt;Hello, $name&lt;/span&gt;
+&lt;span class="x"&gt;This stays exactly as typed.&lt;/span&gt;
+&lt;span class="x"&gt;EOF;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;The distinction matters when you need to preserve dollar signs, backticks, or template literals as-is — configuration files, SQL strings, or code generation.&lt;/p&gt;
+&lt;h2&gt;Common use cases&lt;/h2&gt;
+&lt;p&gt;Heredocs excel anywhere you'd otherwise reach for &lt;code&gt;echo&lt;/code&gt; chains or messy quoting:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;Generating config files&lt;/strong&gt; — Write entire configs inline instead of editing them separately.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Running SQL queries&lt;/strong&gt; — Pass multi-line SQL to &lt;code&gt;mysql&lt;/code&gt;, &lt;code&gt;psql&lt;/code&gt;, or &lt;code&gt;sqlite3&lt;/code&gt; without escaping.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Here documents in tests&lt;/strong&gt; — Embed expected output or fixture data directly in test files.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Sending emails&lt;/strong&gt; — Compose email bodies inline for &lt;code&gt;sendmail&lt;/code&gt; or &lt;code&gt;mail&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Embedding templates&lt;/strong&gt; — Build HTML, Markdown, or other structured text from variables.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2&gt;Python's take&lt;/h2&gt;
+&lt;p&gt;Python doesn't have a built-in heredoc operator, but achieves the same result with &lt;strong&gt;triple-quoted strings&lt;/strong&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;import&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nn"&gt;sqlite3&lt;/span&gt;
+
+&lt;span class="n"&gt;conn&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;sqlite3&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;connect&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;users.db&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;cur&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;conn&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;cursor&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+
+&lt;span class="n"&gt;query&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
+&lt;span class="s2"&gt;    SELECT id, name, email&lt;/span&gt;
+&lt;span class="s2"&gt;    FROM users&lt;/span&gt;
+&lt;span class="s2"&gt;    WHERE active = 1&lt;/span&gt;
+&lt;span class="s2"&gt;    ORDER BY name;&lt;/span&gt;
+&lt;span class="s2"&gt;&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
+
+&lt;span class="n"&gt;cur&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;execute&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;query&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Triple quotes (&lt;code&gt;"""&lt;/code&gt; or &lt;code&gt;'''&lt;/code&gt;) preserve newlines and indentation naturally. Use &lt;code&gt;'''&lt;/code&gt; (or &lt;code&gt;r"""&lt;/code&gt;) when you need a raw string — Python's equivalent of nowdoc — to avoid escaping backslashes or dollar signs.&lt;/p&gt;
+&lt;p&gt;You can also combine this with &lt;code&gt;textwrap.dedent()&lt;/code&gt; to strip leading whitespace from indented blocks:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;from&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nn"&gt;textwrap&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;dedent&lt;/span&gt;
+
+&lt;span class="n"&gt;config&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;dedent&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
+&lt;span class="s2"&gt;    [database]&lt;/span&gt;
+&lt;span class="s2"&gt;    host = localhost&lt;/span&gt;
+&lt;span class="s2"&gt;    port = 5432&lt;/span&gt;
+&lt;span class="s2"&gt;    name = myapp&lt;/span&gt;
+&lt;span class="s2"&gt;&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;strip&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h2&gt;Bash deep dive&lt;/h2&gt;
+&lt;p&gt;Bash heredoc has a couple of useful variants. The standard form:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;cat&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s"&gt;&amp;lt;&amp;lt; EOF&lt;/span&gt;
+&lt;span class="s"&gt;Some text here&lt;/span&gt;
+&lt;span class="s"&gt;EOF&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;Stripping leading tabs&lt;/strong&gt; — Prefix the delimiter with &lt;code&gt;-&lt;/code&gt; to remove leading tab characters (not spaces). This keeps your heredoc indented in a script without adding tabs to the output:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;if&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;true&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;then&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;cat&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s"&gt;&amp;lt;&amp;lt;- EOF&lt;/span&gt;
+&lt;span class="s"&gt;        This has no leading tabs&lt;/span&gt;
+&lt;span class="s"&gt;    EOF&lt;/span&gt;
+&lt;span class="k"&gt;fi&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;Quoting the delimiter&lt;/strong&gt; — &lt;code&gt;'EOF'&lt;/code&gt; turns off variable expansion, giving you nowdoc-like behavior:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nv"&gt;price&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;$100&amp;#39;&lt;/span&gt;
+cat&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s"&gt;&amp;lt;&amp;lt; &amp;#39;EOF&amp;#39;&lt;/span&gt;
+&lt;span class="s"&gt;The price is $price&lt;/span&gt;
+&lt;span class="s"&gt;EOF&lt;/span&gt;
+&lt;span class="c1"&gt;# Output: The price is $price&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Without the quotes, &lt;code&gt;$price&lt;/code&gt; would expand to &lt;code&gt;100&lt;/code&gt;.&lt;/p&gt;
+&lt;h2&gt;When to reach for heredoc&lt;/h2&gt;
+&lt;p&gt;Use heredoc when the text you're passing is long enough that inline quotes become unwieldy, or when the content itself contains quotes, newlines, or special characters that would be painful to escape.&lt;/p&gt;
+&lt;p&gt;If the text is short and simple, a quoted string is still cleaner. Heredoc is a tool, not a default — but when the situation calls for it, nothing else feels as natural.&lt;/p&gt;
+&lt;p&gt;I reach for it constantly in scripts that generate configs, seed databases, or compose structured text. Once you internalize the syntax, you'll spot the use cases everywhere.&lt;/p&gt;</content><category term="misc"/><category term="bash"/><category term="python"/><category term="programming"/><category term="tutorial"/></entry><entry><title>Follow Your Spirit — Always the First Thought</title><link href="https://netzro.github.io/posts/2026/Sep/08/follow-your-spirit/" rel="alternate"/><published>2026-09-08T00:00:00+01:00</published><updated>2026-09-08T00:00:00+01:00</updated><author><name>Gifted</name></author><id>tag:netzro.github.io,2026-09-08:/posts/2026/Sep/08/follow-your-spirit/</id><summary type="html">&lt;h3&gt;note-to-self:26-05&lt;/h3&gt;
 &lt;p&gt;That very first feeling. That quiet, instant pulse before the mind starts negotiating …&lt;/p&gt;</summary><content type="html">&lt;h3&gt;note-to-self:26-05&lt;/h3&gt;
 &lt;p&gt;That very first feeling. That quiet, instant pulse before the mind starts negotiating — &lt;em&gt;that's your spirit talking.&lt;/em&gt;&lt;/p&gt;
 &lt;p&gt;Then comes the second thought. The one that weighs risks, counts costs, remembers past failures. That's your ego protecting you from everything, including your own potential.&lt;/p&gt;
@@ -1147,13 +1248,4 @@
 &lt;p&gt;The through-line of both parts is simple: small pure functions, composed into bigger behavior, with side effects pushed to the edges. &lt;code&gt;partial&lt;/code&gt; and &lt;code&gt;lru_cache&lt;/code&gt; make those functions cheaper to build and run. Closures and decorators let them carry context. Recursion handles the problems that are recursive at heart.&lt;/p&gt;
 &lt;p&gt;If Part 1 was "functions are values," Part 2 is "and here's what you can build once you really believe it." Open a recent script and find one &lt;code&gt;for&lt;/code&gt; loop that appends to a list, then rewrite it as a comprehension, then as a &lt;code&gt;map&lt;/code&gt;. The code gets shorter, and the intent gets clearer. That's the whole point.&lt;/p&gt;
 &lt;hr&gt;
-&lt;p&gt;&lt;em&gt;Go back to &lt;a href="https://netzro.github.io/posts/2026/Jul/24/python-functions-functional-beginner/"&gt;Part 1&lt;/a&gt; if you need to revisit the foundations.&lt;/em&gt;&lt;/p&gt;</content><category term="misc"/><category term="python"/><category term="functional-programming"/><category term="programming"/><category term="tutorial"/></entry><entry><title>Life and Balance</title><link href="https://netzro.github.io/posts/2026/Jul/24/life-and-balance/" rel="alternate"/><published>2026-07-24T00:00:00+01:00</published><updated>2026-07-24T00:00:00+01:00</updated><author><name>Gifted</name></author><id>tag:netzro.github.io,2026-07-24:/posts/2026/Jul/24/life-and-balance/</id><summary type="html">&lt;h3&gt;note-to-self:26-04&lt;/h3&gt;
-&lt;blockquote&gt;
-&lt;p&gt;The chase for more — more code, more projects, more output — is easy to …&lt;/p&gt;&lt;/blockquote&gt;</summary><content type="html">&lt;h3&gt;note-to-self:26-04&lt;/h3&gt;
-&lt;blockquote&gt;
-&lt;p&gt;The chase for more — more code, more projects, more output — is easy to mistake for progress. But a life spent only building is a life half-lived.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;Balance isn't a schedule you force. It's a quiet check: am I feeding the mind, the body, and the people who matter, or only the machine in my pocket?&lt;/p&gt;
-&lt;p&gt;The phone runs my infrastructure. It should not run me. Step back sometimes. Touch grass. The servers will keep.&lt;/p&gt;
-&lt;hr&gt;
-&lt;p&gt;&lt;em&gt;Previously: &lt;a href="https://netzro.github.io/posts/2026/Jun/21/the-life-you-want/"&gt;The Life You Want&lt;/a&gt;, &lt;a href="https://netzro.github.io/posts/2026/Jun/18/grace-has-limits/"&gt;Grace Has Limits&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;</content><category term="misc"/><category term="nts"/><category term="balance"/><category term="life-lessons"/></entry></feed>
+&lt;p&gt;&lt;em&gt;Go back to &lt;a href="https://netzro.github.io/posts/2026/Jul/24/python-functions-functional-beginner/"&gt;Part 1&lt;/a&gt; if you need to revisit the foundations.&lt;/em&gt;&lt;/p&gt;</content><category term="misc"/><category term="python"/><category term="functional-programming"/><category term="programming"/><category term="tutorial"/></entry></feed>
