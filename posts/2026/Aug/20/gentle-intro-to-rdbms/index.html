@@ -1,107 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="generator" content="Pelican" />
-    <meta name="google-site-verification" content="A4y8JqsFj7oLMg1M1My15A25RDFuP-S1Y2Waa7Mw50s" />
-    <link rel="canonical" href="https://netzro.github.io/posts/2026/Aug/20/gentle-intro-to-rdbms/" />
-    <title>A Gentle Introduction to RDBMS</title>
-    <meta name="description" content="A beginner-friendly walkthrough of Relational Database Management Systems: what they are, how they organize data, and core concepts to get started." />
-    <!-- Open Graph -->
-    <meta property="og:type" content="article" />
-    <meta property="og:site_name" content="Gifted Space" />
-    <meta property="og:title" content="A Gentle Introduction to RDBMS" />
-    <meta property="og:description" content="A beginner-friendly walkthrough of Relational Database Management Systems: what they are, how they organize data, and core concepts to get started." />
-    <meta property="og:url" content="https://netzro.github.io/posts/2026/Aug/20/gentle-intro-to-rdbms/" />
-    <link rel="stylesheet" type="text/css" href="https://netzro.github.io/theme/css/mac-classic.css" />
-    <link rel="icon" href="https://netzro.github.io/images/favicon.ico" type="image/x-icon" />
-    <link href="https://netzro.github.io/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Gifted Space Atom Feed" />
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-VJD75C7TTC"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-VJD75C7TTC');
-</script>
-<meta name="description" content="A beginner-friendly walkthrough of Relational Database Management Systems: what they are, how they organize data, and core concepts to get started." />
-    <script>
-        if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-            document.documentElement.classList.add('dark');
-        } else {
-            document.documentElement.classList.remove('dark')
-        }
-    </script>
-</head>
-<body>
-    <div class="mac-window">
-        <div class="mac-window__outer">
-            <div class="mac-window__inner">
-                <!-- Title Bar -->
-                <div class="mac-title-bar">
-                    <div class="mac-title-bar__grill">
-                        <div class="mac-title-bar__grill-line"></div>
-                        <div class="mac-title-bar__grill-line"></div>
-                        <div class="mac-title-bar__grill-line"></div>
-                        <div class="mac-title-bar__grill-line"></div>
-                        <div class="mac-title-bar__grill-line"></div>
-                        <div class="mac-title-bar__grill-line"></div>
-                    </div>
-                    <div class="mac-title-bar__title">Gifted Space</div>
-                </div>
+  <head>
+        <title>Gifted Space - A Gentle Introduction to RDBMS</title>
+      <meta charset="utf-8" />
+      <meta name="generator" content="Pelican" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="https://netzro.github.io/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Gifted Space Full Atom Feed" />
+        <link href="https://netzro.github.io/feeds/misc.atom.xml" type="application/atom+xml" rel="alternate" title="Misc Category Atom Feed" />
 
-                <!-- Content -->
-                <div class="mac-content">
-                    <!-- Navigation -->
-                    <nav class="mac-nav">
-                        <ul class="mac-nav__list">
-                            <li class="mac-nav__item ">
-                                <a class="mac-nav__link" href="https://netzro.github.io/">Home</a>
-                            </li>
-                            <li class="mac-nav__item ">
-                                <a class="mac-nav__link" href="https://netzro.github.io/pages/about/">About</a>
-                            </li>
-                            <li class="mac-nav__item ">
-                                <a class="mac-nav__link" href="https://netzro.github.io/pages/projects/">Projects</a>
-                            </li>
-                            <li class="mac-nav__item ">
-                                <a class="mac-nav__link" href="https://netzro.github.io/pages/blogroll/">Blogroll</a>
-                            </li>
-                            <li class="mac-nav__item ">
-                                <a class="mac-nav__link" href="https://netzro.github.io/pages/reading-list/">Reading</a>
-                            </li>
-                            <li class="mac-nav__item ">
-                                <a class="mac-nav__link" href="https://netzro.github.io/pages/uses/">Uses</a>
-                            </li>
-                            <li class="mac-nav__item ">
-                                <a class="mac-nav__link" href="https://netzro.github.io/pages/movies/">Movies</a>
-                            </li>
-                            <li class="mac-nav__item ">
-                                <a class="mac-nav__link" href="https://netzro.github.io/pages/music/">Music</a>
-                            </li>
-                            <li class="mac-nav__item ">
-                                <a class="mac-nav__link" href="https://netzro.github.io/archives.html">Archive</a>
-                            </li>
-                            <li class="mac-nav__item ">
-                                <a class="mac-nav__link" href="https://netzro.github.io/tags.html">Tags</a>
-                            </li>
-                        </ul>
-                    </nav>
 
-                    <!-- Main Content -->
-                    <div class="mac-content__inner">
-<article class="mac-article">
-    <header class="mac-article__header">
-        <h1 class="mac-article__title">A Gentle Introduction to RDBMS</h1>
-        <div class="mac-article__meta">
-            <time>August 20, 2026</time>
-&nbsp;&middot;&nbsp;Gifted        </div>
+
+
+    <meta name="tags" content="rdbms" />
+    <meta name="tags" content="databases" />
+    <meta name="tags" content="sql" />
+    <meta name="tags" content="beginner" />
+
+  </head>
+
+  <body>
+      <header>
+          <hgroup><h1><a href="https://netzro.github.io/">Gifted Space</a></h1></hgroup>
+          <nav><ul>
+          </ul></nav>
+      </header>
+      <main>
+  <article>
+    <header>
+      <h2>
+        <a href="https://netzro.github.io/posts/2026/Aug/20/gentle-intro-to-rdbms/" rel="bookmark"
+           title="Permalink to A Gentle Introduction to RDBMS">A Gentle Introduction to RDBMS</a></h2>
+      
     </header>
-
-
-    <div class="mac-article__content">
-        <h2>A Gentle Introduction to RDBMS</h2>
+    <h2>A Gentle Introduction to RDBMS</h2>
 <p>If you've ever wondered how apps like Twitter, your banking portal, or even this blog store and retrieve data efficiently, chances are they're using a <strong>Relational Database Management System (RDBMS)</strong>.</p>
 <h3>So, What Is an RDBMS?</h3>
 <p>At its core, an RDBMS is software that lets you create, manage, and interact with databases in a structured way. Think of it as a highly organized digital filing cabinet. Instead of tossing everything into one big drawer, an RDBMS keeps data in neat, labeled folders — called <strong>tables</strong>.</p>
@@ -166,103 +97,31 @@
 <p>The world of databases can feel vast, but it all starts with a single table. Take your time, ask questions, and soon enough, you'll be designing schemas and joining tables like a pro.</p>
 <hr>
 <p><em>Have you worked with an RDBMS before? Share your favorite tool or a tip for beginners in the comments.</em></p>
-    </div>
-
-    <footer class="mac-tags">
-        <ul class="mac-tags__list">
-            <li class="mac-tags__item"><a href="https://netzro.github.io/tag/beginner.html">beginner</a></li>
-            <li class="mac-tags__item"><a href="https://netzro.github.io/tag/databases.html">databases</a></li>
-            <li class="mac-tags__item"><a href="https://netzro.github.io/tag/rdbms.html">rdbms</a></li>
-            <li class="mac-tags__item"><a href="https://netzro.github.io/tag/sql.html">sql</a></li>
-        </ul>
+    <footer>
+      <p>Published: <time datetime="2026-08-20T00:00:00+01:00">
+        Thu 20 August 2026
+      </time></p>
+        <address>
+          By             <a href="https://netzro.github.io/author/gifted.html">Gifted</a>
+        </address>
+        <p>
+          Category: <a href="https://netzro.github.io/category/misc.html">misc</a>
+        </p>
+        <p>
+          Tags:
+            <a href="https://netzro.github.io/tag/rdbms.html">rdbms</a>
+            <a href="https://netzro.github.io/tag/databases.html">databases</a>
+            <a href="https://netzro.github.io/tag/sql.html">sql</a>
+            <a href="https://netzro.github.io/tag/beginner.html">beginner</a>
+        </p>
     </footer>
-
-    <!-- Prev/Next -->
-    <nav style="margin-top: 2em; padding-top: 1em; border-top: 1px solid #eee;">
-        <div style="display: flex; justify-content: space-between; gap: 1em;">
-            <span></span>
-        </div>
-    </nav>
-
-    <!-- Share buttons -->
-    <div style="margin-top: 1.5em; text-align: center;">
-        <a target="_blank" rel="noopener noreferrer" title="Share on twitter" href="https://twitter.com/intent/tweet/?text=Features&amp;url=https://netzro.github.io/posts/2026/Aug/20/gentle-intro-to-rdbms/" class="mac-btn" style="font-size: 11px;">
-            <i class="fab fa-twitter" aria-hidden="true"></i> twitter
-        </a>
-        <a target="_blank" rel="noopener noreferrer" title="Share on linkedin" href="https://www.linkedin.com/sharing/share-offsite/?url=https://netzro.github.io/posts/2026/Aug/20/gentle-intro-to-rdbms/" class="mac-btn" style="font-size: 11px;">
-            <i class="fab fa-linkedin" aria-hidden="true"></i> linkedin
-        </a>
-        <a target="_blank" rel="noopener noreferrer" title="Share on reddit" href="https://reddit.com/submit?url=https://netzro.github.io/posts/2026/Aug/20/gentle-intro-to-rdbms/" class="mac-btn" style="font-size: 11px;">
-            <i class="fab fa-reddit" aria-hidden="true"></i> reddit
-        </a>
-        <a target="_blank" rel="noopener noreferrer" title="Share on facebook" href="https://facebook.com/sharer/sharer.php?u=https://netzro.github.io/posts/2026/Aug/20/gentle-intro-to-rdbms/" class="mac-btn" style="font-size: 11px;">
-            <i class="fab fa-facebook" aria-hidden="true"></i> facebook
-        </a>
-        <a target="_blank" rel="noopener noreferrer" title="Share on whatsapp" href="https://api.whatsapp.com/send?text=Features - https://netzro.github.io/posts/2026/Aug/20/gentle-intro-to-rdbms/" class="mac-btn" style="font-size: 11px;">
-            <i class="fab fa-whatsapp" aria-hidden="true"></i> whatsapp
-        </a>
-        <a target="_blank" rel="noopener noreferrer" title="Share on telegram" href="https://telegram.me/share/url?text=Features&amp;url=https://netzro.github.io/posts/2026/Aug/20/gentle-intro-to-rdbms/" class="mac-btn" style="font-size: 11px;">
-            <i class="fab fa-telegram" aria-hidden="true"></i> telegram
-        </a>
-    </div>
-</article>
-                    </div>
-                </div>
-
-                <!-- Footer inside window -->
-                <footer class="mac-footer">
-                    <div>
-©2026 - Gifted &middot;                         Powered by <a href="https://getpelican.com/">Pelican</a> &middot;
-                        <a href="https://github.com/netzro">netzro</a>
-                    </div>
-                    <div class="mac-footer__theme">
-                        <button id="theme-toggle" class="mac-btn" style="padding: 2px 8px; font-size: 10px;">
-                            <span id="theme-toggle-light">&#9788; Light</span>
-                            <span id="theme-toggle-dark">&#9789; Dark</span>
-                        </button>
-                    </div>
-                </footer>
-            </div>
-        </div>
-    </div>
-
-    <script>
-        let themeToggleLight = document.getElementById('theme-toggle-light');
-        let themeToggleDark = document.getElementById('theme-toggle-dark');
-        if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-            themeToggleLight.style.display = 'inline';
-            themeToggleDark.style.display = 'none';
-        } else {
-            themeToggleLight.style.display = 'none';
-            themeToggleDark.style.display = 'inline';
-        }
-        document.getElementById('theme-toggle').addEventListener('click', function () {
-            if (localStorage.getItem('color-theme')) {
-                if (localStorage.getItem('color-theme') === 'light') {
-                    document.documentElement.classList.add('dark');
-                    localStorage.setItem('color-theme', 'dark');
-                    themeToggleLight.style.display = 'inline';
-                    themeToggleDark.style.display = 'none';
-                } else {
-                    document.documentElement.classList.remove('dark');
-                    localStorage.setItem('color-theme', 'light');
-                    themeToggleLight.style.display = 'none';
-                    themeToggleDark.style.display = 'inline';
-                }
-            } else {
-                if (document.documentElement.classList.contains('dark')) {
-                    document.documentElement.classList.remove('dark');
-                    localStorage.setItem('color-theme', 'light');
-                    themeToggleLight.style.display = 'none';
-                    themeToggleDark.style.display = 'inline';
-                } else {
-                    document.documentElement.classList.add('dark');
-                    localStorage.setItem('color-theme', 'dark');
-                    themeToggleLight.style.display = 'inline';
-                    themeToggleDark.style.display = 'none';
-                }
-            }
-        });
-    </script>
-</body>
+  </article>
+      </main>
+      <footer>
+          <address>
+            Proudly powered by <a rel="nofollow" href="https://getpelican.com/">Pelican</a>,
+            which takes great advantage of <a rel="nofollow" href="https://www.python.org/">Python</a>.
+          </address>
+      </footer>
+  </body>
 </html>
