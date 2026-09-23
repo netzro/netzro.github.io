@@ -164,54 +164,54 @@ _Watched on_ - 02nd July 2026
 
 <details markdown='1'><summary>June 2026</summary>
 
-**Sheep Detectives (2026)**  
+![](https://netzro.github.io/images/posters/sheep-detectives-2026.jpg) **Sheep Detectives (2026)**  
 _Watched on_ - 28th June 2026
 
-**The Moogai (2024)**  
+![](https://netzro.github.io/images/posters/the-moogai-2024.jpg) **The Moogai (2024)**  
 _Watched on_ - 25th June 2026
 
-**Sick (2022)**  
+![](https://netzro.github.io/images/posters/sick-2022.jpg) **Sick (2022)**  
 _Watched on_ - 21st June 2026
 
-**Arena (2011)**  
+![](https://netzro.github.io/images/posters/arena-2011.jpg) **Arena (2011)**  
 _Watched on_ - 21st June 2026
 
-**The Mummy (2026)**  
+![](https://netzro.github.io/images/posters/the-mummy-2026.jpg) **The Mummy (2026)**  
 _Watched on_ - 21st June 2026
 
-**The Wasp (2024)**  
+![](https://netzro.github.io/images/posters/the-wasp-2024.jpg) **The Wasp (2024)**  
 _Watched on_ - 21st June 2026
 
-**Voicemails for Isabelle (2026)**  
+![](https://netzro.github.io/images/posters/voicemails-for-isabelle-2026.jpg) **Voicemails for Isabelle (2026)**  
 _Watched on_ - 21st June 2026
 
-**Deep Water (2026)**  
+![](https://netzro.github.io/images/posters/deep-water-2026.jpg) **Deep Water (2026)**  
 _Watched on_ - 18th June 2026
 
-**Neglected (2026)**  
+![](https://netzro.github.io/images/posters/neglected-2026.jpg) **Neglected (2026)**  
 _Watched on_ - 18th June 2026
 
-**The Passenger (2026)**  
+![](https://netzro.github.io/images/posters/the-passenger-2026.jpg) **The Passenger (2026)**  
 _Watched on_ - 11th June 2026
 
 **Seven Snipers (2025)**  
 _Watched on_ - 11th June 2026
 
-**Oblivion (2013)**  
+![](https://netzro.github.io/images/posters/oblivion-2013.jpg) **Oblivion (2013)**  
 _Watched on_ - 10th June 2026
 </details>
 
 <details markdown='1'><summary>June 2025</summary>
 
-**Predator: Killer of Killers (2025)**  
+![](https://netzro.github.io/images/posters/predator-killer-of-killers-2025.jpg) **Predator: Killer of Killers (2025)**  
 _My rating_ - ⭐⭐⭐  
 _Watched on_ - 15th June 2025
 
-**Sinners (2025)**  
+![](https://netzro.github.io/images/posters/sinners-2025.jpg) **Sinners (2025)**  
 _My rating_ - ⭐⭐⭐  
 _Watched on_ - 15th June 2025
 
-**The Amateur (2025)**    
+![](https://netzro.github.io/images/posters/the-amateur-2025.jpg) **The Amateur (2025)**  
 _My rating_  - ⭐⭐⭐  
 _Watched on_ - 14th June 2025  
 
@@ -378,38 +378,38 @@ _Watched on_ - 24th December 2024
 
 <details markdown='1'><summary>October 2024</summary>
 
-**Ransom (1996)**  
+![](https://netzro.github.io/images/posters/ransom-1996.jpg) **Ransom (1996)**  
 _My rating_ - ⭐⭐⭐⭐  
 _Watched on_ 🔄 - 1st October 2024
 </details>
 
 <details markdown='1'><summary>September 2024</summary>
 
-**Last Straw (2024)**  
+![](https://netzro.github.io/images/posters/last-straw-2024.jpg) **Last Straw (2024)**  
 _My rating_ - ⭐⭐⭐  
 _Watched on_ - 30th September 2024
 
-**The Avengers (2012)**  
+![](https://netzro.github.io/images/posters/the-avengers-2012.jpg) **The Avengers (2012)**  
 _My rating_ - ⭐⭐⭐⭐  
 _Watched on_ 🔄 - 29th September 2024
 
-**The Incredible Hulk (2008)**  
+![](https://netzro.github.io/images/posters/the-incredible-hulk-2008.jpg) **The Incredible Hulk (2008)**  
 _My rating_ - ⭐⭐⭐⭐  
 _Watched on_ 🔄 - 28th September 2024
 
-**Blink Twice (2024)**  
+![](https://netzro.github.io/images/posters/blink-twice-2024.jpg) **Blink Twice (2024)**  
 _My rating_ - ⭐⭐⭐  
 _Watched on_ - 20th September 2024
 
-**The Crow (2024)**  
+![](https://netzro.github.io/images/posters/the-crow-2024.jpg) **The Crow (2024)**  
 _My rating_ - ⭐⭐⭐  
 _Watched on_ - 20th September 2024
 
-**Ant-Man (2015)**  
+![](https://netzro.github.io/images/posters/ant-man-2015.jpg) **Ant-Man (2015)**  
 _My rating_ - ⭐⭐⭐⭐  
 _Watched on_ 🔄 - 20th September 2024
 
-**Deadpool & Wolverine (2024)**  
+![](https://netzro.github.io/images/posters/deadpool-and-wolverine-2024.jpg) **Deadpool & Wolverine (2024)**  
 _My rating_ - ⭐⭐⭐⭐  
 _Watched on_ - 19th September 2024
 
@@ -417,39 +417,39 @@ _Watched on_ - 19th September 2024
 _My rating_ - ⭐⭐⭐⭐  
 _Watched on_ 🔄 - 18th September 2024
 
-**Subservience (2024)**  
+![](https://netzro.github.io/images/posters/subservience-2024.jpg) **Subservience (2024)**  
 _My rating_ - ⭐⭐⭐⭐  
 _Watched on_ - 18th September 2024
 
-**1992 (2024)**  
+![](https://netzro.github.io/images/posters/1992-2024.jpg) **1992 (2024)**  
 _My rating_ - ⭐⭐⭐  
 _Watched on_ - 18th September 2024
 
-**Iron Man 3 (2013)**  
+![](https://netzro.github.io/images/posters/iron-man-3-2013.jpg) **Iron Man 3 (2013)**  
 _My rating_ - ⭐⭐⭐⭐  
 _Watched on_ 🔄 - 15th September 2024
 
-**Iron Man 2 (2010)**  
+![](https://netzro.github.io/images/posters/iron-man-2-2010.jpg) **Iron Man 2 (2010)**  
 _My rating_ - ⭐⭐⭐⭐  
 _Watched on_ 🔄 - 15th September 2024
 
-**Iron Man (2008)**  
+![](https://netzro.github.io/images/posters/iron-man-2008.jpg) **Iron Man (2008)**  
 _My rating_ - ⭐⭐⭐⭐  
 _Watched on_ 🔄 - 15th September 2024
 
-**Thor (2011)**  
+![](https://netzro.github.io/images/posters/thor-2011.jpg) **Thor (2011)**  
 _My rating_ - ⭐⭐⭐⭐  
 _Watched on_ 🔄 - 15th September 2024
 
-**Trap (2024)**  
+![](https://netzro.github.io/images/posters/trap-2024.jpg) **Trap (2024)**  
 _My rating_ - ⭐⭐⭐⭐  
 _Watched on_ - 1st September 2024
 
-**Tokunbo (2024)**  
+![](https://netzro.github.io/images/posters/tokunbo-2024.jpg) **Tokunbo (2024)**  
 _My rating_ - ⭐⭐⭐  
 _Watched on_ - 1st September 2024
 
-**Borderlands (2024)**  
+![](https://netzro.github.io/images/posters/borderlands-2024.jpg) **Borderlands (2024)**  
 _My rating_ - ⭐⭐⭐  
 _Watched on_ - 1st September 2024
 
@@ -457,59 +457,59 @@ _Watched on_ - 1st September 2024
 
 <details markdown='1'><summary>August 2024</summary>
 
-**The Killer (2024)**  
+![](https://netzro.github.io/images/posters/the-killer-2024.jpg) **The Killer (2024)**  
 _My rating_ - ⭐⭐  
 _Watched on_ - 31st August 2024
 
-**Hell Hole (2024)**  
+![](https://netzro.github.io/images/posters/hell-hole-2024.jpg) **Hell Hole (2024)**  
 _My rating_ - ⭐⭐  
 _Watched on_ - 28th August 2024
 
-**Longlegs (2024)**  
+![](https://netzro.github.io/images/posters/longlegs-2024.jpg) **Longlegs (2024)**  
 _My rating_ - ⭐  
 _Watched on_ - 28th August 2024
 
-**Greedy People (2024)**  
+![](https://netzro.github.io/images/posters/greedy-people-2024.jpg) **Greedy People (2024)**  
 _My rating_ - ⭐⭐⭐⭐  
 _Watched on_ - 24th August 2024
 
-**Gunner (2024)**  
+![](https://netzro.github.io/images/posters/gunner-2024.jpg) **Gunner (2024)**  
 _My rating_ - ⭐⭐  
 _Watched on_ - 24th August 2024
 
-**Jackpot (2024)**  
+![](https://netzro.github.io/images/posters/jackpot-2024.jpg) **Jackpot (2024)**  
 _My rating_ - ⭐⭐  
 _Watched on_ - 23rd August 2024
 
-**The Beast Within (2024)**  
+![](https://netzro.github.io/images/posters/the-beast-within-2024.jpg) **The Beast Within (2024)**  
 _My rating_ - ⭐  
 _Watched on_ - 21st August 2024
 
-**Despicable Me 4 (2024)**  
+![](https://netzro.github.io/images/posters/despicable-me-4-2024.jpg) **Despicable Me 4 (2024)**  
 _My rating_ - ⭐⭐⭐⭐  
 _Watched on_ - 18th August 2024
 
-**The Duel (2024)**  
+![](https://netzro.github.io/images/posters/the-duel-2024.jpg) **The Duel (2024)**  
 _My rating_ - ⭐⭐⭐  
 _Watched on_ - 18th August 2024
 
-**The Union (2024)**  
+![](https://netzro.github.io/images/posters/the-union-2024.jpg) **The Union (2024)**  
 _My rating_ - ⭐⭐⭐⭐  
 _Watched on_ - 18th August 2024
 
-**Fly Me To The Moon (2024)**  
+![](https://netzro.github.io/images/posters/fly-me-to-the-moon-2024.jpg) **Fly Me To The Moon (2024)**  
 _My rating_ - ⭐⭐⭐⭐  
 _Watched on_ - 18th August 2024
 
-**Twisters (2024)**  
+![](https://netzro.github.io/images/posters/twisters-2024.jpg) **Twisters (2024)**  
 _My rating_ - ⭐⭐⭐  
 _Watched on_ - 18th August 2024
 
-**The Shakedown (2024)**  
+![](https://netzro.github.io/images/posters/the-shakedown-2024.jpg) **The Shakedown (2024)**  
 _My rating_ - ⭐⭐⭐⭐  
 _Watched on_ - 11th August 2024
 
-**The Instigators (2024)**  
+![](https://netzro.github.io/images/posters/the-instigators-2024.jpg) **The Instigators (2024)**  
 _My rating_ - ⭐⭐⭐⭐  
 _Watched on_ - 11th August 2024
 
@@ -521,7 +521,7 @@ _Watched on_ - 11th August 2024
 
 <details markdown='1'><summary>July 2024</summary>
 
-**Bad Boys: Ride or Die (2024)**  
+![](https://netzro.github.io/images/posters/bad-boys-ride-or-die-2024.jpg) **Bad Boys: Ride or Die (2024)**  
 _My rating_ - ⭐⭐⭐⭐⭐  
 _Watched on_ - 18th July 2024
 
@@ -529,7 +529,7 @@ _Watched on_ - 18th July 2024
 _My rating_ - ⭐⭐⭐⭐  
 _Watched on_ - 11th July 2024
 
-**Soul (2020)**  
+![](https://netzro.github.io/images/posters/soul-2020.jpg) **Soul (2020)**  
 _My rating_ - ⭐⭐⭐⭐⭐  
 _Watched on_ 🔄 - 11th July 2024
 
