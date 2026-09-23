@@ -1,41 +1,81 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-  <head>
-        <title>Gifted Space - Config File Formats in Python: A Practical Guide</title>
-      <meta charset="utf-8" />
-      <meta name="generator" content="Pelican" />
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link href="https://netzro.github.io/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Gifted Space Full Atom Feed" />
-        <link href="https://netzro.github.io/feeds/misc.atom.xml" type="application/atom+xml" rel="alternate" title="Misc Category Atom Feed" />
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <title>  Config File Formats in Python: A Practical Guide | Gifted Space
+</title>
+  <link rel="canonical" href="https://netzro.github.io/posts/2026/Jun/21/python-config-formats/index.html">
 
 
+  <link rel="stylesheet" href="https://netzro.github.io/theme/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://netzro.github.io/theme/css/fontawesome.min.css">
+  <link rel="stylesheet" href="https://netzro.github.io/theme/css/pygments/default.min.css">
+  <link rel="stylesheet" href="https://netzro.github.io/theme/css/theme.css">
+
+  <link rel="alternate" type="application/atom+xml" title="Full Atom Feed"
+        href="https://netzro.github.io/feeds/all.atom.xml">
+  <link rel="alternate" type="application/atom+xml" title="Categories Atom Feed"
+        href="https://netzro.github.io/feeds/misc.atom.xml">  
+  <meta name="description" content="A hands-on look at every config format Python projects actually use — INI, JSON, YAML, TOML, and env files — with real code examples and when each one makes sense.">
+  <script>
+    (function(i, s, o, g, r, a, m) {
+      i['GoogleAnalyticsObject'] = r;
+      i[r] = i[r] || function() {
+        (i[r].q = i[r].q || []).push(arguments)
+      }, i[r].l = 1 * new Date();
+      a = s.createElement(o);
+      a.async = 1;
+      a.src = g;
+      m = s.getElementsByTagName(o)[0];
+      m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+    ga('create', 'G-VJD75C7TTC', 'auto');
+    ga('send', 'pageview');
+  </script>
 
 
-    <meta name="tags" content="python" />
-    <meta name="tags" content="configuration" />
-    <meta name="tags" content="yaml" />
-    <meta name="tags" content="toml" />
-    <meta name="tags" content="json" />
-    <meta name="tags" content="ini" />
-    <meta name="tags" content="best-practices" />
+</head>
 
-  </head>
+<body>
+  <header class="header">
+    <div class="container">
+<div class="row">
+  <div class="col-sm-12">
+    <h1 class="title"><a href="https://netzro.github.io/">Gifted Space</a></h1>
+  </div>
+</div>    </div>
+  </header>
 
-  <body>
-      <header>
-          <hgroup><h1><a href="https://netzro.github.io/">Gifted Space</a></h1></hgroup>
-          <nav><ul>
-          </ul></nav>
-      </header>
-      <main>
-  <article>
+  <div class="main">
+    <div class="container">
+      <h1>  Config File Formats in Python: A Practical Guide
+</h1>
+      <hr>
+  <article class="article">
     <header>
-      <h2>
-        <a href="https://netzro.github.io/posts/2026/Jun/21/python-config-formats/" rel="bookmark"
-           title="Permalink to Config File Formats in Python: A Practical Guide">Config File Formats in Python: A Practical Guide</a></h2>
-      
+      <ul class="list-inline">
+        <li class="list-inline-item text-muted" title="2026-06-21T00:00:00+01:00">
+          <i class="fas fa-clock"></i>
+          Sun 21 June 2026
+        </li>
+        <li class="list-inline-item">
+          <i class="fas fa-folder-open"></i>
+          <a href="https://netzro.github.io/category/misc.html">misc</a>
+        </li>
+          <li class="list-inline-item">
+            <i class="fas fa-user"></i>
+              <a href="https://netzro.github.io/author/gifted.html">Gifted</a>          </li>
+          <li class="list-inline-item">
+            <i class="fas fa-tag"></i>
+              <a href="https://netzro.github.io/tag/python.html">#python</a>,               <a href="https://netzro.github.io/tag/configuration.html">#configuration</a>,               <a href="https://netzro.github.io/tag/yaml.html">#yaml</a>,               <a href="https://netzro.github.io/tag/toml.html">#toml</a>,               <a href="https://netzro.github.io/tag/json.html">#json</a>,               <a href="https://netzro.github.io/tag/ini.html">#ini</a>,               <a href="https://netzro.github.io/tag/best-practices.html">#best-practices</a>          </li>
+      </ul>
     </header>
-    <hr>
+    <div class="content">
+      <hr>
 <p>Every Python project needs configuration at some point. Database credentials, feature flags, API keys, logging levels — something has to live outside your code. The question is: what format do you put it in?</p>
 <p>There's no single right answer. There are, however, clear trade-offs. Here's what I've learned from using all of them.</p>
 <h2>The Contenders</h2>
@@ -244,34 +284,27 @@
 <h2>The Real Rule</h2>
 <p>The best config format is the one your team will actually maintain correctly. A perfectly structured YAML file that nobody wants to edit is worse than a simple <code>.env</code> file people understand.</p>
 <p>Pick the simplest format that handles your actual requirements. Add complexity only when the config demands it — not because a format is popular.</p>
-    <footer>
-      <p>Published: <time datetime="2026-06-21T00:00:00+01:00">
-        Sun 21 June 2026
-      </time></p>
-        <address>
-          By             <a href="https://netzro.github.io/author/gifted.html">Gifted</a>
-        </address>
-        <p>
-          Category: <a href="https://netzro.github.io/category/misc.html">misc</a>
-        </p>
-        <p>
-          Tags:
-            <a href="https://netzro.github.io/tag/python.html">python</a>
-            <a href="https://netzro.github.io/tag/configuration.html">configuration</a>
-            <a href="https://netzro.github.io/tag/yaml.html">yaml</a>
-            <a href="https://netzro.github.io/tag/toml.html">toml</a>
-            <a href="https://netzro.github.io/tag/json.html">json</a>
-            <a href="https://netzro.github.io/tag/ini.html">ini</a>
-            <a href="https://netzro.github.io/tag/best-practices.html">best-practices</a>
-        </p>
-    </footer>
+    </div>
   </article>
-      </main>
-      <footer>
-          <address>
-            Proudly powered by <a rel="nofollow" href="https://getpelican.com/">Pelican</a>,
-            which takes great advantage of <a rel="nofollow" href="https://www.python.org/">Python</a>.
-          </address>
-      </footer>
-  </body>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="container">
+<div class="row">
+  <ul class="col-sm-6 list-inline">
+      <li class="list-inline-item"><a href="https://netzro.github.io/authors.html">Authors</a></li>
+    <li class="list-inline-item"><a href="https://netzro.github.io/archives.html">Archives</a></li>
+    <li class="list-inline-item"><a href="https://netzro.github.io/categories.html">Categories</a></li>
+      <li class="list-inline-item"><a href="https://netzro.github.io/tags.html">Tags</a></li>
+  </ul>
+  <p class="col-sm-6 text-sm-right text-muted">
+    Generated by <a href="https://github.com/getpelican/pelican" target="_blank">Pelican</a>
+    / <a href="https://github.com/nairobilug/pelican-alchemy" target="_blank">&#x2728;</a>
+  </p>
+</div>    </div>
+  </footer>
+
+</body>
+
 </html>

@@ -1,40 +1,81 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-  <head>
-        <title>Gifted Space - I Built a Personal Wiki That Thinks for Me</title>
-      <meta charset="utf-8" />
-      <meta name="generator" content="Pelican" />
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link href="https://netzro.github.io/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Gifted Space Full Atom Feed" />
-        <link href="https://netzro.github.io/feeds/dev.atom.xml" type="application/atom+xml" rel="alternate" title="Dev Category Atom Feed" />
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <title>  I Built a Personal Wiki That Thinks for Me | Gifted Space
+</title>
+  <link rel="canonical" href="https://netzro.github.io/posts/2026/Jun/14/personal-wiki/index.html">
 
 
+  <link rel="stylesheet" href="https://netzro.github.io/theme/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://netzro.github.io/theme/css/fontawesome.min.css">
+  <link rel="stylesheet" href="https://netzro.github.io/theme/css/pygments/default.min.css">
+  <link rel="stylesheet" href="https://netzro.github.io/theme/css/theme.css">
+
+  <link rel="alternate" type="application/atom+xml" title="Full Atom Feed"
+        href="https://netzro.github.io/feeds/all.atom.xml">
+  <link rel="alternate" type="application/atom+xml" title="Categories Atom Feed"
+        href="https://netzro.github.io/feeds/dev.atom.xml">  
+  <meta name="description" content="A personal wiki with an agent schema that ingests my notes, answers queries, and self-audits — all in plain markdown, all in git.">
+  <script>
+    (function(i, s, o, g, r, a, m) {
+      i['GoogleAnalyticsObject'] = r;
+      i[r] = i[r] || function() {
+        (i[r].q = i[r].q || []).push(arguments)
+      }, i[r].l = 1 * new Date();
+      a = s.createElement(o);
+      a.async = 1;
+      a.src = g;
+      m = s.getElementsByTagName(o)[0];
+      m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+    ga('create', 'G-VJD75C7TTC', 'auto');
+    ga('send', 'pageview');
+  </script>
 
 
-    <meta name="tags" content="wiki" />
-    <meta name="tags" content="automation" />
-    <meta name="tags" content="knowledge-base" />
-    <meta name="tags" content="markdown" />
-    <meta name="tags" content="github" />
-    <meta name="tags" content="llm" />
+</head>
 
-  </head>
+<body>
+  <header class="header">
+    <div class="container">
+<div class="row">
+  <div class="col-sm-12">
+    <h1 class="title"><a href="https://netzro.github.io/">Gifted Space</a></h1>
+  </div>
+</div>    </div>
+  </header>
 
-  <body>
-      <header>
-          <hgroup><h1><a href="https://netzro.github.io/">Gifted Space</a></h1></hgroup>
-          <nav><ul>
-          </ul></nav>
-      </header>
-      <main>
-  <article>
+  <div class="main">
+    <div class="container">
+      <h1>  I Built a Personal Wiki That Thinks for Me
+</h1>
+      <hr>
+  <article class="article">
     <header>
-      <h2>
-        <a href="https://netzro.github.io/posts/2026/Jun/14/personal-wiki/" rel="bookmark"
-           title="Permalink to I Built a Personal Wiki That Thinks for Me">I Built a Personal Wiki That Thinks for Me</a></h2>
-      
+      <ul class="list-inline">
+        <li class="list-inline-item text-muted" title="2026-06-14T00:00:00+01:00">
+          <i class="fas fa-clock"></i>
+          Sun 14 June 2026
+        </li>
+        <li class="list-inline-item">
+          <i class="fas fa-folder-open"></i>
+          <a href="https://netzro.github.io/category/dev.html">Dev</a>
+        </li>
+          <li class="list-inline-item">
+            <i class="fas fa-user"></i>
+              <a href="https://netzro.github.io/author/gifted.html">Gifted</a>          </li>
+          <li class="list-inline-item">
+            <i class="fas fa-tag"></i>
+              <a href="https://netzro.github.io/tag/wiki.html">#wiki</a>,               <a href="https://netzro.github.io/tag/automation.html">#automation</a>,               <a href="https://netzro.github.io/tag/knowledge-base.html">#knowledge-base</a>,               <a href="https://netzro.github.io/tag/markdown.html">#markdown</a>,               <a href="https://netzro.github.io/tag/github.html">#github</a>,               <a href="https://netzro.github.io/tag/llm.html">#llm</a>          </li>
+      </ul>
     </header>
-    <hr>
+    <div class="content">
+      <hr>
 <p>I have 138 files scattered across my notes directory — 123 of them markdown, the rest shell scripts, Python, JSON, CSV, and a couple of Bean text files. Investing tips, AI observations, business ideas, personal growth notes — all raw, none of it connected. I wanted a system that could ingest those notes, build structured knowledge pages, and answer questions from them. So I built one.</p>
 <p>The result is <code>personal-wiki</code>: a git-tracked markdown wiki designed to be maintained by my AI agent.</p>
 <h2>The Idea</h2>
@@ -68,33 +109,27 @@
 <p>And eventually, I might add a lightweight static site generator on top so I can browse the wiki in a browser. But for now, markdown in a terminal is enough.</p>
 <hr>
 <p>The source is on GitHub (private repo <code>netzro/personal-wiki</code>). The whole thing is fewer than 200 lines of markdown. Sometimes the best tool is the simplest one.</p>
-    <footer>
-      <p>Published: <time datetime="2026-06-14T00:00:00+01:00">
-        Sun 14 June 2026
-      </time></p>
-        <address>
-          By             <a href="https://netzro.github.io/author/gifted.html">Gifted</a>
-        </address>
-        <p>
-          Category: <a href="https://netzro.github.io/category/dev.html">Dev</a>
-        </p>
-        <p>
-          Tags:
-            <a href="https://netzro.github.io/tag/wiki.html">wiki</a>
-            <a href="https://netzro.github.io/tag/automation.html">automation</a>
-            <a href="https://netzro.github.io/tag/knowledge-base.html">knowledge-base</a>
-            <a href="https://netzro.github.io/tag/markdown.html">markdown</a>
-            <a href="https://netzro.github.io/tag/github.html">github</a>
-            <a href="https://netzro.github.io/tag/llm.html">llm</a>
-        </p>
-    </footer>
+    </div>
   </article>
-      </main>
-      <footer>
-          <address>
-            Proudly powered by <a rel="nofollow" href="https://getpelican.com/">Pelican</a>,
-            which takes great advantage of <a rel="nofollow" href="https://www.python.org/">Python</a>.
-          </address>
-      </footer>
-  </body>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="container">
+<div class="row">
+  <ul class="col-sm-6 list-inline">
+      <li class="list-inline-item"><a href="https://netzro.github.io/authors.html">Authors</a></li>
+    <li class="list-inline-item"><a href="https://netzro.github.io/archives.html">Archives</a></li>
+    <li class="list-inline-item"><a href="https://netzro.github.io/categories.html">Categories</a></li>
+      <li class="list-inline-item"><a href="https://netzro.github.io/tags.html">Tags</a></li>
+  </ul>
+  <p class="col-sm-6 text-sm-right text-muted">
+    Generated by <a href="https://github.com/getpelican/pelican" target="_blank">Pelican</a>
+    / <a href="https://github.com/nairobilug/pelican-alchemy" target="_blank">&#x2728;</a>
+  </p>
+</div>    </div>
+  </footer>
+
+</body>
+
 </html>

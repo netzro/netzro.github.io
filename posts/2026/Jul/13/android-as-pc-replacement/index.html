@@ -1,39 +1,81 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-  <head>
-        <title>Gifted Space - Using Your Android Phone as a PC Replacement</title>
-      <meta charset="utf-8" />
-      <meta name="generator" content="Pelican" />
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link href="https://netzro.github.io/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Gifted Space Full Atom Feed" />
-        <link href="https://netzro.github.io/feeds/misc.atom.xml" type="application/atom+xml" rel="alternate" title="Misc Category Atom Feed" />
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <title>  Using Your Android Phone as a PC Replacement | Gifted Space
+</title>
+  <link rel="canonical" href="https://netzro.github.io/posts/2026/Jul/13/android-as-pc-replacement/index.html">
 
 
+  <link rel="stylesheet" href="https://netzro.github.io/theme/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://netzro.github.io/theme/css/fontawesome.min.css">
+  <link rel="stylesheet" href="https://netzro.github.io/theme/css/pygments/default.min.css">
+  <link rel="stylesheet" href="https://netzro.github.io/theme/css/theme.css">
+
+  <link rel="alternate" type="application/atom+xml" title="Full Atom Feed"
+        href="https://netzro.github.io/feeds/all.atom.xml">
+  <link rel="alternate" type="application/atom+xml" title="Categories Atom Feed"
+        href="https://netzro.github.io/feeds/misc.atom.xml">  
+  <meta name="description" content="How I run a full development and automation stack from an Android phone using Termux and proot Debian — and where the limits still bite.">
+  <script>
+    (function(i, s, o, g, r, a, m) {
+      i['GoogleAnalyticsObject'] = r;
+      i[r] = i[r] || function() {
+        (i[r].q = i[r].q || []).push(arguments)
+      }, i[r].l = 1 * new Date();
+      a = s.createElement(o);
+      a.async = 1;
+      a.src = g;
+      m = s.getElementsByTagName(o)[0];
+      m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+    ga('create', 'G-VJD75C7TTC', 'auto');
+    ga('send', 'pageview');
+  </script>
 
 
-    <meta name="tags" content="android" />
-    <meta name="tags" content="termux" />
-    <meta name="tags" content="productivity" />
-    <meta name="tags" content="mobile" />
-    <meta name="tags" content="linux" />
+</head>
 
-  </head>
+<body>
+  <header class="header">
+    <div class="container">
+<div class="row">
+  <div class="col-sm-12">
+    <h1 class="title"><a href="https://netzro.github.io/">Gifted Space</a></h1>
+  </div>
+</div>    </div>
+  </header>
 
-  <body>
-      <header>
-          <hgroup><h1><a href="https://netzro.github.io/">Gifted Space</a></h1></hgroup>
-          <nav><ul>
-          </ul></nav>
-      </header>
-      <main>
-  <article>
+  <div class="main">
+    <div class="container">
+      <h1>  Using Your Android Phone as a PC Replacement
+</h1>
+      <hr>
+  <article class="article">
     <header>
-      <h2>
-        <a href="https://netzro.github.io/posts/2026/Jul/13/android-as-pc-replacement/" rel="bookmark"
-           title="Permalink to Using Your Android Phone as a PC Replacement">Using Your Android Phone as a PC Replacement</a></h2>
-      
+      <ul class="list-inline">
+        <li class="list-inline-item text-muted" title="2026-07-13T00:00:00+01:00">
+          <i class="fas fa-clock"></i>
+          Mon 13 July 2026
+        </li>
+        <li class="list-inline-item">
+          <i class="fas fa-folder-open"></i>
+          <a href="https://netzro.github.io/category/misc.html">misc</a>
+        </li>
+          <li class="list-inline-item">
+            <i class="fas fa-user"></i>
+              <a href="https://netzro.github.io/author/gifted.html">Gifted</a>          </li>
+          <li class="list-inline-item">
+            <i class="fas fa-tag"></i>
+              <a href="https://netzro.github.io/tag/android.html">#android</a>,               <a href="https://netzro.github.io/tag/termux.html">#termux</a>,               <a href="https://netzro.github.io/tag/productivity.html">#productivity</a>,               <a href="https://netzro.github.io/tag/mobile.html">#mobile</a>,               <a href="https://netzro.github.io/tag/linux.html">#linux</a>          </li>
+      </ul>
     </header>
-    <p>A few years ago, doing real work from a phone meant squinting at a trimmed-down app and giving up halfway. That changed for me the day I stopped treating my Android phone like a phone and started treating it like a small, always-on computer that happens to make calls.</p>
+    <div class="content">
+      <p>A few years ago, doing real work from a phone meant squinting at a trimmed-down app and giving up halfway. That changed for me the day I stopped treating my Android phone like a phone and started treating it like a small, always-on computer that happens to make calls.</p>
 <p>This is not a stunt about what a phone can do. It is the setup I actually use. The thing writing this post is running on it.</p>
 <h2>What "replacement" means</h2>
 <p>Be clear about the claim. I am not saying a phone replaces a desktop for everyone. Video editing, heavy local ML training, and CAD are still better on a real machine. What I am saying is that for coding, server management, automation, and most knowledge work, my phone is now the primary device. The laptop mostly collects dust.</p>
@@ -61,32 +103,27 @@
 <h2>Getting started</h2>
 <p>If you want to try this, the path is short. Install Termux, learn a handful of shell commands, then add a Linux environment once you outgrow the sandbox. Pick one real task, a script, a bot, a static site, and run it end to end from the phone. The abstraction collapses the moment you do it once.</p>
 <p>The laptop is not dead. It is just no longer the default. For most of what I do, the small machine in my pocket already won.</p>
-    <footer>
-      <p>Published: <time datetime="2026-07-13T00:00:00+01:00">
-        Mon 13 July 2026
-      </time></p>
-        <address>
-          By             <a href="https://netzro.github.io/author/gifted.html">Gifted</a>
-        </address>
-        <p>
-          Category: <a href="https://netzro.github.io/category/misc.html">misc</a>
-        </p>
-        <p>
-          Tags:
-            <a href="https://netzro.github.io/tag/android.html">android</a>
-            <a href="https://netzro.github.io/tag/termux.html">termux</a>
-            <a href="https://netzro.github.io/tag/productivity.html">productivity</a>
-            <a href="https://netzro.github.io/tag/mobile.html">mobile</a>
-            <a href="https://netzro.github.io/tag/linux.html">linux</a>
-        </p>
-    </footer>
+    </div>
   </article>
-      </main>
-      <footer>
-          <address>
-            Proudly powered by <a rel="nofollow" href="https://getpelican.com/">Pelican</a>,
-            which takes great advantage of <a rel="nofollow" href="https://www.python.org/">Python</a>.
-          </address>
-      </footer>
-  </body>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="container">
+<div class="row">
+  <ul class="col-sm-6 list-inline">
+      <li class="list-inline-item"><a href="https://netzro.github.io/authors.html">Authors</a></li>
+    <li class="list-inline-item"><a href="https://netzro.github.io/archives.html">Archives</a></li>
+    <li class="list-inline-item"><a href="https://netzro.github.io/categories.html">Categories</a></li>
+      <li class="list-inline-item"><a href="https://netzro.github.io/tags.html">Tags</a></li>
+  </ul>
+  <p class="col-sm-6 text-sm-right text-muted">
+    Generated by <a href="https://github.com/getpelican/pelican" target="_blank">Pelican</a>
+    / <a href="https://github.com/nairobilug/pelican-alchemy" target="_blank">&#x2728;</a>
+  </p>
+</div>    </div>
+  </footer>
+
+</body>
+
 </html>

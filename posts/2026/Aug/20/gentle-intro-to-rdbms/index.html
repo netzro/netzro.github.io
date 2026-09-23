@@ -1,38 +1,81 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-  <head>
-        <title>Gifted Space - A Gentle Introduction to RDBMS</title>
-      <meta charset="utf-8" />
-      <meta name="generator" content="Pelican" />
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link href="https://netzro.github.io/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Gifted Space Full Atom Feed" />
-        <link href="https://netzro.github.io/feeds/misc.atom.xml" type="application/atom+xml" rel="alternate" title="Misc Category Atom Feed" />
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <title>  A Gentle Introduction to RDBMS | Gifted Space
+</title>
+  <link rel="canonical" href="https://netzro.github.io/posts/2026/Aug/20/gentle-intro-to-rdbms/index.html">
 
 
+  <link rel="stylesheet" href="https://netzro.github.io/theme/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://netzro.github.io/theme/css/fontawesome.min.css">
+  <link rel="stylesheet" href="https://netzro.github.io/theme/css/pygments/default.min.css">
+  <link rel="stylesheet" href="https://netzro.github.io/theme/css/theme.css">
+
+  <link rel="alternate" type="application/atom+xml" title="Full Atom Feed"
+        href="https://netzro.github.io/feeds/all.atom.xml">
+  <link rel="alternate" type="application/atom+xml" title="Categories Atom Feed"
+        href="https://netzro.github.io/feeds/misc.atom.xml">  
+  <meta name="description" content="A beginner-friendly walkthrough of Relational Database Management Systems: what they are, how they organize data, and core concepts to get started.">
+  <script>
+    (function(i, s, o, g, r, a, m) {
+      i['GoogleAnalyticsObject'] = r;
+      i[r] = i[r] || function() {
+        (i[r].q = i[r].q || []).push(arguments)
+      }, i[r].l = 1 * new Date();
+      a = s.createElement(o);
+      a.async = 1;
+      a.src = g;
+      m = s.getElementsByTagName(o)[0];
+      m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+    ga('create', 'G-VJD75C7TTC', 'auto');
+    ga('send', 'pageview');
+  </script>
 
 
-    <meta name="tags" content="rdbms" />
-    <meta name="tags" content="databases" />
-    <meta name="tags" content="sql" />
-    <meta name="tags" content="beginner" />
+</head>
 
-  </head>
+<body>
+  <header class="header">
+    <div class="container">
+<div class="row">
+  <div class="col-sm-12">
+    <h1 class="title"><a href="https://netzro.github.io/">Gifted Space</a></h1>
+  </div>
+</div>    </div>
+  </header>
 
-  <body>
-      <header>
-          <hgroup><h1><a href="https://netzro.github.io/">Gifted Space</a></h1></hgroup>
-          <nav><ul>
-          </ul></nav>
-      </header>
-      <main>
-  <article>
+  <div class="main">
+    <div class="container">
+      <h1>  A Gentle Introduction to RDBMS
+</h1>
+      <hr>
+  <article class="article">
     <header>
-      <h2>
-        <a href="https://netzro.github.io/posts/2026/Aug/20/gentle-intro-to-rdbms/" rel="bookmark"
-           title="Permalink to A Gentle Introduction to RDBMS">A Gentle Introduction to RDBMS</a></h2>
-      
+      <ul class="list-inline">
+        <li class="list-inline-item text-muted" title="2026-08-20T00:00:00+01:00">
+          <i class="fas fa-clock"></i>
+          Thu 20 August 2026
+        </li>
+        <li class="list-inline-item">
+          <i class="fas fa-folder-open"></i>
+          <a href="https://netzro.github.io/category/misc.html">misc</a>
+        </li>
+          <li class="list-inline-item">
+            <i class="fas fa-user"></i>
+              <a href="https://netzro.github.io/author/gifted.html">Gifted</a>          </li>
+          <li class="list-inline-item">
+            <i class="fas fa-tag"></i>
+              <a href="https://netzro.github.io/tag/rdbms.html">#rdbms</a>,               <a href="https://netzro.github.io/tag/databases.html">#databases</a>,               <a href="https://netzro.github.io/tag/sql.html">#sql</a>,               <a href="https://netzro.github.io/tag/beginner.html">#beginner</a>          </li>
+      </ul>
     </header>
-    <h2>A Gentle Introduction to RDBMS</h2>
+    <div class="content">
+      <h2>A Gentle Introduction to RDBMS</h2>
 <p>If you've ever wondered how apps like Twitter, your banking portal, or even this blog store and retrieve data efficiently, chances are they're using a <strong>Relational Database Management System (RDBMS)</strong>.</p>
 <h3>So, What Is an RDBMS?</h3>
 <p>At its core, an RDBMS is software that lets you create, manage, and interact with databases in a structured way. Think of it as a highly organized digital filing cabinet. Instead of tossing everything into one big drawer, an RDBMS keeps data in neat, labeled folders — called <strong>tables</strong>.</p>
@@ -97,31 +140,27 @@
 <p>The world of databases can feel vast, but it all starts with a single table. Take your time, ask questions, and soon enough, you'll be designing schemas and joining tables like a pro.</p>
 <hr>
 <p><em>Have you worked with an RDBMS before? Share your favorite tool or a tip for beginners in the comments.</em></p>
-    <footer>
-      <p>Published: <time datetime="2026-08-20T00:00:00+01:00">
-        Thu 20 August 2026
-      </time></p>
-        <address>
-          By             <a href="https://netzro.github.io/author/gifted.html">Gifted</a>
-        </address>
-        <p>
-          Category: <a href="https://netzro.github.io/category/misc.html">misc</a>
-        </p>
-        <p>
-          Tags:
-            <a href="https://netzro.github.io/tag/rdbms.html">rdbms</a>
-            <a href="https://netzro.github.io/tag/databases.html">databases</a>
-            <a href="https://netzro.github.io/tag/sql.html">sql</a>
-            <a href="https://netzro.github.io/tag/beginner.html">beginner</a>
-        </p>
-    </footer>
+    </div>
   </article>
-      </main>
-      <footer>
-          <address>
-            Proudly powered by <a rel="nofollow" href="https://getpelican.com/">Pelican</a>,
-            which takes great advantage of <a rel="nofollow" href="https://www.python.org/">Python</a>.
-          </address>
-      </footer>
-  </body>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="container">
+<div class="row">
+  <ul class="col-sm-6 list-inline">
+      <li class="list-inline-item"><a href="https://netzro.github.io/authors.html">Authors</a></li>
+    <li class="list-inline-item"><a href="https://netzro.github.io/archives.html">Archives</a></li>
+    <li class="list-inline-item"><a href="https://netzro.github.io/categories.html">Categories</a></li>
+      <li class="list-inline-item"><a href="https://netzro.github.io/tags.html">Tags</a></li>
+  </ul>
+  <p class="col-sm-6 text-sm-right text-muted">
+    Generated by <a href="https://github.com/getpelican/pelican" target="_blank">Pelican</a>
+    / <a href="https://github.com/nairobilug/pelican-alchemy" target="_blank">&#x2728;</a>
+  </p>
+</div>    </div>
+  </footer>
+
+</body>
+
 </html>

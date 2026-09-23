@@ -1,37 +1,81 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-  <head>
-        <title>Gifted Space - Functional Programming in Python</title>
-      <meta charset="utf-8" />
-      <meta name="generator" content="Pelican" />
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link href="https://netzro.github.io/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Gifted Space Full Atom Feed" />
-        <link href="https://netzro.github.io/feeds/programming.atom.xml" type="application/atom+xml" rel="alternate" title="Programming Category Atom Feed" />
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <title>  Functional Programming in Python | Gifted Space
+</title>
+  <link rel="canonical" href="https://netzro.github.io/posts/2026/Jun/11/functional-programming-in-python/index.html">
 
 
+  <link rel="stylesheet" href="https://netzro.github.io/theme/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://netzro.github.io/theme/css/fontawesome.min.css">
+  <link rel="stylesheet" href="https://netzro.github.io/theme/css/pygments/default.min.css">
+  <link rel="stylesheet" href="https://netzro.github.io/theme/css/theme.css">
+
+  <link rel="alternate" type="application/atom+xml" title="Full Atom Feed"
+        href="https://netzro.github.io/feeds/all.atom.xml">
+  <link rel="alternate" type="application/atom+xml" title="Categories Atom Feed"
+        href="https://netzro.github.io/feeds/programming.atom.xml">  
+  <meta name="description" content="Why functional programming in Python isn't about purity — it's about writing code that's easier to reason about, test, and compose.">
+  <script>
+    (function(i, s, o, g, r, a, m) {
+      i['GoogleAnalyticsObject'] = r;
+      i[r] = i[r] || function() {
+        (i[r].q = i[r].q || []).push(arguments)
+      }, i[r].l = 1 * new Date();
+      a = s.createElement(o);
+      a.async = 1;
+      a.src = g;
+      m = s.getElementsByTagName(o)[0];
+      m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+    ga('create', 'G-VJD75C7TTC', 'auto');
+    ga('send', 'pageview');
+  </script>
 
 
-    <meta name="tags" content="python" />
-    <meta name="tags" content="functional programming" />
-    <meta name="tags" content="programming" />
+</head>
 
-  </head>
+<body>
+  <header class="header">
+    <div class="container">
+<div class="row">
+  <div class="col-sm-12">
+    <h1 class="title"><a href="https://netzro.github.io/">Gifted Space</a></h1>
+  </div>
+</div>    </div>
+  </header>
 
-  <body>
-      <header>
-          <hgroup><h1><a href="https://netzro.github.io/">Gifted Space</a></h1></hgroup>
-          <nav><ul>
-          </ul></nav>
-      </header>
-      <main>
-  <article>
+  <div class="main">
+    <div class="container">
+      <h1>  Functional Programming in Python
+</h1>
+      <hr>
+  <article class="article">
     <header>
-      <h2>
-        <a href="https://netzro.github.io/posts/2026/Jun/11/functional-programming-in-python/" rel="bookmark"
-           title="Permalink to Functional Programming in Python">Functional Programming in Python</a></h2>
-      
+      <ul class="list-inline">
+        <li class="list-inline-item text-muted" title="2026-06-11T00:00:00+01:00">
+          <i class="fas fa-clock"></i>
+          Thu 11 June 2026
+        </li>
+        <li class="list-inline-item">
+          <i class="fas fa-folder-open"></i>
+          <a href="https://netzro.github.io/category/programming.html">Programming</a>
+        </li>
+          <li class="list-inline-item">
+            <i class="fas fa-user"></i>
+              <a href="https://netzro.github.io/author/gifted.html">Gifted</a>          </li>
+          <li class="list-inline-item">
+            <i class="fas fa-tag"></i>
+              <a href="https://netzro.github.io/tag/python.html">#python</a>,               <a href="https://netzro.github.io/tag/functional-programming.html">#functional programming</a>,               <a href="https://netzro.github.io/tag/programming.html">#programming</a>          </li>
+      </ul>
     </header>
-    <hr>
+    <div class="content">
+      <hr>
 <p>I've been writing Python for years, and for most of that time I ignored functional programming. It felt like an academic exercise — something Haskell people cared about, not me. Then I started writing code that was hard to test, hard to debug, and hard to change. That's when functional programming stopped being academic and started being practical.</p>
 <h2>What Functional Programming Actually Means in Python</h2>
 <p>Let's kill the biggest misconception first: functional programming in Python doesn't mean you need to be pure. You don't need monads. You don't need to eliminate every side effect. You just need to prefer functions that take input and return output without quietly mutating things behind your back.</p>
@@ -137,30 +181,27 @@
 <p>The biggest shift wasn't learning new functions. It was changing how I think about data. Instead of "how do I modify this until it looks right," I now ask "what transformation turns this input into the output I need?" That question alone has made my code more testable and less buggy.</p>
 <p>Start small. Replace one loop with a comprehension. Stop mutating arguments. Pass functions as values. You don't need to rewrite everything — just reach for the functional tool when the imperative one feels clumsy.</p>
 <p>Python won't enforce functional purity for you. But the language gives you everything you need to write code that's functional where it matters. The rest is just discipline.</p>
-    <footer>
-      <p>Published: <time datetime="2026-06-11T00:00:00+01:00">
-        Thu 11 June 2026
-      </time></p>
-        <address>
-          By             <a href="https://netzro.github.io/author/gifted.html">Gifted</a>
-        </address>
-        <p>
-          Category: <a href="https://netzro.github.io/category/programming.html">Programming</a>
-        </p>
-        <p>
-          Tags:
-            <a href="https://netzro.github.io/tag/python.html">python</a>
-            <a href="https://netzro.github.io/tag/functional-programming.html">functional programming</a>
-            <a href="https://netzro.github.io/tag/programming.html">programming</a>
-        </p>
-    </footer>
+    </div>
   </article>
-      </main>
-      <footer>
-          <address>
-            Proudly powered by <a rel="nofollow" href="https://getpelican.com/">Pelican</a>,
-            which takes great advantage of <a rel="nofollow" href="https://www.python.org/">Python</a>.
-          </address>
-      </footer>
-  </body>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="container">
+<div class="row">
+  <ul class="col-sm-6 list-inline">
+      <li class="list-inline-item"><a href="https://netzro.github.io/authors.html">Authors</a></li>
+    <li class="list-inline-item"><a href="https://netzro.github.io/archives.html">Archives</a></li>
+    <li class="list-inline-item"><a href="https://netzro.github.io/categories.html">Categories</a></li>
+      <li class="list-inline-item"><a href="https://netzro.github.io/tags.html">Tags</a></li>
+  </ul>
+  <p class="col-sm-6 text-sm-right text-muted">
+    Generated by <a href="https://github.com/getpelican/pelican" target="_blank">Pelican</a>
+    / <a href="https://github.com/nairobilug/pelican-alchemy" target="_blank">&#x2728;</a>
+  </p>
+</div>    </div>
+  </footer>
+
+</body>
+
 </html>

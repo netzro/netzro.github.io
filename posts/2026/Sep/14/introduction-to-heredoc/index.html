@@ -1,38 +1,81 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-  <head>
-        <title>Gifted Space - Introduction to Heredoc</title>
-      <meta charset="utf-8" />
-      <meta name="generator" content="Pelican" />
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link href="https://netzro.github.io/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Gifted Space Full Atom Feed" />
-        <link href="https://netzro.github.io/feeds/misc.atom.xml" type="application/atom+xml" rel="alternate" title="Misc Category Atom Feed" />
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <title>  Introduction to Heredoc | Gifted Space
+</title>
+  <link rel="canonical" href="https://netzro.github.io/posts/2026/Sep/14/introduction-to-heredoc/index.html">
 
 
+  <link rel="stylesheet" href="https://netzro.github.io/theme/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://netzro.github.io/theme/css/fontawesome.min.css">
+  <link rel="stylesheet" href="https://netzro.github.io/theme/css/pygments/default.min.css">
+  <link rel="stylesheet" href="https://netzro.github.io/theme/css/theme.css">
+
+  <link rel="alternate" type="application/atom+xml" title="Full Atom Feed"
+        href="https://netzro.github.io/feeds/all.atom.xml">
+  <link rel="alternate" type="application/atom+xml" title="Categories Atom Feed"
+        href="https://netzro.github.io/feeds/misc.atom.xml">  
+  <meta name="description" content="Learn the basics of heredoc and nowdoc in Bash and Python — syntax, differences, and common use cases.">
+  <script>
+    (function(i, s, o, g, r, a, m) {
+      i['GoogleAnalyticsObject'] = r;
+      i[r] = i[r] || function() {
+        (i[r].q = i[r].q || []).push(arguments)
+      }, i[r].l = 1 * new Date();
+      a = s.createElement(o);
+      a.async = 1;
+      a.src = g;
+      m = s.getElementsByTagName(o)[0];
+      m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+    ga('create', 'G-VJD75C7TTC', 'auto');
+    ga('send', 'pageview');
+  </script>
 
 
-    <meta name="tags" content="bash" />
-    <meta name="tags" content="python" />
-    <meta name="tags" content="programming" />
-    <meta name="tags" content="tutorial" />
+</head>
 
-  </head>
+<body>
+  <header class="header">
+    <div class="container">
+<div class="row">
+  <div class="col-sm-12">
+    <h1 class="title"><a href="https://netzro.github.io/">Gifted Space</a></h1>
+  </div>
+</div>    </div>
+  </header>
 
-  <body>
-      <header>
-          <hgroup><h1><a href="https://netzro.github.io/">Gifted Space</a></h1></hgroup>
-          <nav><ul>
-          </ul></nav>
-      </header>
-      <main>
-  <article>
+  <div class="main">
+    <div class="container">
+      <h1>  Introduction to Heredoc
+</h1>
+      <hr>
+  <article class="article">
     <header>
-      <h2>
-        <a href="https://netzro.github.io/posts/2026/Sep/14/introduction-to-heredoc/" rel="bookmark"
-           title="Permalink to Introduction to Heredoc">Introduction to Heredoc</a></h2>
-      
+      <ul class="list-inline">
+        <li class="list-inline-item text-muted" title="2026-09-14T00:00:00+01:00">
+          <i class="fas fa-clock"></i>
+          Mon 14 September 2026
+        </li>
+        <li class="list-inline-item">
+          <i class="fas fa-folder-open"></i>
+          <a href="https://netzro.github.io/category/misc.html">misc</a>
+        </li>
+          <li class="list-inline-item">
+            <i class="fas fa-user"></i>
+              <a href="https://netzro.github.io/author/gifted.html">Gifted</a>          </li>
+          <li class="list-inline-item">
+            <i class="fas fa-tag"></i>
+              <a href="https://netzro.github.io/tag/bash.html">#bash</a>,               <a href="https://netzro.github.io/tag/python.html">#python</a>,               <a href="https://netzro.github.io/tag/programming.html">#programming</a>,               <a href="https://netzro.github.io/tag/tutorial.html">#tutorial</a>          </li>
+      </ul>
     </header>
-    <h1>Introduction to Heredoc</h1>
+    <div class="content">
+      <h1>Introduction to Heredoc</h1>
 <p>Heredoc is a way to pass multi-line input to a command or language without fussing over escaping or newline characters. It's one of those quiet tools that saves you a surprising amount of time once you understand the mechanics.</p>
 <p>I'll cover the basics of heredoc, the distinction between heredoc and nowdoc, where they shine in practice, and how they work in Bash and Python.</p>
 <h2>The basic idea</h2>
@@ -134,31 +177,27 @@ cat<span class="w"> </span><span class="s">&lt;&lt; &#39;EOF&#39;</span>
 <p>Use heredoc when the text you're passing is long enough that inline quotes become unwieldy, or when the content itself contains quotes, newlines, or special characters that would be painful to escape.</p>
 <p>If the text is short and simple, a quoted string is still cleaner. Heredoc is a tool, not a default — but when the situation calls for it, nothing else feels as natural.</p>
 <p>I reach for it constantly in scripts that generate configs, seed databases, or compose structured text. Once you internalize the syntax, you'll spot the use cases everywhere.</p>
-    <footer>
-      <p>Published: <time datetime="2026-09-14T00:00:00+01:00">
-        Mon 14 September 2026
-      </time></p>
-        <address>
-          By             <a href="https://netzro.github.io/author/gifted.html">Gifted</a>
-        </address>
-        <p>
-          Category: <a href="https://netzro.github.io/category/misc.html">misc</a>
-        </p>
-        <p>
-          Tags:
-            <a href="https://netzro.github.io/tag/bash.html">bash</a>
-            <a href="https://netzro.github.io/tag/python.html">python</a>
-            <a href="https://netzro.github.io/tag/programming.html">programming</a>
-            <a href="https://netzro.github.io/tag/tutorial.html">tutorial</a>
-        </p>
-    </footer>
+    </div>
   </article>
-      </main>
-      <footer>
-          <address>
-            Proudly powered by <a rel="nofollow" href="https://getpelican.com/">Pelican</a>,
-            which takes great advantage of <a rel="nofollow" href="https://www.python.org/">Python</a>.
-          </address>
-      </footer>
-  </body>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="container">
+<div class="row">
+  <ul class="col-sm-6 list-inline">
+      <li class="list-inline-item"><a href="https://netzro.github.io/authors.html">Authors</a></li>
+    <li class="list-inline-item"><a href="https://netzro.github.io/archives.html">Archives</a></li>
+    <li class="list-inline-item"><a href="https://netzro.github.io/categories.html">Categories</a></li>
+      <li class="list-inline-item"><a href="https://netzro.github.io/tags.html">Tags</a></li>
+  </ul>
+  <p class="col-sm-6 text-sm-right text-muted">
+    Generated by <a href="https://github.com/getpelican/pelican" target="_blank">Pelican</a>
+    / <a href="https://github.com/nairobilug/pelican-alchemy" target="_blank">&#x2728;</a>
+  </p>
+</div>    </div>
+  </footer>
+
+</body>
+
 </html>
