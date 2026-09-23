@@ -5,11 +5,26 @@ Status: hidden
 ---
 
 # Movies
-_Updated as I watch. Last update: 14th September 2026._
+_Updated as I watch. Last update: 23rd September 2026._
 
 ### Watchlist
 
 <details markdown='1'><summary>September 2026</summary>
+
+![](https://netzro.github.io/images/posters/oxygen-1999.jpg) **Oxygen (1999)**
+_Watched on_ - 23rd September 2026
+
+![](https://netzro.github.io/images/posters/avengers-age-of-ultron-2015.jpg) **Avengers: Age of Ultron (2015)**  *rewatched*
+_Watched on_ - 21st September 2026
+
+![](https://netzro.github.io/images/posters/mayday-2026.jpg) **Mayday (2026)**
+_Watched on_ - 18th September 2026
+
+![](https://netzro.github.io/images/posters/end-of-oak-street-2026.jpg) **The End of Oak Street (2026)**
+_Watched on_ - 18th September 2026
+
+![](https://netzro.github.io/images/posters/just-play-dead-2026.jpg) **Just Play Dead (2026)**
+_Watched on_ - 16th September 2026
 
 ![](https://netzro.github.io/images/posters/the-skeleton-key-2005.jpg) **The Skeleton Key (2005)**
 _Watched on_ - 14th September 2026

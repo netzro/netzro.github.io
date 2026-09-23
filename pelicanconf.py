@@ -25,7 +25,7 @@ PAGE_URL = 'pages/{slug}/'
 PAGE_SAVE_AS = 'pages/{slug}/index.html'
 
 COPYRIGHT = '©2026 - Gifted'
-THEME = 'theme/Papyrus'
+THEME = 'theme/Alchemy'
 THEME_STATIC_PATHS = ['static']
 STATIC_PATHS = ['images', 'extra']
 
