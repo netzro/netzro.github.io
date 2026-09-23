@@ -6,7 +6,6 @@ Tags: linux, filesystem, tutorial
 Slug: understanding-linux-file-system-part-1-structure-walkthrough
 Summary: A hands-on walkthrough of the Linux filesystem hierarchy — what lives where, why it matters, and how to explore it yourself.
 
-# Understanding the Linux File System — Part 1: Structure Walkthrough
 
 Linux keeps everything under one root — `/`. No drive letters, no `C:` or `D:`. Every storage device, every file, every configuration lives somewhere under this single tree. Once you get the layout, navigating any Linux system feels obvious.
 
