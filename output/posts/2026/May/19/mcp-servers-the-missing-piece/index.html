@@ -1,37 +1,81 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-  <head>
-        <title>Gifted Space - MCP Servers: The Missing Piece in AI Agent Development</title>
-      <meta charset="utf-8" />
-      <meta name="generator" content="Pelican" />
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link href="https://netzro.github.io/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Gifted Space Full Atom Feed" />
-        <link href="https://netzro.github.io/feeds/tech.atom.xml" type="application/atom+xml" rel="alternate" title="Tech Category Atom Feed" />
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <title>  MCP Servers: The Missing Piece in AI Agent Development | Gifted Space
+</title>
+  <link rel="canonical" href="https://netzro.github.io/posts/2026/May/19/mcp-servers-the-missing-piece/index.html">
 
 
+  <link rel="stylesheet" href="https://netzro.github.io/theme/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://netzro.github.io/theme/css/fontawesome.min.css">
+  <link rel="stylesheet" href="https://netzro.github.io/theme/css/pygments/default.min.css">
+  <link rel="stylesheet" href="https://netzro.github.io/theme/css/theme.css">
+
+  <link rel="alternate" type="application/atom+xml" title="Full Atom Feed"
+        href="https://netzro.github.io/feeds/all.atom.xml">
+  <link rel="alternate" type="application/atom+xml" title="Categories Atom Feed"
+        href="https://netzro.github.io/feeds/tech.atom.xml">  
+  <meta name="description" content="What MCP servers are, why they matter, and how I use them to extend my AI agents.">
+  <script>
+    (function(i, s, o, g, r, a, m) {
+      i['GoogleAnalyticsObject'] = r;
+      i[r] = i[r] || function() {
+        (i[r].q = i[r].q || []).push(arguments)
+      }, i[r].l = 1 * new Date();
+      a = s.createElement(o);
+      a.async = 1;
+      a.src = g;
+      m = s.getElementsByTagName(o)[0];
+      m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+    ga('create', 'G-VJD75C7TTC', 'auto');
+    ga('send', 'pageview');
+  </script>
 
 
-    <meta name="tags" content="ai" />
-    <meta name="tags" content="python" />
-    <meta name="tags" content="technology" />
+</head>
 
-  </head>
+<body>
+  <header class="header">
+    <div class="container">
+<div class="row">
+  <div class="col-sm-12">
+    <h1 class="title"><a href="https://netzro.github.io/">Gifted Space</a></h1>
+  </div>
+</div>    </div>
+  </header>
 
-  <body>
-      <header>
-          <hgroup><h1><a href="https://netzro.github.io/">Gifted Space</a></h1></hgroup>
-          <nav><ul>
-          </ul></nav>
-      </header>
-      <main>
-  <article>
+  <div class="main">
+    <div class="container">
+      <h1>  MCP Servers: The Missing Piece in AI Agent Development
+</h1>
+      <hr>
+  <article class="article">
     <header>
-      <h2>
-        <a href="https://netzro.github.io/posts/2026/May/19/mcp-servers-the-missing-piece/" rel="bookmark"
-           title="Permalink to MCP Servers: The Missing Piece in AI Agent Development">MCP Servers: The Missing Piece in AI Agent Development</a></h2>
-      
+      <ul class="list-inline">
+        <li class="list-inline-item text-muted" title="2026-05-19T00:00:00+01:00">
+          <i class="fas fa-clock"></i>
+          Tue 19 May 2026
+        </li>
+        <li class="list-inline-item">
+          <i class="fas fa-folder-open"></i>
+          <a href="https://netzro.github.io/category/tech.html">Tech</a>
+        </li>
+          <li class="list-inline-item">
+            <i class="fas fa-user"></i>
+              <a href="https://netzro.github.io/author/gifted.html">Gifted</a>          </li>
+          <li class="list-inline-item">
+            <i class="fas fa-tag"></i>
+              <a href="https://netzro.github.io/tag/ai.html">#ai</a>,               <a href="https://netzro.github.io/tag/python.html">#python</a>,               <a href="https://netzro.github.io/tag/technology.html">#technology</a>          </li>
+      </ul>
     </header>
-    <p>If you've been building AI agents for any length of time, you've probably hit the same wall I did — the model is smart, but it can't actually <em>do</em> anything without you wiring up every tool by hand. That's where MCP servers changed everything for me.</p>
+    <div class="content">
+      <p>If you've been building AI agents for any length of time, you've probably hit the same wall I did — the model is smart, but it can't actually <em>do</em> anything without you wiring up every tool by hand. That's where MCP servers changed everything for me.</p>
 <h2>What Is MCP?</h2>
 <p>MCP stands for Model Context Protocol. It's an open standard that defines how AI models communicate with external tools and services. Think of it as a universal plug — instead of building a custom integration every time you want your agent to talk to a new service, you build one MCP server and any compliant agent can use it.</p>
 <p>The architecture is simple. An MCP server exposes a list of tools — functions with names, descriptions, and typed parameters. The agent discovers these tools at startup, and when it decides to use one, it sends a structured JSON call. The server executes the logic and returns a result. That's the entire contract.</p>
@@ -97,30 +141,27 @@
 <p>The protocol is still young. Right now MCP is primarily stdio-based, which means each server is a subprocess. HTTP transport is coming and will open up remote servers, shared tool registries, and proper multi-agent architectures where agents expose tools to each other.</p>
 <p>For now though, stdio is more than enough. My agent wakes up, connects to seven servers, loads over 100 tools, and is ready to manage my portfolio, check my inbox, and publish blog posts — all from a phone running Debian in Termux.</p>
 <p>That's the thing about MCP. It's not glamorous infrastructure. It's just a clean protocol that lets your agent actually touch the world.</p>
-    <footer>
-      <p>Published: <time datetime="2026-05-19T00:00:00+01:00">
-        Tue 19 May 2026
-      </time></p>
-        <address>
-          By             <a href="https://netzro.github.io/author/gifted.html">Gifted</a>
-        </address>
-        <p>
-          Category: <a href="https://netzro.github.io/category/tech.html">Tech</a>
-        </p>
-        <p>
-          Tags:
-            <a href="https://netzro.github.io/tag/ai.html">ai</a>
-            <a href="https://netzro.github.io/tag/python.html">python</a>
-            <a href="https://netzro.github.io/tag/technology.html">technology</a>
-        </p>
-    </footer>
+    </div>
   </article>
-      </main>
-      <footer>
-          <address>
-            Proudly powered by <a rel="nofollow" href="https://getpelican.com/">Pelican</a>,
-            which takes great advantage of <a rel="nofollow" href="https://www.python.org/">Python</a>.
-          </address>
-      </footer>
-  </body>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="container">
+<div class="row">
+  <ul class="col-sm-6 list-inline">
+      <li class="list-inline-item"><a href="https://netzro.github.io/authors.html">Authors</a></li>
+    <li class="list-inline-item"><a href="https://netzro.github.io/archives.html">Archives</a></li>
+    <li class="list-inline-item"><a href="https://netzro.github.io/categories.html">Categories</a></li>
+      <li class="list-inline-item"><a href="https://netzro.github.io/tags.html">Tags</a></li>
+  </ul>
+  <p class="col-sm-6 text-sm-right text-muted">
+    Generated by <a href="https://github.com/getpelican/pelican" target="_blank">Pelican</a>
+    / <a href="https://github.com/nairobilug/pelican-alchemy" target="_blank">&#x2728;</a>
+  </p>
+</div>    </div>
+  </footer>
+
+</body>
+
 </html>
