@@ -15,7 +15,7 @@ I do not own a laptop. Everything runs from a Samsung A05 through Termux.
 ### Core Stack
 - **Termux** — Linux terminal emulator, the foundation of everything
 - **proot-distro** — runs a full Debian environment without root
-- **uv** — Python package management with UV_LINK_MODE=copy
+- **pip3** — Python package management (uv broken on Termux)
 - **Git + SSH** — version control and GitHub access
 - **loguru** — structured logging across all my Python tools
 
