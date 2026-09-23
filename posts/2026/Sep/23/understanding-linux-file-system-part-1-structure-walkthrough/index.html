@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content="Pelican" />
+    <meta name="google-site-verification" content="A4y8JqsFj7oLMg1M1My15A25RDFuP-S1Y2Waa7Mw50s" />
+    <link rel="canonical" href="https://netzro.github.io/posts/2026/Sep/23/understanding-linux-file-system-part-1-structure-walkthrough/" />
+    <title>Understanding the Linux File System — Part 1: Structure Walkthrough</title>
+    <meta name="description" content="A hands-on walkthrough of the Linux filesystem hierarchy — what lives where, why it matters, and how to explore it yourself." />
+    <!-- Open Graph -->
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="Gifted Space" />
+    <meta property="og:title" content="Understanding the Linux File System — Part 1: Structure Walkthrough" />
+    <meta property="og:description" content="A hands-on walkthrough of the Linux filesystem hierarchy — what lives where, why it matters, and how to explore it yourself." />
+    <meta property="og:url" content="https://netzro.github.io/posts/2026/Sep/23/understanding-linux-file-system-part-1-structure-walkthrough/" />
+    <link rel="stylesheet" type="text/css" href="https://netzro.github.io/theme/css/mac-classic.css" />
+    <link rel="icon" href="https://netzro.github.io/images/favicon.ico" type="image/x-icon" />
+    <link href="https://netzro.github.io/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Gifted Space Atom Feed" />
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-VJD75C7TTC"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-VJD75C7TTC');
+</script>
+<meta name="description" content="A hands-on walkthrough of the Linux filesystem hierarchy — what lives where, why it matters, and how to explore it yourself." />
+    <script>
+        if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark')
+        }
+    </script>
+</head>
+<body>
+    <div class="mac-window">
+        <div class="mac-window__outer">
+            <div class="mac-window__inner">
+                <!-- Title Bar -->
+                <div class="mac-title-bar">
+                    <div class="mac-title-bar__grill">
+                        <div class="mac-title-bar__grill-line"></div>
+                        <div class="mac-title-bar__grill-line"></div>
+                        <div class="mac-title-bar__grill-line"></div>
+                        <div class="mac-title-bar__grill-line"></div>
+                        <div class="mac-title-bar__grill-line"></div>
+                        <div class="mac-title-bar__grill-line"></div>
+                    </div>
+                    <div class="mac-title-bar__title">Gifted Space</div>
+                </div>
+
+                <!-- Content -->
+                <div class="mac-content">
+                    <!-- Navigation -->
+                    <nav class="mac-nav">
+                        <ul class="mac-nav__list">
+                            <li class="mac-nav__item ">
+                                <a class="mac-nav__link" href="https://netzro.github.io/">Home</a>
+                            </li>
+                            <li class="mac-nav__item ">
+                                <a class="mac-nav__link" href="https://netzro.github.io/pages/about/">About</a>
+                            </li>
+                            <li class="mac-nav__item ">
+                                <a class="mac-nav__link" href="https://netzro.github.io/pages/projects/">Projects</a>
+                            </li>
+                            <li class="mac-nav__item ">
+                                <a class="mac-nav__link" href="https://netzro.github.io/pages/blogroll/">Blogroll</a>
+                            </li>
+                            <li class="mac-nav__item ">
+                                <a class="mac-nav__link" href="https://netzro.github.io/pages/reading-list/">Reading</a>
+                            </li>
+                            <li class="mac-nav__item ">
+                                <a class="mac-nav__link" href="https://netzro.github.io/pages/uses/">Uses</a>
+                            </li>
+                            <li class="mac-nav__item ">
+                                <a class="mac-nav__link" href="https://netzro.github.io/pages/movies/">Movies</a>
+                            </li>
+                            <li class="mac-nav__item ">
+                                <a class="mac-nav__link" href="https://netzro.github.io/pages/music/">Music</a>
+                            </li>
+                            <li class="mac-nav__item ">
+                                <a class="mac-nav__link" href="https://netzro.github.io/archives.html">Archive</a>
+                            </li>
+                            <li class="mac-nav__item ">
+                                <a class="mac-nav__link" href="https://netzro.github.io/tags.html">Tags</a>
+                            </li>
+                        </ul>
+                    </nav>
+
+                    <!-- Main Content -->
+                    <div class="mac-content__inner">
+<article class="mac-article">
+    <header class="mac-article__header">
+        <h1 class="mac-article__title">Understanding the Linux File System — Part 1: Structure Walkthrough</h1>
+        <div class="mac-article__meta">
+            <time>September 23, 2026</time>
+&nbsp;&middot;&nbsp;Gifted        </div>
+    </header>
+
+
+    <div class="mac-article__content">
+        <h1>Understanding the Linux File System — Part 1: Structure Walkthrough</h1>
+<p>Linux keeps everything under one root — <code>/</code>. No drive letters, no <code>C:</code> or <code>D:</code>. Every storage device, every file, every configuration lives somewhere under this single tree. Once you get the layout, navigating any Linux system feels obvious.</p>
+<h2>The Root Directory <code>/</code></h2>
+<p>Everything starts here. <code>/</code> is not your home directory — it's the top of the entire filesystem. Disks, partitions, and virtual filesystems all branch off from here.</p>
+<div class="highlight"><pre><span></span><code>ls<span class="w"> </span>/
+</code></pre></div>
+
+<p>You'll see the standard directories that make up the Filesystem Hierarchy Standard (FHS). Each one below.</p>
+<h2><code>/bin</code> — Essential User Commands</h2>
+<p>Binaries every user needs, even in single-user mode. <code>ls</code>, <code>cp</code>, <code>mv</code>, <code>cat</code>, <code>grep</code>, <code>bash</code> — all here. Statically linked or depending only on <code>/lib</code>, so they work even if other filesystems aren't mounted.</p>
+<div class="highlight"><pre><span></span><code>ls<span class="w"> </span>/bin<span class="w"> </span><span class="p">|</span><span class="w"> </span>head<span class="w"> </span>-20
+<span class="c1"># cat /bin/bash     # don&#39;t do this, it&#39;s binary</span>
+</code></pre></div>
+
+<h2><code>/etc</code> — Configuration</h2>
+<p>"Et cetera" — and that's roughly what lives here. Network settings (<code>/etc/network/</code>), user accounts (<code>/etc/passwd</code>, <code>/etc/shadow</code>), cron jobs (<code>/etc/crontab</code>), hostname (<code>/etc/hostname</code>).</p>
+<div class="highlight"><pre><span></span><code>cat<span class="w"> </span>/etc/hostname
+cat<span class="w"> </span>/etc/passwd<span class="w"> </span><span class="p">|</span><span class="w"> </span>head<span class="w"> </span>-5
+</code></pre></div>
+
+<blockquote>
+<p>⚠️ <code>/etc/passwd</code> is world-readable. Password hashes live in <code>/etc/shadow</code>, root-only. I still get nervous <code>cat</code>-ing it on production boxes.</p>
+</blockquote>
+<h2><code>/home</code> — User Directories</h2>
+<p>Each non-root user gets a folder here: <code>/home/gifted</code>, <code>/home/alice</code>, etc. Personal files, dotfiles (<code>.bashrc</code>, <code>.vimrc</code>), local configs. Backing up <code>/home</code> is the #1 rule — it's the only part most users care about. I learned this the hard way.</p>
+<div class="highlight"><pre><span></span><code>ls<span class="w"> </span>/home
+du<span class="w"> </span>-sh<span class="w"> </span>/home/*<span class="w">     </span><span class="c1"># disk usage per user</span>
+</code></pre></div>
+
+<h2><code>/var</code> — Variable Data</h2>
+<p>Things that grow: logs (<code>/var/log/</code>), mail queues (<code>/var/mail/</code>), package caches (<code>/var/cache/</code>), www roots (<code>/var/www/</code>). Disk full? Check <code>/var/log</code> first — syslog silently eats gigabytes. Happened to me more times than I'd like to admit.</p>
+<div class="highlight"><pre><span></span><code>du<span class="w"> </span>-sh<span class="w"> </span>/var/log/*<span class="w"> </span><span class="p">|</span><span class="w"> </span>sort<span class="w"> </span>-h<span class="w"> </span><span class="p">|</span><span class="w"> </span>tail<span class="w"> </span>-10
+journalctl<span class="w"> </span>--disk-usage<span class="w">    </span><span class="c1"># systemd log size</span>
+</code></pre></div>
+
+<h2><code>/proc</code> — Process &amp; Kernel Info</h2>
+<p>Not a real filesystem — virtual, maintained by the kernel. Each process gets a numeric directory: <code>/proc/1234/</code> holds status, open files, memory map, cmdline.</p>
+<div class="highlight"><pre><span></span><code>ls<span class="w"> </span>/proc<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span><span class="s1">&#39;^[0-9]&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>head<span class="w"> </span>-10<span class="w">   </span><span class="c1"># list PIDs</span>
+cat<span class="w"> </span>/proc/1/cmdline<span class="w">                   </span><span class="c1"># PID 1&#39;s command</span>
+cat<span class="w"> </span>/proc/meminfo<span class="w">                     </span><span class="c1"># memory stats</span>
+cat<span class="w"> </span>/proc/cpuinfo<span class="w">                     </span><span class="c1"># CPU details</span>
+</code></pre></div>
+
+<h2><code>/sys</code> — Device &amp; Kernel Parameters</h2>
+<p>Also virtual. Kernel data about hardware: USB devices, block devices, power management. A device tree you can browse.</p>
+<div class="highlight"><pre><span></span><code>ls<span class="w"> </span>/sys/block/<span class="w">          </span><span class="c1"># block devices</span>
+ls<span class="w"> </span>/sys/class/net/<span class="w">      </span><span class="c1"># network interfaces</span>
+cat<span class="w"> </span>/sys/class/net/eth0/address<span class="w">   </span><span class="c1"># MAC address</span>
+</code></pre></div>
+
+<h2><code>/dev</code> — Device Files</h2>
+<p>Everything is a file — including hardware. <code>/dev/sda</code> is your first disk, <code>/dev/tty</code> is your terminal, <code>/dev/urandom</code> gives random bytes, <code>/dev/null</code> discards anything written to it.</p>
+<div class="highlight"><pre><span></span><code>ls<span class="w"> </span>/dev/sd*<span class="w">            </span><span class="c1"># storage devices</span>
+ls<span class="w"> </span>/dev/tty*<span class="w">           </span><span class="c1"># terminals</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;hello&quot;</span><span class="w"> </span>&gt;<span class="w"> </span>/dev/null<span class="w">   </span><span class="c1"># silently discards</span>
+</code></pre></div>
+
+<h2>The Big Picture</h2>
+<div class="highlight"><pre><span></span><code><span class="o">/</span>
+<span class="err">├──</span><span class="w"> </span><span class="n">bin</span><span class="o">/</span><span class="w">          </span><span class="err">→</span><span class="w"> </span><span class="n">essential</span><span class="w"> </span><span class="n">commands</span>
+<span class="err">├──</span><span class="w"> </span><span class="n">etc</span><span class="o">/</span><span class="w">          </span><span class="err">→</span><span class="w"> </span><span class="n">system</span><span class="w"> </span><span class="n">config</span>
+<span class="err">├──</span><span class="w"> </span><span class="n">home</span><span class="o">/</span><span class="w">         </span><span class="err">→</span><span class="w"> </span><span class="n">user</span><span class="w"> </span><span class="n">data</span>
+<span class="err">├──</span><span class="w"> </span><span class="k">var</span><span class="o">/</span><span class="w">          </span><span class="err">→</span><span class="w"> </span><span class="n">logs</span><span class="p">,</span><span class="w"> </span><span class="n">caches</span><span class="p">,</span><span class="w"> </span><span class="n">queues</span>
+<span class="err">├──</span><span class="w"> </span><span class="n">proc</span><span class="o">/</span><span class="w">         </span><span class="err">→</span><span class="w"> </span><span class="n">process</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">kernel</span><span class="w"> </span><span class="n">info</span><span class="w"> </span><span class="p">(</span><span class="n">virtual</span><span class="p">)</span>
+<span class="err">├──</span><span class="w"> </span><span class="n">sys</span><span class="o">/</span><span class="w">          </span><span class="err">→</span><span class="w"> </span><span class="n">device</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">hardware</span><span class="w"> </span><span class="n">info</span><span class="w"> </span><span class="p">(</span><span class="n">virtual</span><span class="p">)</span>
+<span class="err">├──</span><span class="w"> </span><span class="n">dev</span><span class="o">/</span><span class="w">          </span><span class="err">→</span><span class="w"> </span><span class="n">device</span><span class="w"> </span><span class="n">files</span>
+<span class="err">├──</span><span class="w"> </span><span class="n">tmp</span><span class="o">/</span><span class="w">          </span><span class="err">→</span><span class="w"> </span><span class="n">temporary</span><span class="w"> </span><span class="n">files</span><span class="w"> </span><span class="p">(</span><span class="n">cleared</span><span class="w"> </span><span class="n">on</span><span class="w"> </span><span class="n">reboot</span><span class="p">)</span>
+<span class="err">├──</span><span class="w"> </span><span class="n">usr</span><span class="o">/</span><span class="w">          </span><span class="err">→</span><span class="w"> </span><span class="n">installed</span><span class="w"> </span><span class="n">software</span><span class="p">,</span><span class="w"> </span><span class="n">libraries</span><span class="p">,</span><span class="w"> </span><span class="n">docs</span>
+<span class="err">├──</span><span class="w"> </span><span class="n">opt</span><span class="o">/</span><span class="w">          </span><span class="err">→</span><span class="w"> </span><span class="n">optional</span><span class="w"> </span><span class="n">third</span><span class="o">-</span><span class="n">party</span><span class="w"> </span><span class="n">software</span>
+<span class="err">├──</span><span class="w"> </span><span class="n">boot</span><span class="o">/</span><span class="w">         </span><span class="err">→</span><span class="w"> </span><span class="n">kernel</span><span class="p">,</span><span class="w"> </span><span class="n">initramfs</span><span class="p">,</span><span class="w"> </span><span class="n">bootloader</span>
+<span class="err">├──</span><span class="w"> </span><span class="n">lib</span><span class="o">/</span><span class="w">          </span><span class="err">→</span><span class="w"> </span><span class="n">shared</span><span class="w"> </span><span class="n">libraries</span>
+<span class="err">├──</span><span class="w"> </span><span class="n">sbin</span><span class="o">/</span><span class="w">         </span><span class="err">→</span><span class="w"> </span><span class="n">admin</span><span class="w"> </span><span class="n">binaries</span><span class="w"> </span><span class="p">(</span><span class="n">root</span><span class="o">-</span><span class="n">only</span><span class="p">)</span>
+<span class="err">├──</span><span class="w"> </span><span class="n">root</span><span class="o">/</span><span class="w">         </span><span class="err">→</span><span class="w"> </span><span class="n">root</span><span class="w"> </span><span class="n">user</span><span class="s1">&#39;s home</span>
+<span class="err">├──</span><span class="w"> </span><span class="n">run</span><span class="o">/</span><span class="w">          </span><span class="err">→</span><span class="w"> </span><span class="n">runtime</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="p">(</span><span class="n">PIDs</span><span class="p">,</span><span class="w"> </span><span class="n">sockets</span><span class="p">)</span>
+<span class="err">└──</span><span class="w"> </span><span class="n">mnt</span><span class="o">/</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">media</span><span class="o">/</span><span class="w"> </span><span class="err">→</span><span class="w"> </span><span class="n">mount</span><span class="w"> </span><span class="n">points</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">removable</span><span class="w"> </span><span class="n">media</span>
+</code></pre></div>
+
+<h2>Personal Note</h2>
+<p>Coming from Android/Termux, the <code>/</code> tree feels familiar in spirit — Termux has its own isolated filesystem at <code>/data/data/com.termux/files/home/</code> — but the full Linux hierarchy is a different beast. <code>/proc</code> and <code>/sys</code> are windows into the kernel, not real storage. That mental model explains why <code>cat /proc/meminfo</code> works even when your disk is full.</p>
+<p>Part 2 tomorrow: inodes, hard vs soft links, permissions (<code>rwx</code>), and the FHS in depth.</p>
+    </div>
+
+    <footer class="mac-tags">
+        <ul class="mac-tags__list">
+            <li class="mac-tags__item"><a href="https://netzro.github.io/tag/filesystem.html">filesystem</a></li>
+            <li class="mac-tags__item"><a href="https://netzro.github.io/tag/linux.html">linux</a></li>
+            <li class="mac-tags__item"><a href="https://netzro.github.io/tag/tutorial.html">tutorial</a></li>
+        </ul>
+    </footer>
+
+    <!-- Prev/Next -->
+    <nav style="margin-top: 2em; padding-top: 1em; border-top: 1px solid #eee;">
+        <div style="display: flex; justify-content: space-between; gap: 1em;">
+            <span></span>
+        </div>
+    </nav>
+
+    <!-- Share buttons -->
+    <div style="margin-top: 1.5em; text-align: center;">
+        <a target="_blank" rel="noopener noreferrer" title="Share on twitter" href="https://twitter.com/intent/tweet/?text=Features&amp;url=https://netzro.github.io/posts/2026/Sep/23/understanding-linux-file-system-part-1-structure-walkthrough/" class="mac-btn" style="font-size: 11px;">
+            <i class="fab fa-twitter" aria-hidden="true"></i> twitter
+        </a>
+        <a target="_blank" rel="noopener noreferrer" title="Share on linkedin" href="https://www.linkedin.com/sharing/share-offsite/?url=https://netzro.github.io/posts/2026/Sep/23/understanding-linux-file-system-part-1-structure-walkthrough/" class="mac-btn" style="font-size: 11px;">
+            <i class="fab fa-linkedin" aria-hidden="true"></i> linkedin
+        </a>
+        <a target="_blank" rel="noopener noreferrer" title="Share on reddit" href="https://reddit.com/submit?url=https://netzro.github.io/posts/2026/Sep/23/understanding-linux-file-system-part-1-structure-walkthrough/" class="mac-btn" style="font-size: 11px;">
+            <i class="fab fa-reddit" aria-hidden="true"></i> reddit
+        </a>
+        <a target="_blank" rel="noopener noreferrer" title="Share on facebook" href="https://facebook.com/sharer/sharer.php?u=https://netzro.github.io/posts/2026/Sep/23/understanding-linux-file-system-part-1-structure-walkthrough/" class="mac-btn" style="font-size: 11px;">
+            <i class="fab fa-facebook" aria-hidden="true"></i> facebook
+        </a>
+        <a target="_blank" rel="noopener noreferrer" title="Share on whatsapp" href="https://api.whatsapp.com/send?text=Features - https://netzro.github.io/posts/2026/Sep/23/understanding-linux-file-system-part-1-structure-walkthrough/" class="mac-btn" style="font-size: 11px;">
+            <i class="fab fa-whatsapp" aria-hidden="true"></i> whatsapp
+        </a>
+        <a target="_blank" rel="noopener noreferrer" title="Share on telegram" href="https://telegram.me/share/url?text=Features&amp;url=https://netzro.github.io/posts/2026/Sep/23/understanding-linux-file-system-part-1-structure-walkthrough/" class="mac-btn" style="font-size: 11px;">
+            <i class="fab fa-telegram" aria-hidden="true"></i> telegram
+        </a>
+    </div>
+</article>
+                    </div>
+                </div>
+
+                <!-- Footer inside window -->
+                <footer class="mac-footer">
+                    <div>
+©2026 - Gifted &middot;                         Powered by <a href="https://getpelican.com/">Pelican</a> &middot;
+                        <a href="https://github.com/netzro">netzro</a>
+                    </div>
+                    <div class="mac-footer__theme">
+                        <button id="theme-toggle" class="mac-btn" style="padding: 2px 8px; font-size: 10px;">
+                            <span id="theme-toggle-light">&#9788; Light</span>
+                            <span id="theme-toggle-dark">&#9789; Dark</span>
+                        </button>
+                    </div>
+                </footer>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let themeToggleLight = document.getElementById('theme-toggle-light');
+        let themeToggleDark = document.getElementById('theme-toggle-dark');
+        if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            themeToggleLight.style.display = 'inline';
+            themeToggleDark.style.display = 'none';
+        } else {
+            themeToggleLight.style.display = 'none';
+            themeToggleDark.style.display = 'inline';
+        }
+        document.getElementById('theme-toggle').addEventListener('click', function () {
+            if (localStorage.getItem('color-theme')) {
+                if (localStorage.getItem('color-theme') === 'light') {
+                    document.documentElement.classList.add('dark');
+                    localStorage.setItem('color-theme', 'dark');
+                    themeToggleLight.style.display = 'inline';
+                    themeToggleDark.style.display = 'none';
+                } else {
+                    document.documentElement.classList.remove('dark');
+                    localStorage.setItem('color-theme', 'light');
+                    themeToggleLight.style.display = 'none';
+                    themeToggleDark.style.display = 'inline';
+                }
+            } else {
+                if (document.documentElement.classList.contains('dark')) {
+                    document.documentElement.classList.remove('dark');
+                    localStorage.setItem('color-theme', 'light');
+                    themeToggleLight.style.display = 'none';
+                    themeToggleDark.style.display = 'inline';
+                } else {
+                    document.documentElement.classList.add('dark');
+                    localStorage.setItem('color-theme', 'dark');
+                    themeToggleLight.style.display = 'inline';
+                    themeToggleDark.style.display = 'none';
+                }
+            }
+        });
+    </script>
+</body>
+</html>
