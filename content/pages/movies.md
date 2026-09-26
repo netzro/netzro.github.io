@@ -11,6 +11,9 @@ _Updated as I watch. Last update: 23rd September 2026._
 
 <details markdown='1'><summary>September 2026</summary>
 
+![](https://netzro.github.io/images/posters/the-wall-2012.jpg) **The Wall (2012)**
+_Watched on_ - 26th September 2026
+
 ![](https://netzro.github.io/images/posters/oxygen-1999.jpg) **Oxygen (1999)**
 _Watched on_ - 23rd September 2026
 
