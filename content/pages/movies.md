@@ -680,7 +680,7 @@ _Updated as I watch. Last update: 27th September 2026._
   </div>
 </div>
 <div class="movie-card">
-  <div class="poster-placeholder">No poster</div>
+  <img src="https://netzro.github.io/images/posters/seven-snipers-2025.jpg" alt="Seven Snipers">
   <div class="movie-card-body">
     <h3>Seven Snipers</h3>
     <p class="released">Released: 2025</p>
@@ -744,7 +744,7 @@ _Updated as I watch. Last update: 27th September 2026._
 
 <div class="movies-grid">
 <div class="movie-card">
-  <div class="poster-placeholder">No poster</div>
+  <img src="https://netzro.github.io/images/posters/g20-2025.jpg" alt="G20">
   <div class="movie-card-body">
     <h3>G20</h3>
     <p class="released">Released: 2025</p>
@@ -754,7 +754,7 @@ _Updated as I watch. Last update: 27th September 2026._
   </div>
 </div>
 <div class="movie-card">
-  <div class="poster-placeholder">No poster</div>
+  <img src="https://netzro.github.io/images/posters/independence-day-1996.jpg" alt="Independence Day">
   <div class="movie-card-body">
     <h3>Independence Day</h3>
     <p class="released">Released: 1996</p>
@@ -764,7 +764,7 @@ _Updated as I watch. Last update: 27th September 2026._
   </div>
 </div>
 <div class="movie-card">
-  <div class="poster-placeholder">No poster</div>
+  <img src="https://netzro.github.io/images/posters/death-of-a-unicorn-2025.jpg" alt="Death of a Unicorn">
   <div class="movie-card-body">
     <h3>Death of a Unicorn</h3>
     <p class="released">Released: 2025</p>
@@ -774,7 +774,7 @@ _Updated as I watch. Last update: 27th September 2026._
   </div>
 </div>
 <div class="movie-card">
-  <div class="poster-placeholder">No poster</div>
+  <img src="https://netzro.github.io/images/posters/havoc-2025.jpg" alt="Havoc">
   <div class="movie-card-body">
     <h3>Havoc</h3>
     <p class="released">Released: 2025</p>
@@ -784,7 +784,7 @@ _Updated as I watch. Last update: 27th September 2026._
   </div>
 </div>
 <div class="movie-card">
-  <div class="poster-placeholder">No poster</div>
+  <img src="https://netzro.github.io/images/posters/exterriatorial-2025.jpg" alt="Exterriatorial">
   <div class="movie-card-body">
     <h3>Exterriatorial</h3>
     <p class="released">Released: 2025</p>
@@ -794,7 +794,7 @@ _Updated as I watch. Last update: 27th September 2026._
   </div>
 </div>
 <div class="movie-card">
-  <div class="poster-placeholder">No poster</div>
+  <img src="https://netzro.github.io/images/posters/the-accountant-2-2025.jpg" alt="The Accountant 2">
   <div class="movie-card-body">
     <h3>The Accountant 2</h3>
     <p class="released">Released: 2025</p>
@@ -811,7 +811,7 @@ _Updated as I watch. Last update: 27th September 2026._
 
 <div class="movies-grid">
 <div class="movie-card">
-  <div class="poster-placeholder">No poster</div>
+  <img src="https://netzro.github.io/images/posters/locked-2025.jpg" alt="Locked">
   <div class="movie-card-body">
     <h3>Locked</h3>
     <p class="released">Released: 2025</p>
@@ -821,7 +821,7 @@ _Updated as I watch. Last update: 27th September 2026._
   </div>
 </div>
 <div class="movie-card">
-  <div class="poster-placeholder">No poster</div>
+  <img src="https://netzro.github.io/images/posters/in-the-lost-lands-2025.jpg" alt="In the Lost Lands">
   <div class="movie-card-body">
     <h3>In the Lost Lands</h3>
     <p class="released">Released: 2025</p>
@@ -831,7 +831,7 @@ _Updated as I watch. Last update: 27th September 2026._
   </div>
 </div>
 <div class="movie-card">
-  <div class="poster-placeholder">No poster</div>
+  <img src="https://netzro.github.io/images/posters/a-minecraft-movie-2025.jpg" alt="A Minecraft Movie">
   <div class="movie-card-body">
     <h3>A Minecraft Movie</h3>
     <p class="released">Released: 2025</p>
@@ -841,7 +841,7 @@ _Updated as I watch. Last update: 27th September 2026._
   </div>
 </div>
 <div class="movie-card">
-  <div class="poster-placeholder">No poster</div>
+  <img src="https://netzro.github.io/images/posters/a-working-man-2025.jpg" alt="A Working Man">
   <div class="movie-card-body">
     <h3>A Working Man</h3>
     <p class="released">Released: 2025</p>
@@ -858,7 +858,7 @@ _Updated as I watch. Last update: 27th September 2026._
 
 <div class="movies-grid">
 <div class="movie-card">
-  <div class="poster-placeholder">No poster</div>
+  <img src="https://netzro.github.io/images/posters/cleaner-2025.jpg" alt="Cleaner">
   <div class="movie-card-body">
     <h3>Cleaner</h3>
     <p class="released">Released: 2025</p>
@@ -868,7 +868,7 @@ _Updated as I watch. Last update: 27th September 2026._
   </div>
 </div>
 <div class="movie-card">
-  <div class="poster-placeholder">No poster</div>
+  <img src="https://netzro.github.io/images/posters/novacaine-2025.jpg" alt="Novacaine">
   <div class="movie-card-body">
     <h3>Novacaine</h3>
     <p class="released">Released: 2025</p>
@@ -878,7 +878,7 @@ _Updated as I watch. Last update: 27th September 2026._
   </div>
 </div>
 <div class="movie-card">
-  <div class="poster-placeholder">No poster</div>
+  <img src="https://netzro.github.io/images/posters/captain-america-brave-new-world-2025.jpg" alt="Captain America: Brave New World">
   <div class="movie-card-body">
     <h3>Captain America: Brave New World</h3>
     <p class="released">Released: 2025</p>
@@ -888,7 +888,7 @@ _Updated as I watch. Last update: 27th September 2026._
   </div>
 </div>
 <div class="movie-card">
-  <div class="poster-placeholder">No poster</div>
+  <img src="https://netzro.github.io/images/posters/fight-or-flight-2025.jpg" alt="Fight or Flight">
   <div class="movie-card-body">
     <h3>Fight or Flight</h3>
     <p class="released">Released: 2025</p>
@@ -905,7 +905,7 @@ _Updated as I watch. Last update: 27th September 2026._
 
 <div class="movies-grid">
 <div class="movie-card">
-  <div class="poster-placeholder">No poster</div>
+  <img src="https://netzro.github.io/images/posters/mickey-17-2025.jpg" alt="Mickey 17">
   <div class="movie-card-body">
     <h3>Mickey 17</h3>
     <p class="released">Released: 2025</p>
@@ -915,7 +915,7 @@ _Updated as I watch. Last update: 27th September 2026._
   </div>
 </div>
 <div class="movie-card">
-  <div class="poster-placeholder">No poster</div>
+  <img src="https://netzro.github.io/images/posters/mufasa-the-lion-king-2024.jpg" alt="Mufasa: The Lion King">
   <div class="movie-card-body">
     <h3>Mufasa: The Lion King</h3>
     <p class="released">Released: 2024</p>
@@ -925,7 +925,7 @@ _Updated as I watch. Last update: 27th September 2026._
   </div>
 </div>
 <div class="movie-card">
-  <div class="poster-placeholder">No poster</div>
+  <img src="https://netzro.github.io/images/posters/exam-2009.jpg" alt="Exam">
   <div class="movie-card-body">
     <h3>Exam</h3>
     <p class="released">Released: 2009</p>
@@ -935,7 +935,7 @@ _Updated as I watch. Last update: 27th September 2026._
   </div>
 </div>
 <div class="movie-card">
-  <div class="poster-placeholder">No poster</div>
+  <img src="https://netzro.github.io/images/posters/land-of-bad-2024.jpg" alt="Land of Bad">
   <div class="movie-card-body">
     <h3>Land of Bad</h3>
     <p class="released">Released: 2024</p>
@@ -945,7 +945,7 @@ _Updated as I watch. Last update: 27th September 2026._
   </div>
 </div>
 <div class="movie-card">
-  <div class="poster-placeholder">No poster</div>
+  <img src="https://netzro.github.io/images/posters/the-ministry-of-ungentlemanly-warfare-2024.jpg" alt="The Ministry of Ungentlemanly Warfare">
   <div class="movie-card-body">
     <h3>The Ministry of Ungentlemanly Warfare</h3>
     <p class="released">Released: 2024</p>
@@ -955,7 +955,7 @@ _Updated as I watch. Last update: 27th September 2026._
   </div>
 </div>
 <div class="movie-card">
-  <div class="poster-placeholder">No poster</div>
+  <img src="https://netzro.github.io/images/posters/flight-risk-2025.jpg" alt="Flight Risk">
   <div class="movie-card-body">
     <h3>Flight Risk</h3>
     <p class="released">Released: 2025</p>
@@ -965,7 +965,7 @@ _Updated as I watch. Last update: 27th September 2026._
   </div>
 </div>
 <div class="movie-card">
-  <div class="poster-placeholder">No poster</div>
+  <img src="https://netzro.github.io/images/posters/the-gorge-2025.jpg" alt="The Gorge">
   <div class="movie-card-body">
     <h3>The Gorge</h3>
     <p class="released">Released: 2025</p>
@@ -975,7 +975,7 @@ _Updated as I watch. Last update: 27th September 2026._
   </div>
 </div>
 <div class="movie-card">
-  <div class="poster-placeholder">No poster</div>
+  <img src="https://netzro.github.io/images/posters/get-out-2017.jpg" alt="Get Out">
   <div class="movie-card-body">
     <h3>Get Out</h3>
     <p class="released">Released: 2017</p>
@@ -985,7 +985,7 @@ _Updated as I watch. Last update: 27th September 2026._
   </div>
 </div>
 <div class="movie-card">
-  <div class="poster-placeholder">No poster</div>
+  <img src="https://netzro.github.io/images/posters/den-of-thieves-2018.jpg" alt="Den of Thieves">
   <div class="movie-card-body">
     <h3>Den of Thieves</h3>
     <p class="released">Released: 2018</p>
@@ -1002,7 +1002,7 @@ _Updated as I watch. Last update: 27th September 2026._
 
 <div class="movies-grid">
 <div class="movie-card">
-  <div class="poster-placeholder">No poster</div>
+  <img src="https://netzro.github.io/images/posters/smile-2-2024.jpg" alt="Smile 2">
   <div class="movie-card-body">
     <h3>Smile 2</h3>
     <p class="released">Released: 2024</p>
@@ -1012,7 +1012,7 @@ _Updated as I watch. Last update: 27th September 2026._
   </div>
 </div>
 <div class="movie-card">
-  <div class="poster-placeholder">No poster</div>
+  <img src="https://netzro.github.io/images/posters/back-in-action-2025.jpg" alt="Back in Action">
   <div class="movie-card-body">
     <h3>Back in Action</h3>
     <p class="released">Released: 2025</p>
@@ -1022,7 +1022,7 @@ _Updated as I watch. Last update: 27th September 2026._
   </div>
 </div>
 <div class="movie-card">
-  <div class="poster-placeholder">No poster</div>
+  <img src="https://netzro.github.io/images/posters/kate-2021.jpg" alt="Kate">
   <div class="movie-card-body">
     <h3>Kate</h3>
     <p class="released">Released: 2021</p>
@@ -1032,7 +1032,7 @@ _Updated as I watch. Last update: 27th September 2026._
   </div>
 </div>
 <div class="movie-card">
-  <div class="poster-placeholder">No poster</div>
+  <img src="https://netzro.github.io/images/posters/the-5th-wave-2016.jpg" alt="The 5th Wave">
   <div class="movie-card-body">
     <h3>The 5th Wave</h3>
     <p class="released">Released: 2016</p>
@@ -1042,7 +1042,7 @@ _Updated as I watch. Last update: 27th September 2026._
   </div>
 </div>
 <div class="movie-card">
-  <div class="poster-placeholder">No poster</div>
+  <img src="https://netzro.github.io/images/posters/wrath-of-the-titans-2012.jpg" alt="Wrath of the Titans">
   <div class="movie-card-body">
     <h3>Wrath of the Titans</h3>
     <p class="released">Released: 2012</p>
@@ -1052,7 +1052,7 @@ _Updated as I watch. Last update: 27th September 2026._
   </div>
 </div>
 <div class="movie-card">
-  <div class="poster-placeholder">No poster</div>
+  <img src="https://netzro.github.io/images/posters/the-great-wall-2017.jpg" alt="The Great Wall">
   <div class="movie-card-body">
     <h3>The Great Wall</h3>
     <p class="released">Released: 2017</p>
@@ -1062,7 +1062,7 @@ _Updated as I watch. Last update: 27th September 2026._
   </div>
 </div>
 <div class="movie-card">
-  <div class="poster-placeholder">No poster</div>
+  <img src="https://netzro.github.io/images/posters/amor-2024.jpg" alt="Amor">
   <div class="movie-card-body">
     <h3>Amor</h3>
     <p class="released">Released: 2024</p>
@@ -1072,7 +1072,7 @@ _Updated as I watch. Last update: 27th September 2026._
   </div>
 </div>
 <div class="movie-card">
-  <div class="poster-placeholder">No poster</div>
+  <img src="https://netzro.github.io/images/posters/colombiana-2011.jpg" alt="Colombiana">
   <div class="movie-card-body">
     <h3>Colombiana</h3>
     <p class="released">Released: 2011</p>
@@ -1082,7 +1082,7 @@ _Updated as I watch. Last update: 27th September 2026._
   </div>
 </div>
 <div class="movie-card">
-  <div class="poster-placeholder">No poster</div>
+  <img src="https://netzro.github.io/images/posters/kraven-the-hunter-2024.jpg" alt="Kraven the Hunter">
   <div class="movie-card-body">
     <h3>Kraven the Hunter</h3>
     <p class="released">Released: 2024</p>
@@ -1092,7 +1092,7 @@ _Updated as I watch. Last update: 27th September 2026._
   </div>
 </div>
 <div class="movie-card">
-  <div class="poster-placeholder">No poster</div>
+  <img src="https://netzro.github.io/images/posters/carry-on-2024.jpg" alt="Carry On">
   <div class="movie-card-body">
     <h3>Carry On</h3>
     <p class="released">Released: 2024</p>
@@ -1109,7 +1109,7 @@ _Updated as I watch. Last update: 27th September 2026._
 
 <div class="movies-grid">
 <div class="movie-card">
-  <div class="poster-placeholder">No poster</div>
+  <img src="https://netzro.github.io/images/posters/classified-2024.jpg" alt="Classified">
   <div class="movie-card-body">
     <h3>Classified</h3>
     <p class="released">Released: 2024</p>
@@ -1119,7 +1119,7 @@ _Updated as I watch. Last update: 27th September 2026._
   </div>
 </div>
 <div class="movie-card">
-  <div class="poster-placeholder">No poster</div>
+  <img src="https://netzro.github.io/images/posters/elevation-2024.jpg" alt="Elevation">
   <div class="movie-card-body">
     <h3>Elevation</h3>
     <p class="released">Released: 2024</p>
@@ -1129,7 +1129,7 @@ _Updated as I watch. Last update: 27th September 2026._
   </div>
 </div>
 <div class="movie-card">
-  <div class="poster-placeholder">No poster</div>
+  <img src="https://netzro.github.io/images/posters/canary-black-2024.jpg" alt="Canary Black">
   <div class="movie-card-body">
     <h3>Canary Black</h3>
     <p class="released">Released: 2024</p>
@@ -1139,7 +1139,7 @@ _Updated as I watch. Last update: 27th September 2026._
   </div>
 </div>
 <div class="movie-card">
-  <div class="poster-placeholder">No poster</div>
+  <img src="https://netzro.github.io/images/posters/moana-2-2024.jpg" alt="Moana 2">
   <div class="movie-card-body">
     <h3>Moana 2</h3>
     <p class="released">Released: 2024</p>
@@ -1149,7 +1149,7 @@ _Updated as I watch. Last update: 27th September 2026._
   </div>
 </div>
 <div class="movie-card">
-  <div class="poster-placeholder">No poster</div>
+  <img src="https://netzro.github.io/images/posters/heretic-2024.jpg" alt="Heretic">
   <div class="movie-card-body">
     <h3>Heretic</h3>
     <p class="released">Released: 2024</p>
@@ -1159,7 +1159,7 @@ _Updated as I watch. Last update: 27th September 2026._
   </div>
 </div>
 <div class="movie-card">
-  <div class="poster-placeholder">No poster</div>
+  <img src="https://netzro.github.io/images/posters/the-return-2024.jpg" alt="The Return">
   <div class="movie-card-body">
     <h3>The Return</h3>
     <p class="released">Released: 2024</p>
@@ -1169,7 +1169,7 @@ _Updated as I watch. Last update: 27th September 2026._
   </div>
 </div>
 <div class="movie-card">
-  <div class="poster-placeholder">No poster</div>
+  <img src="https://netzro.github.io/images/posters/red-one-2024.jpg" alt="Red One">
   <div class="movie-card-body">
     <h3>Red One</h3>
     <p class="released">Released: 2024</p>
@@ -1179,7 +1179,7 @@ _Updated as I watch. Last update: 27th September 2026._
   </div>
 </div>
 <div class="movie-card">
-  <div class="poster-placeholder">No poster</div>
+  <img src="https://netzro.github.io/images/posters/dirty-angels-2024.jpg" alt="Dirty Angels">
   <div class="movie-card-body">
     <h3>Dirty Angels</h3>
     <p class="released">Released: 2024</p>
@@ -1189,7 +1189,7 @@ _Updated as I watch. Last update: 27th September 2026._
   </div>
 </div>
 <div class="movie-card">
-  <div class="poster-placeholder">No poster</div>
+  <img src="https://netzro.github.io/images/posters/gladiator-2000.jpg" alt="Gladiator">
   <div class="movie-card-body">
     <h3>Gladiator</h3>
     <p class="released">Released: 2000</p>
@@ -1199,7 +1199,7 @@ _Updated as I watch. Last update: 27th September 2026._
   </div>
 </div>
 <div class="movie-card">
-  <div class="poster-placeholder">No poster</div>
+  <img src="https://netzro.github.io/images/posters/venom-the-last-dance-2024.jpg" alt="Venom: The Last Dance">
   <div class="movie-card-body">
     <h3>Venom: The Last Dance</h3>
     <p class="released">Released: 2024</p>
@@ -1209,7 +1209,7 @@ _Updated as I watch. Last update: 27th September 2026._
   </div>
 </div>
 <div class="movie-card">
-  <div class="poster-placeholder">No poster</div>
+  <img src="https://netzro.github.io/images/posters/gladiator-ii-2024.jpg" alt="Gladiator II">
   <div class="movie-card-body">
     <h3>Gladiator II</h3>
     <p class="released">Released: 2024</p>
@@ -1313,7 +1313,7 @@ _Updated as I watch. Last update: 27th September 2026._
   </div>
 </div>
 <div class="movie-card">
-  <div class="poster-placeholder">No poster</div>
+  <img src="https://netzro.github.io/images/posters/deadpool-2010.jpg" alt="Deadpool">
   <div class="movie-card-body">
     <h3>Deadpool</h3>
     <p class="released">Released: 2010</p>
@@ -1560,7 +1560,7 @@ _Updated as I watch. Last update: 27th September 2026._
   </div>
 </div>
 <div class="movie-card">
-  <div class="poster-placeholder">No poster</div>
+  <img src="https://netzro.github.io/images/posters/the-one-fast-move-2024.jpg" alt="The One Fast Move">
   <div class="movie-card-body">
     <h3>The One Fast Move</h3>
     <p class="released">Released: 2024</p>
@@ -1587,7 +1587,7 @@ _Updated as I watch. Last update: 27th September 2026._
   </div>
 </div>
 <div class="movie-card">
-  <div class="poster-placeholder">No poster</div>
+  <img src="https://netzro.github.io/images/posters/a-quiet-place-day-one-2020.jpg" alt="A Quiet Place: Day One">
   <div class="movie-card-body">
     <h3>A Quiet Place: Day One</h3>
     <p class="released">Released: 2020</p>
