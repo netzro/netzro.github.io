@@ -748,6 +748,7 @@ _Updated as I watch. Last update: 27th September 2026._
   <div class="movie-card-body">
     <h3>G20</h3>
     <p class="released">Released: 2025</p>
+    <p class="synopsis">Terrorists take over the G20 summit with President Sutton, bringing her governing and military experience to defend her family, company, and the world.</p>
     
     
     <p class="watched">Watched: 18th May 2025</p>
@@ -758,6 +759,7 @@ _Updated as I watch. Last update: 27th September 2026._
   <div class="movie-card-body">
     <h3>Independence Day</h3>
     <p class="released">Released: 1996</p>
+    <p class="synopsis">The aliens are coming and their goal is to invade and destroy Earth. Fighting superior technology, mankind's best weapon is the will to survive.</p>
     
     
     <p class="watched">Watched: 11th May 2025</p>
@@ -768,6 +770,7 @@ _Updated as I watch. Last update: 27th September 2026._
   <div class="movie-card-body">
     <h3>Death of a Unicorn</h3>
     <p class="released">Released: 2025</p>
+    <p class="synopsis">A father and daughter accidentally hit and kill a unicorn while en route to a weekend retreat, where his billionaire boss seeks to exploit the creature's miraculous curative properties.</p>
     
     
     <p class="watched">Watched: 1st May 2025</p>
@@ -778,6 +781,7 @@ _Updated as I watch. Last update: 27th September 2026._
   <div class="movie-card-body">
     <h3>Havoc</h3>
     <p class="released">Released: 2025</p>
+    <p class="synopsis">After a drug deal gone wrong, a bruised detective must fight his way through the criminal underworld to rescue a politician's estranged son, unraveling a deep web of corruption and conspiracy that ensnares his entire city.</p>
     
     
     <p class="watched">Watched: 1st May 2025</p>
@@ -788,6 +792,7 @@ _Updated as I watch. Last update: 27th September 2026._
   <div class="movie-card-body">
     <h3>Exterriatorial</h3>
     <p class="released">Released: 2025</p>
+    <p class="synopsis">A group of friends on a weekend trip to a cabin in the woods find themselves terrorized by alien visitors.</p>
     
     
     <p class="watched">Watched: 1st May 2025</p>
@@ -798,6 +803,7 @@ _Updated as I watch. Last update: 27th September 2026._
   <div class="movie-card-body">
     <h3>The Accountant 2</h3>
     <p class="released">Released: 2025</p>
+    <p class="synopsis">Christian Wolff applies his brilliant mind and illegal methods to reconstruct the unsolved puzzle of a Treasury chief's murder.</p>
     
     
     <p class="watched">Watched: 1st May 2025</p>
@@ -815,6 +821,7 @@ _Updated as I watch. Last update: 27th September 2026._
   <div class="movie-card-body">
     <h3>Locked</h3>
     <p class="released">Released: 2025</p>
+    <p class="synopsis">A thief breaking into a luxury SUV realizes that he has slipped into a sophisticated game of psychological horror.</p>
     
     
     <p class="watched">Watched: 27th April 2025</p>
@@ -825,6 +832,7 @@ _Updated as I watch. Last update: 27th September 2026._
   <div class="movie-card-body">
     <h3>In the Lost Lands</h3>
     <p class="released">Released: 2025</p>
+    <p class="synopsis">A queen sends the powerful and feared sorceress Gray Alys to the ghostly wilderness of the Lost Lands in search of a magical power, where the sorceress and her guide, the drifter Boyce, must outwit and outfight man and demon.</p>
     
     
     <p class="watched">Watched: 14th April 2025</p>
@@ -835,6 +843,7 @@ _Updated as I watch. Last update: 27th September 2026._
   <div class="movie-card-body">
     <h3>A Minecraft Movie</h3>
     <p class="released">Released: 2025</p>
+    <p class="synopsis">Four misfits are suddenly pulled through a mysterious portal into a bizarre cubic wonderland that thrives on imagination. To get back home they'll have to master this world while embarking on a quest with an unexpected expert craf...</p>
     
     
     <p class="watched">Watched: 13th April 2025</p>
@@ -845,6 +854,7 @@ _Updated as I watch. Last update: 27th September 2026._
   <div class="movie-card-body">
     <h3>A Working Man</h3>
     <p class="released">Released: 2025</p>
+    <p class="synopsis">Levon Cade left his profession behind to work construction and be a good dad to his daughter. But when a local girl vanishes, he's asked to return to the skills that made him a mythic figure in the shadowy world of counter-terrorism.</p>
     
     
     <p class="watched">Watched: 5th April 2025</p>
@@ -862,6 +872,7 @@ _Updated as I watch. Last update: 27th September 2026._
   <div class="movie-card-body">
     <h3>Cleaner</h3>
     <p class="released">Released: 2025</p>
+    <p class="synopsis">Criminal activists hijack a gala, taking 300 hostages. One extremist plans mass murder as a message to the world. An Ex-soldier turned window cleaner now works to rescue the hostages.</p>
     
     
     <p class="watched">Watched: 21st March 2025</p>
@@ -872,6 +883,7 @@ _Updated as I watch. Last update: 27th September 2026._
   <div class="movie-card-body">
     <h3>Novacaine</h3>
     <p class="released">Released: 2025</p>
+    <p class="synopsis">When the girl of his dreams is kidnapped, a man incapable of feeling physical pain turns his rare condition into an unexpected advantage in the fight to rescue her.</p>
     
     
     <p class="watched">Watched: 20th March 2025</p>
@@ -882,6 +894,7 @@ _Updated as I watch. Last update: 27th September 2026._
   <div class="movie-card-body">
     <h3>Captain America: Brave New World</h3>
     <p class="released">Released: 2025</p>
+    <p class="synopsis">Sam Wilson, the new Captain America, finds himself in the middle of an international incident and must discover the motive behind a nefarious global plan.</p>
     
     
     <p class="watched">Watched: 8th March 2025</p>
@@ -892,6 +905,7 @@ _Updated as I watch. Last update: 27th September 2026._
   <div class="movie-card-body">
     <h3>Fight or Flight</h3>
     <p class="released">Released: 2025</p>
+    <p class="synopsis">A mercenary takes on the job of tracking down a target on a plane but must protect that target when they're surrounded by people trying to kill both of them.</p>
     
     
     <p class="watched">Watched: 6th March 2025</p>
@@ -909,6 +923,7 @@ _Updated as I watch. Last update: 27th September 2026._
   <div class="movie-card-body">
     <h3>Mickey 17</h3>
     <p class="released">Released: 2025</p>
+    <p class="synopsis">During a human expedition to colonize space, Mickey 17, a so-called "expendable" employee, is sent to explore an ice planet.</p>
     
     
     <p class="watched">Watched: 25th February 2025</p>
@@ -919,6 +934,7 @@ _Updated as I watch. Last update: 27th September 2026._
   <div class="movie-card-body">
     <h3>Mufasa: The Lion King</h3>
     <p class="released">Released: 2024</p>
+    <p class="synopsis">Mufasa, a cub lost and alone, meets a sympathetic lion named Taka, the heir to a royal bloodline. The chance meeting sets in motion an expansive journey of a group of misfits searching for their destiny.</p>
     
     
     <p class="watched">Watched: 20th February 2025</p>
@@ -929,6 +945,7 @@ _Updated as I watch. Last update: 27th September 2026._
   <div class="movie-card-body">
     <h3>Exam</h3>
     <p class="released">Released: 2009</p>
+    <p class="synopsis">Eight candidates for a highly desirable corporate job are locked together in an exam room and given a final test with just one seemingly simple question. However, it doesn't take long for confusion to ensue and tensions to unravel.</p>
     
     
     <p class="watched">Watched: 17th February 2025</p>
@@ -939,6 +956,7 @@ _Updated as I watch. Last update: 27th September 2026._
   <div class="movie-card-body">
     <h3>Land of Bad</h3>
     <p class="released">Released: 2024</p>
+    <p class="synopsis">A Delta Force team fights for survival as an Air Force drone pilot becomes its eyes in the sky.</p>
     
     
     <p class="watched">Watched: 17th February 2025</p>
@@ -949,6 +967,7 @@ _Updated as I watch. Last update: 27th September 2026._
   <div class="movie-card-body">
     <h3>The Ministry of Ungentlemanly Warfare</h3>
     <p class="released">Released: 2024</p>
+    <p class="synopsis">The British military recruits a small group of highly skilled soldiers to strike against German forces behind enemy lines during World War II.</p>
     
     
     <p class="watched">Watched: 17th February 2025</p>
@@ -959,6 +978,7 @@ _Updated as I watch. Last update: 27th September 2026._
   <div class="movie-card-body">
     <h3>Flight Risk</h3>
     <p class="released">Released: 2025</p>
+    <p class="synopsis">A pilot transports an Air Marshal accompanying a fugitive to trial. As they cross the Alaskan wilderness, tensions soar and trust is tested, as not everyone on board is who they seem.</p>
     
     
     <p class="watched">Watched: 16th February 2025</p>
@@ -969,6 +989,7 @@ _Updated as I watch. Last update: 27th September 2026._
   <div class="movie-card-body">
     <h3>The Gorge</h3>
     <p class="released">Released: 2025</p>
+    <p class="synopsis">Two operatives are appointed to posts in guard towers on opposite sides of a classified gorge.</p>
     
     
     <p class="watched">Watched: 14th February 2025</p>
@@ -979,6 +1000,7 @@ _Updated as I watch. Last update: 27th September 2026._
   <div class="movie-card-body">
     <h3>Get Out</h3>
     <p class="released">Released: 2017</p>
+    <p class="synopsis">A young African-American visits his white girlfriend's parents for the weekend, where his simmering uneasiness about their reception of him eventually reaches a boiling point.</p>
     
     
     <p class="watched">Watched: 13th February 2025</p>
@@ -989,6 +1011,7 @@ _Updated as I watch. Last update: 27th September 2026._
   <div class="movie-card-body">
     <h3>Den of Thieves</h3>
     <p class="released">Released: 2018</p>
+    <p class="synopsis">An elite unit of the LA County Sheriff's Dept. and the state's most successful bank robbery crew clash as the outlaws plan a seemingly impossible heist on the Federal Reserve Bank.</p>
     
     
     <p class="watched">Watched: 9th February 2025</p>
@@ -1006,6 +1029,7 @@ _Updated as I watch. Last update: 27th September 2026._
   <div class="movie-card-body">
     <h3>Smile 2</h3>
     <p class="released">Released: 2024</p>
+    <p class="synopsis">About to embark on a world tour, global pop sensation Skye Riley begins experiencing increasingly terrifying and inexplicable events. Overwhelmed by the escalating horrors and the pressures of fame, Skye is forced to face her past.</p>
     
     
     <p class="watched">Watched: 26th January 2025</p>
@@ -1016,6 +1040,7 @@ _Updated as I watch. Last update: 27th September 2026._
   <div class="movie-card-body">
     <h3>Back in Action</h3>
     <p class="released">Released: 2025</p>
+    <p class="synopsis">Former CIA spies Emily and Matt are pulled back into espionage after their secret identities are exposed.</p>
     
     
     <p class="watched">Watched: 26th January 2025</p>
@@ -1026,6 +1051,7 @@ _Updated as I watch. Last update: 27th September 2026._
   <div class="movie-card-body">
     <h3>Kate</h3>
     <p class="released">Released: 2021</p>
+    <p class="synopsis">A jaded assassin assigned to target a yakuza clan has 24 hours to find out who poisoned her and get vengeance before she dies.</p>
     
     
     <p class="watched">Watched: 17th January 2025</p>
@@ -1036,6 +1062,7 @@ _Updated as I watch. Last update: 27th September 2026._
   <div class="movie-card-body">
     <h3>The 5th Wave</h3>
     <p class="released">Released: 2016</p>
+    <p class="synopsis">Four waves of increasingly deadly alien attacks have left most of Earth in ruin. Cassie is on the run, desperately trying to save her younger brother.</p>
     
     
     <p class="watched">Watched: 17th January 2025</p>
@@ -1046,6 +1073,7 @@ _Updated as I watch. Last update: 27th September 2026._
   <div class="movie-card-body">
     <h3>Wrath of the Titans</h3>
     <p class="released">Released: 2012</p>
+    <p class="synopsis">Perseus braves the treacherous underworld to rescue his father, Zeus, captured by his son, Ares, and brother Hades who unleash the ancient Titans upon the world.</p>
     
     
     <p class="watched">Watched: 17th January 2025</p>
@@ -1056,6 +1084,7 @@ _Updated as I watch. Last update: 27th September 2026._
   <div class="movie-card-body">
     <h3>The Great Wall</h3>
     <p class="released">Released: 2017</p>
+    <p class="synopsis">A border community of brain dead, pro-Trumpers follow their leader's orders and to build a wall to protect 'us' from 'them', to comedic yet tragic ends. Lego film.</p>
     
     
     <p class="watched">Watched: 17th January 2025</p>
@@ -1066,6 +1095,7 @@ _Updated as I watch. Last update: 27th September 2026._
   <div class="movie-card-body">
     <h3>Amor</h3>
     <p class="released">Released: 2024</p>
+    <p class="synopsis">Lucía tries to survive love and art in a tug-of-war with the complicated relationship she has with her best friend, Pol.</p>
     
     
     <p class="watched">Watched: 6th January 2025</p>
@@ -1076,6 +1106,7 @@ _Updated as I watch. Last update: 27th September 2026._
   <div class="movie-card-body">
     <h3>Colombiana</h3>
     <p class="released">Released: 2011</p>
+    <p class="synopsis">A professional assassin seeks revenge for the murder of her parents.</p>
     
     
     <p class="watched">Watched: 3rd January 2025</p>
@@ -1086,6 +1117,7 @@ _Updated as I watch. Last update: 27th September 2026._
   <div class="movie-card-body">
     <h3>Kraven the Hunter</h3>
     <p class="released">Released: 2024</p>
+    <p class="synopsis">Kraven's complex relationship with his ruthless father, Nikolai Kravinoff, starts him down a path of vengeance with brutal consequences, motivating him to become not only the greatest hunter in the world, but also one of its most ...</p>
     
     
     <p class="watched">Watched: 2nd January 2025</p>
@@ -1096,6 +1128,7 @@ _Updated as I watch. Last update: 27th September 2026._
   <div class="movie-card-body">
     <h3>Carry On</h3>
     <p class="released">Released: 2024</p>
+    <p class="synopsis">A young woman on a plane attempts a covert operation to steal a briefcase from another passenger for reasons unknown.</p>
     
     
     <p class="watched">Watched: 2nd January 2025</p>
@@ -1113,6 +1146,7 @@ _Updated as I watch. Last update: 27th September 2026._
   <div class="movie-card-body">
     <h3>Classified</h3>
     <p class="released">Released: 2024</p>
+    <p class="synopsis">A career CIA hitman who's been solely using the classified section of various newspapers to receive his orders suddenly discovers that his division's actually been shut down for years.</p>
     
     
     <p class="watched">Watched: 29th December 2024</p>
@@ -1123,6 +1157,7 @@ _Updated as I watch. Last update: 27th September 2026._
   <div class="movie-card-body">
     <h3>Elevation</h3>
     <p class="released">Released: 2024</p>
+    <p class="synopsis">A single father and two women venture from the safety of their homes to face monstrous creatures to save the life of a young boy.</p>
     
     
     <p class="watched">Watched: 29th December 2024</p>
@@ -1133,6 +1168,7 @@ _Updated as I watch. Last update: 27th September 2026._
   <div class="movie-card-body">
     <h3>Canary Black</h3>
     <p class="released">Released: 2024</p>
+    <p class="synopsis">It follows Avery Graves as she is blackmailed by terrorists into betraying her own country to save her kidnapped husband.</p>
     
     
     <p class="watched">Watched: 29th December 2024</p>
@@ -1143,6 +1179,7 @@ _Updated as I watch. Last update: 27th September 2026._
   <div class="movie-card-body">
     <h3>Moana 2</h3>
     <p class="released">Released: 2024</p>
+    <p class="synopsis">After receiving an unexpected call from her wayfinding ancestors, Moana must journey to the far seas of Oceania and into dangerous, long-lost waters for an adventure unlike anything she's ever faced.</p>
     
     
     <p class="watched">Watched: 29th December 2024</p>
@@ -1153,6 +1190,7 @@ _Updated as I watch. Last update: 27th September 2026._
   <div class="movie-card-body">
     <h3>Heretic</h3>
     <p class="released">Released: 2024</p>
+    <p class="synopsis">Two young religious women are drawn into a game of cat-and-mouse in the house of a strange man.</p>
     
     
     <p class="watched">Watched: 28th December 2024</p>
@@ -1163,6 +1201,7 @@ _Updated as I watch. Last update: 27th September 2026._
   <div class="movie-card-body">
     <h3>The Return</h3>
     <p class="released">Released: 2024</p>
+    <p class="synopsis">After 20 years Odysseus finally returns to Ithaca, where he finds his wife held prisoner by suitors vying to be king and his son facing death at their hands. To win back his family and all he has lost, Odysseus must rediscover his...</p>
     
     
     <p class="watched">Watched: 28th December 2024</p>
@@ -1173,6 +1212,7 @@ _Updated as I watch. Last update: 27th September 2026._
   <div class="movie-card-body">
     <h3>Red One</h3>
     <p class="released">Released: 2024</p>
+    <p class="synopsis">After Santa Claus is kidnapped, the North Pole's Head of Security must team up with a notorious hacker in a globe-trotting, action-packed mission to save Christmas.</p>
     
     
     <p class="watched">Watched: 27th December 2024</p>
@@ -1183,6 +1223,7 @@ _Updated as I watch. Last update: 27th September 2026._
   <div class="movie-card-body">
     <h3>Dirty Angels</h3>
     <p class="released">Released: 2024</p>
+    <p class="synopsis">It centers on a group of female soldiers who disguise themselves as medics to rescue a group of teenagers caught between ISIS and the forces of the Taliban.</p>
     
     
     <p class="watched">Watched: 27th December 2024</p>
@@ -1193,6 +1234,7 @@ _Updated as I watch. Last update: 27th September 2026._
   <div class="movie-card-body">
     <h3>Gladiator</h3>
     <p class="released">Released: 2000</p>
+    <p class="synopsis">A former Roman General sets out to exact vengeance against the corrupt emperor who murdered his family and sent him into slavery.</p>
     
     
     <p class="watched">Watched: 25th December 2024</p>
@@ -1203,6 +1245,7 @@ _Updated as I watch. Last update: 27th September 2026._
   <div class="movie-card-body">
     <h3>Venom: The Last Dance</h3>
     <p class="released">Released: 2024</p>
+    <p class="synopsis">Eddie Brock and Venom must make a devastating decision as they're pursued by a mysterious military man and alien monsters from Venom's home world.</p>
     
     
     <p class="watched">Watched: 24th December 2024</p>
@@ -1213,6 +1256,7 @@ _Updated as I watch. Last update: 27th September 2026._
   <div class="movie-card-body">
     <h3>Gladiator II</h3>
     <p class="released">Released: 2024</p>
+    <p class="synopsis">After his home is conquered by the tyrannical emperors who now lead Rome, Lucius is forced to enter the Colosseum and must look to his past to find strength to return the glory of Rome to its people.</p>
     
     
     <p class="watched">Watched: 24th December 2024</p>
