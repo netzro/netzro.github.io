@@ -4,7 +4,7 @@ Date: 2026-09-28
 Status: hidden
 ---
 
-# My Music List, mostly on repeat
+# My Music List
 
 <style>
 .music-grid {
@@ -62,10 +62,30 @@ Status: hidden
 
 <div class="music-card">
   <div class="yt-audio">
+    <iframe src="https://www.youtube-nocookie.com/embed/Edek5yMYlJw" title="Enya - Boadicea" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe>
+  </div>
+  <div class="music-card-body">
+    <h3>Boadicea</h3>
+    <p class="artist">Enya</p>
+  </div>
+</div>
+
+<div class="music-card">
+  <div class="yt-audio">
+    <iframe src="https://www.youtube-nocookie.com/embed/ow9_519_xVQ" title="Zendaya - Wonderful Life" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe>
+  </div>
+  <div class="music-card-body">
+    <h3>Wonderful Life</h3>
+    <p class="artist">Zendaya</p>
+  </div>
+</div>
+
+<div class="music-card">
+  <div class="yt-audio">
     <iframe src="https://www.youtube-nocookie.com/embed/HNBCVM4KbUM" title="Bob Marley - Three Little Birds" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe>
   </div>
   <div class="music-card-body">
-    <h3>Three Little Birds <span class="on-repeat">↻ on repeat</span></h3>
+    <h3>Three Little Birds</h3>
     <p class="artist">Bob Marley</p>
   </div>
 </div>
