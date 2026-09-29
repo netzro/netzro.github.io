@@ -5,7 +5,7 @@ Status: hidden
 ---
 
 # Movies
-_Updated as I watch. Last update: 27th September 2026._
+_Updated as I watch. Last update: 29th September 2026._
 
 ### Watchlist
 
@@ -98,6 +98,16 @@ _Updated as I watch. Last update: 27th September 2026._
 <details markdown='1'><summary>September 2026</summary>
 
 <div class="movies-grid">
+<div class="movie-card">
+  <img src="https://netzro.github.io/images/posters/sacrifice-2026.jpg" alt="Sacrifice (2026)" width="300" height="450" loading="lazy">
+  <div class="movie-card-body">
+    <h3>Sacrifice</h3>
+    <p class="released">Released: 2026</p>
+    <p class="synopsis">At an elite fundraising gala, celebrities and socialites find themselves in danger when armed activists storm the venue in pursuit of a legendary relic that could unlock supernatural powers.</p>
+
+    <p class="watched">Watched: 29th September 2026</p>
+  </div>
+</div>
 <div class="movie-card">
   <img src="https://netzro.github.io/images/posters/the-wall-2012.jpg" alt="The Wall (2012)" width="300" height="450" loading="lazy">
   <div class="movie-card-body">
