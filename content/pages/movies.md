@@ -5,7 +5,7 @@ Status: hidden
 ---
 
 # Movies
-_Updated as I watch. Last update: 29th September 2026._
+_Updated as I watch. Last update: 30th September 2026._
 
 ### Watchlist
 
@@ -98,6 +98,76 @@ _Updated as I watch. Last update: 29th September 2026._
 <details markdown='1'><summary>September 2026</summary>
 
 <div class="movies-grid">
+<div class="movie-card">
+  <img src="https://netzro.github.io/images/posters/the-runner-2026.jpg" alt="The Runner (2026)" width="300" height="450" loading="lazy">
+  <div class="movie-card-body">
+    <h3>The Runner</h3>
+    <p class="released">Released: 2026</p>
+    <p class="synopsis">A high-powered attorney must race through London to save her abducted son while following cryptic commands from a mysterious caller.</p>
+
+    <p class="watched">Watched: 30th September 2026</p>
+  </div>
+</div>
+<div class="movie-card">
+  <img src="https://netzro.github.io/images/posters/idiots-2026.jpg" alt="Idiots (2026)" width="300" height="450" loading="lazy">
+  <div class="movie-card-body">
+    <h3>Idiots</h3>
+    <p class="released">Released: 2026</p>
+    <p class="synopsis">Two rock-bottom drivers transport a wealthy teen to rehab, but their simple job spirals into a chaotic journey of drugs, danger, and crime as their passenger derails their plans.</p>
+
+    <p class="watched">Watched: 30th September 2026</p>
+  </div>
+</div>
+<div class="movie-card">
+  <img src="https://netzro.github.io/images/posters/one-last-shot-2026.jpg" alt="One Last Shot (2026)" width="300" height="450" loading="lazy">
+  <div class="movie-card-body">
+    <h3>One Last Shot</h3>
+    <p class="released">Released: 2026</p>
+    <p class="synopsis">Navy Seal Jake Harris must stop a team of mercenaries, led by his disillusioned former comrade, from disabling the US missile defense network.</p>
+
+    <p class="watched">Watched: 30th September 2026</p>
+  </div>
+</div>
+<div class="movie-card">
+  <img src="https://netzro.github.io/images/posters/runner-2026.jpg" alt="Runner (2026)" width="300" height="450" loading="lazy">
+  <div class="movie-card-body">
+    <h3>Runner</h3>
+    <p class="released">Released: 2026</p>
+    <p class="synopsis">A former soldier and his unlikely partner become the targets of a ruthless cartel while racing to complete a critical medical delivery and save the life of a little girl.</p>
+
+    <p class="watched">Watched: 28th September 2026</p>
+  </div>
+</div>
+<div class="movie-card">
+  <img src="https://netzro.github.io/images/posters/the-fix-2026.jpg" alt="The Fix (2026)" width="300" height="450" loading="lazy">
+  <div class="movie-card-body">
+    <h3>The Fix</h3>
+    <p class="released">Released: 2026</p>
+    <p class="synopsis">Disillusioned by the end of the war in Afghanistan, a group of disgraced, war torn ex-CIA operators set out to Tehran to take down a life changing score.</p>
+
+    <p class="watched">Watched: 28th September 2026</p>
+  </div>
+</div>
+<div class="movie-card">
+  <img src="https://netzro.github.io/images/posters/knightfall-2026.jpg" alt="Knightfall (2026)" width="300" height="450" loading="lazy">
+  <div class="movie-card-body">
+    <h3>Knightfall</h3>
+    <p class="released">Released: 2026</p>
+    <p class="synopsis">When the mysterious behemoth known only as Bane frees Batman's entire rogue's gallery from Arkham Asylum, the Caped Crusader is pushed to his mental and physical breaking point.</p>
+
+    <p class="watched">Watched: 25th September 2026</p>
+  </div>
+</div>
+<div class="movie-card">
+  <img src="https://netzro.github.io/images/posters/dark-hollow-2026.jpg" alt="Dark Hollow (2026)" width="300" height="450" loading="lazy">
+  <div class="movie-card-body">
+    <h3>Dark Hollow</h3>
+    <p class="released">Released: 2026</p>
+    <p class="synopsis">When a nightmarish monster emerges from the depths of an Appalachian coal mine, a young mother must hunt down the creature to protect her home and save her family.</p>
+
+    <p class="watched">Watched: 25th September 2026</p>
+  </div>
+</div>
 <div class="movie-card">
   <img src="https://netzro.github.io/images/posters/sacrifice-2026.jpg" alt="Sacrifice (2026)" width="300" height="450" loading="lazy">
   <div class="movie-card-body">
