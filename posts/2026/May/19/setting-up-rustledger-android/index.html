@@ -106,7 +106,7 @@
 <h2>Why Rustledger</h2>
 <p>Beancount is Python-based, which means a virtual environment, pip, and a runtime that adds weight to an already constrained Android setup. Rustledger is a Rust implementation of the same double-entry accounting system — fully compatible with beancount's file format, but distributed as a single static binary.</p>
 <p>No Python. No venv. No pip. Just download and run.</p>
-<p>The other reason: rustledger ships an MCP server. That means my AI agent can query the ledger, run balance reports, and record transactions directly. More on that in a future post.</p>
+<p>The other reason: rustledger ships an MCP server. That means my AI agent can query the ledger, run balance reports, and record transactions directly. I cover the general idea in <a href="https://netzro.github.io/posts/2026/May/19/mcp-servers-the-missing-piece/">MCP Servers: The Missing Piece in AI Agent Development</a>.</p>
 <h2>Installing on Android (proot Debian)</h2>
 <p>I run everything inside proot-distro Debian on Termux. Standard ARM64 Linux binaries work fine here, but static builds are more reliable — they don't depend on shared libraries that may or may not exist in the proot environment.</p>
 <p>First, find the right release asset:</p>
@@ -163,7 +163,7 @@ include &quot;business_2026.bean&quot;
 <p>This is the file the MCP server points to, so the agent can query across both contexts in one call.</p>
 <h2>What's Next</h2>
 <p>The real unlock is connecting rustledger to my AI agent via the MCP server. Instead of manually editing bean files, I tell Joe what I spent during the day and he records it, validates the files, and commits to git. The ledger stays accurate without any manual formatting work on my end.</p>
-<p>That setup — and what it actually looks like in practice — is what the next post will cover.</p>
+<p>If you want the general shape of that setup, I wrote about it in <a href="https://netzro.github.io/posts/2026/May/19/mcp-servers-the-missing-piece/">MCP Servers: The Missing Piece in AI Agent Development</a>.</p>
     </div>
 
     <footer class="mac-tags">

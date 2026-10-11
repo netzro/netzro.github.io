@@ -158,7 +158,7 @@ hermes&lt;span class="w"&gt; &lt;/span&gt;setup
 &lt;h2&gt;Why Rustledger&lt;/h2&gt;
 &lt;p&gt;Beancount is Python-based, which means a virtual environment, pip, and a runtime that adds weight to an already constrained Android setup. Rustledger is a Rust implementation of the same double-entry accounting system — fully compatible with beancount's file format, but distributed as a single static binary.&lt;/p&gt;
 &lt;p&gt;No Python. No venv. No pip. Just download and run.&lt;/p&gt;
-&lt;p&gt;The other reason: rustledger ships an MCP server. That means my AI agent can query the ledger, run balance reports, and record transactions directly. More on that in a future post.&lt;/p&gt;
+&lt;p&gt;The other reason: rustledger ships an MCP server. That means my AI agent can query the ledger, run balance reports, and record transactions directly. I cover the general idea in &lt;a href="https://netzro.github.io/posts/2026/May/19/mcp-servers-the-missing-piece/"&gt;MCP Servers: The Missing Piece in AI Agent Development&lt;/a&gt;.&lt;/p&gt;
 &lt;h2&gt;Installing on Android (proot Debian)&lt;/h2&gt;
 &lt;p&gt;I run everything inside proot-distro Debian on Termux. Standard ARM64 Linux binaries work fine here, but static builds are more reliable — they don't depend on shared libraries that may or may not exist in the proot environment.&lt;/p&gt;
 &lt;p&gt;First, find the right release asset:&lt;/p&gt;
@@ -215,4 +215,4 @@ include &amp;quot;business_2026.bean&amp;quot;
 &lt;p&gt;This is the file the MCP server points to, so the agent can query across both contexts in one call.&lt;/p&gt;
 &lt;h2&gt;What's Next&lt;/h2&gt;
 &lt;p&gt;The real unlock is connecting rustledger to my AI agent via the MCP server. Instead of manually editing bean files, I tell Joe what I spent during the day and he records it, validates the files, and commits to git. The ledger stays accurate without any manual formatting work on my end.&lt;/p&gt;
-&lt;p&gt;That setup — and what it actually looks like in practice — is what the next post will cover.&lt;/p&gt;</content><category term="Tech"/><category term="finance"/><category term="android"/><category term="termux"/></entry></feed>
+&lt;p&gt;If you want the general shape of that setup, I wrote about it in &lt;a href="https://netzro.github.io/posts/2026/May/19/mcp-servers-the-missing-piece/"&gt;MCP Servers: The Missing Piece in AI Agent Development&lt;/a&gt;.&lt;/p&gt;</content><category term="Tech"/><category term="finance"/><category term="android"/><category term="termux"/></entry></feed>
