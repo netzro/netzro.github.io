@@ -16,7 +16,7 @@ Beancount is Python-based, which means a virtual environment, pip, and a runtime
 
 No Python. No venv. No pip. Just download and run.
 
-The other reason: rustledger ships an MCP server. That means my AI agent can query the ledger, run balance reports, and record transactions directly. More on that in a future post.
+The other reason: rustledger ships an MCP server. That means my AI agent can query the ledger, run balance reports, and record transactions directly. I cover the general idea in [MCP Servers: The Missing Piece in AI Agent Development](https://netzro.github.io/posts/2026/May/19/mcp-servers-the-missing-piece/).
 
 ## Installing on Android (proot Debian)
 
@@ -98,4 +98,4 @@ This is the file the MCP server points to, so the agent can query across both co
 
 The real unlock is connecting rustledger to my AI agent via the MCP server. Instead of manually editing bean files, I tell Joe what I spent during the day and he records it, validates the files, and commits to git. The ledger stays accurate without any manual formatting work on my end.
 
-That setup — and what it actually looks like in practice — is what the next post will cover.
+If you want the general shape of that setup, I wrote about it in [MCP Servers: The Missing Piece in AI Agent Development](https://netzro.github.io/posts/2026/May/19/mcp-servers-the-missing-piece/).

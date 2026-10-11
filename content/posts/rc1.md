@@ -47,5 +47,3 @@ An example of an algorithm might look like this:
 ```markdown
 R U R' U'
 ```
-
-In the next post, I will start solving the cube.

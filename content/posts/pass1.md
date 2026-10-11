@@ -48,5 +48,3 @@ Pull and push your Pass store to GitHub:
 pass git pull remote origin <repo-url> <branch>
 pass git push remote origin <repo-url> <branch>
 ```
-
-In a future post, we’ll explore how to install Android Password Store and set it up as my primary password manager instead of relying on Google.

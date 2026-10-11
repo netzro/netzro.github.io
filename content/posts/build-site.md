@@ -1,4 +1,4 @@
-Title: Building My Site/Blog (Parr 1)
+Title: Building My Site/Blog (Part 1)
 Date: 2024-08-09
 Tags: pelican, python, 100daystooffload
 
@@ -60,4 +60,4 @@ To save your dependencies, run:
 pip freeze > requirements.txt
 ```
 
-That's all for today. In the next post, we'll generate our site and publish it to GitHub Pages.
+That's all for today.

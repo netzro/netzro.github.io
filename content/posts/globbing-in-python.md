@@ -129,4 +129,4 @@ glob.glob("**/*.md", recursive=True)
 
 See how many markdown files exist under your current directory. Then try `glob.glob("content/posts/**/*.md", recursive=True)` to list every blog post.
 
-In **Part 2**, we'll go further — `fnmatch` for string-only matching, brace expansion, writing a custom glob engine, and globbing across remote filesystems.
+In [**Part 2**](https://netzro.github.io/posts/2026/Sep/08/globbing-in-python-part2/), we'll go further — `fnmatch` for string-only matching, brace expansion, writing a custom glob engine, and globbing across remote filesystems.
