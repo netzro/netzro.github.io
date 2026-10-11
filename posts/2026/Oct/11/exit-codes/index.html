@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content="Pelican" />
+    <meta name="google-site-verification" content="A4y8JqsFj7oLMg1M1My15A25RDFuP-S1Y2Waa7Mw50s" />
+    <link rel="canonical" href="https://netzro.github.io/posts/2026/Oct/11/exit-codes/" />
+    <title>Exit Codes: The Numbers Your Terminal Won't Show You</title>
+    <meta name="description" content="A practical guide to exit codes — what 0, 1, 2, 126, 127 and 128+N actually mean, why 75 and 78 matter, and how to use them in your own scripts." />
+    <!-- Open Graph -->
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="Gifted Space" />
+    <meta property="og:title" content="Exit Codes: The Numbers Your Terminal Won't Show You" />
+    <meta property="og:description" content="A practical guide to exit codes — what 0, 1, 2, 126, 127 and 128+N actually mean, why 75 and 78 matter, and how to use them in your own scripts." />
+    <meta property="og:url" content="https://netzro.github.io/posts/2026/Oct/11/exit-codes/" />
+    <link rel="stylesheet" type="text/css" href="https://netzro.github.io/theme/css/mac-classic.css" />
+    <link rel="icon" href="https://netzro.github.io/images/favicon.ico" type="image/x-icon" />
+    <link href="https://netzro.github.io/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Gifted Space Atom Feed" />
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-VJD75C7TTC"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-VJD75C7TTC');
+</script>
+<meta name="description" content="A practical guide to exit codes — what 0, 1, 2, 126, 127 and 128+N actually mean, why 75 and 78 matter, and how to use them in your own scripts." />
+    <script>
+        if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark')
+        }
+    </script>
+</head>
+<body>
+    <div class="mac-window">
+        <div class="mac-window__outer">
+            <div class="mac-window__inner">
+                <!-- Title Bar -->
+                <div class="mac-title-bar">
+                    <div class="mac-title-bar__grill">
+                        <div class="mac-title-bar__grill-line"></div>
+                        <div class="mac-title-bar__grill-line"></div>
+                        <div class="mac-title-bar__grill-line"></div>
+                        <div class="mac-title-bar__grill-line"></div>
+                        <div class="mac-title-bar__grill-line"></div>
+                        <div class="mac-title-bar__grill-line"></div>
+                    </div>
+                    <div class="mac-title-bar__title">Gifted Space</div>
+                </div>
+
+                <!-- Content -->
+                <div class="mac-content">
+                    <!-- Navigation -->
+                    <nav class="mac-nav">
+                        <ul class="mac-nav__list">
+                            <li class="mac-nav__item ">
+                                <a class="mac-nav__link" href="https://netzro.github.io/">Home</a>
+                            </li>
+                            <li class="mac-nav__item ">
+                                <a class="mac-nav__link" href="https://netzro.github.io/pages/about/">About</a>
+                            </li>
+                            <li class="mac-nav__item ">
+                                <a class="mac-nav__link" href="https://netzro.github.io/pages/projects/">Projects</a>
+                            </li>
+                            <li class="mac-nav__item ">
+                                <a class="mac-nav__link" href="https://netzro.github.io/pages/blogroll/">Blogroll</a>
+                            </li>
+                            <li class="mac-nav__item ">
+                                <a class="mac-nav__link" href="https://netzro.github.io/pages/reading-list/">Reading</a>
+                            </li>
+                            <li class="mac-nav__item ">
+                                <a class="mac-nav__link" href="https://netzro.github.io/pages/uses/">Uses</a>
+                            </li>
+                            <li class="mac-nav__item ">
+                                <a class="mac-nav__link" href="https://netzro.github.io/pages/movies/">Movies</a>
+                            </li>
+                            <li class="mac-nav__item ">
+                                <a class="mac-nav__link" href="https://netzro.github.io/pages/music/">Music</a>
+                            </li>
+                            <li class="mac-nav__item ">
+                                <a class="mac-nav__link" href="https://netzro.github.io/archives.html">Archive</a>
+                            </li>
+                            <li class="mac-nav__item ">
+                                <a class="mac-nav__link" href="https://netzro.github.io/tags.html">Tags</a>
+                            </li>
+                        </ul>
+                    </nav>
+
+                    <!-- Main Content -->
+                    <div class="mac-content__inner">
+<article class="mac-article">
+    <header class="mac-article__header">
+        <h1 class="mac-article__title">Exit Codes: The Numbers Your Terminal Won't Show You</h1>
+        <div class="mac-article__meta">
+            <time>October 11, 2026</time>
+&nbsp;&middot;&nbsp;Gifted        </div>
+    </header>
+
+
+    <div class="mac-article__content">
+        <h1>Exit Codes: The Numbers Your Terminal Won't Show You</h1>
+<p>Every command you run ends by handing your shell a number. Almost nobody looks at it, which is a shame, because when something fails silently that number is usually the only witness.</p>
+<h2>The one rule everything follows</h2>
+<p>Zero means success. Anything else means failure.</p>
+<p>That convention is backwards from how most languages treat numbers. In C, <code>0</code> is false; here, <code>0</code> means everything is fine.</p>
+<p>You've been seeing this number all along, whether you noticed it or not. It lives in a shell variable called <code>$?</code>:</p>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span><span class="nb">true</span>
+$<span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="nv">$?</span>
+<span class="m">0</span>
+$<span class="w"> </span><span class="nb">false</span>
+$<span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="nv">$?</span>
+<span class="m">1</span>
+</code></pre></div>
+
+<p><code>$?</code> only holds the last command's status. It gets overwritten by the very next thing you run, including the <code>echo</code> you used to print it. That's why you save it immediately if you need it:</p>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>ls<span class="w"> </span>/nonexistent
+ls:<span class="w"> </span>cannot<span class="w"> </span>access<span class="w"> </span><span class="s1">&#39;/nonexistent&#39;</span>:<span class="w"> </span>No<span class="w"> </span>such<span class="w"> </span>file<span class="w"> </span>or<span class="w"> </span>directory
+$<span class="w"> </span><span class="nv">code</span><span class="o">=</span><span class="nv">$?</span>
+$<span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;exit was </span><span class="nv">$code</span><span class="s2">&quot;</span>
+<span class="nb">exit</span><span class="w"> </span>was<span class="w"> </span><span class="m">2</span>
+</code></pre></div>
+
+<h2>The codes you'll actually meet</h2>
+<p>Here's what I see day to day, all verified on this machine:</p>
+<table>
+<thead>
+<tr>
+<th>Code</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>0</code></td>
+<td>Success</td>
+</tr>
+<tr>
+<td><code>1</code></td>
+<td>General error, the catch-all</td>
+</tr>
+<tr>
+<td><code>2</code></td>
+<td>Misuse of a shell builtin (bad option, missing argument)</td>
+</tr>
+<tr>
+<td><code>126</code></td>
+<td>Command found, but not executable</td>
+</tr>
+<tr>
+<td><code>127</code></td>
+<td>Command not found</td>
+</tr>
+<tr>
+<td><code>130</code></td>
+<td>Terminated by Ctrl-C</td>
+</tr>
+<tr>
+<td><code>128+N</code></td>
+<td>Killed by signal N</td>
+</tr>
+</tbody>
+</table>
+<p>The difference between 126 and 127 is worth internalising:</p>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>nonexistent-command-xyz
+sh:<span class="w"> </span>nonexistent-command-xyz:<span class="w"> </span>not<span class="w"> </span>found
+$<span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="nv">$?</span>
+<span class="m">127</span>
+
+$<span class="w"> </span><span class="nb">printf</span><span class="w"> </span><span class="s1">&#39;#!/bin/sh\necho hi\n&#39;</span><span class="w"> </span>&gt;<span class="w"> </span>script.sh
+$<span class="w"> </span>chmod<span class="w"> </span><span class="m">644</span><span class="w"> </span>script.sh<span class="w">      </span><span class="c1"># readable, but not executable</span>
+$<span class="w"> </span>./script.sh
+sh:<span class="w"> </span>./script.sh:<span class="w"> </span>Permission<span class="w"> </span>denied
+$<span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="nv">$?</span>
+<span class="m">126</span>
+</code></pre></div>
+
+<p>127 means "I couldn't find it." 126 means "I found it, but it won't run." If a script works for you and fails on a server, that distinction is often the whole answer. A file that lost its execute bit during a copy gives you 126, not 127.</p>
+<h2>128+N: the signal convention</h2>
+<p>When a process is killed by a signal rather than exiting on its own, the shell reports <code>128 + signal_number</code>. The three you'll meet most:</p>
+<ul>
+<li><code>130</code> = 128 + 2, SIGINT. You pressed Ctrl-C.</li>
+<li><code>143</code> = 128 + 15, SIGTERM. Something asked it to stop politely.</li>
+<li><code>137</code> = 128 + 9, SIGKILL. Something killed it outright.</li>
+</ul>
+<p>That last one matters if you've ever had a process vanish on a small machine. 137 usually means the kernel's out-of-memory killer decided your process was the problem.</p>
+<p>There's a trap here. Python reports signals differently. Where the shell says 143, Python's <code>subprocess</code> says <code>-15</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="kn">import</span><span class="w"> </span><span class="nn">subprocess</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">r</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">([</span><span class="s1">&#39;sh&#39;</span><span class="p">,</span> <span class="s1">&#39;-c&#39;</span><span class="p">,</span> <span class="s1">&#39;kill -TERM $$&#39;</span><span class="p">])</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">r</span><span class="o">.</span><span class="n">returncode</span>
+<span class="o">-</span><span class="mi">15</span>          <span class="c1"># shell would have shown 143</span>
+</code></pre></div>
+
+<p>A negative value means "died from signal N." If you're checking for a signal death in Python and comparing against 143, you'll never match it.</p>
+<h2>Going past 255, or not</h2>
+<p>An exit code is a single byte. The range is 0 to 255, and anything outside wraps around modulo 256:</p>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>sh<span class="w"> </span>-c<span class="w"> </span><span class="s1">&#39;exit 256&#39;</span>
+$<span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="nv">$?</span>
+<span class="m">0</span><span class="w">            </span><span class="c1"># 256 % 256 = 0</span>
+$<span class="w"> </span>sh<span class="w"> </span>-c<span class="w"> </span><span class="s1">&#39;exit 257&#39;</span>
+$<span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="nv">$?</span>
+<span class="m">1</span><span class="w">            </span><span class="c1"># 257 % 256 = 1</span>
+</code></pre></div>
+
+<p>Python behaves the same way, which is a genuine footgun:</p>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>python3<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;import sys; sys.exit(300)&quot;</span>
+$<span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="nv">$?</span>
+<span class="m">44</span><span class="w">           </span><span class="c1"># 300 % 256</span>
+$<span class="w"> </span>python3<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;import sys; sys.exit(-1)&quot;</span>
+$<span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="nv">$?</span>
+<span class="m">255</span>
+</code></pre></div>
+
+<p>So <code>sys.exit(-1)</code> doesn't mean "error" in any special sense. It means 255. If you want a distinguishable failure code, pick a small positive number.</p>
+<h2>The convention most people never hear about</h2>
+<p>There's an older, more expressive set of codes from BSD's <code>sysexits.h</code>. Almost nothing uses them by default, but they earn their keep when you're writing something a supervisor will restart, because they let you say why it failed and whether retrying could possibly help.</p>
+<p>I use them in a trading bot I've been building. Four codes cover everything it needs to communicate:</p>
+<div class="highlight"><pre><span></span><code><span class="n">EX_OK</span>     <span class="o">=</span> <span class="mi">0</span>    <span class="c1"># success</span>
+<span class="n">EX_ERROR</span>  <span class="o">=</span> <span class="mi">1</span>    <span class="c1"># crash / repeated errors: restart with backoff</span>
+<span class="n">EX_LOCKED</span> <span class="o">=</span> <span class="mi">75</span>   <span class="c1"># another instance holds the lock: do NOT thrash</span>
+<span class="n">EX_CONFIG</span> <span class="o">=</span> <span class="mi">78</span>   <span class="c1"># bad config / secrets / corrupt state: restarting cannot help</span>
+</code></pre></div>
+
+<p>The two interesting ones are 75 and 78.</p>
+<p>75 (EX_TEMPFAIL) means "temporary failure, try again later." When my bot starts a second time while the first is still running, it exits 75. The supervisor reads that and knows not to hammer it, because another instance is already alive and restarting is pointless.</p>
+<p>78 (EX_CONFIG) means the configuration is wrong. A missing API key, an unreadable state file, a typo in a config option. This one is the most valuable of the lot, because it tells the supervisor to stop trying. Restarting a process with a broken config produces the same failure in a loop, forever, burning resources and filling logs.</p>
+<p>If a supervisor is going to restart your program, your exit codes are how you tell it whether that's a good idea. Zero and a generic 1 don't carry that information. 75 and 78 do.</p>
+<h2>Using them in your own scripts</h2>
+<p>In bash, <code>exit N</code> sets the code. In Python, <code>sys.exit(N)</code> raises <code>SystemExit</code>, which the interpreter turns into the process code:</p>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>python3<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;import sys; sys.exit(75)&quot;</span>
+$<span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="nv">$?</span>
+<span class="m">75</span>
+</code></pre></div>
+
+<p><code>SystemExit</code> with a string is a special case. It prints the message and exits 1, not the number:</p>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>python3<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;raise SystemExit(&#39;something went wrong&#39;)&quot;</span>
+something<span class="w"> </span>went<span class="w"> </span>wrong
+$<span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="nv">$?</span>
+<span class="m">1</span>
+</code></pre></div>
+
+<p>If you want a specific code, pass an integer. If you want a message on stderr, print it yourself and then exit with the code.</p>
+<p>One more habit worth adopting:</p>
+<div class="highlight"><pre><span></span><code><span class="ch">#!/bin/bash</span>
+<span class="nb">set</span><span class="w"> </span>-euo<span class="w"> </span>pipefail
+</code></pre></div>
+
+<p><code>-e</code> makes the script exit the moment any command fails, using that command's code. Without it, a failing step in the middle gets ignored and the script reports success at the end. That's the worst outcome, because it looks like it worked.</p>
+<h2>Wrapping up</h2>
+<p>Exit codes are a small, boring, useful protocol. Zero is success, everything else is a reason. The signal range starts at 128. The range is one byte, so it wraps. And the sysexits values, particularly 75 and 78, are how a program explains itself to whatever is supervising it.</p>
+<p>Next time a script fails without saying why, check <code>$?</code> before you change anything. It's probably already told you.</p>
+    </div>
+
+    <footer class="mac-tags">
+        <ul class="mac-tags__list">
+            <li class="mac-tags__item"><a href="https://netzro.github.io/tag/bash.html">bash</a></li>
+            <li class="mac-tags__item"><a href="https://netzro.github.io/tag/linux.html">linux</a></li>
+            <li class="mac-tags__item"><a href="https://netzro.github.io/tag/programming.html">programming</a></li>
+            <li class="mac-tags__item"><a href="https://netzro.github.io/tag/python.html">python</a></li>
+            <li class="mac-tags__item"><a href="https://netzro.github.io/tag/tutorial.html">tutorial</a></li>
+        </ul>
+    </footer>
+
+    <!-- Prev/Next -->
+    <nav style="margin-top: 2em; padding-top: 1em; border-top: 1px solid #eee;">
+        <div style="display: flex; justify-content: space-between; gap: 1em;">
+            <span></span>
+        </div>
+    </nav>
+
+    <!-- Share buttons -->
+    <div style="margin-top: 1.5em; text-align: center;">
+        <a target="_blank" rel="noopener noreferrer" title="Share on twitter" href="https://twitter.com/intent/tweet/?text=Features&amp;url=https://netzro.github.io/posts/2026/Oct/11/exit-codes/" class="mac-btn" style="font-size: 11px;">
+            <i class="fab fa-twitter" aria-hidden="true"></i> twitter
+        </a>
+        <a target="_blank" rel="noopener noreferrer" title="Share on linkedin" href="https://www.linkedin.com/sharing/share-offsite/?url=https://netzro.github.io/posts/2026/Oct/11/exit-codes/" class="mac-btn" style="font-size: 11px;">
+            <i class="fab fa-linkedin" aria-hidden="true"></i> linkedin
+        </a>
+        <a target="_blank" rel="noopener noreferrer" title="Share on reddit" href="https://reddit.com/submit?url=https://netzro.github.io/posts/2026/Oct/11/exit-codes/" class="mac-btn" style="font-size: 11px;">
+            <i class="fab fa-reddit" aria-hidden="true"></i> reddit
+        </a>
+        <a target="_blank" rel="noopener noreferrer" title="Share on facebook" href="https://facebook.com/sharer/sharer.php?u=https://netzro.github.io/posts/2026/Oct/11/exit-codes/" class="mac-btn" style="font-size: 11px;">
+            <i class="fab fa-facebook" aria-hidden="true"></i> facebook
+        </a>
+        <a target="_blank" rel="noopener noreferrer" title="Share on whatsapp" href="https://api.whatsapp.com/send?text=Features - https://netzro.github.io/posts/2026/Oct/11/exit-codes/" class="mac-btn" style="font-size: 11px;">
+            <i class="fab fa-whatsapp" aria-hidden="true"></i> whatsapp
+        </a>
+        <a target="_blank" rel="noopener noreferrer" title="Share on telegram" href="https://telegram.me/share/url?text=Features&amp;url=https://netzro.github.io/posts/2026/Oct/11/exit-codes/" class="mac-btn" style="font-size: 11px;">
+            <i class="fab fa-telegram" aria-hidden="true"></i> telegram
+        </a>
+    </div>
+</article>
+                    </div>
+                </div>
+
+                <!-- Footer inside window -->
+                <footer class="mac-footer">
+                    <div>
+©2026 - Gifted &middot;                         Powered by <a href="https://getpelican.com/">Pelican</a> &middot;
+                        <a href="https://github.com/netzro">netzro</a>
+                    </div>
+                    <div class="mac-footer__theme">
+                        <button id="theme-toggle" class="mac-btn" style="padding: 2px 8px; font-size: 10px;">
+                            <span id="theme-toggle-light">&#9788; Light</span>
+                            <span id="theme-toggle-dark">&#9789; Dark</span>
+                        </button>
+                    </div>
+                </footer>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let themeToggleLight = document.getElementById('theme-toggle-light');
+        let themeToggleDark = document.getElementById('theme-toggle-dark');
+        if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            themeToggleLight.style.display = 'inline';
+            themeToggleDark.style.display = 'none';
+        } else {
+            themeToggleLight.style.display = 'none';
+            themeToggleDark.style.display = 'inline';
+        }
+        document.getElementById('theme-toggle').addEventListener('click', function () {
+            if (localStorage.getItem('color-theme')) {
+                if (localStorage.getItem('color-theme') === 'light') {
+                    document.documentElement.classList.add('dark');
+                    localStorage.setItem('color-theme', 'dark');
+                    themeToggleLight.style.display = 'inline';
+                    themeToggleDark.style.display = 'none';
+                } else {
+                    document.documentElement.classList.remove('dark');
+                    localStorage.setItem('color-theme', 'light');
+                    themeToggleLight.style.display = 'none';
+                    themeToggleDark.style.display = 'inline';
+                }
+            } else {
+                if (document.documentElement.classList.contains('dark')) {
+                    document.documentElement.classList.remove('dark');
+                    localStorage.setItem('color-theme', 'light');
+                    themeToggleLight.style.display = 'none';
+                    themeToggleDark.style.display = 'inline';
+                } else {
+                    document.documentElement.classList.add('dark');
+                    localStorage.setItem('color-theme', 'dark');
+                    themeToggleLight.style.display = 'inline';
+                    themeToggleDark.style.display = 'none';
+                }
+            }
+        });
+    </script>
+</body>
+</html>
