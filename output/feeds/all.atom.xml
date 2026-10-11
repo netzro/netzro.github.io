@@ -1,5 +1,154 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Gifted Space</title><link href="https://netzro.github.io/" rel="alternate"/><link href="https://netzro.github.io/feeds/all.atom.xml" rel="self"/><id>https://netzro.github.io/</id><updated>2026-09-23T00:00:00+01:00</updated><entry><title>Understanding the Linux File System — Part 1: Structure Walkthrough</title><link href="https://netzro.github.io/posts/2026/Sep/23/understanding-linux-file-system-part-1-structure-walkthrough/" rel="alternate"/><published>2026-09-23T00:00:00+01:00</published><updated>2026-09-23T00:00:00+01:00</updated><author><name>Gifted</name></author><id>tag:netzro.github.io,2026-09-23:/posts/2026/Sep/23/understanding-linux-file-system-part-1-structure-walkthrough/</id><summary type="html">&lt;p&gt;A hands-on walkthrough of the Linux filesystem hierarchy — what lives where, why it matters, and how to explore it yourself.&lt;/p&gt;</summary><content type="html">&lt;p&gt;Linux keeps everything under one root — &lt;code&gt;/&lt;/code&gt;. No drive letters, no &lt;code&gt;C:&lt;/code&gt; or &lt;code&gt;D:&lt;/code&gt;. Every storage device, every file, every configuration lives somewhere under this single tree. Once you get the layout, navigating any Linux system feels obvious.&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Gifted Space</title><link href="https://netzro.github.io/" rel="alternate"/><link href="https://netzro.github.io/feeds/all.atom.xml" rel="self"/><id>https://netzro.github.io/</id><updated>2026-10-11T00:00:00+01:00</updated><entry><title>Exit Codes: The Numbers Your Terminal Won't Show You</title><link href="https://netzro.github.io/posts/2026/Oct/11/exit-codes/" rel="alternate"/><published>2026-10-11T00:00:00+01:00</published><updated>2026-10-11T00:00:00+01:00</updated><author><name>Gifted</name></author><id>tag:netzro.github.io,2026-10-11:/posts/2026/Oct/11/exit-codes/</id><summary type="html">&lt;p&gt;A practical guide to exit codes — what 0, 1, 2, 126, 127 and 128+N actually mean, why 75 and 78 matter, and how to use them in your own scripts.&lt;/p&gt;</summary><content type="html">&lt;h1&gt;Exit Codes: The Numbers Your Terminal Won't Show You&lt;/h1&gt;
+&lt;p&gt;Every command you run ends by handing your shell a number. Almost nobody looks at it, which is a shame, because when something fails silently that number is usually the only witness.&lt;/p&gt;
+&lt;h2&gt;The one rule everything follows&lt;/h2&gt;
+&lt;p&gt;Zero means success. Anything else means failure.&lt;/p&gt;
+&lt;p&gt;That convention is backwards from how most languages treat numbers. In C, &lt;code&gt;0&lt;/code&gt; is false; here, &lt;code&gt;0&lt;/code&gt; means everything is fine.&lt;/p&gt;
+&lt;p&gt;You've been seeing this number all along, whether you noticed it or not. It lives in a shell variable called &lt;code&gt;$?&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;$&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nb"&gt;true&lt;/span&gt;
+$&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nb"&gt;echo&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;$?&lt;/span&gt;
+&lt;span class="m"&gt;0&lt;/span&gt;
+$&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nb"&gt;false&lt;/span&gt;
+$&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nb"&gt;echo&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;$?&lt;/span&gt;
+&lt;span class="m"&gt;1&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;code&gt;$?&lt;/code&gt; only holds the last command's status. It gets overwritten by the very next thing you run, including the &lt;code&gt;echo&lt;/code&gt; you used to print it. That's why you save it immediately if you need it:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;$&lt;span class="w"&gt; &lt;/span&gt;ls&lt;span class="w"&gt; &lt;/span&gt;/nonexistent
+ls:&lt;span class="w"&gt; &lt;/span&gt;cannot&lt;span class="w"&gt; &lt;/span&gt;access&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;/nonexistent&amp;#39;&lt;/span&gt;:&lt;span class="w"&gt; &lt;/span&gt;No&lt;span class="w"&gt; &lt;/span&gt;such&lt;span class="w"&gt; &lt;/span&gt;file&lt;span class="w"&gt; &lt;/span&gt;or&lt;span class="w"&gt; &lt;/span&gt;directory
+$&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;code&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nv"&gt;$?&lt;/span&gt;
+$&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nb"&gt;echo&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;exit was &lt;/span&gt;&lt;span class="nv"&gt;$code&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;
+&lt;span class="nb"&gt;exit&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;was&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;2&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h2&gt;The codes you'll actually meet&lt;/h2&gt;
+&lt;p&gt;Here's what I see day to day, all verified on this machine:&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Code&lt;/th&gt;
+&lt;th&gt;Meaning&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;0&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Success&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;1&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;General error, the catch-all&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;2&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Misuse of a shell builtin (bad option, missing argument)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;126&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Command found, but not executable&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;127&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Command not found&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;130&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Terminated by Ctrl-C&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;128+N&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Killed by signal N&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;The difference between 126 and 127 is worth internalising:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;$&lt;span class="w"&gt; &lt;/span&gt;nonexistent-command-xyz
+sh:&lt;span class="w"&gt; &lt;/span&gt;nonexistent-command-xyz:&lt;span class="w"&gt; &lt;/span&gt;not&lt;span class="w"&gt; &lt;/span&gt;found
+$&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nb"&gt;echo&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;$?&lt;/span&gt;
+&lt;span class="m"&gt;127&lt;/span&gt;
+
+$&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nb"&gt;printf&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;#!/bin/sh\necho hi\n&amp;#39;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&amp;gt;&lt;span class="w"&gt; &lt;/span&gt;script.sh
+$&lt;span class="w"&gt; &lt;/span&gt;chmod&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;644&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;script.sh&lt;span class="w"&gt;      &lt;/span&gt;&lt;span class="c1"&gt;# readable, but not executable&lt;/span&gt;
+$&lt;span class="w"&gt; &lt;/span&gt;./script.sh
+sh:&lt;span class="w"&gt; &lt;/span&gt;./script.sh:&lt;span class="w"&gt; &lt;/span&gt;Permission&lt;span class="w"&gt; &lt;/span&gt;denied
+$&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nb"&gt;echo&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;$?&lt;/span&gt;
+&lt;span class="m"&gt;126&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;127 means "I couldn't find it." 126 means "I found it, but it won't run." If a script works for you and fails on a server, that distinction is often the whole answer. A file that lost its execute bit during a copy gives you 126, not 127.&lt;/p&gt;
+&lt;h2&gt;128+N: the signal convention&lt;/h2&gt;
+&lt;p&gt;When a process is killed by a signal rather than exiting on its own, the shell reports &lt;code&gt;128 + signal_number&lt;/code&gt;. The three you'll meet most:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;130&lt;/code&gt; = 128 + 2, SIGINT. You pressed Ctrl-C.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;143&lt;/code&gt; = 128 + 15, SIGTERM. Something asked it to stop politely.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;137&lt;/code&gt; = 128 + 9, SIGKILL. Something killed it outright.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;That last one matters if you've ever had a process vanish on a small machine. 137 usually means the kernel's out-of-memory killer decided your process was the problem.&lt;/p&gt;
+&lt;p&gt;There's a trap here. Python reports signals differently. Where the shell says 143, Python's &lt;code&gt;subprocess&lt;/code&gt; says &lt;code&gt;-15&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nn"&gt;subprocess&lt;/span&gt;
+&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;r&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;subprocess&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;run&lt;/span&gt;&lt;span class="p"&gt;([&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;sh&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;-c&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;kill -TERM $$&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;r&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;returncode&lt;/span&gt;
+&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;15&lt;/span&gt;          &lt;span class="c1"&gt;# shell would have shown 143&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;A negative value means "died from signal N." If you're checking for a signal death in Python and comparing against 143, you'll never match it.&lt;/p&gt;
+&lt;h2&gt;Going past 255, or not&lt;/h2&gt;
+&lt;p&gt;An exit code is a single byte. The range is 0 to 255, and anything outside wraps around modulo 256:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;$&lt;span class="w"&gt; &lt;/span&gt;sh&lt;span class="w"&gt; &lt;/span&gt;-c&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;exit 256&amp;#39;&lt;/span&gt;
+$&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nb"&gt;echo&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;$?&lt;/span&gt;
+&lt;span class="m"&gt;0&lt;/span&gt;&lt;span class="w"&gt;            &lt;/span&gt;&lt;span class="c1"&gt;# 256 % 256 = 0&lt;/span&gt;
+$&lt;span class="w"&gt; &lt;/span&gt;sh&lt;span class="w"&gt; &lt;/span&gt;-c&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;exit 257&amp;#39;&lt;/span&gt;
+$&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nb"&gt;echo&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;$?&lt;/span&gt;
+&lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="w"&gt;            &lt;/span&gt;&lt;span class="c1"&gt;# 257 % 256 = 1&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Python behaves the same way, which is a genuine footgun:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;$&lt;span class="w"&gt; &lt;/span&gt;python3&lt;span class="w"&gt; &lt;/span&gt;-c&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;import sys; sys.exit(300)&amp;quot;&lt;/span&gt;
+$&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nb"&gt;echo&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;$?&lt;/span&gt;
+&lt;span class="m"&gt;44&lt;/span&gt;&lt;span class="w"&gt;           &lt;/span&gt;&lt;span class="c1"&gt;# 300 % 256&lt;/span&gt;
+$&lt;span class="w"&gt; &lt;/span&gt;python3&lt;span class="w"&gt; &lt;/span&gt;-c&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;import sys; sys.exit(-1)&amp;quot;&lt;/span&gt;
+$&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nb"&gt;echo&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;$?&lt;/span&gt;
+&lt;span class="m"&gt;255&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;So &lt;code&gt;sys.exit(-1)&lt;/code&gt; doesn't mean "error" in any special sense. It means 255. If you want a distinguishable failure code, pick a small positive number.&lt;/p&gt;
+&lt;h2&gt;The convention most people never hear about&lt;/h2&gt;
+&lt;p&gt;There's an older, more expressive set of codes from BSD's &lt;code&gt;sysexits.h&lt;/code&gt;. Almost nothing uses them by default, but they earn their keep when you're writing something a supervisor will restart, because they let you say why it failed and whether retrying could possibly help.&lt;/p&gt;
+&lt;p&gt;I use them in a trading bot I've been building. Four codes cover everything it needs to communicate:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;EX_OK&lt;/span&gt;     &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;    &lt;span class="c1"&gt;# success&lt;/span&gt;
+&lt;span class="n"&gt;EX_ERROR&lt;/span&gt;  &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;    &lt;span class="c1"&gt;# crash / repeated errors: restart with backoff&lt;/span&gt;
+&lt;span class="n"&gt;EX_LOCKED&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;75&lt;/span&gt;   &lt;span class="c1"&gt;# another instance holds the lock: do NOT thrash&lt;/span&gt;
+&lt;span class="n"&gt;EX_CONFIG&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;78&lt;/span&gt;   &lt;span class="c1"&gt;# bad config / secrets / corrupt state: restarting cannot help&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;The two interesting ones are 75 and 78.&lt;/p&gt;
+&lt;p&gt;75 (EX_TEMPFAIL) means "temporary failure, try again later." When my bot starts a second time while the first is still running, it exits 75. The supervisor reads that and knows not to hammer it, because another instance is already alive and restarting is pointless.&lt;/p&gt;
+&lt;p&gt;78 (EX_CONFIG) means the configuration is wrong. A missing API key, an unreadable state file, a typo in a config option. This one is the most valuable of the lot, because it tells the supervisor to stop trying. Restarting a process with a broken config produces the same failure in a loop, forever, burning resources and filling logs.&lt;/p&gt;
+&lt;p&gt;If a supervisor is going to restart your program, your exit codes are how you tell it whether that's a good idea. Zero and a generic 1 don't carry that information. 75 and 78 do.&lt;/p&gt;
+&lt;h2&gt;Using them in your own scripts&lt;/h2&gt;
+&lt;p&gt;In bash, &lt;code&gt;exit N&lt;/code&gt; sets the code. In Python, &lt;code&gt;sys.exit(N)&lt;/code&gt; raises &lt;code&gt;SystemExit&lt;/code&gt;, which the interpreter turns into the process code:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;$&lt;span class="w"&gt; &lt;/span&gt;python3&lt;span class="w"&gt; &lt;/span&gt;-c&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;import sys; sys.exit(75)&amp;quot;&lt;/span&gt;
+$&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nb"&gt;echo&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;$?&lt;/span&gt;
+&lt;span class="m"&gt;75&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;code&gt;SystemExit&lt;/code&gt; with a string is a special case. It prints the message and exits 1, not the number:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;$&lt;span class="w"&gt; &lt;/span&gt;python3&lt;span class="w"&gt; &lt;/span&gt;-c&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;raise SystemExit(&amp;#39;something went wrong&amp;#39;)&amp;quot;&lt;/span&gt;
+something&lt;span class="w"&gt; &lt;/span&gt;went&lt;span class="w"&gt; &lt;/span&gt;wrong
+$&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nb"&gt;echo&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;$?&lt;/span&gt;
+&lt;span class="m"&gt;1&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;If you want a specific code, pass an integer. If you want a message on stderr, print it yourself and then exit with the code.&lt;/p&gt;
+&lt;p&gt;One more habit worth adopting:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="ch"&gt;#!/bin/bash&lt;/span&gt;
+&lt;span class="nb"&gt;set&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;-euo&lt;span class="w"&gt; &lt;/span&gt;pipefail
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;code&gt;-e&lt;/code&gt; makes the script exit the moment any command fails, using that command's code. Without it, a failing step in the middle gets ignored and the script reports success at the end. That's the worst outcome, because it looks like it worked.&lt;/p&gt;
+&lt;h2&gt;Wrapping up&lt;/h2&gt;
+&lt;p&gt;Exit codes are a small, boring, useful protocol. Zero is success, everything else is a reason. The signal range starts at 128. The range is one byte, so it wraps. And the sysexits values, particularly 75 and 78, are how a program explains itself to whatever is supervising it.&lt;/p&gt;
+&lt;p&gt;Next time a script fails without saying why, check &lt;code&gt;$?&lt;/code&gt; before you change anything. It's probably already told you.&lt;/p&gt;</content><category term="misc"/><category term="bash"/><category term="linux"/><category term="python"/><category term="programming"/><category term="tutorial"/></entry><entry><title>Understanding the Linux File System — Part 1: Structure Walkthrough</title><link href="https://netzro.github.io/posts/2026/Sep/23/understanding-linux-file-system-part-1-structure-walkthrough/" rel="alternate"/><published>2026-09-23T00:00:00+01:00</published><updated>2026-09-23T00:00:00+01:00</updated><author><name>Gifted</name></author><id>tag:netzro.github.io,2026-09-23:/posts/2026/Sep/23/understanding-linux-file-system-part-1-structure-walkthrough/</id><summary type="html">&lt;p&gt;A hands-on walkthrough of the Linux filesystem hierarchy — what lives where, why it matters, and how to explore it yourself.&lt;/p&gt;</summary><content type="html">&lt;p&gt;Linux keeps everything under one root — &lt;code&gt;/&lt;/code&gt;. No drive letters, no &lt;code&gt;C:&lt;/code&gt; or &lt;code&gt;D:&lt;/code&gt;. Every storage device, every file, every configuration lives somewhere under this single tree. Once you get the layout, navigating any Linux system feels obvious.&lt;/p&gt;
 &lt;h2&gt;The Root Directory &lt;code&gt;/&lt;/code&gt;&lt;/h2&gt;
 &lt;p&gt;Everything starts here. &lt;code&gt;/&lt;/code&gt; is not your home directory — it's the top of the entire filesystem. Disks, partitions, and virtual filesystems all branch off from here.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;ls&lt;span class="w"&gt; &lt;/span&gt;/
@@ -1109,124 +1258,4 @@ cat&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s"&gt;&amp;lt;&amp;lt; &a
 &lt;p&gt;Pick an RDBMS (PostgreSQL is a great choice for learning), install it, and try running a few commands. Many come with free GUI tools like DBeaver or pgAdmin that make exploring tables a breeze.&lt;/p&gt;
 &lt;p&gt;The world of databases can feel vast, but it all starts with a single table. Take your time, ask questions, and soon enough, you'll be designing schemas and joining tables like a pro.&lt;/p&gt;
 &lt;hr&gt;
-&lt;p&gt;&lt;em&gt;Have you worked with an RDBMS before? Share your favorite tool or a tip for beginners in the comments.&lt;/em&gt;&lt;/p&gt;</content><category term="misc"/><category term="rdbms"/><category term="databases"/><category term="sql"/><category term="beginner"/></entry><entry><title>Globbing in Python, Part 1</title><link href="https://netzro.github.io/posts/2026/Aug/02/globbing-in-python/" rel="alternate"/><published>2026-08-02T00:00:00+01:00</published><updated>2026-08-02T00:00:00+01:00</updated><author><name>Gifted</name></author><id>tag:netzro.github.io,2026-08-02:/posts/2026/Aug/02/globbing-in-python/</id><summary type="html">&lt;p&gt;A beginner-friendly look at how glob patterns work in Python — &lt;code&gt;*&lt;/code&gt;, &lt;code&gt;?&lt;/code&gt;, &lt;code&gt;[...]&lt;/code&gt;, and the &lt;code&gt;glob&lt;/code&gt; module.&lt;/p&gt;</summary><content type="html">&lt;h2&gt;What globbing is&lt;/h2&gt;
-&lt;p&gt;Globbing is pattern matching for file paths. Instead of listing every file by name, you describe a shape and the system finds the matches.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;py&lt;/span&gt;&lt;span class="w"&gt;        &lt;/span&gt;&lt;span class="err"&gt;→&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ow"&gt;all&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;Python&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;files&lt;/span&gt;
-&lt;span class="n"&gt;data_&lt;/span&gt;&lt;span class="vm"&gt;?&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;csv&lt;/span&gt;&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="err"&gt;→&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;data_1&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;csv&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;data_A&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;csv&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;but&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ow"&gt;not&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;data_10&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;csv&lt;/span&gt;
-&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="n"&gt;abc&lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;txt&lt;/span&gt;&lt;span class="w"&gt;   &lt;/span&gt;&lt;span class="err"&gt;→&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;txt&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;b&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;txt&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ow"&gt;or&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;c&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;txt&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;Python has a built-in &lt;code&gt;glob&lt;/code&gt; module that does exactly this. No pip install needed.&lt;/p&gt;
-&lt;h2&gt;The basics: &lt;code&gt;*&lt;/code&gt; and &lt;code&gt;?&lt;/code&gt;&lt;/h2&gt;
-&lt;p&gt;The two most common patterns:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;*&lt;/code&gt; matches any number of characters (including zero)&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;?&lt;/code&gt; matches exactly one character&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;import&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nn"&gt;glob&lt;/span&gt;
-
-&lt;span class="c1"&gt;# All Python files in the current directory&lt;/span&gt;
-&lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;f&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;glob&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;glob&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;*.py&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
-    &lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-
-&lt;span class="c1"&gt;# Files like data_1.csv, data_X.csv — but not data_10.csv&lt;/span&gt;
-&lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;f&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;glob&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;glob&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;data_?.csv&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
-    &lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;code&gt;*&lt;/code&gt; is greedy. &lt;code&gt;*.py&lt;/code&gt; matches &lt;code&gt;setup.py&lt;/code&gt;, &lt;code&gt;my_script.py&lt;/code&gt;, even &lt;code&gt;.py&lt;/code&gt; (an empty name with an extension). If you want non-hidden files only, combine it:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="c1"&gt;# Hidden files (starting with .) are NOT matched by *&lt;/span&gt;
-&lt;span class="n"&gt;glob&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;glob&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;*.py&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;    &lt;span class="c1"&gt;# finds app.py, not .hidden.py&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h2&gt;Character classes: &lt;code&gt;[...]&lt;/code&gt;&lt;/h2&gt;
-&lt;p&gt;Square brackets match one character from a set:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="c1"&gt;# Exactly one character from the set a, b, or c&lt;/span&gt;
-&lt;span class="n"&gt;glob&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;glob&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;[abc].txt&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;   &lt;span class="c1"&gt;# a.txt, b.txt, c.txt — not ab.txt&lt;/span&gt;
-
-&lt;span class="c1"&gt;# Ranges work too&lt;/span&gt;
-&lt;span class="n"&gt;glob&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;glob&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;file[0-9].log&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;  &lt;span class="c1"&gt;# file0.log, file1.log, ... file9.log&lt;/span&gt;
-
-&lt;span class="c1"&gt;# Negation with ^ or !&lt;/span&gt;
-&lt;span class="n"&gt;glob&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;glob&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;file[^0-9].log&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;  &lt;span class="c1"&gt;# fileX.log, fileA.log — not file1.log&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h2&gt;Recursive glob with &lt;code&gt;**&lt;/code&gt;&lt;/h2&gt;
-&lt;p&gt;Python 3.5+ supports recursive globbing with &lt;code&gt;**&lt;/code&gt;. This is the most useful pattern for real work:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;import&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nn"&gt;glob&lt;/span&gt;
-
-&lt;span class="c1"&gt;# All Python files in current dir and every subdirectory&lt;/span&gt;
-&lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;f&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;glob&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;glob&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;**/*.py&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;recursive&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kc"&gt;True&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
-    &lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-
-&lt;span class="c1"&gt;# All markdown files anywhere under content/&lt;/span&gt;
-&lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;f&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;glob&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;glob&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;content/**/*.md&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;recursive&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kc"&gt;True&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
-    &lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;Without &lt;code&gt;recursive=True&lt;/code&gt;, &lt;code&gt;**&lt;/code&gt; is treated like &lt;code&gt;*&lt;/code&gt; — it does NOT descend into subdirectories.&lt;/p&gt;
-&lt;h2&gt;&lt;code&gt;glob&lt;/code&gt; vs &lt;code&gt;os.scandir&lt;/code&gt; vs &lt;code&gt;pathlib.Path.glob&lt;/code&gt;&lt;/h2&gt;
-&lt;p&gt;Python gives you three ways to glob. Use each when:&lt;/p&gt;
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;Method&lt;/th&gt;
-&lt;th&gt;Best for&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;glob.glob()&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;Quick one-liners, shell-like patterns&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;pathlib.Path.glob()&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;Object-oriented workflows, chaining with other path ops&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;os.scandir()&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;When you need fine control (filter by stat, avoid recursion)&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;from&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nn"&gt;pathlib&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;Path&lt;/span&gt;
-
-&lt;span class="c1"&gt;# Same as glob.glob(&amp;quot;**/*.py&amp;quot;, recursive=True)&lt;/span&gt;
-&lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;f&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;Path&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;.&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;glob&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;**/*.py&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
-    &lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-
-&lt;span class="c1"&gt;# Filter by something else&lt;/span&gt;
-&lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;f&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;Path&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;.&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;glob&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;**/*.py&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
-    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;stat&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;st_size&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="mi"&gt;1000&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
-        &lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="sa"&gt;f&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="si"&gt;{&lt;/span&gt;&lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt; (&lt;/span&gt;&lt;span class="si"&gt;{&lt;/span&gt;&lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;stat&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;st_size&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt; bytes)&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;code&gt;pathlib&lt;/code&gt; is the modern choice. It returns &lt;code&gt;Path&lt;/code&gt; objects (not strings), so you can call &lt;code&gt;.read_text()&lt;/code&gt;, &lt;code&gt;.rename()&lt;/code&gt;, &lt;code&gt;.stem&lt;/code&gt;, &lt;code&gt;.suffix&lt;/code&gt; directly.&lt;/p&gt;
-&lt;h2&gt;Common pitfalls&lt;/h2&gt;
-&lt;ol&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;Hidden files are invisible to &lt;code&gt;*&lt;/code&gt;&lt;/strong&gt; — files starting with &lt;code&gt;.&lt;/code&gt; are skipped by default. If you need them, use &lt;code&gt;glob.glob(".*")&lt;/code&gt; explicitly.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;&lt;code&gt;**&lt;/code&gt; without &lt;code&gt;recursive=True&lt;/code&gt; is a no-op for recursion&lt;/strong&gt; — it acts like &lt;code&gt;*&lt;/code&gt; and only matches the current directory.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;Glob returns strings, not sorted&lt;/strong&gt; — the order is filesystem-dependent. If you need sorted results, wrap it: &lt;code&gt;sorted(glob.glob("*.py"))&lt;/code&gt;.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;No match returns an empty list, not an error&lt;/strong&gt; — always handle the empty case if the result drives further logic.&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;files&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;glob&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;glob&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;nonexistent/*.py&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="ow"&gt;not&lt;/span&gt; &lt;span class="n"&gt;files&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
-    &lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;No matches — check the directory and pattern.&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h2&gt;Try it yourself&lt;/h2&gt;
-&lt;p&gt;Open a Python REPL and try:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;import&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nn"&gt;glob&lt;/span&gt;
-&lt;span class="n"&gt;glob&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;glob&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;**/*.md&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;recursive&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kc"&gt;True&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;See how many markdown files exist under your current directory. Then try &lt;code&gt;glob.glob("content/posts/**/*.md", recursive=True)&lt;/code&gt; to list every blog post.&lt;/p&gt;
-&lt;p&gt;In &lt;strong&gt;Part 2&lt;/strong&gt;, we'll go further — &lt;code&gt;fnmatch&lt;/code&gt; for string-only matching, brace expansion, writing a custom glob engine, and globbing across remote filesystems.&lt;/p&gt;</content><category term="misc"/><category term="python"/><category term="globbing"/><category term="programming"/><category term="tutorial"/></entry></feed>
+&lt;p&gt;&lt;em&gt;Have you worked with an RDBMS before? Share your favorite tool or a tip for beginners in the comments.&lt;/em&gt;&lt;/p&gt;</content><category term="misc"/><category term="rdbms"/><category term="databases"/><category term="sql"/><category term="beginner"/></entry></feed>
