@@ -166,3 +166,7 @@ cython_debug/
 
 # scratch dir (profile workspace standard 2026-08-10)
 tmp/
+
+# Zettel Notes app state — not content. Created by the app when a folder is
+# opened; never belongs in the repo.
+.zettel-notes/
