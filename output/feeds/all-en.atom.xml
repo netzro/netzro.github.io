@@ -1,5 +1,131 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Gifted Space</title><link href="https://netzro.github.io/" rel="alternate"/><link href="https://netzro.github.io/feeds/all-en.atom.xml" rel="self"/><id>https://netzro.github.io/</id><updated>2026-10-11T00:00:00+01:00</updated><entry><title>Exit Codes: The Numbers Your Terminal Won't Show You</title><link href="https://netzro.github.io/posts/2026/Oct/11/exit-codes/" rel="alternate"/><published>2026-10-11T00:00:00+01:00</published><updated>2026-10-11T00:00:00+01:00</updated><author><name>Gifted</name></author><id>tag:netzro.github.io,2026-10-11:/posts/2026/Oct/11/exit-codes/</id><summary type="html">&lt;p&gt;A practical guide to exit codes — what 0, 1, 2, 126, 127 and 128+N actually mean, why 75 and 78 matter, and how to use them in your own scripts.&lt;/p&gt;</summary><content type="html">&lt;h1&gt;Exit Codes: The Numbers Your Terminal Won't Show You&lt;/h1&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Gifted Space</title><link href="https://netzro.github.io/" rel="alternate"/><link href="https://netzro.github.io/feeds/all-en.atom.xml" rel="self"/><id>https://netzro.github.io/</id><updated>2026-10-12T00:00:00+01:00</updated><entry><title>Understanding the Linux File System — Part 2: Inodes, Links, and Permissions</title><link href="https://netzro.github.io/posts/2026/Oct/12/understanding-linux-file-system-part-2-inodes-links-permissions/" rel="alternate"/><published>2026-10-12T00:00:00+01:00</published><updated>2026-10-12T00:00:00+01:00</updated><author><name>Gifted</name></author><id>tag:netzro.github.io,2026-10-12:/posts/2026/Oct/12/understanding-linux-file-system-part-2-inodes-links-permissions/</id><summary type="html">&lt;p&gt;Inodes, hard vs soft links, and the rwx permission model — the parts of the Linux filesystem that Part 1 only walked past.&lt;/p&gt;</summary><content type="html">&lt;h1&gt;Understanding the Linux File System — Part 2: Inodes, Links, and Permissions&lt;/h1&gt;
+&lt;p&gt;In &lt;a href="https://netzro.github.io/posts/2026/Sep/23/understanding-linux-file-system-part-1-structure-walkthrough/"&gt;Part 1&lt;/a&gt; I walked the directory tree: what lives in &lt;code&gt;/etc&lt;/code&gt;, why &lt;code&gt;/proc&lt;/code&gt; isn't real storage, where your logs go. This part goes underneath the tree.&lt;/p&gt;
+&lt;p&gt;Because the tree is a lie of convenience. A directory is not a container holding your files. It's a list of names mapped to numbers, and those numbers point somewhere else entirely. Once that clicks, links and permissions stop being trivia and start being obvious.&lt;/p&gt;
+&lt;h2&gt;What an inode actually is&lt;/h2&gt;
+&lt;p&gt;Every file on a Linux filesystem has an &lt;strong&gt;inode&lt;/strong&gt;: a numbered record holding everything about the file except its name and its contents.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;$&lt;span class="w"&gt; &lt;/span&gt;ls&lt;span class="w"&gt; &lt;/span&gt;-li&lt;span class="w"&gt; &lt;/span&gt;demo.txt
+&lt;span class="m"&gt;4033239&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;-rw-------.&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;u0_a362&lt;span class="w"&gt; &lt;/span&gt;u0_a362&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;6&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;Oct&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;11&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;09&lt;/span&gt;:21&lt;span class="w"&gt; &lt;/span&gt;demo.txt
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;That leading &lt;code&gt;4033239&lt;/code&gt; is the inode number. Ask for it directly:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;$&lt;span class="w"&gt; &lt;/span&gt;stat&lt;span class="w"&gt; &lt;/span&gt;-c&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;%n inode=%i links=%h type=%F&amp;#39;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;demo.txt
+demo.txt&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;inode&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;4033239&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;links&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;type&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;regular&lt;span class="w"&gt; &lt;/span&gt;file
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;The inode stores the file's size, owner, group, permission bits, timestamps, and the pointers to where the actual data blocks live on disk. What it does &lt;strong&gt;not&lt;/strong&gt; store is the filename. The name lives in the directory, as an entry pointing at the inode.&lt;/p&gt;
+&lt;p&gt;So the mental model is:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;directory entry  ──►  inode  ──►  data blocks
+   &amp;quot;demo.txt&amp;quot;         4033239       (on disk)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;That separation is the whole reason links exist, and the whole reason &lt;code&gt;rm&lt;/code&gt; doesn't always delete your data.&lt;/p&gt;
+&lt;h2&gt;Hard links: two names, one inode&lt;/h2&gt;
+&lt;p&gt;A hard link is a second directory entry pointing at the same inode. On a normal Linux system:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;$&lt;span class="w"&gt; &lt;/span&gt;ln&lt;span class="w"&gt; &lt;/span&gt;demo.txt&lt;span class="w"&gt; &lt;/span&gt;hardlink.txt
+$&lt;span class="w"&gt; &lt;/span&gt;ls&lt;span class="w"&gt; &lt;/span&gt;-li&lt;span class="w"&gt; &lt;/span&gt;demo.txt&lt;span class="w"&gt; &lt;/span&gt;hardlink.txt
+&lt;span class="m"&gt;4033239&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;-rw-------.&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;2&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;u0_a362&lt;span class="w"&gt; &lt;/span&gt;u0_a362&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;6&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;Oct&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;11&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;09&lt;/span&gt;:21&lt;span class="w"&gt; &lt;/span&gt;demo.txt
+&lt;span class="m"&gt;4033239&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;-rw-------.&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;2&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;u0_a362&lt;span class="w"&gt; &lt;/span&gt;u0_a362&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;6&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;Oct&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;11&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;09&lt;/span&gt;:21&lt;span class="w"&gt; &lt;/span&gt;hardlink.txt
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Same inode number. Same data. The link count went from 1 to 2, which is what that third column means.&lt;/p&gt;
+&lt;p&gt;This is why deleting a hard-linked file doesn't destroy the data:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;$&lt;span class="w"&gt; &lt;/span&gt;rm&lt;span class="w"&gt; &lt;/span&gt;demo.txt
+$&lt;span class="w"&gt; &lt;/span&gt;cat&lt;span class="w"&gt; &lt;/span&gt;hardlink.txt
+hello
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;code&gt;rm&lt;/code&gt; removed one &lt;em&gt;name&lt;/em&gt;. The inode still has a link count of 1, so the data stays. The kernel only frees the blocks when the link count hits zero and nothing has the file open.&lt;/p&gt;
+&lt;p&gt;Two consequences worth knowing: hard links can't cross filesystems, because an inode number is only unique within its own filesystem. And you generally can't hard-link a directory, because that would let you build a loop in the tree.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;A caveat on that block above.&lt;/strong&gt; I couldn't run it on the machine I write these posts from. Termux on Android returns &lt;code&gt;Permission denied&lt;/code&gt; for &lt;code&gt;ln&lt;/code&gt; without &lt;code&gt;-s&lt;/code&gt;, because app storage here is f2fs under SELinux, which blocks hard links for app processes. The behaviour I've described is standard Linux and it's what you'll see on any normal distro, but that transcript is from the manual, not from this phone. I'd rather flag it than let it pass as something I ran.&lt;/p&gt;
+&lt;h2&gt;Soft links: a name pointing at a name&lt;/h2&gt;
+&lt;p&gt;A symbolic link (symlink) is a different animal. It's its own file, with its own inode, whose &lt;em&gt;contents&lt;/em&gt; are a path.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;$&lt;span class="w"&gt; &lt;/span&gt;ln&lt;span class="w"&gt; &lt;/span&gt;-s&lt;span class="w"&gt; &lt;/span&gt;demo.txt&lt;span class="w"&gt; &lt;/span&gt;symlink.txt
+$&lt;span class="w"&gt; &lt;/span&gt;ls&lt;span class="w"&gt; &lt;/span&gt;-li&lt;span class="w"&gt; &lt;/span&gt;demo.txt&lt;span class="w"&gt; &lt;/span&gt;symlink.txt
+&lt;span class="m"&gt;4033239&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;-rw-------.&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;u0_a362&lt;span class="w"&gt; &lt;/span&gt;u0_a362&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;6&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;Oct&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;11&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;09&lt;/span&gt;:21&lt;span class="w"&gt; &lt;/span&gt;demo.txt
+&lt;span class="m"&gt;4033289&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;lrwxrwxrwx.&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;u0_a362&lt;span class="w"&gt; &lt;/span&gt;u0_a362&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;8&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;Oct&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;11&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;09&lt;/span&gt;:21&lt;span class="w"&gt; &lt;/span&gt;symlink.txt&lt;span class="w"&gt; &lt;/span&gt;-&amp;gt;&lt;span class="w"&gt; &lt;/span&gt;demo.txt
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Different inode. The &lt;code&gt;l&lt;/code&gt; at the start of the permissions marks it as a link, and the &lt;code&gt;-&amp;gt;&lt;/code&gt; shows where it points.&lt;/p&gt;
+&lt;p&gt;The practical difference: a symlink stores a &lt;em&gt;path&lt;/em&gt;, not an inode. So it can cross filesystems, and it can point at something that doesn't exist. That second property is what makes broken links possible:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;$&lt;span class="w"&gt; &lt;/span&gt;ln&lt;span class="w"&gt; &lt;/span&gt;-sf&lt;span class="w"&gt; &lt;/span&gt;/nonexistent/target&lt;span class="w"&gt; &lt;/span&gt;broken.lnk
+$&lt;span class="w"&gt; &lt;/span&gt;cat&lt;span class="w"&gt; &lt;/span&gt;broken.lnk
+cat:&lt;span class="w"&gt; &lt;/span&gt;broken.lnk:&lt;span class="w"&gt; &lt;/span&gt;No&lt;span class="w"&gt; &lt;/span&gt;such&lt;span class="w"&gt; &lt;/span&gt;file&lt;span class="w"&gt; &lt;/span&gt;or&lt;span class="w"&gt; &lt;/span&gt;directory
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;The link itself is perfectly valid. It just points nowhere. &lt;code&gt;ls -l&lt;/code&gt; still shows it:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;$&lt;span class="w"&gt; &lt;/span&gt;ls&lt;span class="w"&gt; &lt;/span&gt;-l&lt;span class="w"&gt; &lt;/span&gt;broken.lnk
+lrwxrwxrwx.&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;u0_a362&lt;span class="w"&gt; &lt;/span&gt;u0_a362&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;19&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;Oct&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;11&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;09&lt;/span&gt;:22&lt;span class="w"&gt; &lt;/span&gt;broken.lnk&lt;span class="w"&gt; &lt;/span&gt;-&amp;gt;&lt;span class="w"&gt; &lt;/span&gt;/nonexistent/target
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Symlinks also chain. Point a link at a link and reading it follows the whole path:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;$&lt;span class="w"&gt; &lt;/span&gt;ln&lt;span class="w"&gt; &lt;/span&gt;-s&lt;span class="w"&gt; &lt;/span&gt;orig.txt&lt;span class="w"&gt; &lt;/span&gt;link1
+$&lt;span class="w"&gt; &lt;/span&gt;ln&lt;span class="w"&gt; &lt;/span&gt;-s&lt;span class="w"&gt; &lt;/span&gt;link1&lt;span class="w"&gt; &lt;/span&gt;link2
+$&lt;span class="w"&gt; &lt;/span&gt;cat&lt;span class="w"&gt; &lt;/span&gt;link2
+data
+$&lt;span class="w"&gt; &lt;/span&gt;rm&lt;span class="w"&gt; &lt;/span&gt;orig.txt
+$&lt;span class="w"&gt; &lt;/span&gt;cat&lt;span class="w"&gt; &lt;/span&gt;link2
+cat:&lt;span class="w"&gt; &lt;/span&gt;link2:&lt;span class="w"&gt; &lt;/span&gt;No&lt;span class="w"&gt; &lt;/span&gt;such&lt;span class="w"&gt; &lt;/span&gt;file&lt;span class="w"&gt; &lt;/span&gt;or&lt;span class="w"&gt; &lt;/span&gt;directory
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Remove the real file and the entire chain collapses, because every link in it is just a path that no longer resolves.&lt;/p&gt;
+&lt;h2&gt;Permissions: who can do what&lt;/h2&gt;
+&lt;p&gt;Every inode carries nine permission bits, in three groups of three:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;-rwxr-xr-x
+ │││ │││ │││
+ │││ │││ └┴┴── others
+ │││ └┴┴───── group
+ └┴┴──────── owner
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Each group is &lt;code&gt;r&lt;/code&gt; (read), &lt;code&gt;w&lt;/code&gt; (write), &lt;code&gt;x&lt;/code&gt; (execute). For files, &lt;code&gt;x&lt;/code&gt; means "can be run as a program." For directories, it means something different: &lt;strong&gt;&lt;code&gt;x&lt;/code&gt; is the right to traverse into the directory.&lt;/strong&gt; A directory you can read but not traverse lets you list names and nothing else.&lt;/p&gt;
+&lt;p&gt;Each group is really a three-bit number, which is where the octal notation comes from. Here's the table, verified on this machine:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;$&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;for&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;m&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;in&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;777&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;755&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;644&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;600&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;400&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;do&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nb"&gt;printf&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;x&amp;#39;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&amp;gt;&lt;span class="w"&gt; &lt;/span&gt;p.tmp&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;chmod&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;$m&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;p.tmp
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="nb"&gt;printf&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;  %s -&amp;gt; %s\n&amp;quot;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="nv"&gt;$m&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="k"&gt;$(&lt;/span&gt;stat&lt;span class="w"&gt; &lt;/span&gt;-c&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;%A&amp;#39;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;p.tmp&lt;span class="k"&gt;)&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;done&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="m"&gt;777&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;-&amp;gt;&lt;span class="w"&gt; &lt;/span&gt;-rwxrwxrwx
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="m"&gt;755&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;-&amp;gt;&lt;span class="w"&gt; &lt;/span&gt;-rwxr-xr-x
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="m"&gt;644&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;-&amp;gt;&lt;span class="w"&gt; &lt;/span&gt;-rw-r--r--
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="m"&gt;600&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;-&amp;gt;&lt;span class="w"&gt; &lt;/span&gt;-rw-------
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="m"&gt;400&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;-&amp;gt;&lt;span class="w"&gt; &lt;/span&gt;-r--------
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;The four you'll actually type:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;755&lt;/strong&gt; — owner can read, write, execute; everyone else can read and execute. Directories, scripts, anything executable.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;644&lt;/strong&gt; — owner reads and writes; everyone else only reads. Documents, configs, most files.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;600&lt;/strong&gt; — owner only. Private keys, tokens, anything secret.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;400&lt;/strong&gt; — read-only, even for the owner. Rare, but it's the "don't touch this" bit.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The execute bit is not decoration. Watch what happens without it:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;$&lt;span class="w"&gt; &lt;/span&gt;chmod&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;644&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;e.sh
+$&lt;span class="w"&gt; &lt;/span&gt;./e.sh
+bash:&lt;span class="w"&gt; &lt;/span&gt;./e.sh:&lt;span class="w"&gt; &lt;/span&gt;Permission&lt;span class="w"&gt; &lt;/span&gt;denied
+$&lt;span class="w"&gt; &lt;/span&gt;chmod&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;755&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;e.sh
+$&lt;span class="w"&gt; &lt;/span&gt;./e.sh
+ran
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;A file with &lt;code&gt;rw&lt;/code&gt; and no &lt;code&gt;x&lt;/code&gt; is just text. You can read it all day, but the kernel won't execute it. That's the entire difference between a script and a document.&lt;/p&gt;
+&lt;h2&gt;Where new file permissions come from&lt;/h2&gt;
+&lt;p&gt;When you create a file, the permissions aren't chosen by the app — they're the result of a mask called &lt;code&gt;umask&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;$&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nb"&gt;umask&lt;/span&gt;
+&lt;span class="m"&gt;0077&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;code&gt;umask&lt;/code&gt; lists the bits to &lt;em&gt;remove&lt;/em&gt; from the default. On this machine it's &lt;code&gt;0077&lt;/code&gt;, so group and others get nothing, and every new file lands at &lt;code&gt;600&lt;/code&gt;. On a typical desktop &lt;code&gt;umask&lt;/code&gt; is &lt;code&gt;022&lt;/code&gt;, giving new files &lt;code&gt;644&lt;/code&gt; and new directories &lt;code&gt;755&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;That's why the same script behaves differently on two machines: the code is identical, but &lt;code&gt;umask&lt;/code&gt; decided what the file could do when it was created.&lt;/p&gt;
+&lt;h2&gt;Why inodes can run out&lt;/h2&gt;
+&lt;p&gt;Disk space and inodes are counted separately. A filesystem has a fixed number of inodes, set when it was created, and a file consumes one regardless of its size.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;$&lt;span class="w"&gt; &lt;/span&gt;df&lt;span class="w"&gt; &lt;/span&gt;-i&lt;span class="w"&gt; &lt;/span&gt;/data
+Filesystem&lt;span class="w"&gt;         &lt;/span&gt;Inodes&lt;span class="w"&gt;   &lt;/span&gt;IUsed&lt;span class="w"&gt;   &lt;/span&gt;IFree&lt;span class="w"&gt; &lt;/span&gt;IUse%&lt;span class="w"&gt; &lt;/span&gt;Mounted&lt;span class="w"&gt; &lt;/span&gt;on
+/dev/block/dm-59&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;12354048&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;9128412&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;3225636&lt;/span&gt;&lt;span class="w"&gt;   &lt;/span&gt;&lt;span class="m"&gt;74&lt;/span&gt;%&lt;span class="w"&gt; &lt;/span&gt;/data/user/0
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;74% of the inodes on this device are gone while there's still free space. That's normal here — Android app storage is millions of tiny files — but it's the classic failure mode elsewhere: a mail queue or a cache directory fills up with millions of empty files, &lt;code&gt;df -h&lt;/code&gt; reports plenty of room, and every write fails with "no space left on device." The space isn't the problem. The inode table is.&lt;/p&gt;
+&lt;h2&gt;Personal Note&lt;/h2&gt;
+&lt;p&gt;Part 1 was about navigating the tree. This part is about what the tree is made of, and it changed how I read &lt;code&gt;ls -l&lt;/code&gt; output. That leading inode number used to be noise. Now it's the first thing I check when two files look identical but behave differently, because identical-looking names with different inodes are two different files, and identical inodes are two names for one file.&lt;/p&gt;
+&lt;p&gt;The filename is not the file. The name is a label in a directory pointing at a numbered record, and almost every surprising thing about Linux file behaviour follows from that one fact.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Go back to &lt;a href="https://netzro.github.io/posts/2026/Sep/23/understanding-linux-file-system-part-1-structure-walkthrough/"&gt;Part 1&lt;/a&gt; for the directory tree walkthrough.&lt;/em&gt;&lt;/p&gt;</content><category term="misc"/><category term="linux"/><category term="filesystem"/><category term="tutorial"/></entry><entry><title>Exit Codes: The Numbers Your Terminal Won't Show You</title><link href="https://netzro.github.io/posts/2026/Oct/11/exit-codes/" rel="alternate"/><published>2026-10-11T00:00:00+01:00</published><updated>2026-10-11T00:00:00+01:00</updated><author><name>Gifted</name></author><id>tag:netzro.github.io,2026-10-11:/posts/2026/Oct/11/exit-codes/</id><summary type="html">&lt;p&gt;A practical guide to exit codes — what 0, 1, 2, 126, 127 and 128+N actually mean, why 75 and 78 matter, and how to use them in your own scripts.&lt;/p&gt;</summary><content type="html">&lt;h1&gt;Exit Codes: The Numbers Your Terminal Won't Show You&lt;/h1&gt;
 &lt;p&gt;Every command you run ends by handing your shell a number. Almost nobody looks at it, which is a shame, because when something fails silently that number is usually the only witness.&lt;/p&gt;
 &lt;h2&gt;The one rule everything follows&lt;/h2&gt;
 &lt;p&gt;Zero means success. Anything else means failure.&lt;/p&gt;
@@ -1194,68 +1320,4 @@ cat&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s"&gt;&amp;lt;&amp;lt; &a
 &lt;li&gt;&lt;strong&gt;Ordered, mutable collection&lt;/strong&gt; → &lt;code&gt;list&lt;/code&gt;&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;Ordered, immutable record or key&lt;/strong&gt; → &lt;code&gt;tuple&lt;/code&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;When the built-in falls short on complexity or ergonomics, the &lt;code&gt;collections&lt;/code&gt; module usually has a tuned specialist: &lt;code&gt;deque&lt;/code&gt; for queues, &lt;code&gt;Counter&lt;/code&gt; for tallies, &lt;code&gt;defaultdict&lt;/code&gt; for grouping. Reach for them when they remove real boilerplate — not because they are "more advanced." The best data structure is the one whose complexity you do not pay for, and whose clarity saves more time than you spend learning it.&lt;/p&gt;</content><category term="misc"/><category term="python"/><category term="data structures"/><category term="programming"/></entry><entry><title>A Gentle Introduction to RDBMS</title><link href="https://netzro.github.io/posts/2026/Aug/20/gentle-intro-to-rdbms/" rel="alternate"/><published>2026-08-20T00:00:00+01:00</published><updated>2026-08-20T00:00:00+01:00</updated><author><name>Gifted</name></author><id>tag:netzro.github.io,2026-08-20:/posts/2026/Aug/20/gentle-intro-to-rdbms/</id><summary type="html">&lt;p&gt;A beginner-friendly walkthrough of Relational Database Management Systems: what they are, how they organize data, and core concepts to get started.&lt;/p&gt;</summary><content type="html">&lt;h2&gt;A Gentle Introduction to RDBMS&lt;/h2&gt;
-&lt;p&gt;If you've ever wondered how apps like Twitter, your banking portal, or even this blog store and retrieve data efficiently, chances are they're using a &lt;strong&gt;Relational Database Management System (RDBMS)&lt;/strong&gt;.&lt;/p&gt;
-&lt;h3&gt;So, What Is an RDBMS?&lt;/h3&gt;
-&lt;p&gt;At its core, an RDBMS is software that lets you create, manage, and interact with databases in a structured way. Think of it as a highly organized digital filing cabinet. Instead of tossing everything into one big drawer, an RDBMS keeps data in neat, labeled folders — called &lt;strong&gt;tables&lt;/strong&gt;.&lt;/p&gt;
-&lt;p&gt;Each table holds rows (also called &lt;strong&gt;records&lt;/strong&gt;) and columns (called &lt;strong&gt;fields&lt;/strong&gt;). For example, a &lt;code&gt;users&lt;/code&gt; table might look like this:&lt;/p&gt;
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;id&lt;/th&gt;
-&lt;th&gt;name&lt;/th&gt;
-&lt;th&gt;email&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;1&lt;/td&gt;
-&lt;td&gt;Alice&lt;/td&gt;
-&lt;td&gt;alice@example.com&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;2&lt;/td&gt;
-&lt;td&gt;Bob&lt;/td&gt;
-&lt;td&gt;bob@example.com&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;p&gt;This structure makes it easy to find, update, and relate data.&lt;/p&gt;
-&lt;h3&gt;Why "Relational"?&lt;/h3&gt;
-&lt;p&gt;The "relational" part means that tables can be linked — or related — to one another. This is done through &lt;strong&gt;keys&lt;/strong&gt;:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;A &lt;strong&gt;primary key&lt;/strong&gt; uniquely identifies each row in a table (like &lt;code&gt;id&lt;/code&gt; above).&lt;/li&gt;
-&lt;li&gt;A &lt;strong&gt;foreign key&lt;/strong&gt; is a column that links to a primary key in another table.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;For instance, if you have a &lt;code&gt;posts&lt;/code&gt; table, you could link each post back to its author using the &lt;code&gt;user_id&lt;/code&gt; column, which references the &lt;code&gt;id&lt;/code&gt; column in the &lt;code&gt;users&lt;/code&gt; table. This relationship lets you ask questions like "Show me all posts by Alice" without duplicating her name in every row.&lt;/p&gt;
-&lt;h3&gt;Common RDBMS Tools&lt;/h3&gt;
-&lt;p&gt;Some of the most popular RDBMS options include:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;PostgreSQL&lt;/strong&gt; — powerful, open-source, and feature-rich&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;MySQL&lt;/strong&gt; — widely used, especially in web applications&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;SQLite&lt;/strong&gt; — lightweight, file-based, great for mobile apps and small projects&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;MariaDB&lt;/strong&gt; — a community-driven fork of MySQL&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;Each has its own strengths, but they all speak &lt;strong&gt;SQL&lt;/strong&gt; (Structured Query Language) — the standard way to talk to relational databases.&lt;/p&gt;
-&lt;h3&gt;Basic SQL: A Few Friendly Commands&lt;/h3&gt;
-&lt;p&gt;Here are the four essential SQL operations, often called &lt;strong&gt;CRUD&lt;/strong&gt;:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;Create&lt;/strong&gt;: &lt;code&gt;INSERT INTO users (name, email) VALUES ('Charlie', 'charlie@example.com');&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Read&lt;/strong&gt;: &lt;code&gt;SELECT name FROM users WHERE id = 1;&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Update&lt;/strong&gt;: &lt;code&gt;UPDATE users SET email = 'new@example.com' WHERE id = 1;&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Delete&lt;/strong&gt;: &lt;code&gt;DELETE FROM users WHERE id = 1;&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;These simple commands let you build powerful data workflows.&lt;/p&gt;
-&lt;h3&gt;A Note on ACID&lt;/h3&gt;
-&lt;p&gt;Good RDBMS tools follow &lt;strong&gt;ACID&lt;/strong&gt; properties, which ensure your data stays reliable:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;Atomicity&lt;/strong&gt; — transactions succeed completely or not at all&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Consistency&lt;/strong&gt; — data remains valid after every operation&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Isolation&lt;/strong&gt; — concurrent operations don't interfere&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Durability&lt;/strong&gt; — once saved, data stays saved&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3&gt;Getting Started&lt;/h3&gt;
-&lt;p&gt;Pick an RDBMS (PostgreSQL is a great choice for learning), install it, and try running a few commands. Many come with free GUI tools like DBeaver or pgAdmin that make exploring tables a breeze.&lt;/p&gt;
-&lt;p&gt;The world of databases can feel vast, but it all starts with a single table. Take your time, ask questions, and soon enough, you'll be designing schemas and joining tables like a pro.&lt;/p&gt;
-&lt;hr&gt;
-&lt;p&gt;&lt;em&gt;Have you worked with an RDBMS before? Share your favorite tool or a tip for beginners in the comments.&lt;/em&gt;&lt;/p&gt;</content><category term="misc"/><category term="rdbms"/><category term="databases"/><category term="sql"/><category term="beginner"/></entry></feed>
+&lt;p&gt;When the built-in falls short on complexity or ergonomics, the &lt;code&gt;collections&lt;/code&gt; module usually has a tuned specialist: &lt;code&gt;deque&lt;/code&gt; for queues, &lt;code&gt;Counter&lt;/code&gt; for tallies, &lt;code&gt;defaultdict&lt;/code&gt; for grouping. Reach for them when they remove real boilerplate — not because they are "more advanced." The best data structure is the one whose complexity you do not pay for, and whose clarity saves more time than you spend learning it.&lt;/p&gt;</content><category term="misc"/><category term="python"/><category term="data structures"/><category term="programming"/></entry></feed>
