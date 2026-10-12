@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content="Pelican" />
+    <meta name="google-site-verification" content="A4y8JqsFj7oLMg1M1My15A25RDFuP-S1Y2Waa7Mw50s" />
+    <link rel="canonical" href="https://netzro.github.io/posts/2026/Oct/12/understanding-linux-file-system-part-2-inodes-links-permissions/" />
+    <title>Understanding the Linux File System — Part 2: Inodes, Links, and Permissions</title>
+    <meta name="description" content="Inodes, hard vs soft links, and the rwx permission model — the parts of the Linux filesystem that Part 1 only walked past." />
+    <!-- Open Graph -->
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="Gifted Space" />
+    <meta property="og:title" content="Understanding the Linux File System — Part 2: Inodes, Links, and Permissions" />
+    <meta property="og:description" content="Inodes, hard vs soft links, and the rwx permission model — the parts of the Linux filesystem that Part 1 only walked past." />
+    <meta property="og:url" content="https://netzro.github.io/posts/2026/Oct/12/understanding-linux-file-system-part-2-inodes-links-permissions/" />
+    <link rel="stylesheet" type="text/css" href="https://netzro.github.io/theme/css/mac-classic.css" />
+    <link rel="icon" href="https://netzro.github.io/images/favicon.ico" type="image/x-icon" />
+    <link href="https://netzro.github.io/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Gifted Space Atom Feed" />
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-VJD75C7TTC"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-VJD75C7TTC');
+</script>
+<meta name="description" content="Inodes, hard vs soft links, and the rwx permission model — the parts of the Linux filesystem that Part 1 only walked past." />
+    <script>
+        if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark')
+        }
+    </script>
+</head>
+<body>
+    <div class="mac-window">
+        <div class="mac-window__outer">
+            <div class="mac-window__inner">
+                <!-- Title Bar -->
+                <div class="mac-title-bar">
+                    <div class="mac-title-bar__grill">
+                        <div class="mac-title-bar__grill-line"></div>
+                        <div class="mac-title-bar__grill-line"></div>
+                        <div class="mac-title-bar__grill-line"></div>
+                        <div class="mac-title-bar__grill-line"></div>
+                        <div class="mac-title-bar__grill-line"></div>
+                        <div class="mac-title-bar__grill-line"></div>
+                    </div>
+                    <div class="mac-title-bar__title">Gifted Space</div>
+                </div>
+
+                <!-- Content -->
+                <div class="mac-content">
+                    <!-- Navigation -->
+                    <nav class="mac-nav">
+                        <ul class="mac-nav__list">
+                            <li class="mac-nav__item ">
+                                <a class="mac-nav__link" href="https://netzro.github.io/">Home</a>
+                            </li>
+                            <li class="mac-nav__item ">
+                                <a class="mac-nav__link" href="https://netzro.github.io/pages/about/">About</a>
+                            </li>
+                            <li class="mac-nav__item ">
+                                <a class="mac-nav__link" href="https://netzro.github.io/pages/projects/">Projects</a>
+                            </li>
+                            <li class="mac-nav__item ">
+                                <a class="mac-nav__link" href="https://netzro.github.io/pages/blogroll/">Blogroll</a>
+                            </li>
+                            <li class="mac-nav__item ">
+                                <a class="mac-nav__link" href="https://netzro.github.io/pages/reading-list/">Reading</a>
+                            </li>
+                            <li class="mac-nav__item ">
+                                <a class="mac-nav__link" href="https://netzro.github.io/pages/uses/">Uses</a>
+                            </li>
+                            <li class="mac-nav__item ">
+                                <a class="mac-nav__link" href="https://netzro.github.io/pages/movies/">Movies</a>
+                            </li>
+                            <li class="mac-nav__item ">
+                                <a class="mac-nav__link" href="https://netzro.github.io/pages/music/">Music</a>
+                            </li>
+                            <li class="mac-nav__item ">
+                                <a class="mac-nav__link" href="https://netzro.github.io/archives.html">Archive</a>
+                            </li>
+                            <li class="mac-nav__item ">
+                                <a class="mac-nav__link" href="https://netzro.github.io/tags.html">Tags</a>
+                            </li>
+                        </ul>
+                    </nav>
+
+                    <!-- Main Content -->
+                    <div class="mac-content__inner">
+<article class="mac-article">
+    <header class="mac-article__header">
+        <h1 class="mac-article__title">Understanding the Linux File System — Part 2: Inodes, Links, and Permissions</h1>
+        <div class="mac-article__meta">
+            <time>October 12, 2026</time>
+&nbsp;&middot;&nbsp;Gifted        </div>
+    </header>
+
+
+    <div class="mac-article__content">
+        <h1>Understanding the Linux File System — Part 2: Inodes, Links, and Permissions</h1>
+<p>In <a href="https://netzro.github.io/posts/2026/Sep/23/understanding-linux-file-system-part-1-structure-walkthrough/">Part 1</a> I walked the directory tree: what lives in <code>/etc</code>, why <code>/proc</code> isn't real storage, where your logs go. This part goes underneath the tree.</p>
+<p>Because the tree is a lie of convenience. A directory is not a container holding your files. It's a list of names mapped to numbers, and those numbers point somewhere else entirely. Once that clicks, links and permissions stop being trivia and start being obvious.</p>
+<h2>What an inode actually is</h2>
+<p>Every file on a Linux filesystem has an <strong>inode</strong>: a numbered record holding everything about the file except its name and its contents.</p>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>ls<span class="w"> </span>-li<span class="w"> </span>demo.txt
+<span class="m">4033239</span><span class="w"> </span>-rw-------.<span class="w"> </span><span class="m">1</span><span class="w"> </span>u0_a362<span class="w"> </span>u0_a362<span class="w"> </span><span class="m">6</span><span class="w"> </span>Oct<span class="w"> </span><span class="m">11</span><span class="w"> </span><span class="m">09</span>:21<span class="w"> </span>demo.txt
+</code></pre></div>
+
+<p>That leading <code>4033239</code> is the inode number. Ask for it directly:</p>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>stat<span class="w"> </span>-c<span class="w"> </span><span class="s1">&#39;%n inode=%i links=%h type=%F&#39;</span><span class="w"> </span>demo.txt
+demo.txt<span class="w"> </span><span class="nv">inode</span><span class="o">=</span><span class="m">4033239</span><span class="w"> </span><span class="nv">links</span><span class="o">=</span><span class="m">1</span><span class="w"> </span><span class="nv">type</span><span class="o">=</span>regular<span class="w"> </span>file
+</code></pre></div>
+
+<p>The inode stores the file's size, owner, group, permission bits, timestamps, and the pointers to where the actual data blocks live on disk. What it does <strong>not</strong> store is the filename. The name lives in the directory, as an entry pointing at the inode.</p>
+<p>So the mental model is:</p>
+<div class="highlight"><pre><span></span><code>directory entry  ──►  inode  ──►  data blocks
+   &quot;demo.txt&quot;         4033239       (on disk)
+</code></pre></div>
+
+<p>That separation is the whole reason links exist, and the whole reason <code>rm</code> doesn't always delete your data.</p>
+<h2>Hard links: two names, one inode</h2>
+<p>A hard link is a second directory entry pointing at the same inode. On a normal Linux system:</p>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>ln<span class="w"> </span>demo.txt<span class="w"> </span>hardlink.txt
+$<span class="w"> </span>ls<span class="w"> </span>-li<span class="w"> </span>demo.txt<span class="w"> </span>hardlink.txt
+<span class="m">4033239</span><span class="w"> </span>-rw-------.<span class="w"> </span><span class="m">2</span><span class="w"> </span>u0_a362<span class="w"> </span>u0_a362<span class="w"> </span><span class="m">6</span><span class="w"> </span>Oct<span class="w"> </span><span class="m">11</span><span class="w"> </span><span class="m">09</span>:21<span class="w"> </span>demo.txt
+<span class="m">4033239</span><span class="w"> </span>-rw-------.<span class="w"> </span><span class="m">2</span><span class="w"> </span>u0_a362<span class="w"> </span>u0_a362<span class="w"> </span><span class="m">6</span><span class="w"> </span>Oct<span class="w"> </span><span class="m">11</span><span class="w"> </span><span class="m">09</span>:21<span class="w"> </span>hardlink.txt
+</code></pre></div>
+
+<p>Same inode number. Same data. The link count went from 1 to 2, which is what that third column means.</p>
+<p>This is why deleting a hard-linked file doesn't destroy the data:</p>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>rm<span class="w"> </span>demo.txt
+$<span class="w"> </span>cat<span class="w"> </span>hardlink.txt
+hello
+</code></pre></div>
+
+<p><code>rm</code> removed one <em>name</em>. The inode still has a link count of 1, so the data stays. The kernel only frees the blocks when the link count hits zero and nothing has the file open.</p>
+<p>Two consequences worth knowing: hard links can't cross filesystems, because an inode number is only unique within its own filesystem. And you generally can't hard-link a directory, because that would let you build a loop in the tree.</p>
+<p><strong>A caveat on that block above.</strong> I couldn't run it on the machine I write these posts from. Termux on Android returns <code>Permission denied</code> for <code>ln</code> without <code>-s</code>, because app storage here is f2fs under SELinux, which blocks hard links for app processes. The behaviour I've described is standard Linux and it's what you'll see on any normal distro, but that transcript is from the manual, not from this phone. I'd rather flag it than let it pass as something I ran.</p>
+<h2>Soft links: a name pointing at a name</h2>
+<p>A symbolic link (symlink) is a different animal. It's its own file, with its own inode, whose <em>contents</em> are a path.</p>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>ln<span class="w"> </span>-s<span class="w"> </span>demo.txt<span class="w"> </span>symlink.txt
+$<span class="w"> </span>ls<span class="w"> </span>-li<span class="w"> </span>demo.txt<span class="w"> </span>symlink.txt
+<span class="m">4033239</span><span class="w"> </span>-rw-------.<span class="w"> </span><span class="m">1</span><span class="w"> </span>u0_a362<span class="w"> </span>u0_a362<span class="w"> </span><span class="m">6</span><span class="w"> </span>Oct<span class="w"> </span><span class="m">11</span><span class="w"> </span><span class="m">09</span>:21<span class="w"> </span>demo.txt
+<span class="m">4033289</span><span class="w"> </span>lrwxrwxrwx.<span class="w"> </span><span class="m">1</span><span class="w"> </span>u0_a362<span class="w"> </span>u0_a362<span class="w"> </span><span class="m">8</span><span class="w"> </span>Oct<span class="w"> </span><span class="m">11</span><span class="w"> </span><span class="m">09</span>:21<span class="w"> </span>symlink.txt<span class="w"> </span>-&gt;<span class="w"> </span>demo.txt
+</code></pre></div>
+
+<p>Different inode. The <code>l</code> at the start of the permissions marks it as a link, and the <code>-&gt;</code> shows where it points.</p>
+<p>The practical difference: a symlink stores a <em>path</em>, not an inode. So it can cross filesystems, and it can point at something that doesn't exist. That second property is what makes broken links possible:</p>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>ln<span class="w"> </span>-sf<span class="w"> </span>/nonexistent/target<span class="w"> </span>broken.lnk
+$<span class="w"> </span>cat<span class="w"> </span>broken.lnk
+cat:<span class="w"> </span>broken.lnk:<span class="w"> </span>No<span class="w"> </span>such<span class="w"> </span>file<span class="w"> </span>or<span class="w"> </span>directory
+</code></pre></div>
+
+<p>The link itself is perfectly valid. It just points nowhere. <code>ls -l</code> still shows it:</p>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>ls<span class="w"> </span>-l<span class="w"> </span>broken.lnk
+lrwxrwxrwx.<span class="w"> </span><span class="m">1</span><span class="w"> </span>u0_a362<span class="w"> </span>u0_a362<span class="w"> </span><span class="m">19</span><span class="w"> </span>Oct<span class="w"> </span><span class="m">11</span><span class="w"> </span><span class="m">09</span>:22<span class="w"> </span>broken.lnk<span class="w"> </span>-&gt;<span class="w"> </span>/nonexistent/target
+</code></pre></div>
+
+<p>Symlinks also chain. Point a link at a link and reading it follows the whole path:</p>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>ln<span class="w"> </span>-s<span class="w"> </span>orig.txt<span class="w"> </span>link1
+$<span class="w"> </span>ln<span class="w"> </span>-s<span class="w"> </span>link1<span class="w"> </span>link2
+$<span class="w"> </span>cat<span class="w"> </span>link2
+data
+$<span class="w"> </span>rm<span class="w"> </span>orig.txt
+$<span class="w"> </span>cat<span class="w"> </span>link2
+cat:<span class="w"> </span>link2:<span class="w"> </span>No<span class="w"> </span>such<span class="w"> </span>file<span class="w"> </span>or<span class="w"> </span>directory
+</code></pre></div>
+
+<p>Remove the real file and the entire chain collapses, because every link in it is just a path that no longer resolves.</p>
+<h2>Permissions: who can do what</h2>
+<p>Every inode carries nine permission bits, in three groups of three:</p>
+<div class="highlight"><pre><span></span><code>-rwxr-xr-x
+ │││ │││ │││
+ │││ │││ └┴┴── others
+ │││ └┴┴───── group
+ └┴┴──────── owner
+</code></pre></div>
+
+<p>Each group is <code>r</code> (read), <code>w</code> (write), <code>x</code> (execute). For files, <code>x</code> means "can be run as a program." For directories, it means something different: <strong><code>x</code> is the right to traverse into the directory.</strong> A directory you can read but not traverse lets you list names and nothing else.</p>
+<p>Each group is really a three-bit number, which is where the octal notation comes from. Here's the table, verified on this machine:</p>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span><span class="k">for</span><span class="w"> </span>m<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="m">777</span><span class="w"> </span><span class="m">755</span><span class="w"> </span><span class="m">644</span><span class="w"> </span><span class="m">600</span><span class="w"> </span><span class="m">400</span><span class="p">;</span><span class="w"> </span><span class="k">do</span><span class="w"> </span><span class="nb">printf</span><span class="w"> </span><span class="s1">&#39;x&#39;</span><span class="w"> </span>&gt;<span class="w"> </span>p.tmp<span class="p">;</span><span class="w"> </span>chmod<span class="w"> </span><span class="nv">$m</span><span class="w"> </span>p.tmp
+<span class="w">    </span><span class="nb">printf</span><span class="w"> </span><span class="s2">&quot;  %s -&gt; %s\n&quot;</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$m</span><span class="s2">&quot;</span><span class="w"> </span><span class="s2">&quot;</span><span class="k">$(</span>stat<span class="w"> </span>-c<span class="w"> </span><span class="s1">&#39;%A&#39;</span><span class="w"> </span>p.tmp<span class="k">)</span><span class="s2">&quot;</span><span class="p">;</span><span class="w"> </span><span class="k">done</span>
+<span class="w">  </span><span class="m">777</span><span class="w"> </span>-&gt;<span class="w"> </span>-rwxrwxrwx
+<span class="w">  </span><span class="m">755</span><span class="w"> </span>-&gt;<span class="w"> </span>-rwxr-xr-x
+<span class="w">  </span><span class="m">644</span><span class="w"> </span>-&gt;<span class="w"> </span>-rw-r--r--
+<span class="w">  </span><span class="m">600</span><span class="w"> </span>-&gt;<span class="w"> </span>-rw-------
+<span class="w">  </span><span class="m">400</span><span class="w"> </span>-&gt;<span class="w"> </span>-r--------
+</code></pre></div>
+
+<p>The four you'll actually type:</p>
+<ul>
+<li><strong>755</strong> — owner can read, write, execute; everyone else can read and execute. Directories, scripts, anything executable.</li>
+<li><strong>644</strong> — owner reads and writes; everyone else only reads. Documents, configs, most files.</li>
+<li><strong>600</strong> — owner only. Private keys, tokens, anything secret.</li>
+<li><strong>400</strong> — read-only, even for the owner. Rare, but it's the "don't touch this" bit.</li>
+</ul>
+<p>The execute bit is not decoration. Watch what happens without it:</p>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>chmod<span class="w"> </span><span class="m">644</span><span class="w"> </span>e.sh
+$<span class="w"> </span>./e.sh
+bash:<span class="w"> </span>./e.sh:<span class="w"> </span>Permission<span class="w"> </span>denied
+$<span class="w"> </span>chmod<span class="w"> </span><span class="m">755</span><span class="w"> </span>e.sh
+$<span class="w"> </span>./e.sh
+ran
+</code></pre></div>
+
+<p>A file with <code>rw</code> and no <code>x</code> is just text. You can read it all day, but the kernel won't execute it. That's the entire difference between a script and a document.</p>
+<h2>Where new file permissions come from</h2>
+<p>When you create a file, the permissions aren't chosen by the app — they're the result of a mask called <code>umask</code>:</p>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span><span class="nb">umask</span>
+<span class="m">0077</span>
+</code></pre></div>
+
+<p><code>umask</code> lists the bits to <em>remove</em> from the default. On this machine it's <code>0077</code>, so group and others get nothing, and every new file lands at <code>600</code>. On a typical desktop <code>umask</code> is <code>022</code>, giving new files <code>644</code> and new directories <code>755</code>.</p>
+<p>That's why the same script behaves differently on two machines: the code is identical, but <code>umask</code> decided what the file could do when it was created.</p>
+<h2>Why inodes can run out</h2>
+<p>Disk space and inodes are counted separately. A filesystem has a fixed number of inodes, set when it was created, and a file consumes one regardless of its size.</p>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>df<span class="w"> </span>-i<span class="w"> </span>/data
+Filesystem<span class="w">         </span>Inodes<span class="w">   </span>IUsed<span class="w">   </span>IFree<span class="w"> </span>IUse%<span class="w"> </span>Mounted<span class="w"> </span>on
+/dev/block/dm-59<span class="w"> </span><span class="m">12354048</span><span class="w"> </span><span class="m">9128412</span><span class="w"> </span><span class="m">3225636</span><span class="w">   </span><span class="m">74</span>%<span class="w"> </span>/data/user/0
+</code></pre></div>
+
+<p>74% of the inodes on this device are gone while there's still free space. That's normal here — Android app storage is millions of tiny files — but it's the classic failure mode elsewhere: a mail queue or a cache directory fills up with millions of empty files, <code>df -h</code> reports plenty of room, and every write fails with "no space left on device." The space isn't the problem. The inode table is.</p>
+<h2>Personal Note</h2>
+<p>Part 1 was about navigating the tree. This part is about what the tree is made of, and it changed how I read <code>ls -l</code> output. That leading inode number used to be noise. Now it's the first thing I check when two files look identical but behave differently, because identical-looking names with different inodes are two different files, and identical inodes are two names for one file.</p>
+<p>The filename is not the file. The name is a label in a directory pointing at a numbered record, and almost every surprising thing about Linux file behaviour follows from that one fact.</p>
+<p><em>Go back to <a href="https://netzro.github.io/posts/2026/Sep/23/understanding-linux-file-system-part-1-structure-walkthrough/">Part 1</a> for the directory tree walkthrough.</em></p>
+    </div>
+
+    <footer class="mac-tags">
+        <ul class="mac-tags__list">
+            <li class="mac-tags__item"><a href="https://netzro.github.io/tag/filesystem.html">filesystem</a></li>
+            <li class="mac-tags__item"><a href="https://netzro.github.io/tag/linux.html">linux</a></li>
+            <li class="mac-tags__item"><a href="https://netzro.github.io/tag/tutorial.html">tutorial</a></li>
+        </ul>
+    </footer>
+
+    <!-- Prev/Next -->
+    <nav style="margin-top: 2em; padding-top: 1em; border-top: 1px solid #eee;">
+        <div style="display: flex; justify-content: space-between; gap: 1em;">
+            <span></span>
+        </div>
+    </nav>
+
+    <!-- Share buttons -->
+    <div style="margin-top: 1.5em; text-align: center;">
+        <a target="_blank" rel="noopener noreferrer" title="Share on twitter" href="https://twitter.com/intent/tweet/?text=Features&amp;url=https://netzro.github.io/posts/2026/Oct/12/understanding-linux-file-system-part-2-inodes-links-permissions/" class="mac-btn" style="font-size: 11px;">
+            <i class="fab fa-twitter" aria-hidden="true"></i> twitter
+        </a>
+        <a target="_blank" rel="noopener noreferrer" title="Share on linkedin" href="https://www.linkedin.com/sharing/share-offsite/?url=https://netzro.github.io/posts/2026/Oct/12/understanding-linux-file-system-part-2-inodes-links-permissions/" class="mac-btn" style="font-size: 11px;">
+            <i class="fab fa-linkedin" aria-hidden="true"></i> linkedin
+        </a>
+        <a target="_blank" rel="noopener noreferrer" title="Share on reddit" href="https://reddit.com/submit?url=https://netzro.github.io/posts/2026/Oct/12/understanding-linux-file-system-part-2-inodes-links-permissions/" class="mac-btn" style="font-size: 11px;">
+            <i class="fab fa-reddit" aria-hidden="true"></i> reddit
+        </a>
+        <a target="_blank" rel="noopener noreferrer" title="Share on facebook" href="https://facebook.com/sharer/sharer.php?u=https://netzro.github.io/posts/2026/Oct/12/understanding-linux-file-system-part-2-inodes-links-permissions/" class="mac-btn" style="font-size: 11px;">
+            <i class="fab fa-facebook" aria-hidden="true"></i> facebook
+        </a>
+        <a target="_blank" rel="noopener noreferrer" title="Share on whatsapp" href="https://api.whatsapp.com/send?text=Features - https://netzro.github.io/posts/2026/Oct/12/understanding-linux-file-system-part-2-inodes-links-permissions/" class="mac-btn" style="font-size: 11px;">
+            <i class="fab fa-whatsapp" aria-hidden="true"></i> whatsapp
+        </a>
+        <a target="_blank" rel="noopener noreferrer" title="Share on telegram" href="https://telegram.me/share/url?text=Features&amp;url=https://netzro.github.io/posts/2026/Oct/12/understanding-linux-file-system-part-2-inodes-links-permissions/" class="mac-btn" style="font-size: 11px;">
+            <i class="fab fa-telegram" aria-hidden="true"></i> telegram
+        </a>
+    </div>
+</article>
+                    </div>
+                </div>
+
+                <!-- Footer inside window -->
+                <footer class="mac-footer">
+                    <div>
+©2026 - Gifted &middot;                         Powered by <a href="https://getpelican.com/">Pelican</a> &middot;
+                        <a href="https://github.com/netzro">netzro</a>
+                    </div>
+                    <div class="mac-footer__theme">
+                        <button id="theme-toggle" class="mac-btn" style="padding: 2px 8px; font-size: 10px;">
+                            <span id="theme-toggle-light">&#9788; Light</span>
+                            <span id="theme-toggle-dark">&#9789; Dark</span>
+                        </button>
+                    </div>
+                </footer>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let themeToggleLight = document.getElementById('theme-toggle-light');
+        let themeToggleDark = document.getElementById('theme-toggle-dark');
+        if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            themeToggleLight.style.display = 'inline';
+            themeToggleDark.style.display = 'none';
+        } else {
+            themeToggleLight.style.display = 'none';
+            themeToggleDark.style.display = 'inline';
+        }
+        document.getElementById('theme-toggle').addEventListener('click', function () {
+            if (localStorage.getItem('color-theme')) {
+                if (localStorage.getItem('color-theme') === 'light') {
+                    document.documentElement.classList.add('dark');
+                    localStorage.setItem('color-theme', 'dark');
+                    themeToggleLight.style.display = 'inline';
+                    themeToggleDark.style.display = 'none';
+                } else {
+                    document.documentElement.classList.remove('dark');
+                    localStorage.setItem('color-theme', 'light');
+                    themeToggleLight.style.display = 'none';
+                    themeToggleDark.style.display = 'inline';
+                }
+            } else {
+                if (document.documentElement.classList.contains('dark')) {
+                    document.documentElement.classList.remove('dark');
+                    localStorage.setItem('color-theme', 'light');
+                    themeToggleLight.style.display = 'none';
+                    themeToggleDark.style.display = 'inline';
+                } else {
+                    document.documentElement.classList.add('dark');
+                    localStorage.setItem('color-theme', 'dark');
+                    themeToggleLight.style.display = 'inline';
+                    themeToggleDark.style.display = 'none';
+                }
+            }
+        });
+    </script>
+</body>
+</html>
